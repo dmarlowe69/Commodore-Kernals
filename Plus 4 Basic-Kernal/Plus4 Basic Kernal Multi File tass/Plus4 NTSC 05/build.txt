@@ -1,0 +1,21 @@
+
+
+C:\Users\Denton\Desktop\Plus4 BASIC KERNAL\Plus4 Basic Kernal Multi File tass>re
+m call 64t plus4 > plus4.out
+
+C:\Users\Denton\Desktop\Plus4 BASIC KERNAL\Plus4 Basic Kernal Multi File tass>64
+tass plus4.asm -D plus4ntsc=04 -L plus4.lst -o plus4.prg
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   plus4.asm
+Assembling file:   defines.inc
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $8000-$ffff   $8000
+
+C:\Users\Denton\Desktop\Plus4 BASIC KERNAL\Plus4 Basic Kernal Multi File tass>pa
+use
+Press any key to continue . . .

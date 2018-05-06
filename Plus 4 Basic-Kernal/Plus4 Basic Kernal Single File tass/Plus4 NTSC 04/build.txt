@@ -1,0 +1,23 @@
+
+C:\My Commodore\Commodore 2018\Commodore Macro Assembler Development System\MADS
+ Plus 4 Assembler Plus 4\Plus4 BASIC KERNAL\Plus4 Basic Kernal Single File tass\
+Plus4 NTSC 05>rem call 64t plus4 > plus4.out
+
+C:\My Commodore\Commodore 2018\Commodore Macro Assembler Development System\MADS
+ Plus 4 Assembler Plus 4\Plus4 BASIC KERNAL\Plus4 Basic Kernal Single File tass\
+Plus4 NTSC 05>64tass plus4full.asm -D plus4ntsc=05 -L plus4full.lst -o plus4full
+.prg
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   plus4full.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $8000-$ffff   $8000
+
+C:\My Commodore\Commodore 2018\Commodore Macro Assembler Development System\MADS
+ Plus 4 Assembler Plus 4\Plus4 BASIC KERNAL\Plus4 Basic Kernal Single File tass\
+Plus4 NTSC 05>pause
+Press any key to continue . . .

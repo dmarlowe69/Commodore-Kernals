@@ -1,0 +1,3 @@
+bsa tedmon.asm
+
+pause

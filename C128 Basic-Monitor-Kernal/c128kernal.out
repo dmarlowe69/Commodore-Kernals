@@ -1,0 +1,13 @@
+
+C:\Users\Denton\Desktop\Github\C128 Basic-Monitor-Kernal\Basic-Monitor-Kernal Sources\Edilbert Github tass>64tass c128kernal.asm -L c128kernal.lst -o c128kernal.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   c128kernal.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $4000-$ffff   $c000
+
+C:\Users\Denton\Desktop\Github\C128 Basic-Monitor-Kernal\Basic-Monitor-Kernal Sources\Edilbert Github tass>rem pause 

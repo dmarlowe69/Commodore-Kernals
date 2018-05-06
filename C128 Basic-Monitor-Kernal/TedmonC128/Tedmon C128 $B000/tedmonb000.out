@@ -1,0 +1,14 @@
+
+C:\Users\Denton\Desktop\TedmonC128\Tedmon C128 $B000 tass>64tass tedmonb000.asm -L tedmonb000.lst -o tedmonb000.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   tedmonb000.asm
+Assembling file:   tedmon128.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $b000-$bbb1   $0bb2
+
+C:\Users\Denton\Desktop\TedmonC128\Tedmon C128 $B000 tass>rem pause 

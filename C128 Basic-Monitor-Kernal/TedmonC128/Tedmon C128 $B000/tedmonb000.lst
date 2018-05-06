@@ -1,0 +1,1336 @@
+
+; 64tass Turbo Assembler Macro V1.53.1515 listing file
+; 64tass -L tedmonb000.lst -o tedmonb000.prg tedmonb000.asm
+; Wed Jan 31 16:20:53 2018
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: tedmonb000.asm
+
+=$b000					TEDMON = *
+=bytes($00)				monlo	= <TEDMON ;$00
+=bytes($b0)				monhi	= >TEDMON ;$20
+
+;******  Processing file: tedmon128.asm
+
+=$032e					iexmon	= $032e
+=$0a00					sysvec	= $0a00
+=$ffd2					chrout	= $ffd2
+=$ff7d					jprimm	= $ff7d
+=$ff71					jjmpfar	= $ff71
+=$ff00					mmureg	= $ff00
+=$ff90					jsetmsg	= $ff90
+=$ff74					jindfet	= $ff74
+=$ff7a					jindcmp	= $ff7a
+=$ff77					jindsta	= $ff77
+=$ffcf					jbasin	= $ffcf
+=$ffc0					jopen	= $ffc0
+=$ffc6					jchkin	= $ffc6
+=$ffc3					jclose	= $ffc3
+=$ffbd					jsetnam	= $ffbd
+=$ffe1					jstop	= $ffe1
+=$ffba					jsetlfs	= $ffba
+=$ffcc					jclrch	= $ffcc
+=$ffc9					jckout	= $ffc9
+=$ff68					jsetbnk	= $ff68
+=$ff6e					jjsrfar	= $ff6e
+=$ffd5					jload	= $ffd5
+=$ffd8					jsave	= $ffd8
+.b000					jmoninit
+.b000	4c 21 b0	jmp $b021		jmp moninit
+.b003	4c 09 b0	jmp $b009	jmonbrk	jmp monbrk ; Break entry point (IBRK at $0316-$0317 points here)
+.b006					jimonrtn
+.b006	4c b2 b0	jmp $b0b2		jmp mm3
+.b009	20 7d ff	jsr $ff7d	monbrk	jsr jprimm
+>b00c	0d 42 52 45 41 4b 07 00		.byte $0d,$42,$52,$45,$41,$4b,$07,$00
+.b014	68		pla			pla
+.b015	85 02		sta $02			sta $02
+.b017	a2 05		ldx #$05		ldx #$05
+.b019	68		pla		mb1	pla
+.b01a	95 03		sta $03,x		sta $03,X
+.b01c	ca		dex			dex
+.b01d	10 fa		bpl $b019		bpl mb1
+.b01f	30 25		bmi $b046		bmi mi1
+.b021	a9 00		lda #$00	moninit	lda #$00 ; Cold-start routine
+.b023	8d 00 ff	sta $ff00		sta mmureg
+.b026	85 06		sta $06			sta $06
+.b028	85 07		sta $07			sta $07
+.b02a	85 08		sta $08			sta $08
+.b02c	85 05		sta $05			sta $05
+.b02e	a9 00		lda #$00		lda #monlo
+.b030	a0 b0		ldy #$b0		ldy #monhi
+.b032	85 04		sta $04			sta $04
+.b034	84 03		sty $03			sty $03
+.b036	a9 0f		lda #$0f		lda #$0f
+.b038	85 02		sta $02			sta $02
+.b03a	20 7d ff	jsr $ff7d		jsr jprimm
+>b03d	0d 4d 4f 4e 49 54 4f 52		.byte $0d,$4d,$4f,$4e,$49,$54,$4f,$52,$00
+>b045	00
+.b046	d8		cld		mi1	cld
+.b047	ba		tsx			tsx
+.b048	86 09		stx $09			stx $09
+.b04a	a9 c0		lda #$c0		lda #$c0
+.b04c	20 90 ff	jsr $ff90		jsr jsetmsg
+.b04f	58		cli			cli
+.b050	20 7d ff	jsr $ff7d	showreg jsr jprimm ; Print registers
+>b053	0d 20 20 20 20 50 43 20		.byte $0d,$20,$20,$20,$20,$50,$43,$20,$20,$53,$52,$20
+>b05b	20 53 52 20
+>b05f	41 43 20 58 52 20 59 52		.byte $41,$43,$20,$58,$52,$20,$59,$52,$20,$53,$50,$0d
+>b067	20 53 50 0d
+>b06b	3b 20 1b 51 00			.byte $3b,$20,$1b,$51,$00
+.b070	a5 02		lda $02			lda $02
+.b072	20 d2 b8	jsr $b8d2		jsr cvtbyt
+.b075	8a		txa			txa
+.b076	20 d2 ff	jsr $ffd2		jsr chrout
+.b079	a5 03		lda $03			lda $03
+.b07b	20 c2 b8	jsr $b8c2		jsr prntbyt
+.b07e	a0 02		ldy #$02		ldy #$02
+.b080	b9 02 00	lda $0002,y	sreg1	lda $0002,Y
+.b083	20 a5 b8	jsr $b8a5		jsr ph2
+.b086	c8		iny			iny
+.b087	c0 08		cpy #$08		cpy #$08
+.b089	90 f5		bcc $b080		bcc sreg1
+.b08b	20 b4 b8	jsr $b8b4	monmain jsr curstnxt ; Main loop
+.b08e	a2 00		ldx #$00		ldx #$00
+.b090	86 7a		stx $7a			stx $7A
+.b092	20 cf ff	jsr $ffcf	mm1	jsr jbasin
+.b095	9d 00 02	sta $0200,x		sta $0200,X
+.b098	e8		inx			inx
+.b099	e0 a1		cpx #$a1		cpx #$A1
+.b09b	b0 1f		bcs $b0bc		bcs mm5
+.b09d	c9 0d		cmp #$0d		cmp #$0D
+.b09f	d0 f1		bne $b092		bne mm1
+.b0a1	a9 00		lda #$00		lda #$00
+.b0a3	9d ff 01	sta $01ff,x		sta $01FF,X
+.b0a6	20 e9 b8	jsr $b8e9	mm2	jsr tc1
+.b0a9	f0 e0		beq $b08b		beq monmain
+.b0ab	c9 20		cmp #$20		cmp #$20
+.b0ad	f0 f7		beq $b0a6		beq mm2
+.b0af	6c 2e 03	jmp ($032e)		jmp (iexmon)
+.b0b2	a2 15		ldx #$15	mm3	ldx #$15
+.b0b4	dd e6 b0	cmp $b0e6,x	mm4	cmp comtbl,X
+.b0b7	f0 0c		beq $b0c5		beq mm6
+.b0b9	ca		dex			dex
+.b0ba	10 f8		bpl $b0b4		bpl mm4
+.b0bc	20 7d ff	jsr $ff7d	mm5	jsr jprimm
+>b0bf	1d 3f 00			.byte $1d,$3f,$00
+.b0c2	4c 8b b0	jmp $b08b		jmp monmain
+.b0c5	e0 13		cpx #$13	mm6	cpx #$13
+.b0c7	b0 12		bcs $b0db		bcs mm7
+.b0c9	e0 0f		cpx #$0f		cpx #$0F
+.b0cb	b0 13		bcs $b0e0		bcs mm8
+.b0cd	8a		txa			txa
+.b0ce	0a		asl a			asl A
+.b0cf	aa		tax			tax
+.b0d0	bd fd b0	lda $b0fd,x		lda exectbl+1,X
+.b0d3	48		pha			pha
+.b0d4	bd fc b0	lda $b0fc,x		lda exectbl,X
+.b0d7	48		pha			pha
+.b0d8	4c a7 b7	jmp $b7a7		jmp gp1
+.b0db	85 93		sta $93		mm7	sta $93
+.b0dd	4c 37 b3	jmp $b337		jmp monlsv
+.b0e0	4c b1 b9	jmp $b9b1	mm8	jmp numxvrt
+.b0e3	6c 00 0a	jmp ($0a00)	exitmon	jmp (sysvec) ; Back to BASIC via system vector
+.b0e6					comtbl
+>b0e6	41 43 44 46 47 48 4a 4d		.byte $41,$43,$44,$46,$47,$48,$4a,$4d,$52,$54,$58,$40
+>b0ee	52 54 58 40
+>b0f2	2e 3e 3b 24 2b 26 25 4c		.byte $2e,$3e,$3b,$24,$2b,$26,$25,$4c,$53,$56
+>b0fa	53 56
+.b0fc					exectbl
+>b0fc	05 b4				.word assmble-1
+>b0fe	30 b2				.word cmpxfr-1
+>b100	98 b5				.word disassm-1
+>b102	da b3				.word fillmem-1
+>b104	d5 b1				.word gotoloc-1
+>b106	cd b2				.word search-1
+>b108	de b1				.word jmpsub-1
+>b10a	51 b1				.word showmem-1
+>b10c	4f b0				.word showreg-1
+>b10e	33 b2				.word xfr-1
+>b110	e2 b0				.word exitmon-1
+>b112	8f ba				.word diskcmd-1
+>b114	05 b4				.word assmble-1
+>b116	aa b1				.word chngmem-1
+>b118	93 b1				.word chngreg-1
+.b11a	8e b2 0a	stx $0ab2	mindfet	stx $0AB2 ; Kernal INDFET call for the monitor
+.b11d	a6 68		ldx $68			ldx $68
+.b11f	a9 66		lda #$66		lda #$66
+.b121	78		sei			sei
+.b122	20 74 ff	jsr $ff74		jsr jindfet
+.b125	58		cli			cli
+.b126	ae b2 0a	ldx $0ab2		ldx $0AB2
+.b129	60		rts			rts
+.b12a	8e b2 0a	stx $0ab2	mindsta	stx $0AB2 ; Kernal INDSTA call for the monitor
+.b12d	a2 66		ldx #$66		ldx #$66
+.b12f	8e b9 02	stx $02b9		stx $02B9
+.b132	a6 68		ldx $68			ldx $68
+.b134	78		sei			sei
+.b135	20 77 ff	jsr $ff77		jsr jindsta
+.b138	58		cli			cli
+.b139	ae b2 0a	ldx $0ab2		ldx $0AB2
+.b13c	60		rts			rts
+.b13d	8e b2 0a	stx $0ab2	mindcmp	stx $0AB2 ; Kernal INDCMP call for the monitor
+.b140	a2 66		ldx #$66		ldx #$66
+.b142	8e c8 02	stx $02c8		stx $02C8
+.b145	a6 68		ldx $68			ldx $68
+.b147	78		sei			sei
+.b148	20 7a ff	jsr $ff7a		jsr jindcmp
+.b14b	58		cli			cli
+.b14c	08		php			php
+.b14d	ae b2 0a	ldx $0ab2		ldx $0AB2
+.b150	28		plp			plp
+.b151	60		rts			rts
+.b152	b0 08		bcs $b15c	showmem	bcs sm1 ; Memory display
+.b154	20 01 b9	jsr $b901		jsr moveval
+.b157	20 a7 b7	jsr $b7a7		jsr gp1
+.b15a	90 06		bcc $b162		bcc sm2
+.b15c	a9 0b		lda #$0b	sm1	lda #$0b
+.b15e	85 60		sta $60			sta $60
+.b160	d0 15		bne $b177		bne sm4
+.b162	20 0e b9	jsr $b90e	sm2	jsr calccnt
+.b165	90 2a		bcc $b191		bcc sm7
+.b167	a2 03		ldx #$03		ldx #$03
+.b169	24 d7		bit $d7			bit $d7
+.b16b	10 01		bpl $b16e		bpl sm3
+.b16d	e8		inx			inx
+.b16e	46 62		lsr $62		sm3	lsr $62
+.b170	66 61		ror $61			ror $61
+.b172	66 60		ror $60			ror $60
+.b174	ca		dex			dex
+.b175	d0 f7		bne $b16e		bne sm3
+.b177	20 e1 ff	jsr $ffe1	sm4	jsr jstop
+.b17a	f0 12		beq $b18e		beq sm6
+.b17c	20 e8 b1	jsr $b1e8		jsr showlin
+.b17f	a9 08		lda #$08		lda #$08
+.b181	24 d7		bit $d7			bit $d7
+.b183	10 01		bpl $b186		bpl sm5
+.b185	0a		asl a			asl A
+.b186	20 52 b9	jsr $b952	sm5	jsr ip1
+.b189	20 22 b9	jsr $b922		jsr decpoco
+.b18c	b0 e9		bcs $b177		bcs sm4
+.b18e	4c 8b b0	jmp $b08b	sm6	jmp monmain
+.b191	4c bc b0	jmp $b0bc	sm7	jmp mm5
+.b194	20 74 b9	jsr $b974	chngreg jsr chngadd ; Change register
+.b197	a0 00		ldy #$00		ldy #$00
+.b199	20 a7 b7	jsr $b7a7	cr1	jsr gp1
+.b19c	b0 0a		bcs $b1a8		bcs cr2
+.b19e	a5 60		lda $60			lda $60
+.b1a0	99 05 00	sta $0005,y		sta $0005,Y
+.b1a3	c8		iny			iny
+.b1a4	c0 05		cpy #$05		cpy #$05
+.b1a6	90 f1		bcc $b199		bcc cr1
+.b1a8	4c 8b b0	jmp $b08b	cr2	jmp monmain
+.b1ab	b0 1c		bcs $b1c9	chngmem	bcs cm3 ; Change memory
+.b1ad	20 01 b9	jsr $b901		jsr moveval
+.b1b0	a0 00		ldy #$00		ldy #$00
+.b1b2	20 a7 b7	jsr $b7a7	cm1	jsr gp1
+.b1b5	b0 12		bcs $b1c9		bcs cm3
+.b1b7	a5 60		lda $60			lda $60
+.b1b9	20 2a b1	jsr $b12a		jsr mindsta
+.b1bc	c8		iny			iny
+.b1bd	24 d7		bit $d7			bit $D7
+.b1bf	10 04		bpl $b1c5		bpl cm2
+.b1c1	c0 10		cpy #$10		cpy #$10
+.b1c3	90 ed		bcc $b1b2		bcc cm1
+.b1c5	c0 08		cpy #$08	cm2	cpy #$08
+.b1c7	90 e9		bcc $b1b2		bcc cm1
+.b1c9	20 7d ff	jsr $ff7d	cm3	jsr jprimm
+>b1cc	1b 4f 91 00			.byte $1b,$4f,$91,$00
+.b1d0	20 e8 b1	jsr $b1e8		jsr showlin
+.b1d3	4c 8b b0	jmp $b08b		jmp monmain
+.b1d6	20 74 b9	jsr $b974	gotoloc	jsr chngadd ; Go routine
+.b1d9	a6 09		ldx $09			ldx $09
+.b1db	9a		txs			txs
+.b1dc	4c 71 ff	jmp $ff71		jmp jjmpfar
+.b1df	20 74 b9	jsr $b974	jmpsub	jsr chngadd ; Jump to subroutine
+.b1e2	20 6e ff	jsr $ff6e		jsr jjsrfar
+.b1e5	4c 8b b0	jmp $b08b		jmp monmain
+.b1e8	20 b4 b8	jsr $b8b4	showlin	jsr curstnxt ; Display a line of memory
+.b1eb	a9 3e		lda #$3e		lda #$3E
+.b1ed	20 d2 ff	jsr $ffd2		jsr chrout
+.b1f0	20 92 b8	jsr $b892		jsr prnthex
+.b1f3	a0 00		ldy #$00		ldy #$00
+.b1f5	f0 03		beq $b1fa		beq sl2
+.b1f7	20 a8 b8	jsr $b8a8	sl1	jsr ph3
+.b1fa	20 1a b1	jsr $b11a	sl2	jsr mindfet
+.b1fd	20 c2 b8	jsr $b8c2		jsr prntbyt
+.b200	c8		iny			iny
+.b201	c0 08		cpy #$08		cpy #$08
+.b203	24 d7		bit $d7			bit $d7
+.b205	10 02		bpl $b209		bpl sl3
+.b207	c0 10		cpy #$10		cpy #$10
+.b209	90 ec		bcc $b1f7	sl3	bcc sl1
+.b20b	20 7d ff	jsr $ff7d		jsr jprimm
+>b20e	3a 12 00			.byte $3a,$12,$00
+.b211	a0 00		ldy #$00		ldy #$00
+.b213	20 1a b1	jsr $b11a	sl4	jsr mindfet
+.b216	48		pha			pha
+.b217	29 7f		and #$7f		and #$7F
+.b219	c9 20		cmp #$20		cmp #$20
+.b21b	68		pla			pla
+.b21c	b0 02		bcs $b220		bcs sl5
+.b21e	a9 2e		lda #$2e		lda #$2E
+.b220	20 d2 ff	jsr $ffd2	sl5	jsr chrout
+.b223	c8		iny			iny
+.b224	24 d7		bit $d7			bit $d7
+.b226	10 04		bpl $b22c		bpl sl6
+.b228	c0 10		cpy #$10		cpy #$10
+.b22a	90 e7		bcc $b213		bcc sl4
+.b22c	c0 08		cpy #$08	sl6	cpy #$08
+.b22e	90 e3		bcc $b213		bcc sl4
+.b230	60		rts			rts
+.b231	a9 00		lda #$00	cmpxfr	lda #$00 ; Compare / Transfer memory
+>b233	2c					.byte $2c
+>b234	a9				xfr	.byte $a9
+>b235	80					.byte $80
+.b236	85 93		sta $93			sta $93
+.b238	a9 00		lda #$00		lda #$00
+.b23a	8d b3 0a	sta $0ab3		sta $0AB3
+.b23d	20 83 b9	jsr $b983		jsr prepptr
+.b240	b0 05		bcs $b247		bcs cx1
+.b242	20 a7 b7	jsr $b7a7		jsr gp1
+.b245	90 03		bcc $b24a		bcc cx2
+.b247	4c bc b0	jmp $b0bc	cx1	jmp mm5
+.b24a	24 93		bit $93		cx2	bit $93
+.b24c	10 2c		bpl $b27a		bpl cx4
+.b24e	38		sec			sec
+.b24f	a5 66		lda $66			lda $66
+.b251	e5 60		sbc $60			sbc $60
+.b253	a5 67		lda $67			lda $67
+.b255	e5 61		sbc $61			sbc $61
+.b257	b0 21		bcs $b27a		bcs cx4
+.b259	a5 63		lda $63			lda $63
+.b25b	65 60		adc $60			adc $60
+.b25d	85 60		sta $60			sta $60
+.b25f	a5 64		lda $64			lda $64
+.b261	65 61		adc $61			adc $61
+.b263	85 61		sta $61			sta $61
+.b265	a5 65		lda $65			lda $65
+.b267	65 62		adc $62			adc $62
+.b269	85 62		sta $62			sta $62
+.b26b	a2 02		ldx #$02		ldx #$02
+.b26d	bd b7 0a	lda $0ab7,x	cx3	lda $0AB7,X
+.b270	95 66		sta $66,x		sta $66,X
+.b272	ca		dex			dex
+.b273	10 f8		bpl $b26d		bpl cx3
+.b275	a9 80		lda #$80		lda #$80
+.b277	8d b3 0a	sta $0ab3		sta $0AB3
+.b27a	20 b4 b8	jsr $b8b4	cx4	jsr curstnxt
+.b27d	a0 00		ldy #$00		ldy #$00
+.b27f	20 e1 ff	jsr $ffe1	cx5	jsr jstop
+.b282	f0 47		beq $b2cb		beq cx11
+.b284	20 1a b1	jsr $b11a		jsr mindfet
+.b287	a2 60		ldx #$60		ldx #$60
+.b289	8e b9 02	stx $02b9		stx $02B9
+.b28c	8e c8 02	stx $02c8		stx $02C8
+.b28f	a6 62		ldx $62			ldx $62
+.b291	78		sei			sei
+.b292	24 93		bit $93			bit $93
+.b294	10 03		bpl $b299		bpl cx6
+.b296	20 77 ff	jsr $ff77		jsr jindsta
+.b299	a6 62		ldx $62		cx6	ldx $62
+.b29b	20 7a ff	jsr $ff7a		jsr jindcmp
+.b29e	58		cli			cli
+.b29f	f0 09		beq $b2aa		beq cx7
+.b2a1	20 92 b8	jsr $b892		jsr prnthex
+.b2a4	20 a8 b8	jsr $b8a8		jsr ph3
+.b2a7	20 a8 b8	jsr $b8a8		jsr ph3
+.b2aa	2c b3 0a	bit $0ab3	cx7	bit $0AB3
+.b2ad	30 0b		bmi $b2ba		bmi cx8
+.b2af	e6 60		inc $60			inc $60
+.b2b1	d0 10		bne $b2c3		bne cx9
+.b2b3	e6 61		inc $61			inc $61
+.b2b5	d0 0c		bne $b2c3		bne cx9
+.b2b7	4c bc b0	jmp $b0bc		jmp mm5
+.b2ba	20 22 b9	jsr $b922	cx8	jsr decpoco
+.b2bd	20 60 b9	jsr $b960		jsr decptr
+.b2c0	4c c6 b2	jmp $b2c6		jmp cx10
+.b2c3	20 50 b9	jsr $b950	cx9	jsr incptr
+.b2c6	20 3c b9	jsr $b93c	cx10	jsr deccnt
+.b2c9	b0 b4		bcs $b27f		bcs cx5
+.b2cb	4c 8b b0	jmp $b08b	cx11	jmp monmain
+.b2ce	20 83 b9	jsr $b983	search	jsr prepptr ; Search for pattern
+.b2d1	b0 61		bcs $b334		bcs sr9
+.b2d3	a0 00		ldy #$00		ldy #$00
+.b2d5	20 e9 b8	jsr $b8e9		jsr tc1
+.b2d8	c9 27		cmp #$27		cmp #$27
+.b2da	d0 16		bne $b2f2		bne sr2
+.b2dc	20 e9 b8	jsr $b8e9		jsr tc1
+.b2df	c9 00		cmp #$00		cmp #$00
+.b2e1	f0 51		beq $b334		beq sr9
+.b2e3	99 80 0a	sta $0a80,y	sr1	sta $0A80,Y
+.b2e6	c8		iny			iny
+.b2e7	20 e9 b8	jsr $b8e9		jsr tc1
+.b2ea	f0 1b		beq $b307		beq sr4
+.b2ec	c0 20		cpy #$20		cpy #$20
+.b2ee	d0 f3		bne $b2e3		bne sr1
+.b2f0	f0 15		beq $b307		beq sr4
+.b2f2	8c 00 01	sty $0100	sr2	sty $0100
+.b2f5	20 a5 b7	jsr $b7a5		jsr getparm
+.b2f8	a5 60		lda $60		sr3	lda $60
+.b2fa	99 80 0a	sta $0a80,y		sta $0A80,Y
+.b2fd	c8		iny			iny
+.b2fe	20 a7 b7	jsr $b7a7		jsr gp1
+.b301	b0 04		bcs $b307		bcs sr4
+.b303	c0 20		cpy #$20		cpy #$20
+.b305	d0 f1		bne $b2f8		bne sr3
+.b307	84 93		sty $93		sr4	sty $93
+.b309	20 b4 b8	jsr $b8b4		jsr curstnxt
+.b30c	a0 00		ldy #$00	sr5	ldy #$00
+.b30e	20 1a b1	jsr $b11a	sr6	jsr mindfet
+.b311	d9 80 0a	cmp $0a80,y		cmp $0A80,Y
+.b314	d0 0e		bne $b324		bne sr7
+.b316	c8		iny			iny
+.b317	c4 93		cpy $93			cpy $93
+.b319	d0 f3		bne $b30e		bne sr6
+.b31b	20 92 b8	jsr $b892		jsr prnthex
+.b31e	20 a8 b8	jsr $b8a8		jsr ph3
+.b321	20 a8 b8	jsr $b8a8		jsr ph3
+.b324	20 e1 ff	jsr $ffe1	sr7	jsr jstop
+.b327	f0 08		beq $b331		beq sr8
+.b329	20 50 b9	jsr $b950		jsr incptr
+.b32c	20 3c b9	jsr $b93c		jsr deccnt
+.b32f	b0 db		bcs $b30c		bcs sr5
+.b331	4c 8b b0	jmp $b08b	sr8	jmp monmain
+.b334	4c bc b0	jmp $b0bc	sr9	jmp mm5
+.b337	a0 01		ldy #$01	monlsv	ldy #$01 ; Prepare for file operations
+.b339	84 ba		sty $ba			sty $BA
+.b33b	84 b9		sty $b9			sty $B9
+.b33d	88		dey			dey
+.b33e	84 c6		sty $c6			sty $C6
+.b340	84 b7		sty $b7			sty $B7
+.b342	84 c7		sty $c7			sty $C7
+.b344	84 90		sty $90			sty $90
+.b346	a9 0a		lda #$0a		lda #$0A
+.b348	85 bc		sta $bc			sta $BC
+.b34a	a9 80		lda #$80		lda #$80
+.b34c	85 bb		sta $bb			sta $BB
+.b34e	20 e9 b8	jsr $b8e9	mls1	jsr tc1
+.b351	f0 58		beq $b3ab		beq monload
+.b353	c9 20		cmp #$20		cmp #$20
+.b355	f0 f7		beq $b34e		beq mls1
+.b357	c9 22		cmp #$22		cmp #$22
+.b359	d0 15		bne $b370		bne mls3
+.b35b	a6 7a		ldx $7a			ldx $7A
+.b35d	bd 00 02	lda $0200,x	mls2	lda $0200,X
+.b360	f0 49		beq $b3ab		beq monload
+.b362	e8		inx			inx
+.b363	c9 22		cmp #$22		cmp #$22
+.b365	f0 0c		beq $b373		beq mls4
+.b367	91 bb		sta ($bb),y		sta ($BB),Y
+.b369	e6 b7		inc $b7			inc $B7
+.b36b	c8		iny			iny
+.b36c	c0 11		cpy #$11		cpy #$11
+.b36e	90 ed		bcc $b35d		bcc mls2
+.b370	4c bc b0	jmp $b0bc	mls3	jmp mm5
+.b373	86 7a		stx $7a		mls4	stx $7A
+.b375	20 e9 b8	jsr $b8e9		jsr tc1
+.b378	f0 31		beq $b3ab		beq monload
+.b37a	20 a7 b7	jsr $b7a7		jsr gp1
+.b37d	b0 2c		bcs $b3ab		bcs monload
+.b37f	a5 60		lda $60			lda $60
+.b381	85 ba		sta $ba			sta $BA
+.b383	20 a7 b7	jsr $b7a7		jsr gp1
+.b386	b0 23		bcs $b3ab		bcs monload
+.b388	20 01 b9	jsr $b901		jsr moveval
+.b38b	85 c6		sta $c6			sta $C6
+.b38d	20 a7 b7	jsr $b7a7		jsr gp1
+.b390	b0 3f		bcs $b3d1		bcs preplove
+.b392	20 b4 b8	jsr $b8b4		jsr curstnxt
+.b395	a6 60		ldx $60			ldx $60
+.b397	a4 61		ldy $61			ldy $61
+.b399	a5 93		lda $93			lda $93
+.b39b	c9 53		cmp #$53		cmp #$53
+.b39d	d0 d1		bne $b370		bne mls3
+.b39f	a9 00		lda #$00	monsave	lda #$00 ; Save file
+.b3a1	85 b9		sta $b9			sta $B9
+.b3a3	a9 66		lda #$66		lda #$66
+.b3a5	20 d8 ff	jsr $ffd8		jsr jsave
+.b3a8	4c 8b b0	jmp $b08b	msa1	jmp monmain
+.b3ab	a5 93		lda $93		monload	lda $93 ; Load/verify file
+.b3ad	c9 56		cmp #$56		cmp #$56
+.b3af	f0 06		beq $b3b7		beq mlo1
+.b3b1	c9 4c		cmp #$4c		cmp #$4C
+.b3b3	d0 bb		bne $b370		bne mls3
+.b3b5	a9 00		lda #$00		lda #$00
+.b3b7	20 d5 ff	jsr $ffd5	mlo1	jsr jload
+.b3ba	a5 90		lda $90			lda $90
+.b3bc	29 10		and #$10		and #$10
+.b3be	f0 e8		beq $b3a8		beq msa1
+.b3c0	a5 93		lda $93			lda $93
+.b3c2	f0 ac		beq $b370		beq mls3
+.b3c4	20 7d ff	jsr $ff7d		jsr jprimm
+>b3c7	20 45 52 52 4f 52 00		.byte $20,$45,$52,$52,$4f,$52,$00
+.b3ce	4c 8b b0	jmp $b08b		jmp monmain
+.b3d1					preplove
+.b3d1	a6 66		ldx $66			ldx $66
+.b3d3	a4 67		ldy $67			ldy $67
+.b3d5	a9 00		lda #$00		lda #$00
+.b3d7	85 b9		sta $b9			sta $B9
+.b3d9	f0 d0		beq $b3ab		beq monload
+.b3db	20 83 b9	jsr $b983	fillmem	jsr prepptr ; Fill memory
+.b3de	b0 23		bcs $b403		bcs fm3
+.b3e0	a5 68		lda $68			lda $68
+.b3e2	cd b9 0a	cmp $0ab9		cmp $0AB9
+.b3e5	d0 1c		bne $b403		bne fm3
+.b3e7	20 a7 b7	jsr $b7a7		jsr gp1
+.b3ea	b0 17		bcs $b403		bcs fm3
+.b3ec	a0 00		ldy #$00		ldy #$00
+.b3ee	a5 60		lda $60		fm1	lda $60
+.b3f0	20 2a b1	jsr $b12a		jsr mindsta
+.b3f3	20 e1 ff	jsr $ffe1		jsr jstop
+.b3f6	f0 08		beq $b400		beq fm2
+.b3f8	20 50 b9	jsr $b950		jsr incptr
+.b3fb	20 3c b9	jsr $b93c		jsr deccnt
+.b3fe	b0 ee		bcs $b3ee		bcs fm1
+.b400	4c 8b b0	jmp $b08b	fm2	jmp monmain
+.b403	4c bc b0	jmp $b0bc	fm3	jmp mm5
+.b406	b0 3a		bcs $b442	assmble	bcs as6 ; Assemble
+.b408	20 01 b9	jsr $b901		jsr moveval
+.b40b	a2 00		ldx #$00	as1	ldx #$00
+.b40d	8e a1 0a	stx $0aa1		stx $0AA1
+.b410	8e b4 0a	stx $0ab4		stx $0AB4
+.b413	20 e9 b8	jsr $b8e9	as2	jsr tc1
+.b416	d0 07		bne $b41f		bne as3
+.b418	e0 00		cpx #$00		cpx #$00
+.b41a	d0 03		bne $b41f		bne as3
+.b41c	4c 8b b0	jmp $b08b		jmp monmain
+.b41f	c9 20		cmp #$20	as3	cmp #$20
+.b421	f0 e8		beq $b40b		beq as1
+.b423	9d ac 0a	sta $0aac,x		sta $0AAC,X
+.b426	e8		inx			inx
+.b427	e0 03		cpx #$03		cpx #$03
+.b429	d0 e8		bne $b413		bne as2
+.b42b	ca		dex		as4	dex
+.b42c	30 17		bmi $b445		bmi as7
+.b42e	bd ac 0a	lda $0aac,x		lda $0AAC,X
+.b431	38		sec			sec
+.b432	e9 3f		sbc #$3f		sbc #$3F
+.b434	a0 05		ldy #$05		ldy #$05
+.b436	4a		lsr a		as5	lsr A
+.b437	6e a1 0a	ror $0aa1		ror $0AA1
+.b43a	6e a0 0a	ror $0aa0		ror $0AA0
+.b43d	88		dey			dey
+.b43e	d0 f6		bne $b436		bne as5
+.b440	f0 e9		beq $b42b		beq as4
+.b442	4c bc b0	jmp $b0bc	as6	jmp mm5
+.b445	a2 02		ldx #$02	as7	ldx #$02
+.b447	ad b4 0a	lda $0ab4	as8	lda $0AB4
+.b44a	d0 30		bne $b47c		bne as13
+.b44c	20 ce b7	jsr $b7ce		jsr cvtparam
+.b44f	f0 29		beq $b47a		beq as12
+.b451	b0 ef		bcs $b442		bcs as6
+.b453	a9 24		lda #$24		lda #$24
+.b455	9d a0 0a	sta $0aa0,x		sta $0AA0,X
+.b458	e8		inx			inx
+.b459	a5 62		lda $62			lda $62
+.b45b	d0 e5		bne $b442		bne as6
+.b45d	a0 04		ldy #$04		ldy #$04
+.b45f	ad b6 0a	lda $0ab6		lda $0AB6
+.b462	c9 08		cmp #$08		cmp #$08
+.b464	90 05		bcc $b46b		bcc as9
+.b466	cc b4 0a	cpy $0ab4		cpy $0AB4
+.b469	f0 06		beq $b471		beq as10
+.b46b	a5 61		lda $61		as9	lda $61
+.b46d	d0 02		bne $b471		bne as10
+.b46f	a0 02		ldy #$02		ldy #$02
+.b471	a9 30		lda #$30	as10	lda #$30
+.b473	9d a0 0a	sta $0aa0,x	as11	sta $0AA0,X
+.b476	e8		inx			inx
+.b477	88		dey			dey
+.b478	d0 f9		bne $b473		bne as11
+.b47a	c6 7a		dec $7a		as12	dec $7A
+.b47c	20 e9 b8	jsr $b8e9	as13	jsr tc1
+.b47f	f0 0e		beq $b48f		beq as14
+.b481	c9 20		cmp #$20		cmp #$20
+.b483	f0 c2		beq $b447		beq as8
+.b485	9d a0 0a	sta $0aa0,x		sta $0AA0,X
+.b488	e8		inx			inx
+.b489	e0 0a		cpx #$0a		cpx #$0A
+.b48b	90 ba		bcc $b447		bcc as8
+.b48d	b0 b3		bcs $b442		bcs as6
+.b48f	86 63		stx $63		as14	stx $63
+.b491	a2 00		ldx #$00		ldx #$00
+.b493	8e b1 0a	stx $0ab1		stx $0AB1
+.b496	a2 00		ldx #$00	as15	ldx #$00
+.b498	86 9f		stx $9f			stx $9F
+.b49a	ad b1 0a	lda $0ab1		lda $0AB1
+.b49d	20 59 b6	jsr $b659		jsr calcmn
+.b4a0	ae aa 0a	ldx $0aaa		ldx $0AAA
+.b4a3	86 64		stx $64			stx $64
+.b4a5	aa		tax			tax
+.b4a6	bd 61 b7	lda $b761,x		lda mnemtbl1,X
+.b4a9	20 7f b5	jsr $b57f		jsr as30
+.b4ac	bd 21 b7	lda $b721,x		lda mnemtbl,X
+.b4af	20 7f b5	jsr $b57f		jsr as30
+.b4b2	a2 06		ldx #$06		ldx #$06
+.b4b4	e0 03		cpx #$03	as16	cpx #$03
+.b4b6	d0 14		bne $b4cc		bne as18
+.b4b8	ac ab 0a	ldy $0aab		ldy $0AAB
+.b4bb	f0 0f		beq $b4cc		beq as18
+.b4bd	ad aa 0a	lda $0aaa	as17	lda $0AAA
+.b4c0	c9 e8		cmp #$e8		cmp #$E8
+.b4c2	a9 30		lda #$30		lda #$30
+.b4c4	b0 1e		bcs $b4e4		bcs as20
+.b4c6	20 7c b5	jsr $b57c		jsr as29
+.b4c9	88		dey			dey
+.b4ca	d0 f1		bne $b4bd		bne as17
+.b4cc	0e aa 0a	asl $0aaa	as18	asl $0AAA
+.b4cf	90 0e		bcc $b4df		bcc as19
+.b4d1	bd 14 b7	lda $b714,x		lda modetbl-1,X
+.b4d4	20 7f b5	jsr $b57f		jsr as30
+.b4d7	bd 1a b7	lda $b71a,x		lda modetbl+5,X
+.b4da	f0 03		beq $b4df		beq as19
+.b4dc	20 7f b5	jsr $b57f		jsr as30
+.b4df	ca		dex		as19	dex
+.b4e0	d0 d2		bne $b4b4		bne as16
+.b4e2	f0 06		beq $b4ea		beq as21
+.b4e4	20 7c b5	jsr $b57c	as20	jsr as29
+.b4e7	20 7c b5	jsr $b57c		jsr as29
+.b4ea	a5 63		lda $63		as21	lda $63
+.b4ec	c5 9f		cmp $9f			cmp $9F
+.b4ee	f0 03		beq $b4f3		beq as22
+.b4f0	4c 8b b5	jmp $b58b		jmp as31
+.b4f3	ac ab 0a	ldy $0aab	as22	ldy $0AAB
+.b4f6	f0 32		beq $b52a		beq as27
+.b4f8	a5 64		lda $64			lda $64
+.b4fa	c9 9d		cmp #$9d		cmp #$9D
+.b4fc	d0 23		bne $b521		bne as25
+.b4fe	a5 60		lda $60			lda $60
+.b500	e5 66		sbc $66			sbc $66
+.b502	aa		tax			tax
+.b503	a5 61		lda $61			lda $61
+.b505	e5 67		sbc $67			sbc $67
+.b507	90 08		bcc $b511		bcc as23
+.b509	d0 6e		bne $b579		bne as28
+.b50b	e0 82		cpx #$82		cpx #$82
+.b50d	b0 6a		bcs $b579		bcs as28
+.b50f	90 08		bcc $b519		bcc as24
+.b511	a8		tay		as23	tay
+.b512	c8		iny			iny
+.b513	d0 64		bne $b579		bne as28
+.b515	e0 82		cpx #$82		cpx #$82
+.b517	90 60		bcc $b579		bcc as28
+.b519	ca		dex		as24	dex
+.b51a	ca		dex			dex
+.b51b	8a		txa			txa
+.b51c	ac ab 0a	ldy $0aab		ldy $0AAB
+.b51f	d0 03		bne $b524		bne as26
+.b521	b9 5f 00	lda $005f,y	as25	lda $005F,Y
+.b524	20 2a b1	jsr $b12a	as26	jsr mindsta
+.b527	88		dey			dey
+.b528	d0 f7		bne $b521		bne as25
+.b52a	ad b1 0a	lda $0ab1	as27	lda $0AB1
+.b52d	20 2a b1	jsr $b12a		jsr mindsta
+.b530	20 ad b8	jsr $b8ad		jsr curstcur
+.b533	20 7d ff	jsr $ff7d		jsr jprimm
+>b536	41 20 1b 51 00			.byte $41,$20,$1b,$51,$00
+.b53b	20 dc b5	jsr $b5dc		jsr da7
+.b53e	ee ab 0a	inc $0aab		inc $0AAB
+.b541	ad ab 0a	lda $0aab		lda $0AAB
+.b544	20 52 b9	jsr $b952		jsr ip1
+.b547	a9 41		lda #$41		lda #$41
+.b549	8d 4a 03	sta $034a		sta $034A
+.b54c	a9 20		lda #$20		lda #$20
+.b54e	8d 4b 03	sta $034b		sta $034B
+.b551	8d 51 03	sta $0351		sta $0351
+.b554	a5 68		lda $68			lda $68
+.b556	20 d2 b8	jsr $b8d2		jsr cvtbyt
+.b559	8e 4c 03	stx $034c		stx $034C
+.b55c	a5 67		lda $67			lda $67
+.b55e	20 d2 b8	jsr $b8d2		jsr cvtbyt
+.b561	8d 4d 03	sta $034d		sta $034D
+.b564	8e 4e 03	stx $034e		stx $034E
+.b567	a5 66		lda $66			lda $66
+.b569	20 d2 b8	jsr $b8d2		jsr cvtbyt
+.b56c	8d 4f 03	sta $034f		sta $034F
+.b56f	8e 50 03	stx $0350		stx $0350
+.b572	a9 08		lda #$08		lda #$08
+.b574	85 d0		sta $d0			sta $D0
+.b576	4c 8b b0	jmp $b08b		jmp monmain
+.b579	4c bc b0	jmp $b0bc	as28	jmp mm5
+.b57c	20 7f b5	jsr $b57f	as29	jsr as30
+.b57f	8e af 0a	stx $0aaf	as30	stx $0AAF
+.b582	a6 9f		ldx $9f			ldx $9F
+.b584	dd a0 0a	cmp $0aa0,x		cmp $0AA0,X
+.b587	f0 0a		beq $b593		beq as32
+.b589	68		pla			pla
+.b58a	68		pla			pla
+.b58b	ee b1 0a	inc $0ab1	as31	inc $0AB1
+.b58e	f0 e9		beq $b579		beq as28
+.b590	4c 96 b4	jmp $b496		jmp as15
+.b593	e6 9f		inc $9f		as32	inc $9F
+.b595	ae af 0a	ldx $0aaf		ldx $0AAF
+.b598	60		rts			rts
+.b599	b0 08		bcs $b5a3	disassm	bcs da1 ; Disassemble
+.b59b	20 01 b9	jsr $b901		jsr moveval
+.b59e	20 a7 b7	jsr $b7a7		jsr gp1
+.b5a1	90 06		bcc $b5a9		bcc da2
+.b5a3	a9 14		lda #$14	da1	lda #$14
+.b5a5	85 60		sta $60			sta $60
+.b5a7	d0 05		bne $b5ae		bne da3
+.b5a9	20 0e b9	jsr $b90e	da2	jsr calccnt
+.b5ac	90 23		bcc $b5d1		bcc da5
+.b5ae	20 7d ff	jsr $ff7d	da3	jsr jprimm
+>b5b1	0d 1b 51 00			.byte $0d,$1b,$51,$00
+.b5b5	20 e1 ff	jsr $ffe1		jsr jstop
+.b5b8	f0 14		beq $b5ce		beq da4
+.b5ba	20 d4 b5	jsr $b5d4		jsr da6
+.b5bd	ee ab 0a	inc $0aab		inc $0AAB
+.b5c0	ad ab 0a	lda $0aab		lda $0AAB
+.b5c3	20 52 b9	jsr $b952		jsr ip1
+.b5c6	ad ab 0a	lda $0aab		lda $0AAB
+.b5c9	20 24 b9	jsr $b924		jsr dp1
+.b5cc	b0 e0		bcs $b5ae		bcs da3
+.b5ce	4c 8b b0	jmp $b08b	da4	jmp monmain
+.b5d1	4c bc b0	jmp $b0bc	da5	jmp mm5
+.b5d4	a9 2e		lda #$2e	da6	lda #$2E
+.b5d6	20 d2 ff	jsr $ffd2		jsr chrout
+.b5d9	20 a8 b8	jsr $b8a8		jsr ph3
+.b5dc	20 92 b8	jsr $b892	da7	jsr prnthex
+.b5df	20 a8 b8	jsr $b8a8		jsr ph3
+.b5e2	a0 00		ldy #$00		ldy #$00
+.b5e4	20 1a b1	jsr $b11a		jsr mindfet
+.b5e7	20 59 b6	jsr $b659		jsr calcmn
+.b5ea	48		pha			pha
+.b5eb	ae ab 0a	ldx $0aab		ldx $0AAB
+.b5ee	e8		inx			inx
+.b5ef	ca		dex		da8	dex
+.b5f0	10 0a		bpl $b5fc		bpl da9
+.b5f2	20 7d ff	jsr $ff7d		jsr jprimm
+>b5f5	20 20 20 00			.byte $20,$20,$20,$00
+.b5f9	4c 02 b6	jmp $b602		jmp da10
+.b5fc	20 1a b1	jsr $b11a	da9	jsr mindfet
+.b5ff	20 a5 b8	jsr $b8a5		jsr ph2
+.b602	c8		iny		da10	iny
+.b603	c0 03		cpy #$03		cpy #$03
+.b605	90 e8		bcc $b5ef		bcc da8
+.b607	68		pla			pla
+.b608	a2 03		ldx #$03		ldx #$03
+.b60a	20 a1 b6	jsr $b6a1		jsr prntmn
+.b60d	a2 06		ldx #$06		ldx #$06
+.b60f	e0 03		cpx #$03	da11	cpx #$03
+.b611	d0 17		bne $b62a		bne da13
+.b613	ac ab 0a	ldy $0aab		ldy $0AAB
+.b616	f0 12		beq $b62a		beq da13
+.b618	ad aa 0a	lda $0aaa	da12	lda $0AAA
+.b61b	c9 e8		cmp #$e8		cmp #$E8
+.b61d	08		php			php
+.b61e	20 1a b1	jsr $b11a		jsr mindfet
+.b621	28		plp			plp
+.b622	b0 1d		bcs $b641		bcs da15
+.b624	20 c2 b8	jsr $b8c2		jsr prntbyt
+.b627	88		dey			dey
+.b628	d0 ee		bne $b618		bne da12
+.b62a	0e aa 0a	asl $0aaa	da13	asl $0AAA
+.b62d	90 0e		bcc $b63d		bcc da14
+.b62f	bd 14 b7	lda $b714,x		lda modetbl-1,X
+.b632	20 d2 ff	jsr $ffd2		jsr chrout
+.b635	bd 1a b7	lda $b71a,x		lda modetbl+5,X
+.b638	f0 03		beq $b63d		beq da14
+.b63a	20 d2 ff	jsr $ffd2		jsr chrout
+.b63d	ca		dex		da14	dex
+.b63e	d0 cf		bne $b60f		bne da11
+.b640	60		rts			rts
+.b641	20 4d b6	jsr $b64d	da15	jsr da17
+.b644	18		clc			clc
+.b645	69 01		adc #$01		adc #$01
+.b647	d0 01		bne $b64a		bne da16
+.b649	e8		inx			inx
+.b64a	4c 9f b8	jmp $b89f	da16	jmp ph1
+.b64d	a6 67		ldx $67		da17	ldx $67
+.b64f	a8		tay			tay
+.b650	10 01		bpl $b653		bpl da18
+.b652	ca		dex			dex
+.b653	65 66		adc $66		da18	adc $66
+.b655	90 01		bcc $b658		bcc da19
+.b657	e8		inx			inx
+.b658	60		rts		da19	rts
+.b659	a8		tay		calcmn	tay ; Calculates mnemonic and addressing mode
+.b65a	4a		lsr a			lsr A
+.b65b	90 0b		bcc $b668		bcc cmn1
+.b65d	4a		lsr a			lsr A
+.b65e	b0 17		bcs $b677		bcs cmn3
+.b660	c9 22		cmp #$22		cmp #$22
+.b662	f0 13		beq $b677		beq cmn3
+.b664	29 07		and #$07		and #$07
+.b666	09 80		ora #$80		ora #$80
+.b668	4a		lsr a		cmn1	lsr A
+.b669	aa		tax			tax
+.b66a	bd c3 b6	lda $b6c3,x		lda opcdtbl,X
+.b66d	b0 04		bcs $b673		bcs cmn2
+.b66f	4a		lsr a			lsr A
+.b670	4a		lsr a			lsr A
+.b671	4a		lsr a			lsr A
+.b672	4a		lsr a			lsr A
+.b673	29 0f		and #$0f	cmn2	and #$0F
+.b675	d0 04		bne $b67b		bne cmn4
+.b677	a0 80		ldy #$80	cmn3	ldy #$80
+.b679	a9 00		lda #$00		lda #$00
+.b67b	aa		tax		cmn4	tax
+.b67c	bd 07 b7	lda $b707,x		lda indctbl,X
+.b67f	8d aa 0a	sta $0aaa		sta $0AAA
+.b682	29 03		and #$03		and #$03
+.b684	8d ab 0a	sta $0aab		sta $0AAB
+.b687	98		tya			tya
+.b688	29 8f		and #$8f		and #$8F
+.b68a	aa		tax			tax
+.b68b	98		tya			tya
+.b68c	a0 03		ldy #$03		ldy #$03
+.b68e	e0 8a		cpx #$8a		cpx #$8A
+.b690	f0 0b		beq $b69d		beq cmn7
+.b692	4a		lsr a		cmn5	lsr A
+.b693	90 08		bcc $b69d		bcc cmn7
+.b695	4a		lsr a			lsr A
+.b696	4a		lsr a		cmn6	lsr A
+.b697	09 20		ora #$20		ora #$20
+.b699	88		dey			dey
+.b69a	d0 fa		bne $b696		bne cmn6
+.b69c	c8		iny			iny
+.b69d	88		dey		cmn7	dey
+.b69e	d0 f2		bne $b692		bne cmn5
+.b6a0	60		rts			rts
+.b6a1	a8		tay		prntmn	tay ; Prints mnemonic for opcode
+.b6a2	b9 21 b7	lda $b721,y		lda mnemtbl,Y
+.b6a5	85 63		sta $63			sta $63
+.b6a7	b9 61 b7	lda $b761,y		lda mnemtbl1,Y
+.b6aa	85 64		sta $64			sta $64
+.b6ac	a9 00		lda #$00	pm1	lda #$00
+.b6ae	a0 05		ldy #$05		ldy #$05
+.b6b0	06 64		asl $64		pm2	asl $64
+.b6b2	26 63		rol $63			rol $63
+.b6b4	2a		rol a			rol A
+.b6b5	88		dey			dey
+.b6b6	d0 f8		bne $b6b0		bne pm2
+.b6b8	69 3f		adc #$3f		adc #$3F
+.b6ba	20 d2 ff	jsr $ffd2		jsr chrout
+.b6bd	ca		dex			dex
+.b6be	d0 ec		bne $b6ac		bne pm1
+.b6c0	4c a8 b8	jmp $b8a8		jmp ph3
+.b6c3					opcdtbl
+>b6c3	40 02 45 03 d0 08 40 09		.byte $40,$02,$45,$03,$d0,$08,$40,$09,$30,$22,$45,$33
+>b6cb	30 22 45 33
+>b6cf	d0 08 40 09 40 02 45 33		.byte $d0,$08,$40,$09,$40,$02,$45,$33,$d0,$08,$40,$09
+>b6d7	d0 08 40 09
+>b6db	40 02 45 b3 d0 08 40 09		.byte $40,$02,$45,$b3,$d0,$08,$40,$09,$00,$22,$44,$33
+>b6e3	00 22 44 33
+>b6e7	d0 8c 44 00 11 22 44 33		.byte $d0,$8c,$44,$00,$11,$22,$44,$33,$d0,$8c,$44,$9a
+>b6ef	d0 8c 44 9a
+>b6f3	10 22 44 33 d0 08 40 09		.byte $10,$22,$44,$33,$d0,$08,$40,$09,$10,$22,$44,$33
+>b6fb	10 22 44 33
+>b6ff	d0 08 40 09 62 13 78 a9		.byte $d0,$08,$40,$09,$62,$13,$78,$a9
+.b707					indctbl
+>b707	00 21 81 82 00 00 59 4d		.byte $00,$21,$81,$82,$00,$00,$59,$4d,$91,$92,$86,$4a
+>b70f	91 92 86 4a
+>b713	85 9d				.byte $85,$9d
+.b715					modetbl
+>b715	2c 29 2c 23 28 24 59 00		.byte $2c,$29,$2c,$23,$28,$24,$59,$00,$58,$24,$24,$00
+>b71d	58 24 24 00
+.b721					mnemtbl
+>b721	1c 8a 1c 23 5d 8b 1b a1		.byte $1c,$8a,$1c,$23,$5d,$8b,$1b,$a1,$9d,$8a,$1d,$23
+>b729	9d 8a 1d 23
+>b72d	9d 8b 1d a1 00 29 19 ae		.byte $9d,$8b,$1d,$a1,$00,$29,$19,$ae,$69,$a8,$19,$23
+>b735	69 a8 19 23
+>b739	24 53 1b 23 24 53 19 a1		.byte $24,$53,$1b,$23,$24,$53,$19,$a1,$00,$1a,$5b,$5b
+>b741	00 1a 5b 5b
+>b745	a5 69 24 24 ae ae a8 ad		.byte $a5,$69,$24,$24,$ae,$ae,$a8,$ad,$29,$00,$7c,$00
+>b74d	29 00 7c 00
+>b751	15 9c 6d 9c a5 69 29 53		.byte $15,$9c,$6d,$9c,$a5,$69,$29,$53,$84,$13,$34,$11
+>b759	84 13 34 11
+>b75d	a5 69 23 a0			.byte $a5,$69,$23,$a0
+.b761					mnemtbl1
+>b761	d8 62 5a 48 26 62 94 88		.byte $d8,$62,$5a,$48,$26,$62,$94,$88,$54,$44,$c8,$54
+>b769	54 44 c8 54
+>b76d	68 44 e8 94 00 b4 08 84		.byte $68,$44,$e8,$94,$00,$b4,$08,$84,$74,$b4,$28,$6e
+>b775	74 b4 28 6e
+>b779	74 f4 cc 4a 72 f2 a4 8a		.byte $74,$f4,$cc,$4a,$72,$f2,$a4,$8a,$00,$aa,$a2,$a2
+>b781	00 aa a2 a2
+>b785	74 74 74 72 44 68 b2 32		.byte $74,$74,$74,$72,$44,$68,$b2,$32,$b2,$00,$22,$00
+>b78d	b2 00 22 00
+>b791	1a 1a 26 26 72 72 88 c8		.byte $1a,$1a,$26,$26,$72,$72,$88,$c8,$c4,$ca,$26,$48
+>b799	c4 ca 26 48
+>b79d	44 44 a2 c8 0d 20 20 20		.byte $44,$44,$a2,$c8,$0d,$20,$20,$20
+.b7a5	c6 7a		dec $7a		getparm	dec $7A ; Evaluates a parameter in the input buffer
+.b7a7	20 ce b7	jsr $b7ce	gp1	jsr cvtparam
+.b7aa	b0 16		bcs $b7c2		bcs gp3
+.b7ac	20 e7 b8	jsr $b8e7		jsr testchr
+.b7af	d0 09		bne $b7ba		bne gp2
+.b7b1	c6 7a		dec $7a			dec $7A
+.b7b3	ad b4 0a	lda $0ab4		lda $0AB4
+.b7b6	d0 11		bne $b7c9		bne gp5
+.b7b8	f0 0d		beq $b7c7		beq gp4
+.b7ba	c9 20		cmp #$20	gp2	cmp #$20
+.b7bc	f0 0b		beq $b7c9		beq gp5
+.b7be	c9 2c		cmp #$2c		cmp #$2C
+.b7c0	f0 07		beq $b7c9		beq gp5
+.b7c2	68		pla		gp3	pla
+.b7c3	68		pla			pla
+.b7c4	4c bc b0	jmp $b0bc		jmp mm5
+.b7c7	38		sec		gp4	sec
+>b7c8	24					.byte $24
+>b7c9	18				gp5	.byte $18
+.b7ca	ad b4 0a	lda $0ab4		lda $0AB4
+.b7cd	60		rts			rts
+.b7ce					cvtparam
+.b7ce	a9 00		lda #$00		lda #$00
+.b7d0	85 60		sta $60			sta $60
+.b7d2	85 61		sta $61			sta $61
+.b7d4	85 62		sta $62			sta $62
+.b7d6	8d b4 0a	sta $0ab4		sta $0AB4
+.b7d9	8a		txa			txa
+.b7da	48		pha			pha
+.b7db	98		tya			tya
+.b7dc	48		pha			pha
+.b7dd	20 e9 b8	jsr $b8e9	cp1	jsr tc1
+.b7e0	d0 03		bne $b7e5		bne cp2
+.b7e2	4c 7e b8	jmp $b87e		jmp cp12
+.b7e5	c9 20		cmp #$20	cp2	cmp #$20
+.b7e7	f0 f4		beq $b7dd		beq cp1
+.b7e9	a2 03		ldx #$03		ldx #$03
+.b7eb	dd f5 b0	cmp $b0f5,x	cp3	cmp comtbl+15,X
+.b7ee	f0 06		beq $b7f6		beq cp4
+.b7f0	ca		dex			dex
+.b7f1	10 f8		bpl $b7eb		bpl cp3
+.b7f3	e8		inx			inx
+.b7f4	c6 7a		dec $7a			dec $7A
+.b7f6	bc 8a b8	ldy $b88a,x	cp4	ldy basetbl,X
+.b7f9	bd 8e b8	lda $b88e,x		lda basetbl+4,X
+.b7fc	8d b6 0a	sta $0ab6		sta $0AB6
+.b7ff	20 e9 b8	jsr $b8e9	cp5	jsr tc1
+.b802	f0 7a		beq $b87e		beq cp12
+.b804	38		sec			sec
+.b805	e9 30		sbc #$30		sbc #$30
+.b807	90 75		bcc $b87e		bcc cp12
+.b809	c9 0a		cmp #$0a		cmp #$0A
+.b80b	90 06		bcc $b813		bcc cp6
+.b80d	e9 07		sbc #$07		sbc #$07
+.b80f	c9 10		cmp #$10		cmp #$10
+.b811	b0 6b		bcs $b87e		bcs cp12
+.b813	8d b5 0a	sta $0ab5	cp6	sta $0AB5
+.b816	cc b5 0a	cpy $0ab5		cpy $0AB5
+.b819	90 61		bcc $b87c		bcc cp11
+.b81b	f0 5f		beq $b87c		beq cp11
+.b81d	ee b4 0a	inc $0ab4		inc $0AB4
+.b820	c0 0a		cpy #$0a		cpy #$0A
+.b822	d0 0a		bne $b82e		bne cp8
+.b824	a2 02		ldx #$02		ldx #$02
+.b826	b5 60		lda $60,x	cp7	lda $60,X
+.b828	9d b7 0a	sta $0ab7,x		sta $0AB7,X
+.b82b	ca		dex			dex
+.b82c	10 f8		bpl $b826		bpl cp7
+.b82e	ae b6 0a	ldx $0ab6	cp8 	ldx $0AB6
+.b831	06 60		asl $60		cp9	asl $60
+.b833	26 61		rol $61			rol $61
+.b835	26 62		rol $62			rol $62
+.b837	b0 43		bcs $b87c		bcs cp11
+.b839	ca		dex			dex
+.b83a	d0 f5		bne $b831		bne cp9
+.b83c	c0 0a		cpy #$0a		cpy #$0A
+.b83e	d0 22		bne $b862		bne cp10
+.b840	0e b7 0a	asl $0ab7		asl $0AB7
+.b843	2e b8 0a	rol $0ab8		rol $0AB8
+.b846	2e b9 0a	rol $0ab9		rol $0AB9
+.b849	b0 31		bcs $b87c		bcs cp11
+.b84b	ad b7 0a	lda $0ab7		lda $0AB7
+.b84e	65 60		adc $60			adc $60
+.b850	85 60		sta $60			sta $60
+.b852	ad b8 0a	lda $0ab8		lda $0AB8
+.b855	65 61		adc $61			adc $61
+.b857	85 61		sta $61			sta $61
+.b859	ad b9 0a	lda $0ab9		lda $0AB9
+.b85c	65 62		adc $62			adc $62
+.b85e	85 62		sta $62			sta $62
+.b860	b0 1a		bcs $b87c		bcs cp11
+.b862	18		clc		cp10	clc
+.b863	ad b5 0a	lda $0ab5		lda $0AB5
+.b866	65 60		adc $60			adc $60
+.b868	85 60		sta $60			sta $60
+.b86a	8a		txa			txa
+.b86b	65 61		adc $61			adc $61
+.b86d	85 61		sta $61			sta $61
+.b86f	8a		txa			txa
+.b870	65 62		adc $62			adc $62
+.b872	85 62		sta $62			sta $62
+.b874	b0 06		bcs $b87c		bcs cp11
+.b876	29 f0		and #$f0		and #$F0
+.b878	d0 02		bne $b87c		bne cp11
+.b87a	f0 83		beq $b7ff		beq cp5
+.b87c	38		sec		cp11	sec
+>b87d	24					.byte $24
+>b87e	18				cp12	.byte $18
+.b87f	8c b6 0a	sty $0ab6		sty $0AB6
+.b882	68		pla			pla
+.b883	a8		tay			tay
+.b884	68		pla			pla
+.b885	aa		tax			tax
+.b886	ad b4 0a	lda $0ab4		lda $0AB4
+.b889	60		rts			rts
+.b88a					basetbl
+>b88a	10 0a 08 02 04 03 03 01		.byte $10,$0a,$08,$02,$04,$03,$03,$01
+.b892	a5 68		lda $68		prnthex	lda $68 ; Prints a hexadecimal value
+.b894	20 d2 b8	jsr $b8d2		jsr cvtbyt
+.b897	8a		txa			txa
+.b898	20 d2 ff	jsr $ffd2		jsr chrout
+.b89b	a5 66		lda $66			lda $66
+.b89d	a6 67		ldx $67			ldx $67
+.b89f	48		pha		ph1	pha
+.b8a0	8a		txa			txa
+.b8a1	20 c2 b8	jsr $b8c2		jsr prntbyt
+.b8a4	68		pla			pla
+.b8a5	20 c2 b8	jsr $b8c2	ph2	jsr prntbyt
+.b8a8	a9 20		lda #$20	ph3	lda #$20
+.b8aa	4c d2 ff	jmp $ffd2		jmp chrout
+.b8ad					curstcur
+.b8ad	20 7d ff	jsr $ff7d		jsr jprimm
+>b8b0	0d 91 00			.byte $0d,$91,$00
+.b8b3	60		rts			rts
+.b8b4					curstnxt
+.b8b4	a9 0d		lda #$0d		lda #$0D
+.b8b6	4c d2 ff	jmp $ffd2		jmp chrout
+.b8b9	20 7d ff	jsr $ff7d	clrlin	jsr jprimm ; Clears a screen line
+>b8bc	0d 1b 51 20 00			.byte $0d,$1b,$51,$20,$00
+.b8c1	60		rts			rts
+.b8c2	8e af 0a	stx $0aaf	prntbyt	stx $0AAF ; Prints two ASCII characters for a byte value
+.b8c5	20 d2 b8	jsr $b8d2		jsr cvtbyt
+.b8c8	20 d2 ff	jsr $ffd2		jsr chrout
+.b8cb	8a		txa			txa
+.b8cc	ae af 0a	ldx $0aaf		ldx $0AAF
+.b8cf	4c d2 ff	jmp $ffd2		jmp chrout
+.b8d2	48		pha		cvtbyt	pha ; Converts a byte value into two ASCII characters
+.b8d3	20 dc b8	jsr $b8dc		jsr cb1
+.b8d6	aa		tax			tax
+.b8d7	68		pla			pla
+.b8d8	4a		lsr a			lsr A
+.b8d9	4a		lsr a			lsr A
+.b8da	4a		lsr a			lsr A
+.b8db	4a		lsr a			lsr A
+.b8dc	29 0f		and #$0f	cb1	and #$0F
+.b8de	c9 0a		cmp #$0a		cmp #$0A
+.b8e0	90 02		bcc $b8e4		bcc cb2
+.b8e2	69 06		adc #$06		adc #$06
+.b8e4	69 30		adc #$30	cb2	adc #$30
+.b8e6	60		rts			rts
+.b8e7	c6 7a		dec $7a		testchr	dec $7A ; Tests next character in the input buffer
+.b8e9	8e af 0a	stx $0aaf	tc1	stx $0AAF
+.b8ec	a6 7a		ldx $7a			ldx $7A
+.b8ee	bd 00 02	lda $0200,x		lda $0200,X
+.b8f1	f0 06		beq $b8f9		beq tc2
+.b8f3	c9 3a		cmp #$3a		cmp #$3A
+.b8f5	f0 02		beq $b8f9		beq tc2
+.b8f7	c9 3f		cmp #$3f		cmp #$3F
+.b8f9	08		php		tc2	php
+.b8fa	e6 7a		inc $7a			inc $7A
+.b8fc	ae af 0a	ldx $0aaf		ldx $0AAF
+.b8ff	28		plp			plp
+.b900	60		rts			rts
+.b901	a5 60		lda $60		moveval	lda $60 ; Transfers address and bank values to working pointer
+.b903	85 66		sta $66			sta $66
+.b905	a5 61		lda $61			lda $61
+.b907	85 67		sta $67			sta $67
+.b909	a5 62		lda $62			lda $62
+.b90b	85 68		sta $68			sta $68
+.b90d	60		rts			rts
+.b90e	38		sec		calccnt	sec ; Calculates number of bytes and banks to display or move
+.b90f	a5 60		lda $60			lda $60
+.b911	e5 66		sbc $66			sbc $66
+.b913	85 60		sta $60			sta $60
+.b915	a5 61		lda $61			lda $61
+.b917	e5 67		sbc $67			sbc $67
+.b919	85 61		sta $61			sta $61
+.b91b	a5 62		lda $62			lda $62
+.b91d	e5 68		sbc $68			sbc $68
+.b91f	85 62		sta $62			sta $62
+.b921	60		rts			rts
+.b922	a9 01		lda #$01	decpoco	lda #$01 ; Decrements pointer / counter
+.b924	8d af 0a	sta $0aaf	dp1	sta $0AAF
+.b927	38		sec			sec
+.b928	a5 60		lda $60			lda $60
+.b92a	ed af 0a	sbc $0aaf		sbc $0AAF
+.b92d	85 60		sta $60			sta $60
+.b92f	a5 61		lda $61			lda $61
+.b931	e9 00		sbc #$00		sbc #$00
+.b933	85 61		sta $61			sta $61
+.b935	a5 62		lda $62			lda $62
+.b937	e9 00		sbc #$00		sbc #$00
+.b939	85 62		sta $62			sta $62
+.b93b	60		rts			rts
+.b93c	38		sec		deccnt	sec ; Decrements byte count
+.b93d	a5 63		lda $63			lda $63
+.b93f	e9 01		sbc #$01		sbc #$01
+.b941	85 63		sta $63			sta $63
+.b943	a5 64		lda $64			lda $64
+.b945	e9 00		sbc #$00		sbc #$00
+.b947	85 64		sta $64			sta $64
+.b949	a5 65		lda $65			lda $65
+.b94b	e9 00		sbc #$00		sbc #$00
+.b94d	85 65		sta $65			sta $65
+.b94f	60		rts			rts
+.b950	a9 01		lda #$01	incptr	lda #$01 ; Increments address pointer
+.b952	18		clc		ip1	clc
+.b953	65 66		adc $66			adc $66
+.b955	85 66		sta $66			sta $66
+.b957	90 06		bcc $b95f		bcc ip2
+.b959	e6 67		inc $67			inc $67
+.b95b	d0 02		bne $b95f		bne ip2
+.b95d	e6 68		inc $68			inc $68
+.b95f	60		rts		ip2	rts
+.b960	38		sec		decptr	sec ; Decrements address pointer
+.b961	a5 66		lda $66			lda $66
+.b963	e9 01		sbc #$01		sbc #$01
+.b965	85 66		sta $66			sta $66
+.b967	a5 67		lda $67			lda $67
+.b969	e9 00		sbc #$00		sbc #$00
+.b96b	85 67		sta $67			sta $67
+.b96d	a5 68		lda $68			lda $68
+.b96f	e9 00		sbc #$00		sbc #$00
+.b971	85 68		sta $68			sta $68
+.b973	60		rts			rts
+.b974	b0 0c		bcs $b982	chngadd	bcs ca1 ; Changes bank and address
+.b976	a5 60		lda $60			lda $60
+.b978	a4 61		ldy $61			ldy $61
+.b97a	a6 62		ldx $62			ldx $62
+.b97c	85 04		sta $04			sta $04
+.b97e	84 03		sty $03			sty $03
+.b980	86 02		stx $02			stx $02
+.b982	60		rts		ca1	rts
+.b983	b0 2a		bcs $b9af	prepptr	bcs ppex ; Prepares pointers for dual-address operations
+.b985	20 01 b9	jsr $b901		jsr moveval
+.b988	20 a7 b7	jsr $b7a7		jsr gp1
+.b98b	b0 22		bcs $b9af		bcs ppex
+.b98d	a5 60		lda $60			lda $60
+.b98f	8d b7 0a	sta $0ab7		sta $0AB7
+.b992	a5 61		lda $61			lda $61
+.b994	8d b8 0a	sta $0ab8		sta $0AB8
+.b997	a5 62		lda $62			lda $62
+.b999	8d b9 0a	sta $0ab9		sta $0AB9
+.b99c	20 0e b9	jsr $b90e		jsr calccnt
+.b99f	a5 60		lda $60			lda $60
+.b9a1	85 63		sta $63			sta $63
+.b9a3	a5 61		lda $61			lda $61
+.b9a5	85 64		sta $64			sta $64
+.b9a7	a5 62		lda $62			lda $62
+.b9a9	85 65		sta $65			sta $65
+.b9ab	90 02		bcc $b9af		bcc ppex
+.b9ad	18		clc			clc
+>b9ae	24					.byte $24
+>b9af	38				ppex	.byte $38
+.b9b0	60		rts			rts
+.b9b1	20 a5 b7	jsr $b7a5	numxvrt	jsr getparm ; Performs number base conversion
+.b9b4	20 b9 b8	jsr $b8b9		jsr clrlin
+.b9b7	a9 24		lda #$24		lda #$24
+.b9b9	20 d2 ff	jsr $ffd2		jsr chrout
+.b9bc	a5 62		lda $62			lda $62
+.b9be	f0 07		beq $b9c7		beq nx1
+.b9c0	20 d2 b8	jsr $b8d2		jsr cvtbyt
+.b9c3	8a		txa			txa
+.b9c4	20 d2 ff	jsr $ffd2		jsr chrout
+.b9c7	a5 60		lda $60		nx1	lda $60
+.b9c9	a6 61		ldx $61			ldx $61
+.b9cb	20 9f b8	jsr $b89f		jsr ph1
+.b9ce	20 b9 b8	jsr $b8b9		jsr clrlin
+.b9d1	a9 2b		lda #$2b		lda #$2B
+.b9d3	20 d2 ff	jsr $ffd2		jsr chrout
+.b9d6	20 07 ba	jsr $ba07		jsr hexdec
+.b9d9	a9 00		lda #$00		lda #$00
+.b9db	a2 08		ldx #$08		ldx #$08
+.b9dd	a0 03		ldy #$03		ldy #$03
+.b9df	20 5d ba	jsr $ba5d		jsr pb1
+.b9e2	20 b9 b8	jsr $b8b9		jsr clrlin
+.b9e5	a9 26		lda #$26		lda #$26
+.b9e7	20 d2 ff	jsr $ffd2		jsr chrout
+.b9ea	a9 00		lda #$00		lda #$00
+.b9ec	a2 08		ldx #$08		ldx #$08
+.b9ee	a0 02		ldy #$02		ldy #$02
+.b9f0	20 47 ba	jsr $ba47		jsr pntobd
+.b9f3	20 b9 b8	jsr $b8b9		jsr clrlin
+.b9f6	a9 25		lda #$25		lda #$25
+.b9f8	20 d2 ff	jsr $ffd2		jsr chrout
+.b9fb	a9 00		lda #$00		lda #$00
+.b9fd	a2 18		ldx #$18		ldx #$18
+.b9ff	a0 00		ldy #$00		ldy #$00
+.ba01	20 47 ba	jsr $ba47		jsr pntobd
+.ba04	4c 8b b0	jmp $b08b		jmp monmain
+.ba07	20 01 b9	jsr $b901	hexdec	jsr moveval ; Converts a hexadecimal value to decimal
+.ba0a	a9 00		lda #$00		lda #$00
+.ba0c	a2 07		ldx #$07		ldx #$07
+.ba0e	9d a0 0a	sta $0aa0,x	hd1	sta $0AA0,X
+.ba11	ca		dex			dex
+.ba12	10 fa		bpl $ba0e		bpl hd1
+.ba14	ee a7 0a	inc $0aa7		inc $0AA7
+.ba17	a0 17		ldy #$17		ldy #$17
+.ba19	08		php			php
+.ba1a	78		sei			sei
+.ba1b	f8		sed			sed
+.ba1c	46 68		lsr $68		hd2	lsr $68
+.ba1e	66 67		ror $67			ror $67
+.ba20	66 66		ror $66			ror $66
+.ba22	90 0f		bcc $ba33		bcc hd4
+.ba24	18		clc			clc
+.ba25	a2 03		ldx #$03		ldx #$03
+.ba27	bd a4 0a	lda $0aa4,x	hd3	lda $0AA4,X
+.ba2a	7d a0 0a	adc $0aa0,x		adc $0AA0,X
+.ba2d	9d a0 0a	sta $0aa0,x		sta $0AA0,X
+.ba30	ca		dex			dex
+.ba31	10 f4		bpl $ba27		bpl hd3
+.ba33	18		clc		hd4	clc
+.ba34	a2 03		ldx #$03		ldx #$03
+.ba36	bd a4 0a	lda $0aa4,x	hd5	lda $0AA4,X
+.ba39	7d a4 0a	adc $0aa4,x		adc $0AA4,X
+.ba3c	9d a4 0a	sta $0aa4,x		sta $0AA4,X
+.ba3f	ca		dex			dex
+.ba40	10 f4		bpl $ba36		bpl hd5
+.ba42	88		dey			dey
+.ba43	10 d7		bpl $ba1c		bpl hd2
+.ba45	28		plp			plp
+.ba46	60		rts			rts
+.ba47	48		pha		pntobd	pha ; Prints octal, binary or decimal values
+.ba48	a5 60		lda $60			lda $60
+.ba4a	8d a2 0a	sta $0aa2		sta $0AA2
+.ba4d	a5 61		lda $61			lda $61
+.ba4f	8d a1 0a	sta $0aa1		sta $0AA1
+.ba52	a5 62		lda $62			lda $62
+.ba54	8d a0 0a	sta $0aa0		sta $0AA0
+.ba57	a9 00		lda #$00		lda #$00
+.ba59	8d a3 0a	sta $0aa3		sta $0AA3
+.ba5c	68		pla			pla
+.ba5d	8d b4 0a	sta $0ab4	pb1	sta $0AB4
+.ba60	8c b6 0a	sty $0ab6		sty $0AB6
+.ba63	ac b6 0a	ldy $0ab6	pb2	ldy $0AB6
+.ba66	a9 00		lda #$00		lda #$00
+.ba68	0e a3 0a	asl $0aa3	pb3	asl $0AA3
+.ba6b	2e a2 0a	rol $0aa2		rol $0AA2
+.ba6e	2e a1 0a	rol $0aa1		rol $0AA1
+.ba71	2e a0 0a	rol $0aa0		rol $0AA0
+.ba74	2a		rol a			rol A
+.ba75	88		dey			dey
+.ba76	10 f0		bpl $ba68		bpl pb3
+.ba78	a8		tay			tay
+.ba79	d0 09		bne $ba84		bne pb4
+.ba7b	e0 01		cpx #$01		cpx #$01
+.ba7d	f0 05		beq $ba84		beq pb4
+.ba7f	ac b4 0a	ldy $0ab4		ldy $0AB4
+.ba82	f0 08		beq $ba8c		beq pb5
+.ba84	ee b4 0a	inc $0ab4	pb4	inc $0AB4
+.ba87	09 30		ora #$30		ora #$30
+.ba89	20 d2 ff	jsr $ffd2		jsr chrout
+.ba8c	ca		dex		pb5	dex
+.ba8d	d0 d4		bne $ba63		bne pb2
+.ba8f	60		rts			rts
+.ba90	d0 03		bne $ba95	diskcmd	bne dc1 ; Handles disk commands
+.ba92	a2 08		ldx #$08		ldx #$08
+>ba94	2c					.byte $2c
+>ba95	a6				dc1	.byte $a6
+>ba96	60					.byte $60
+.ba97	e0 04		cpx #$04		cpx #$04
+.ba99	90 65		bcc $bb00		bcc dc6
+.ba9b	e0 1f		cpx #$1f		cpx #$1F
+.ba9d	b0 61		bcs $bb00		bcs dc6
+.ba9f	86 60		stx $60			stx $60
+.baa1	a9 00		lda #$00		lda #$00
+.baa3	85 62		sta $62			sta $62
+.baa5	85 b7		sta $b7			sta $B7
+.baa7	aa		tax			tax
+.baa8	20 68 ff	jsr $ff68		jsr jsetbnk
+.baab	20 e9 b8	jsr $b8e9		jsr tc1
+.baae	c6 7a		dec $7a			dec $7A
+.bab0	c9 24		cmp #$24		cmp #$24
+.bab2	f0 4f		beq $bb03		beq showdir
+.bab4	a9 00		lda #$00		lda #$00
+.bab6	a6 60		ldx $60			ldx $60
+.bab8	a0 0f		ldy #$0f		ldy #$0F
+.baba	20 ba ff	jsr $ffba		jsr jsetlfs
+.babd	20 c0 ff	jsr $ffc0		jsr jopen
+.bac0	b0 32		bcs $baf4		bcs dc5
+.bac2	a2 00		ldx #$00		ldx #$00
+.bac4	20 c9 ff	jsr $ffc9		jsr jckout
+.bac7	b0 2b		bcs $baf4		bcs dc5
+.bac9	a6 7a		ldx $7a		dc2	ldx $7A
+.bacb	e6 7a		inc $7a			inc $7A
+.bacd	bd 00 02	lda $0200,x		lda $0200,X
+.bad0	f0 05		beq $bad7		beq dc3
+.bad2	20 d2 ff	jsr $ffd2		jsr chrout
+.bad5	90 f2		bcc $bac9		bcc dc2
+.bad7	20 cc ff	jsr $ffcc	dc3	jsr jclrch
+.bada	20 b4 b8	jsr $b8b4		jsr curstnxt
+.badd	a2 00		ldx #$00		ldx #$00
+.badf	20 c6 ff	jsr $ffc6		jsr jchkin
+.bae2	b0 10		bcs $baf4		bcs dc5
+.bae4	20 cf ff	jsr $ffcf	dc4	jsr jbasin
+.bae7	20 d2 ff	jsr $ffd2		jsr chrout
+.baea	c9 0d		cmp #$0d		cmp #$0D
+.baec	f0 06		beq $baf4		beq dc5
+.baee	a5 90		lda $90			lda $90
+.baf0	29 bf		and #$bf		and #$BF
+.baf2	f0 f0		beq $bae4		beq dc4
+.baf4	20 cc ff	jsr $ffcc	dc5	jsr jclrch
+.baf7	a9 00		lda #$00		lda #$00
+.baf9	38		sec			sec
+.bafa	20 c3 ff	jsr $ffc3		jsr jclose
+.bafd	4c 8b b0	jmp $b08b		jmp monmain
+.bb00	4c bc b0	jmp $b0bc	dc6	jmp mm5
+.bb03	a0 ff		ldy #$ff	showdir	ldy #$FF ; Displays disk directory
+.bb05	a6 7a		ldx $7a			ldx $7A
+.bb07	ca		dex			dex
+.bb08	c8		iny		sd1	iny
+.bb09	e8		inx			inx
+.bb0a	bd 00 02	lda $0200,x		lda $0200,X
+.bb0d	d0 f9		bne $bb08		bne sd1
+.bb0f	98		tya			tya
+.bb10	a6 7a		ldx $7a			ldx $7A
+.bb12	a0 02		ldy #$02		ldy #$02
+.bb14	20 bd ff	jsr $ffbd		jsr jsetnam
+.bb17	a9 00		lda #$00		lda #$00
+.bb19	a6 60		ldx $60			ldx $60
+.bb1b	a0 60		ldy #$60		ldy #$60
+.bb1d	20 ba ff	jsr $ffba		jsr jsetlfs
+.bb20	20 c0 ff	jsr $ffc0		jsr jopen
+.bb23	b0 cf		bcs $baf4		bcs dc5
+.bb25	a2 00		ldx #$00		ldx #$00
+.bb27	20 c6 ff	jsr $ffc6		jsr jchkin
+.bb2a	20 b4 b8	jsr $b8b4		jsr curstnxt
+.bb2d	a0 03		ldy #$03		ldy #$03
+.bb2f	84 63		sty $63		sd2	sty $63
+.bb31	20 cf ff	jsr $ffcf	sd3	jsr jbasin
+.bb34	85 60		sta $60			sta $60
+.bb36	a5 90		lda $90			lda $90
+.bb38	d0 ba		bne $baf4		bne dc5
+.bb3a	20 cf ff	jsr $ffcf		jsr jbasin
+.bb3d	85 61		sta $61			sta $61
+.bb3f	a5 90		lda $90			lda $90
+.bb41	d0 b1		bne $baf4		bne dc5
+.bb43	c6 63		dec $63			dec $63
+.bb45	d0 ea		bne $bb31		bne sd3
+.bb47	20 07 ba	jsr $ba07		jsr hexdec
+.bb4a	a9 00		lda #$00		lda #$00
+.bb4c	a2 08		ldx #$08		ldx #$08
+.bb4e	a0 03		ldy #$03		ldy #$03
+.bb50	20 5d ba	jsr $ba5d		jsr pb1
+.bb53	a9 20		lda #$20		lda #$20
+.bb55	20 d2 ff	jsr $ffd2		jsr chrout
+.bb58	20 cf ff	jsr $ffcf	sd4	jsr jbasin
+.bb5b	f0 09		beq $bb66		beq sd5
+.bb5d	a6 90		ldx $90			ldx $90
+.bb5f	d0 93		bne $baf4		bne dc5
+.bb61	20 d2 ff	jsr $ffd2		jsr chrout
+.bb64	90 f2		bcc $bb58		bcc sd4
+.bb66	20 b4 b8	jsr $b8b4	sd5	jsr curstnxt
+.bb69	20 e1 ff	jsr $ffe1		jsr jstop
+.bb6c	f0 86		beq $baf4		beq dc5
+.bb6e	a0 02		ldy #$02		ldy #$02
+.bb70	d0 bd		bne $bb2f		bne sd2
+>bb72	28 43 29 31 39 38 36 20		.byte $28,$43,$29,$31,$39,$38,$36,$20,$43,$4f,$4d,$4d
+>bb7a	43 4f 4d 4d
+>bb7e	4f 44 4f 52 45 20 45 4c		.byte $4f,$44,$4f,$52,$45,$20,$45,$4c,$45,$43,$54,$52
+>bb86	45 43 54 52
+>bb8a	4f 4e 49 43 53 2c 20 4c		.byte $4f,$4e,$49,$43,$53,$2c,$20,$4c,$54,$44,$2e,$20
+>bb92	54 44 2e 20
+>bb96	41 4c 4c 20 52 49 47 48		.byte $41,$4c,$4c,$20,$52,$49,$47,$48,$54,$53,$20,$52
+>bb9e	54 53 20 52
+>bba2	45 53 45 52 56 45 44 2e		.byte $45,$53,$45,$52,$56,$45,$44,$2e,$ff,$ff,$ff,$ff
+>bbaa	ff ff ff ff
+>bbae	c8 cd 01 c5			.byte $c8,$cd,$01,$c5
+
+;******  Return to file: tedmonb000.asm
+
+
+;******  End of listing

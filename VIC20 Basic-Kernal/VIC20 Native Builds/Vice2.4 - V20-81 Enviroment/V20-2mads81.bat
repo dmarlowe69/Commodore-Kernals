@@ -1,0 +1,1 @@
+%VICE2PATH%\xvic.exe -chdir "%CD%" -config V20-2mads81.set -8 mads_v20.d81 bass20-81.vsf

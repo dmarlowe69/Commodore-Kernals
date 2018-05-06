@@ -1,0 +1,13 @@
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\VIC20\VIC20 BasicKernal Sources\Project64 GitHub\firmware>64tass VC20LD11.asm -L VC20LD11.lst -o VC20LD11.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   VC20LD11.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $c000-$ffff   $4000
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\VIC20\VIC20 BasicKernal Sources\Project64 GitHub\firmware>rem pause 

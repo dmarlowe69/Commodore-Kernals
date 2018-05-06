@@ -1,0 +1,13 @@
+
+C:\Users\denton\Desktop\My Commodore\Commodore VIC 20 MADS Projects\VIC 20 Basic Kernal\Basic tass>64tass basicb.asm -L basicb.lst -o basicb.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   basicb.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $c000-$dffe   $1fff
+
+C:\Users\denton\Desktop\My Commodore\Commodore VIC 20 MADS Projects\VIC 20 Basic Kernal\Basic tass>rem pause 

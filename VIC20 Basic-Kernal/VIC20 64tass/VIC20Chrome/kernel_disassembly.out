@@ -1,0 +1,13 @@
+
+C:\Users\Denton\Desktop\VIC20\VIC20 BasicKernal Sources\VIC20Chrome>64tass kernel_disassembly.asm -L kernel_disassembly.lst -o kernel_disassembly.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   kernel_disassembly.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $c000-$ffff   $4000
+
+C:\Users\Denton\Desktop\VIC20\VIC20 BasicKernal Sources\VIC20Chrome>rem pause 

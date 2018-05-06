@@ -1,0 +1,13 @@
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\C64\VIC20- NTSC>64tass VIC-EdilbertKirk.asm -L VIC-EdilbertKirk.lst -o VIC-EdilbertKirk.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   VIC-EdilbertKirk.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $c000-$ffff   $4000
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\C64\VIC20- NTSC>rem pause 

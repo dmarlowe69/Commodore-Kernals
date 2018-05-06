@@ -1,0 +1,1 @@
+dd if=%1.prg of=%1.bin bs=1 skip=2

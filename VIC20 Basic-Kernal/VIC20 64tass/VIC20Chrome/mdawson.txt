@@ -1,0 +1,3 @@
+https://www.mdawson.net/vic20chrome/vic20.php
+
+https://www.mdawson.net/vic20chrome/vic20/docs/kernel_disassembly.txt

@@ -1,0 +1,14 @@
+
+C:\Users\Denton\Desktop\VIC20\VIC20 BasicKernal Sources\Classic Computing tass>64tass krnlrom.asm -L krnlrom.lst -o krnlrom.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   krnlrom.asm
+Assembling file:   ramvars.inc
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $e000-$ffff   $2000
+
+C:\Users\Denton\Desktop\VIC20\VIC20 BasicKernal Sources\Classic Computing tass>rem pause 

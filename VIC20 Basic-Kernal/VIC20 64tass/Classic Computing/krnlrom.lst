@@ -1,0 +1,4806 @@
+
+; 64tass Turbo Assembler Macro V1.53.1515 listing file
+; 64tass -L krnlrom.lst -o krnlrom.prg krnlrom.asm
+; Sat Jan 06 23:26:14 2018
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: krnlrom.asm
+
+
+;******  Processing file: ramvars.inc
+
+=$a000					A0BASE =$A000		;Autostart ROM base
+=$00					KIM_IOER =$00
+=$0c					KIM_SRCH =$0C
+=$1b					KIM_PLAY =$1B
+=$2e					KIM_RECP =$2E
+=$49					KIM_LOAD =$49
+=$51					KIM_SAVE =$51
+=$59					KIM_VERF =$59
+=$63					KIM_FOUN =$63
+=$6a					KIM_OK   =$6A
+=$ffa5					ACPTR  =$FFA5		;Receive From Serial Bus
+=$fed2					BREAK  =$FED2		;Break vector handler
+=$ffc6					CHKIN  =$FFC6		;Set Input Device
+=$ffc9					CHKOUT =$FFC9		;Set Output Device
+=$ffcf					CHRIN  =$FFCF		;Input a byte
+=$ffd2					CHROUT =$FFD2		;Output One Character
+=$ffa8					CIOUT  =$FFA8		;Send Serial Deferred
+=$ffe7					CLALL  =$FFE7		;Abort All Files
+=$ffc3					CLOSE  =$FFC3		;Close File
+=$ffcc					CLRCH  =$FFCC		;Restore Default I/O
+=$ffe4					GETIN  =$FFE4		;Get a byte
+=$fff3					IOBASE =$FFF3		;Return I/O Base Address
+=$ffb1					LISTN  =$FFB1		;Send LISTEN Command on Serial Bus
+=$ffd5					LOAD   =$FFD5		;Load RAM From Device (flows to ILINKL)
+=$ff9c					MEMBOT =$FF9C		;Set / Read Bottom of Memory
+=$ff99					MEMTOP =$FF99		;Set / Read Top of Memory
+=$ffc0					OPEN   =$FFC0		;Open File
+=$fff0					PLOT   =$FFF0
+=$ffde					RDTIM  =$FFDE		;Read Real-Time Clock
+=$ffb7					READST =$FFB7		;Get I/O Status Word
+=$ff8a					RESTOR =$FF8A		;Restore Kernel Vectors (at $0314)
+=$ffd8					SAVE   =$FFD8		;Save RAM To Device (flows to ILINKS)
+=$ff9f					SCNKEY =$FF9F		;Scan keyboard
+=$ffed					SCREEN =$FFED
+=$ff93					SECND  =$FF93		;Send LISTEN Secondary Address
+=$ffba					SETLFS =$FFBA		;Set Logical File Parameters
+=$ff90					SETMSG =$FF90		;Control OS Messages
+=$ffbd					SETNAM =$FFBD		;Set Filename
+=$ffdb					SETTIM =$FFDB		;Set Real-Time Clock
+=$ffa2					SETTMO =$FFA2		;Set IEEE Timeout
+=$ffe1					STOP   =$FFE1		;Check STOP Key
+=$ffb4					TALK   =$FFB4		;Send TALK Command on Serial Bus
+=$ff96					TKSA   =$FF96		;Send TALK Secondary Address
+=$ffea					UDTIM  =$FFEA		;Increment Real-Time Clock
+=$ffae					UNLSN  =$FFAE		;Send UNLISTEN on Serial Bus
+=$ffab					UNTLK  =$FFAB		;Send UNTALK on Serial Bus
+=$fed2					USER   =$FED2		;User vector
+=$ff8d					VECTOR =$FF8D		;Change Vectors For User
+=$c000					BENTER =$c000		;Basic Restart Vectors
+=$c002					BPANIC =$c002		;Basic PANIC entry
+=$c004					BASSIG =$c004		;'cbmbasic'
+=$c00c					STMDSP =$c00c		;BASIC Command Vectors
+=$c052					FUNDSP =$c052		;BASIC Function Vectors
+=$c080					OPTAB  =$c080		;BASIC Operator Vectors
+=$c09e					RESLST =$c09e		;BASIC Command Keyword Table
+=$c129					MSCLST =$c129		;BASIC Misc. Keyword Table
+=$c140					OPLIST =$c140		;BASIC Operator Keyword Table
+=$c14d					FUNLST =$c14d		;BASIC Function Keyword Table
+=$c19e					ERRTAB =$c19e		;Error Message Table
+=$c328					ERRPTR =$c328		;Error Message Pointers
+=$c364					OKK    =$c364		;Misc. Messages
+=$c389					UNUSE1 =$c389		;Unused byte
+=$c38a					FNDFOR =$c38a		;Find FOR/GOSUB Entry on Stack
+=$c3b8					BLTU   =$c3b8		;Open Space in Memory
+=$c3fb					GETSTK =$c3fb		;Check Stack Depth
+=$c408					REASON =$c408		;Check Memory Overlap
+=$c435					OMERR  =$c435		;Output "?OUT OF MEMORY Error"
+=$c437					ERROR  =$c437		;Error Routine
+=$c469					ERRFIN =$c469		;Break Entry
+=$c474					READY  =$c474		;BASIC ready entry
+=$c480					MAIN   =$c480		;Input & Identify BASIC Line
+=$c49c					MAIN1  =$c49c		;Get Line Number & Tokenise Text
+=$c4a2					INSLIN =$c4a2		;Insert BASIC Text
+=$c533					LNKPRG =$c533		;Rechain Lines
+=$c560					INLIN  =$c560		;Input Line Into Buffer
+=$c579					CRNCH  =$c579		;Tokenize Input Buffer
+=$c613					FNDLIN =$c613		;Search for Line Number
+=$c642					SCRTCH =$c642		;Perform [new]
+=$c644					SCRTCH1 =$c644		;
+=$c65e					CLEAR  =$c65e		;Perform [clr]
+=$c677					CLEAR1 =$c677		;
+=$c67a					CLEAR2 =$c67a		;
+=$c68e					STXPT  =$c68e		;Reset TXTPTR
+=$c69c					LIST   =$c69c		;Perform [list]
+=$c717					QPLOP  =$c717		;Handle LIST
+=$c742					FOR    =$c742		;Perform [for]
+=$c7ae					NEWSTT =$c7ae		;BASIC Warm Start
+=$c7c4					CKEOL  =$c7c4		;Check End of Program
+=$c7e1					GONE   =$c7e1		;Prepare to execute statement
+=$c7ed					GONE3  =$c7ed		;Perform BASIC Keyword
+=$c81d					RESTR  =$c81d		;Perform [restore]
+=$c82c					BSTOP  =$c82c		;Perform [stop], [end], break
+=$c857					CONT   =$c857		;Perform [cont]
+=$c871					RUN    =$c871		;Perform [run]
+=$c883					GOSUB  =$c883		;Perform [gosub]
+=$c8a0					GOTO   =$c8a0		;Perform [goto]
+=$c8d2					RETURN =$c8d2		;Perform [return]
+=$c8f8					DATA   =$c8f8		;Perform [data]
+=$c906					DATAN  =$c906		;Search for Next Statement / Line
+=$c928					IF     =$c928		;Perform [if]
+=$c93b					REM    =$c93b		;Perform [rem]
+=$c94b					ONGOTO =$c94b		;Perform [on]
+=$c96b					LINGET =$c96b		;Fetch linnum From BASIC
+=$c9a5					LET    =$c9a5		;Perform [let]
+=$c9c4					PUTINT =$c9c4		;Assign Integer
+=$c9d6					PTFLPT =$c9d6		;Assign Floating Point
+=$c9d9					PUTSTR =$c9d9		;Assign String
+=$c9e3					PUTTIM =$c9e3		;Assign TI$
+=$ca2c					GETSPT =$ca2c		;Add Digit to FAC#1
+=$ca80					PRINTN =$ca80		;Perform [print#]
+=$ca86					CMD    =$ca86		;Perform [cmd]
+=$ca9a					STRDON =$ca9a		;Print String From Memory
+=$caa0					PRINT  =$caa0		;Perform [print]
+=$cab8					VAROP  =$cab8		;Output Variable
+=$cad7					CRDO   =$cad7		;Output CR/LF
+=$cae8					COMPRT =$cae8		;Handle comma, TAB(, SPC(
+=$cb1e					STROUT =$cb1e		;Output String
+=$cb3b					OUTSPC =$cb3b		;Output Format Character
+=$cb4d					DOAGIN =$cb4d		;Handle Bad Data
+=$cb7b					GET    =$cb7b		;Perform [get]
+=$cba5					INPUTN =$cba5		;Perform [input#]
+=$cbbf					INPUT  =$cbbf		;Perform [input]
+=$cbea					BUFFUL =$cbea		;Read Input Buffer
+=$cbf9					QINLIN =$cbf9		;Do Input Prompt
+=$cc06					READ   =$cc06		;Perform [read]
+=$cc35					RDGET  =$cc35		;General Purpose Read Routine
+=$ccfc					EXINT  =$ccfc		;Input Error Messages
+=$cd1e					NEXT   =$cd1e		;Perform [next]
+=$cd61					DONEXT =$cd61		;Check Valid Loop
+=$cd8a					FRMNUM =$cd8a		;Confirm Result
+=$cd9e					FRMEVL =$cd9e		;Evaluate Expression in Text
+=$ce83					EVAL   =$ce83		;Evaluate Single Term
+=$cea8					PIVAL  =$cea8		;Constant - pi
+=$cead					QDOT   =$cead		;Continue Expression
+=$cef1					PARCHK =$cef1		;Expression in Brackets
+=$cef7					CHKCLS =$cef7		;Confirm Character
+=$cef7					CHKPNC =$cef7		;test ')'
+=$cefa					CHKPNO =$cefa		;test '('
+=$cefd					CHKCOM =$cefd		;test comma
+=$cf08					SNERR  =$cf08		;Output "?SYNTAX Error"
+=$cf0d					DOMIN  =$cf0d		;Set up NOT Function
+=$cf14					RSVVAR =$cf14		;Identify Reserved Variable
+=$cf28					ISVAR  =$cf28		;Search for Variable
+=$cf48					TISASC =$cf48		;Convert TI to ASCII String
+=$cfa7					ISFUN  =$cfa7		;Identify Function Type
+=$cfb1					STRFUN =$cfb1		;Evaluate String Function
+=$cfd1					NUMFUN =$cfd1		;Evaluate Numeric Function
+=$cfe6					OROP   =$cfe6		;Perform [or], [and]"
+=$d016					DOREL  =$d016		;Perform <, =, >
+=$d01b					NUMREL =$d01b		;Numeric Comparison
+=$d02e					STRREL =$d02e		;String Comparison
+=$d07e					DIM    =$d07e		;Perform [dim]
+=$d08b					PTRGET =$d08b		;Identify Variable
+=$d0e7					ORDVAR =$d0e7		;Locate Ordinary Variable
+=$d11d					NOTFNS =$d11d		;Create New Variable
+=$d128					NOTEVL =$d128		;Create Variable
+=$d194					ARYGET =$d194		;Allocate Array Pointer Space
+=$d1a5					N32768 =$d1a5		;Constant 32768 in Flpt	DATA
+=$d1aa					FACINX =$d1aa		;FAC#1 to Integer in (AC/YR)
+=$d1b2					INTIDX =$d1b2		;Evaluate Text for Integer
+=$d1bf					AYINT  =$d1bf		;FAC#1 to Positive Integer
+=$d1d1					ISARY  =$d1d1		;Get Array Parameters
+=$d218					FNDARY =$d218		;Find Array
+=$d245					BSERR  =$d245		;"?Bad subscript error"
+=$d248					FCERR  =$d248		;"?Illegal quantity error"
+=$d261					NOTFDD =$d261		;Create Array
+=$d30e					INLPN2 =$d30e		;Locate Element in Array
+=$d34c					UMULT  =$d34c		;Number of Bytes in Subscript
+=$d37d					FRE    =$d37d		;Perform [fre]
+=$d391					GIVAYF =$d391		;Convert Integer in (AC/YR) to Flpt
+=$d39e					POS    =$d39e		;Perform [pos]
+=$d3a6					ERRDIR =$d3a6		;Confirm Program Mode
+=$d3e1					GETFNM =$d3e1		;Check Syntax of FN
+=$d3f4					FNDOER =$d3f4		;Perform [fn]
+=$d465					STRD   =$d465		;Perform [str$]
+=$d487					STRLIT =$d487		;Setup String
+=$d4d5					PUTNW1 =$d4d5		;Save String Descriptor
+=$d4f4					GETSPA =$d4f4		;Allocate Space for String
+=$d526					GARBAG =$d526		;Garbage Collection
+=$d5bd					DVARS  =$d5bd		;Search for Next String
+=$d606					GRBPAS =$d606		;Collect a String
+=$d63d					CAT    =$d63d		;Concatenate Two Strings
+=$d67a					MOVINS =$d67a		;Store String in High RAM
+=$d6a3					FRESTR =$d6a3		;Perform String Housekeeping
+=$d6db					FREFAC =$d6db		;Clean Descriptor Stack
+=$d6ec					CHRD   =$d6ec		;Perform [chr$]
+=$d700					LEFTD  =$d700		;Perform [left$]
+=$d72c					RIGHTD =$d72c		;Perform [right$]
+=$d737					MIDD   =$d737		;Perform [mid$]
+=$d761					PREAM  =$d761		;Pull sTring Parameters
+=$d77c					LEN    =$d77c		;Perform [len]
+=$d782					LEN1   =$d782		;Exit String Mode
+=$d78b					ASC    =$d78b		;Perform [asc]
+=$d79b					GETBYT =$d79b		;Evaluate Text to 1 Byte in XR
+=$d7ad					VAL    =$d7ad		;Perform [val]
+=$d7b5					STRVAL =$d7b5		;Convert ASCII String to Flpt
+=$d7eb					GETNUM =$d7eb		;Get parameters for POKE/WAIT
+=$d7f7					GETADR =$d7f7		;Convert FAC#1 to Integer in LINNUM
+=$d80d					PEEK   =$d80d		;Perform [peek]
+=$d824					POKE   =$d824		;Perform [poke]
+=$d82d					WAIT   =$d82d		;Perform [wait]
+=$d849					FADDH  =$d849		;Add 0.5 to FAC#1
+=$d850					FSUB   =$d850		;Perform Subtraction
+=$d862					FADD5  =$d862		;Normalize Addition
+=$d867					FADD   =$d867		;Perform Addition
+=$d947					NEGFAC =$d947		;2's Complement FAC#1
+=$d97e					OVERR  =$d97e		;"?OVERFLOW Error"
+=$d983					MULSHF =$d983		;Multiply by Zero Byte
+=$d9bc					FONE   =$d9bc		;Table of Flpt Constants
+=$d9ea					LOG    =$d9ea		;Perform [log]
+=$da28					FMULT  =$da28		;Perform Multiply
+=$da59					MULPLY =$da59		;Multiply by a Byte
+=$da8c					CONUPK =$da8c		;Load FAC#2 From Memory
+=$dab7					MULDIV =$dab7		;Test Both Accumulators
+=$dad4					MLDVEX =$dad4		;Overflow / Underflow
+=$dae2					MUL10  =$dae2		;Multiply FAC#1 by 10
+=$daf9					TENC   =$daf9		;Constant 10 in Flpt
+=$dafe					DIV10  =$dafe		;Divide FAC#1 by 10
+=$db07					FDIV   =$db07		;Divide FAC#2 by Flpt at (AC/YR)
+=$db0f					FDIVT  =$db0f		;Divide FAC#2 by FAC#1
+=$dba2					MOVFM  =$dba2		;Load FAC#1 From Memory
+=$dbc7					MOV2F  =$dbc7		;Store FAC#1 in Memory
+=$dbfc					MOVFA  =$dbfc		;Copy FAC#2 into FAC#1
+=$dc0c					MOVAF  =$dc0c		;Copy FAC#1 into FAC#2
+=$dc1b					ROUND  =$dc1b		;Round FAC#1
+=$dc2b					SIGN   =$dc2b		;Check Sign of FAC#1
+=$dc39					SGN    =$dc39		;Perform [sgn]
+=$dc58					ABS    =$dc58		;Perform [abs]
+=$dc5b					FCOMP  =$dc5b		;Compare FAC#1 With Memory
+=$dc9b					QINT   =$dc9b		;Convert FAC#1 to Integer
+=$dccc					INT    =$dccc		;Perform [int]
+=$dcf3					FIN    =$dcf3		;Convert ASCII String to a Number in FAC#1
+=$ddb3					N0999  =$ddb3		;String Conversion Constants
+=$ddc2					INPRT  =$ddc2		;Output 'IN ' + Line Number
+=$ddcd					INPRT1 =$ddcd		;print BASIC line number
+=$dddd					FOUT   =$dddd		;Convert FAC#1 to ASCII String
+=$de68					FOUTIM =$de68		;Convert TI to String
+=$df11					FHALF  =$df11		;Table of Constants
+=$df71					SQR    =$df71		;Perform [sqr]
+=$df7b					FPWRT  =$df7b		;Perform power ($)
+=$dfb4					NEGOP  =$dfb4		;Negate FAC#1
+=$dfbf					LOGEB2 =$dfbf		;Table of Constants
+=$dfed					EXP    =$dfed		;Perform [exp]
+=$9002					VV9002 = $9002
+=$9005					VV9005 = $9005
+=$9110					VV9110 = $9110
+=$9111					VV9111 = $9111
+=$9112					VV9112 = $9112
+=$9113					VV9113 = $9113
+=$9114					VV9114 = $9114
+=$9118					VV9118 = $9118
+=$9119					VV9119 = $9119
+=$911b					VV911B = $911B
+=$911c					VV911C = $911C
+=$911d					VV911D = $911D
+=$911e					VV911E = $911E
+=$911f					VV911F = $911F
+=$9120					VV9120 = $9120
+=$9121					VV9121 = $9121
+=$9122					VV9122	= $9122		; VIA 2 DDRB
+=$9123					VV9123	= $9123		; VIA 2 DDRA
+=$9124					VV9124	= $9124		; VIA 2 T1C_l
+=$9125					VV9125	= $9125		; VIA 2 T1C_h
+=$9128					VV9128	= $9128		; VIA 2 T2C_l
+=$9129					VV9129	= $9129		; VIA 2 T2C_h
+=$912b					VV912B	= $912B		; VIA 2 ACR
+=$912c					VV912C	= $912C		; VIA 2 PCR
+=$912d					VV912D = $912D
+=$912e					VV912E = $912E
+=$912f					VV912F = $912F
+
+;******  Return to file: krnlrom.asm
+
+.0000					USRPOK
+.0001					USRVEC
+.0003					ADRAY1
+.0005					ADRAY2
+.0007					CHARAC
+.0008					ENDCHR
+.0009					TABCOL
+.000a					VERCK
+.000b					COUNT
+.000c					DIMFLG
+.000d					VALTYP
+.000e					INTFLG
+.000f					DORES
+.0010					SUBFLG
+.0011					INPFLG
+.0012					TANSGN
+.0013					IOPMPT
+.0014					INTRVL
+.0016					TEMPPT
+.0017					LASTPT
+.0019					TEMPST
+.0022					UTLPTR
+.0026					ADDEND
+.002b					TXTTAB
+.002d					VARTAB
+.002f					ARYTAB
+.0031					STREND
+.0033					FRETOP
+.0035					FRESPC
+.0037					MEMSIZ
+.0039					CURLIN
+.003b					OLDLIN
+.003d					OLDTXT
+.003f					DATLIN
+.0041					DATPTR
+.0043					INPPTR
+.0045					VARNAM
+.0047					VARPNT
+.0049					FORPNT
+.004b					YSAVE
+.004d					ACCSYM
+.004e					WORK1
+.0054					JMPER
+.0057					FC3M1
+.005c					FC4M1
+.0061					FC1EXP
+.0062					FC1M1
+.0063					FC1M2
+.0064					FC1M3
+.0065					FC1M4
+.0066					FC1SGN
+.0067					SEVALP
+.0068					FC1OVF
+.0069					FC2EXP
+.006a					FC2M1
+.006b					FC2M2
+.006c					FC2M3
+.006d					FC2M4
+.006e					FC2SGN
+.006f					ARISGN
+.0070					FC1ROU
+.0071					CSBFLN
+.0073					CHRGET
+.0079					CHRGOT
+.007a					TXTPTR
+.0088					FILLEN
+.008b					RNDX
+.0090					CSTAT
+.0091					STKEY
+.0092					SVXT
+.0093					IOFLG2
+.0094					C3PO
+.0095					BSOUT
+.0096					EOTFLG
+.0097					REGSAV
+.0098					COPNFL
+.0099					INDEV
+.009a					OUTDEV
+.009b					TPRTY
+.009c					BYTINF
+.009d					CMDMOD
+.009e					TPTR1
+.009f					TPTR2
+.00a0					CTIMR0
+.00a1					CTIMR1
+.00a2					CTIMR2
+.00a3					SBITCF
+.00a4					CYCLE
+.00a5					CNTDN
+.00a6					BUFPNT
+.00a7					INBIT
+.00a8					BITCI
+.00a9					RINONE
+.00aa					RIDATA
+.00ab					RIPRTY
+.00ac					SAL
+.00ae					EAL
+.00b0					TPCON1
+.00b1					TPCON2
+.00b2					TAPE1
+.00b4					BITTS
+.00b5					NXTBIT
+.00b6					RODATA
+.00b7					FNMLEN
+.00b8					LOGFIL
+.00b9					SECADR
+.00ba					CHANNL
+.00bb					FNPTR
+.00bd					ROPRTY
+.00be					FSBLK
+.00bf					MYCH
+.00c0					CAS1
+.00c1					STAL
+.00c3					MEMUSS
+.00c5					CURKEY
+.00c6					KEYCNT
+.00c7					RVS
+.00c8					EOLPTR
+.00c9					ICRROW
+.00ca					ICRCOL
+.00cb					KEYDN
+.00cc					BLNSW
+.00cd					BLNCT
+.00ce					GDBLN
+.00cf					BLNON
+.00d0					INSRC
+.00d1					LINPTR
+.00d3					CSRIDX
+.00d4					CSRMOD
+.00d5					LINLEN
+.00d6					CURROW
+.00d7					LASTKY
+.00d8					INSRTO
+.00d9					SLLTBL
+.00f1					SLDMY
+.00f2					SCROWM
+.00f3					COLRPT
+.00f5					KEYTAB
+.00f7					RIBUF
+.00f9					ROBUF
+.00fb					OSFRE0
+.00fc					OSFRE1
+.00fd					OSFRE2
+.00fe					OSFRE3
+.00ff					BASSTO
+.0100					FBUFFR
+.0200					BUF
+.0259					FILTBL
+.0263					DEVTBL
+.026d					SECATB
+.0277					KBUFFR
+.0281					OSSTAR
+.0283					OSTOP
+.0285					STIMOT
+.0286					CLCODE
+.0287					CSRCLR
+.0288					HIPAGE
+.0289					KBMAXL
+.028a					KEYRPT
+.028b					KRPTSP
+.028c					KRPTDL
+.028d					SHFTFL
+.028e					LSSHFT
+.028f					FCEVAL
+.0291					SHMODE
+.0292					SCRLFL
+.0293					M51CTR
+.0294					M51CDR
+.0295					M51AJB
+.0297					RSSTAT
+.0298					BITNUM
+.0299					BAUDOF
+.029b					RIDBE
+.029c					RIDBS
+.029d					RODBS
+.029e					RODBE
+.029f					TAPIRQ
+.02a1					PGINDR
+.0300					ERRVPT
+.0302					MAINVP
+.0304					CRNCHV
+.0306					LISTVP
+.0308					BYEBVP
+.030a					EVALVP
+.030c					R6502A
+.030d					R6502X
+.030e					R6502Y
+.030f					R6502P
+.0310					UNKNO1
+.0314					IRQVP
+.0316					BRKVP
+.0318					NMIVP
+.031a					OPENVP
+.031c					CLOSVP
+.031e					CKINVP
+.0320					CKOTVP
+.0322					CLCHVP
+.0324					CHINVP
+.0326					CHOTVP
+.0328					STOPVP
+.032a					GTINVP
+.032c					CLALVP
+.032e					USERVP
+.0330					LLODVP
+.0332					LSAVVP
+.0334					UNKNO2
+.033c					CSBUF
+>e000	0f					.byte $0F
+>e001	dc					.byte $DC				;From BASIC ROM @$C000 JSR $DC0F
+.e002	a5 61		lda $61			LDA FC1EXP
+.e004	c9 88		cmp #$88		CMP #$88
+.e006	90 03		bcc $e00b		BCC ELOOP2			;E00B
+.e008					ELOOP1
+.e008	20 d4 da	jsr $dad4		JSR MLDVEX
+.e00b					ELOOP2
+.e00b	20 cc dc	jsr $dccc		JSR INT
+.e00e	a5 07		lda $07			LDA CHARAC
+.e010	18		clc			CLC
+.e011	69 81		adc #$81		ADC #$81
+.e013	f0 f3		beq $e008		BEQ ELOOP1			;E008
+.e015	38		sec			SEC
+.e016	e9 01		sbc #$01		SBC #$01
+.e018	48		pha			PHA
+.e019	a2 05		ldx #$05		LDX #$05
+.e01b					ELOOP3
+.e01b	b5 69		lda $69,x		LDA FC2EXP,X
+.e01d	b4 61		ldy $61,x		LDY FC1EXP,X
+.e01f	95 61		sta $61,x		STA FC1EXP,X
+.e021	94 69		sty $69,x		STY FC2EXP,X
+.e023	ca		dex			DEX
+.e024	10 f5		bpl $e01b		BPL ELOOP3			;$E01B
+.e026	a5 56		lda $56			LDA JMPER+2
+.e028	85 70		sta $70			STA FC1ROU
+.e02a	20 53 d8	jsr $d853		JSR FSUB+3			;$D853
+.e02d	20 b4 df	jsr $dfb4		JSR NEGOP			;flip sign
+.e030	a9 c4		lda #$c4		LDA #$C4 ;#$EA			;FIXUP1 ;#$C4
+.e032	a0 df		ldy #$df		LDY #$DF ;#$EA			;FIXUP1+1 ;#$DF table of some constants
+.e034	20 56 e0	jsr $e056		JSR POLYIN			;calc polynomial
+.e037	a9 00		lda #$00		LDA #$00
+.e039	85 6f		sta $6f			STA ARISGN
+.e03b	68		pla			PLA
+.e03c	20 b9 da	jsr $dab9		JSR MULDIV+2			;$DAB9
+.e03f	60		rts			RTS
+.e040					POLYX
+.e040	85 71		sta $71			STA CSBFLN
+.e042	84 72		sty $72			STY CSBFLN+1			;ptr to poly degree
+.e044	20 ca db	jsr $dbca		JSR MOV2F+3			;$DBCA move factor to a3
+.e047	a9 57		lda #$57		LDA #$57			;#$57 ptr to fc3m1
+.e049	20 28 da	jsr $da28		JSR FMULT			;multiply fac*a3 (square)
+.e04c	20 5a e0	jsr $e05a		JSR POLYX1			;calc
+.e04f	a9 57		lda #$57		LDA #$57			;}#$57 ptr to fc3m1
+.e051	a0 00		ldy #$00		LDY #$00			;}
+.e053	4c 28 da	jmp $da28		JMP FMULT			;fac=fac*a3
+.e056					POLYIN
+.e056	85 71		sta $71			STA CSBFLN			;ptr to degree
+.e058	84 72		sty $72			STY CSBFLN+1
+.e05a					POLYX1
+.e05a	20 c7 db	jsr $dbc7		JSR MOV2F			;fac to ac4
+.e05d	b1 71		lda ($71),y		LDA (CSBFLN),Y			;degree
+.e05f	85 67		sta $67			STA SEVALP			;counter
+.e061	a4 71		ldy $71			LDY CSBFLN
+.e063	c8		iny			INY				;point to first coef.
+.e064	98		tya			TYA
+.e065	d0 02		bne $e069		BNE POLYSK1
+.e067	e6 72		inc $72			INC CSBFLN+1
+.e069					POLYSK1
+.e069	85 71		sta $71			STA CSBFLN
+.e06b	a4 72		ldy $72			LDY CSBFLN+1
+.e06d					POLYLP
+.e06d	20 28 da	jsr $da28		JSR FMULT			;fac=fac*const (in A/Y)
+.e070	a5 71		lda $71			LDA CSBFLN
+.e072	a4 72		ldy $72			LDY CSBFLN+1
+.e074	18		clc			CLC
+.e075	69 05		adc #$05		ADC #$05			;point to next #
+.e077	90 01		bcc $e07a		BCC POLYSK2
+.e079	c8		iny			INY
+.e07a					POLYSK2
+.e07a	85 71		sta $71			STA CSBFLN
+.e07c	84 72		sty $72			STY CSBFLN+1			;ptr next constant
+.e07e	20 67 d8	jsr $d867		JSR FADD			;fac=fac+const (in A/Y)
+.e081	a9 5c		lda #$5c		LDA #$5C			;}#$5C
+.e083	a0 00		ldy #$00		LDY #$00			;} ptr to FC4M1
+.e085	c6 67		dec $67			DEC SEVALP
+.e087	d0 e4		bne $e06d		BNE POLYLP
+.e089	60		rts			RTS
+.e08a					RMULC
+>e08a	98 35 44 7a 00				.byte $98, $35, $44, $7A, $00	;11.879546
+>e08f	68 28 b1 46 00			RMULC1	.byte $68, $28, $B1, $46, $00	;3.92767774e-4
+.e094					RND
+.e094	20 2b dc	jsr $dc2b		JSR SIGN			;get sign
+.e097	30 37		bmi $e0d0		BMI RNDCAL			;neg? branch
+.e099	d0 20		bne $e0bb		BNE RANDDT
+.e09b	20 f3 ff	jsr $fff3		JSR IOBASE			;get IO base and...
+.e09e	86 22		stx $22			STX UTLPTR
+.e0a0	84 23		sty $23			STY UTLPTR+1			;...save as pointer
+.e0a2	a0 04		ldy #$04		LDY #$04			;}
+.e0a4	b1 22		lda ($22),y		LDA (UTLPTR),Y			;}Timer1 low
+.e0a6	85 62		sta $62			STA FC1M1			;}
+.e0a8	c8		iny			INY				;]
+.e0a9	b1 22		lda ($22),y		LDA (UTLPTR),Y			;]Timer1 high
+.e0ab	85 64		sta $64			STA FC1M3			;]
+.e0ad	a0 08		ldy #$08		LDY #$08			;}
+.e0af	b1 22		lda ($22),y		LDA (UTLPTR),Y			;}Timer2 low
+.e0b1	85 63		sta $63			STA FC1M2			;}
+.e0b3	c8		iny			INY				;]
+.e0b4	b1 22		lda ($22),y		LDA (UTLPTR),Y			;]Timer2 high
+.e0b6	85 65		sta $65			STA FC1M4			;]
+.e0b8	4c e0 e0	jmp $e0e0		JMP RNDEXIT
+.e0bb					RANDDT
+.e0bb	a9 8b		lda #$8b		LDA #$8B			;ptr to last RND
+.e0bd	a0 00		ldy #$00		LDY #$00
+.e0bf	20 a2 db	jsr $dba2		JSR MOVFM			;mmove it to the FAC
+.e0c2	a9 8a		lda #$8a		LDA #$8A ;#$EA			;FIXUP1+2 #$8A randomize data LSB
+.e0c4	a0 e0		ldy #$e0		LDY #$E0 ;#$EA 			;FIXUP1+3 #$E0 randomize data MSB
+.e0c6	20 28 da	jsr $da28		JSR FMULT			;multiply FAC=FAC*const
+.e0c9	a9 8f		lda #$8f		LDA #$8F ;#$EA 			;FIXUP1+4 #$8F
+.e0cb	a0 e0		ldy #$e0		LDY #$E0 ;#$EA 			;FIXUP1+5 #$E0
+.e0cd	20 67 d8	jsr $d867		JSR FADD			;ADD at E0BF FAC=FAC+const
+.e0d0					RNDCAL
+.e0d0	a6 65		ldx $65			LDX FC1M4			;swap digits in FAC
+.e0d2	a5 62		lda $62			LDA FC1M1
+.e0d4	85 65		sta $65			STA FC1M4
+.e0d6	86 62		stx $62			STX FC1M1
+.e0d8	a6 63		ldx $63			LDX FC1M2
+.e0da	a5 64		lda $64			LDA FC1M3
+.e0dc	85 63		sta $63			STA FC1M2
+.e0de	86 64		stx $64			STX FC1M3
+.e0e0					RNDEXIT
+.e0e0	a9 00		lda #$00		LDA #$00
+.e0e2	85 66		sta $66			STA FC1SGN
+.e0e4	a5 61		lda $61			LDA FC1EXP
+.e0e6	85 70		sta $70			STA FC1ROU
+.e0e8	a9 80		lda #$80		LDA #$80			;exponent
+.e0ea	85 61		sta $61			STA FC1EXP
+.e0ec	20 d7 d8	jsr $d8d7		JSR FADD+112			;$D8D7 left-justify FAC
+.e0ef	a2 8b		ldx #$8b		LDX #$8B
+.e0f1	a0 00		ldy #$00		LDY #$00
+.e0f3					RNEXIT
+.e0f3	4c d4 db	jmp $dbd4		JMP MOV2F+13			;$DBD4 round result
+.e0f6					BIOERR
+.e0f6	c9 f0		cmp #$f0		CMP #$F0			;error F0
+.e0f8	d0 07		bne $e101		BNE BERSK
+.e0fa	84 38		sty $38			STY MEMSIZ+1			;set RAM end
+.e0fc	86 37		stx $37			STX MEMSIZ
+.e0fe	4c 63 c6	jmp $c663		JMP CLEAR+5			;$C663 clear from bottom to top
+.e101					BERSK
+.e101	aa		tax			TAX
+.e102	d0 02		bne $e106		BNE BERREX
+.e104	a2 1e		ldx #$1e		LDX #$1E			;BREAK key
+.e106					BERREX
+.e106	4c 37 c4	jmp $c437		JMP ERROR			;error
+.e109					BCHOUT
+.e109	20 d2 ff	jsr $ffd2		JSR CHROUT			;standard call
+.e10c	b0 e8		bcs $e0f6		BCS BIOERR			;error branch on CY=1
+.e10e	60		rts			RTS				;return to BASIC
+.e10f					BCHIN
+.e10f	20 cf ff	jsr $ffcf		JSR CHRIN			;standard call
+.e112	b0 e2		bcs $e0f6		BCS BIOERR			;error branch on CY=1
+.e114	60		rts			RTS
+.e115					BCKOUT
+.e115	20 c9 ff	jsr $ffc9		JSR CHKOUT			;standard call
+.e118	b0 dc		bcs $e0f6		BCS BIOERR			;error branch on CY=1
+.e11a	60		rts			RTS
+.e11b					BCKIN
+.e11b	20 c6 ff	jsr $ffc6		JSR CHKIN			;standard call
+.e11e	b0 d6		bcs $e0f6		BCS BIOERR			;error branch on CY=1
+.e120	60		rts			RTS
+.e121					BGETIN
+.e121	20 e4 ff	jsr $ffe4		JSR GETIN			;standard call
+.e124	b0 d0		bcs $e0f6		BCS BIOERR			;error branch on CY=1
+.e126	60		rts			RTS
+.e127					SYS
+.e127	20 8a cd	jsr $cd8a		JSR FRMNUM			;get numeric term
+.e12a	20 f7 d7	jsr $d7f7		JSR GETADR			;convert FAC1 to integer number
+.e12d	a9 e1		lda #$e1		LDA #$E1 ;#$EA 			;FIXUP1+7 #$E1
+.e12f	48		pha			PHA
+.e130	a9 43		lda #$43		LDA #$43 ;#$EA 			;FIXUP1+6 #$43
+.e132	48		pha			PHA				;push address $E143 (breakpoint)
+.e133	ad 0f 03	lda $030f		LDA R6502P
+.e136	48		pha			PHA				;save processor flags
+.e137	ad 0c 03	lda $030c		LDA R6502A			;load registers with new values
+.e13a	ae 0d 03	ldx $030d		LDX R6502X
+.e13d	ac 0e 03	ldy $030e		LDY R6502Y
+.e140	28		plp			PLP				;restore flags
+.e141	6c 14 00	jmp ($0014)		JMP (INTRVL)			;jump to routine
+.e144	08		php			PHP				;on return, restore regs
+.e145	8d 0c 03	sta $030c		STA R6502A
+.e148	8e 0d 03	stx $030d		STX R6502X
+.e14b	8c 0e 03	sty $030e		STY R6502Y
+.e14e	68		pla			PLA
+.e14f	8d 0f 03	sta $030f		STA R6502P			;restore old flags
+.e152	60		rts			RTS				;return to caller
+.e153					SAVET
+.e153	20 d1 e1	jsr $e1d1		JSR SLPARA			;get SAVE parameters
+.e156	a6 2d		ldx $2d			LDX VARTAB			;load start of vars ptr, which
+.e158	a4 2e		ldy $2e			LDY VARTAB+1			;equals end-of-BASIC
+.e15a	a9 2b		lda #$2b		LDA #TXTTAB			;start address=start of BASIC
+.e15c	20 d8 ff	jsr $ffd8		JSR SAVE			;call SAVE
+.e15f	b0 95		bcs $e0f6		BCS BIOERR			;branch on error
+.e161	60		rts			RTS
+.e162					VERFYT
+.e162	a9 01		lda #$01		LDA #$01			;setup for verify 1=verify
+>e164	2c					.byte $2C				;results in BIT $00A9 skip
+.e165					VERFYL
+.e165	a9 00		lda #$00		LDA #$00			;else, 0=load
+.e167	85 0a		sta $0a			STA VERCK			;save code
+.e169	20 d1 e1	jsr $e1d1		JSR SLPARA			;get parameters
+.e16c	a5 0a		lda $0a			LDA VERCK			;get IO flag
+.e16e	a6 2b		ldx $2b			LDX TXTTAB			;get load address=BASIC start
+.e170	a4 2c		ldy $2c			LDY TXTTAB+1
+.e172	20 d5 ff	jsr $ffd5		JSR LOAD			;Load file
+.e175	b0 57		bcs $e1ce		BCS CLSEXT			;branch on error
+.e177	a5 0a		lda $0a			LDA VERCK			;Verify?
+.e179	f0 1a		beq $e195		BEQ VERLD			;go do it
+.e17b	a2 1c		ldx #$1c		LDX #$1C			;error message #1C (Verify Error)
+.e17d	20 b7 ff	jsr $ffb7		JSR READST			;get IO status
+.e180	29 10		and #$10		AND #%00010000			;#$10 mismatch error
+.e182	f0 03		beq $e187		BEQ SKPRDY			;no, continue
+.e184	4c 37 c4	jmp $c437		JMP ERROR			;do error
+.e187					SKPRDY
+.e187	a5 7a		lda $7a			LDA TXTPTR			;get current char
+.e189	c9 02		cmp #$02		CMP #$02			;direct mode?
+.e18b	f0 07		beq $e194		BEQ VERIFX			;yes, return to ready
+.e18d	a9 64		lda #$64		LDA #$64 ;#$EA			;$64 FIXUP2+4 print "OK"
+.e18f	a0 c3		ldy #$c3		LDY #$C3 ;#$EA			;$C3 FIXUP2+5
+.e191	4c 1e cb	jmp $cb1e		JMP STROUT
+.e194					VERIFX
+.e194	60		rts			RTS
+.e195					VERLD
+.e195	20 b7 ff	jsr $ffb7		JSR READST			;get ST again
+.e198	29 bf		and #$bf		AND #%10111111			;$BF EOF?
+.e19a	f0 05		beq $e1a1		BEQ VERSK1			;no, continue
+.e19c	a2 1d		ldx #$1d		LDX #$1D			;error #1D "Load error"
+.e19e	4c 37 c4	jmp $c437		JMP ERROR			;do it
+.e1a1					VERSK1
+.e1a1	a5 7b		lda $7b			LDA TXTPTR+1
+.e1a3	c9 02		cmp #$02		CMP #$02			;direct mode?
+.e1a5	d0 0e		bne $e1b5		BNE VERSK2			;no, continue
+.e1a7	86 2d		stx $2d			STX VARTAB			;save address of program end
+.e1a9	84 2e		sty $2e			STY VARTAB+1
+.e1ab	a9 76		lda #$76		LDA #$76 ;#$EA			;$76 FIXUP2+6 print "READY"
+.e1ad	a0 c3		ldy #$c3		LDY #$C3 ;#$EA			;$C3 FIXUP2+7
+.e1af	20 1e cb	jsr $cb1e		JSR STROUT
+.e1b2	4c 2a c5	jmp $c52a		JMP $C52A			;jump into BASIC
+.e1b5					VERSK2
+.e1b5	20 8e c6	jsr $c68e		JSR STXPT			;CHRGET ptr to start
+.e1b8	4c 76 e4	jmp $e476		JMP BASSLN			;find pgm lines again
+.e1bb					OPENT
+.e1bb	20 16 e2	jsr $e216		JSR OCPARA			;get OPEN params
+.e1be	20 c0 ff	jsr $ffc0		JSR OPEN			;call OPEN
+.e1c1	b0 0b		bcs $e1ce		BCS CLSEXT			;error branch on CY=1
+.e1c3	60		rts			RTS				;return
+.e1c4					CLOSET
+.e1c4	20 16 e2	jsr $e216		JSR OCPARA			;get original OPEN params
+.e1c7	a5 49		lda $49			LDA FORPNT			;file#
+.e1c9	20 c3 ff	jsr $ffc3		JSR CLOSE			;call close
+.e1cc	90 c6		bcc $e194		BCC VERIFX			;return on carry clear
+.e1ce					CLSEXT
+.e1ce	4c f6 e0	jmp $e0f6		JMP BIOERR			;IO Error
+.e1d1					SLPARA
+.e1d1	a9 00		lda #$00		LDA #$00			;assume no filename...
+.e1d3	20 bd ff	jsr $ffbd		JSR SETNAM			;set it
+.e1d6	a2 01		ldx #$01		LDX #$01			;...device 1 (cass)
+.e1d8	a0 00		ldy #$00		LDY #$00			;...SA=0
+.e1da	20 ba ff	jsr $ffba		JSR SETLFS			;set params
+.e1dd	20 03 e2	jsr $e203		JSR DEFLT			;any more params?
+.e1e0	20 54 e2	jsr $e254		JSR OCPSK2			;yes, check for filename
+.e1e3	20 03 e2	jsr $e203		JSR DEFLT			;more?
+.e1e6	20 fd e1	jsr $e1fd		JSR COMBYT			;check for device#
+.e1e9	a0 00		ldy #$00		LDY #$00			;message 0
+.e1eb	86 49		stx $49			STX FORPNT			;save device#
+.e1ed	20 ba ff	jsr $ffba		JSR SETLFS			;set params again
+.e1f0	20 03 e2	jsr $e203		JSR DEFLT			;more params?
+.e1f3	20 fd e1	jsr $e1fd		JSR COMBYT			;yes, must be message#
+.e1f6	8a		txa			TXA
+.e1f7	a8		tay			TAY
+.e1f8	a6 49		ldx $49			LDX FORPNT			;get device#
+.e1fa	4c ba ff	jmp $ffba		JMP SETLFS			;set params for last time
+.e1fd					COMBYT
+.e1fd	20 0b e2	jsr $e20b		JSR COMMA			;check for comma
+.e200	4c 9e d7	jmp $d79e		JMP GETBYT+3			;get byte param to .X
+.e203					DEFLT
+.e203	20 79 00	jsr $0079		JSR CHRGOT			;get current char to .A
+.e206	d0 02		bne $e20a		BNE DEFLEX			;return if not EOL
+.e208	68		pla			PLA				;pop last call from stack to return to
+.e209	68		pla			PLA				;caller of caller 2 levels up.
+.e20a					DEFLEX
+.e20a	60		rts			RTS
+.e20b					COMMA
+.e20b	20 fd ce	jsr $cefd		JSR CHKCOM			;BASIC comma check
+.e20e	20 79 00	jsr $0079		JSR CHRGOT			;get current char
+.e211	d0 f7		bne $e20a		BNE DEFLEX			;not comma, return
+.e213	4c 08 cf	jmp $cf08		JMP SNERR			;error: comma w/o param
+.e216					OCPARA
+.e216	a9 00		lda #$00		LDA #$00			;assume no filename
+.e218	20 bd ff	jsr $ffbd		JSR SETNAM			;set it
+.e21b	20 0e e2	jsr $e20e		JSR COMMA+3			;more params?
+.e21e	20 9e d7	jsr $d79e		JSR GETBYT+3			;yes, get next to .X (file#)
+.e221	86 49		stx $49			STX FORPNT			;save param value (file#)
+.e223	8a		txa			TXA				;copy param to .A
+.e224	a2 01		ldx #$01		LDX #$01			;device 1 (cass)
+.e226	a0 00		ldy #$00		LDY #$00			;SA= 0 (read)
+.e228	20 ba ff	jsr $ffba		JSR SETLFS			;set params
+.e22b	20 03 e2	jsr $e203		JSR DEFLT			;more params? (device#)
+.e22e	20 fd e1	jsr $e1fd		JSR COMBYT			;yes, get value
+.e231	86 4a		stx $4a			STX FORPNT+1			;save
+.e233	a0 00		ldy #$00		LDY #$00			;SA= 0(read)
+.e235	a5 49		lda $49			LDA FORPNT			;.A= file#
+.e237	e0 03		cpx #$03		CPX #$03			;device <=3
+.e239	90 01		bcc $e23c		BCC OCPSK1			;yes, go set params
+.e23b	88		dey			DEY				;msg =FF if not IEEE
+.e23c					OCPSK1
+.e23c	20 ba ff	jsr $ffba		JSR SETLFS			;set params
+.e23f	20 03 e2	jsr $e203		JSR DEFLT			;more? (msg#)
+.e242	20 fd e1	jsr $e1fd		JSR COMBYT			;yes, get value (SA)
+.e245	8a		txa			TXA
+.e246	a8		tay			TAY				;set message#...
+.e247	a6 4a		ldx $4a			LDX FORPNT+1			;...device#
+.e249	a5 49		lda $49			LDA FORPNT			;...file#
+.e24b	20 ba ff	jsr $ffba		JSR SETLFS			;set params
+.e24e	20 03 e2	jsr $e203		JSR DEFLT			;more params?
+.e251	20 0b e2	jsr $e20b		JSR COMMA			;yes, check for comma
+.e254					OCPSK2
+.e254	20 9e cd	jsr $cd9e		JSR FRMEVL			;evaluate expression
+.e257	20 a3 d6	jsr $d6a3		JSR FRESTR			;contains string?
+.e25a	a6 22		ldx $22			LDX UTLPTR			;yes, save string address LSB...
+.e25c	a4 23		ldy $23			LDY UTLPTR+1			;...MSB
+.e25e	4c bd ff	jmp $ffbd		JMP SETNAM			;set filename param
+.e261					COS
+.e261	a9 dd		lda #$dd		LDA #$DD ;#$EA 			;FIXUP1+12;#$DD
+.e263	a0 e2		ldy #$e2		LDY #$E2; #$EA 			;FIXUP1+13;#$E2 PI2 table
+.e265	20 67 d8	jsr $d867		JSR FADD			;add to FAC
+.e268					SIN
+.e268	20 0c dc	jsr $dc0c		JSR MOVAF			;round FAC, put in arg
+.e26b	a9 e2		lda #$e2		LDA #$E2 ;#$EA 			;FIXUP1+14 ;#$E2
+.e26d	a0 e2		ldy #$e2		LDY #$E2 ;#$EA 			;FIXUP1+15 ;#$E2 PI*2 table
+.e26f	a6 6e		ldx $6e			LDX FC2SGN
+.e271	20 07 db	jsr $db07		JSR FDIV			;divide by 2pi
+.e274	20 0c dc	jsr $dc0c		JSR MOVAF			;round it
+.e277	20 cc dc	jsr $dccc		JSR INT				;get integer
+.e27a	a9 00		lda #$00		LDA #$00
+.e27c	85 6f		sta $6f			STA ARISGN
+.e27e	20 53 d8	jsr $d853		JSR FSUB+3			;$D853 arg-FAC
+.e281	a9 e7		lda #$e7		LDA #$E7 ;#$EA 			;FIXUP1+16;#$E7
+.e283	a0 e2		ldy #$e2		LDY #$E2 ;#$EA 			;FIXUP1+17;#$E2
+.e285	20 50 d8	jsr $d850		JSR FSUB			;const 0.25-FAC
+.e288	a5 66		lda $66			LDA FC1SGN
+.e28a	48		pha			PHA				;save sign
+.e28b	10 0d		bpl $e29a		BPL SINCON1			;if positive, negate it
+.e28d	20 49 d8	jsr $d849		JSR FADDH			;FAC+0.5
+.e290	a5 66		lda $66			LDA FC1SGN			;get sign
+.e292	30 09		bmi $e29d		BMI SINCON1A			;negative?
+.e294	a5 12		lda $12			LDA TANSGN			;flip flag
+.e296	49 ff		eor #$ff		EOR #$FF
+.e298	85 12		sta $12			STA TANSGN
+.e29a					SINCON1
+.e29a	20 b4 df	jsr $dfb4		JSR NEGOP			;negate sign
+.e29d					SINCON1A
+.e29d	a9 e7		lda #$e7		LDA #$E7 ;#$EA 			;FIXUP1+16;#$E7
+.e29f	a0 e2		ldy #$e2		LDY #$E2 ;#$EA 			;FIXUP1+17;#$E2
+.e2a1	20 67 d8	jsr $d867		JSR FADD			;FAC+0.25
+.e2a4	68		pla			PLA				;get sign
+.e2a5	10 03		bpl $e2aa		BPL SINCON2			;positive, branch
+.e2a7	20 b4 df	jsr $dfb4		JSR NEGOP			;else negate
+.e2aa					SINCON2
+.e2aa	a9 ec		lda #$ec		LDA #$EC ;#$EA 			;FIXUP1+18;#$EC ptr to poly coeff.
+.e2ac	a0 e2		ldy #$e2		LDY #$E2 ;#$EA 			;FIXUP1+19;#$E2
+.e2ae	4c 40 e0	jmp $e040		JMP POLYX			;calc. polynomial
+.e2b1					TAN
+.e2b1	20 ca db	jsr $dbca		JSR MOV2F+3			;$DBCA FAC to ac3
+.e2b4	a9 00		lda #$00		LDA #$00
+.e2b6	85 12		sta $12			STA TANSGN			;set flag
+.e2b8	20 68 e2	jsr $e268		JSR SIN				;calc sin
+.e2bb	a2 4e		ldx #$4e		LDX #WORK1			;}$4E helper accum
+.e2bd	a0 00		ldy #$00		LDY #$00			;}
+.e2bf	20 f3 e0	jsr $e0f3		JSR RNEXIT			;FAC to helper
+.e2c2	a9 57		lda #$57		LDA #$57			;}$57 FC3M1 to FC
+.e2c4	a0 00		ldy #$00		LDY #$00			;}
+.e2c6	20 a2 db	jsr $dba2		JSR MOVFM			;move ac3
+.e2c9	a9 00		lda #$00		LDA #$00
+.e2cb	85 66		sta $66			STA FC1SGN			;save sign
+.e2cd	a5 12		lda $12			LDA TANSGN			;and flag
+.e2cf	20 d9 e2	jsr $e2d9		JSR TAN2			;cals cos
+.e2d2	a9 4e		lda #$4e		LDA #WORK1			;}$004E
+.e2d4	a0 00		ldy #$00		LDY #$00			;}
+.e2d6	4c 0f db	jmp $db0f		JMP FDIVT			;divide WORK1 by FAC
+.e2d9					TAN2
+.e2d9	48		pha			PHA
+.e2da	4c 9a e2	jmp $e29a		JMP SINCON1			;calc cos
+.e2dd					PI2
+>e2dd	81 49 0f da a2				.byte $81, $49, $0F, $DA, $A2
+.e2e2					PI22
+>e2e2	83 49 0f da a2				.byte $83, $49, $0F, $DA, $A2
+.e2e7					PI14
+>e2e7	7f 00 00 00 00				.byte $7F, $00, $00, $00, $00
+.e2ec					RNCTR
+>e2ec	05					.byte $05
+.e2ed					TRIG14
+>e2ed	84 e6 1a 2d 1b				.byte $84, $E6, $1A, $2D, $1B
+.e2f2					TRIG42
+>e2f2	86 28 07 fb f8				.byte $86, $28, $07, $FB, $F8
+.e2f7					TRIG76
+>e2f7	87 99 68 89 01				.byte $87, $99, $68, $89, $01
+.e2fc					TRIG81
+>e2fc	87 23 35 df e1				.byte $87, $23, $35, $DF, $E1
+.e301					TRIG41
+>e301	86 a5 5d e7 28				.byte $86, $A5, $5D, $E7, $28
+.e306					TRIG6
+>e306	83 49 0f da a2				.byte $83, $49, $0F, $DA, $A2
+.e30b					ATN
+.e30b	a5 66		lda $66			LDA FC1SGN			;sign
+.e30d	48		pha			PHA				;save it
+.e30e	10 03		bpl $e313		BPL ATNSK1			;positive? branch
+.e310	20 b4 df	jsr $dfb4		JSR NEGOP			;change sign
+.e313					ATNSK1
+.e313	a5 61		lda $61			LDA FC1EXP
+.e315	48		pha			PHA				;save exponent
+.e316	c9 81		cmp #$81		CMP #$81			; 1?
+.e318	90 07		bcc $e321		BCC ATNSK2			;no
+.e31a	a9 bc		lda #$bc		LDA #$BC ;#$EA			;$BC FIXUP2+8
+.e31c	a0 d9		ldy #$d9		LDY #$D9 ;#$EA			;$D9 FIXUP2+9 table of flt pt constants
+.e31e	20 0f db	jsr $db0f		JSR FDIVT			;reciprocal of FAC
+.e321					ATNSK2
+.e321	a9 3b		lda #$3b		LDA #$3B ;#$EA 			;FIXUP1+22;#$3B
+.e323	a0 e3		ldy #$e3		LDY #$E3 ;#$EA 			;FIXUP1+23;$$E3 ATNCON - table of ATN constants
+.e325	20 40 e0	jsr $e040		JSR POLYX			;calc poly
+.e328	68		pla			PLA				;restore exponent
+.e329	c9 81		cmp #$81		CMP #$81			;less than 1
+.e32b	90 07		bcc $e334		BCC ATNSK3
+.e32d	a9 dd		lda #$dd		LDA #$DD ;#$EA 			;FIXUP1+12;#$DD
+.e32f	a0 e2		ldy #$e2		LDY #$E2 ;#$EA 			;FIXUP1+13;#$E2	;const PI/2
+.e331	20 50 d8	jsr $d850		JSR FSUB			;pi/2-FAC
+.e334					ATNSK3
+.e334	68		pla			PLA				;get sign
+.e335	10 03		bpl $e33a		BPL ATNEXT			;positive?
+.e337	4c b4 df	jmp $dfb4		JMP NEGOP			;change it
+.e33a					ATNEXT
+.e33a	60		rts			RTS
+.e33b					ATNCON
+>e33b	0b					.byte $0B				;11 polynomial degrees
+>e33c	76 b3 83 bd d3				.byte $76, $B3, $83, $BD, $D3	;-6.84793912e-04
+>e341	79 1e f4 a6 f5				.byte $79, $1E, $F4, $A6, $F5	; 4.85094216e-03
+>e346	7b 83 fc b0 10				.byte $7B, $83, $FC, $B0, $10	;-0.0161117015
+>e34b	7c 0c 1f 67 ca				.byte $7C, $0C, $1F, $67, $CA	; 0.034209638
+>e350	7c de 53 cb c1				.byte $7C, $DE, $53, $CB, $C1	;-0.054279133
+>e355	7d 14 64 70 4c				.byte $7D, $14, $64, $70, $4C	; 0.0724571965
+>e35a	7d b7 ea 51 7a				.byte $7D, $B7, $EA, $51, $7A	;-0.0898019185
+>e35f	7d 63 30 88 7e				.byte $7D, $63, $30, $88, $7E	; 0.110932413
+>e364	7e 92 44 99 3a				.byte $7E, $92, $44, $99, $3A	;-0.142839808
+>e369	7e 4c cc 91 c7				.byte $7E, $4C, $CC, $91, $C7	; 0.19999912
+>e36e	7f aa aa aa 13				.byte $7F, $AA, $AA, $AA, $13	;-0.333333316
+>e373	81 00 00 00 00				.byte $81, $00, $00, $00, $00	; 1.000000000
+.e378					INIT
+.e378	20 5b e4	jsr $e45b		JSR INITV			;init BASIC vector table
+.e37b					INITNV
+.e37b	20 a4 e3	jsr $e3a4		JSR INITCZ			;init OS RAM locs
+.e37e	20 04 e4	jsr $e404		JSR INITMS			;print power-up message
+.e381	a2 fb		ldx #$fb		LDX #$FB
+.e383	9a		txs			TXS				;setup stack ptr
+.e384	4c 74 c4	jmp $c474		JMP READY			;jump to BASIC
+.e387					INITAT
+.e387	e6 7a		inc $7a			INC TXTPTR
+.e389	d0 02		bne $e38d		BNE ININCR
+.e38b	e6 7b		inc $7b			INC TXTPTR+1
+.e38d					ININCR
+.e38d	ad 60 ea	lda $ea60		LDA MOVLOOP-2
+.e390	c9 3a		cmp #$3a		CMP #':'			;$3A
+.e392	b0 0a		bcs $e39e		BCS INIEXT
+.e394	c9 20		cmp #$20		CMP #' '			;$20 {space}
+.e396	f0 ef		beq $e387		BEQ INITAT
+.e398	38		sec			SEC
+.e399	e9 30		sbc #$30		SBC #$30
+.e39b	38		sec			SEC
+.e39c	e9 d0		sbc #$d0		SBC #$D0
+.e39e					INIEXT
+.e39e	60		rts			RTS
+.e39f					RNDSED
+>e39f	80 4f c7 52 58				.byte $80, $4F, $C7, $52, $58	;0.811635157
+.e3a4					INITCZ
+.e3a4	a9 4c		lda #$4c		LDA #$4C			;save JMP op-code...
+.e3a6	85 54		sta $54			STA JMPER			;...for functions
+.e3a8	85 00		sta $00			STA USRPOK			;...usr functions
+.e3aa	a9 48		lda #$48		LDA #$48 ;#$EA 			;FIXUP1+24;#$48
+.e3ac	a0 d2		ldy #$d2		LDY #$D2 ;#$EA 			;FIXUP1+25;#$D2
+.e3ae	85 01		sta $01			STA USRVEC			;USER vector at $D248
+.e3b0	84 02		sty $02			STY USRVEC+1
+.e3b2	a9 91		lda #$91		LDA #$91 ;#$EA 			;FIXUP1+26;#$91
+.e3b4	a0 d3		ldy #$d3		LDY #$D3 ;#$EA 			;FIXUP1+27;#$D3
+.e3b6	85 05		sta $05			STA ADRAY2
+.e3b8	84 06		sty $06			STY ADRAY2+1			;fixed-float cvt code $D391
+.e3ba	a9 aa		lda #$aa		LDA #$AA ;#$EA			;FIXUP1+28;#$AA
+.e3bc	a0 d1		ldy #$d1		LDY #$D1 ;#$EA 			;FIXUP1+29;#$D1
+.e3be	85 03		sta $03			STA ADRAY1
+.e3c0	84 04		sty $04			STY ADRAY1+1			;float-fixed cvt code $D1AA
+.e3c2	a2 1c		ldx #$1c		LDX #$1C			;move 28 bytes of code
+.e3c4					CHGLOP
+.e3c4	bd 87 e3	lda $e387,x		LDA INITAT,X			;copy CHRGET to z-page location
+.e3c7	95 73		sta $73,x		STA CHRGET,X
+.e3c9	ca		dex			DEX
+.e3ca	10 f8		bpl $e3c4		BPL CHGLOP
+.e3cc	a9 03		lda #$03		LDA #$03			;setup various locations
+.e3ce	85 53		sta $53			STA JMPER-1			;$53 step-width for garbage collection
+.e3d0	a9 00		lda #$00		LDA #$00
+.e3d2	85 68		sta $68			STA FC1OVF
+.e3d4	85 13		sta $13			STA IOPMPT			;input device=keyboard
+.e3d6	85 18		sta $18			STA LASTPT+1
+.e3d8	a2 01		ldx #$01		LDX #$01
+.e3da	8e fd 01	stx $01fd		STX BUF-3			;$01FD
+.e3dd	8e fc 01	stx $01fc		STX BUF-4			;$01FC
+.e3e0	a2 19		ldx #$19		LDX #$19
+.e3e2	86 16		stx $16			STX TEMPPT			;ptr for string stack
+.e3e4	38		sec			SEC				;read bottom of RAM
+.e3e5	20 9c ff	jsr $ff9c		JSR MEMBOT
+.e3e8	86 2b		stx $2b			STX TXTTAB			;save membot.LSB as start of BASIC
+.e3ea	84 2c		sty $2c			STY TXTTAB+1			;save membot.MSB
+.e3ec	38		sec			SEC				;read top of RAM
+.e3ed	20 99 ff	jsr $ff99		JSR MEMTOP
+.e3f0	86 37		stx $37			STX MEMSIZ			;set mem size...
+.e3f2	84 38		sty $38			STY MEMSIZ+1
+.e3f4	86 33		stx $33			STX FRETOP			;...and top of BASIC
+.e3f6	84 34		sty $34			STY FRETOP+1
+.e3f8	a0 00		ldy #$00		LDY #$00			;set zero pointer for start
+.e3fa	98		tya			TYA				;of BASIC (NEWed) sentinal
+.e3fb	91 2b		sta ($2b),y		STA (TXTTAB),Y
+.e3fd	e6 2b		inc $2b			INC TXTTAB
+.e3ff	d0 02		bne $e403		BNE CZEXIT
+.e401	e6 2c		inc $2c			INC TXTTAB+1
+.e403					CZEXIT
+.e403	60		rts			RTS
+.e404					INITMS
+.e404	a5 2b		lda $2b			LDA TXTTAB			;determine memory size
+.e406	a4 2c		ldy $2c			LDY TXTTAB+1			;based on start of BASIC
+.e408	20 08 c4	jsr $c408		JSR REASON			;check free memory
+.e40b	a9 36		lda #$36		LDA #$36 ;#$EA 			;FIXUP1+30;#$36	WORDS text
+.e40d	a0 e4		ldy #$e4		LDY #$E4 ;#$EA 			;FIXUP1+31;#$E4
+.e40f	20 1e cb	jsr $cb1e		JSR STROUT			;print version string
+.e412	a5 37		lda $37			LDA MEMSIZ			;calc mem size in bytes...
+.e414	38		sec			SEC				;BASIC end...
+.e415	e5 2b		sbc $2b			SBC TXTTAB			;minus start...
+.e417	aa		tax			TAX
+.e418	a5 38		lda $38			LDA MEMSIZ+1
+.e41a	e5 2c		sbc $2c			SBC TXTTAB+1			;equals free
+.e41c	20 cd dd	jsr $ddcd		JSR INPRT1			;$DDCD print BASIC line number
+.e41f	a9 29		lda #$29		LDA #$29 ;#$EA 			;FIXUP1+32;#$29	FREMES text
+.e421	a0 e4		ldy #$e4		LDY #$E4 ;#$EA 			;FIXUP1+33;#$E4
+.e423	20 1e cb	jsr $cb1e		JSR STROUT			;print "xx bytes free"
+.e426	4c 44 c6	jmp $c644		JMP SCRTCH1			;$C644 external entry into SCRTCH (NEW)
+.e429					FREMES
+>e429	20 42 59 54 45 53 20 46			.text " BYTES FREE", $0D, $00
+>e431	52 45 45 0d 00
+.e436					WORDS
+>e436	93 2a 2a 2a 2a 20 43 42			.text $93, "**** CBM BASIC V2 ****", $0D, $00
+>e43e	4d 20 42 41 53 49 43 20 56 32 20 2a 2a 2a 2a 0d
+>e44e	00
+.e44f					BVTRS
+>e44f	3a c4					.word ERROR+3			;$C43A
+>e451	83 c4					.word MAIN+3			;$C483
+>e453	7c c5					.word CRNCH+3			;$C57C
+>e455	1a c7					.word QPLOP+3			;$C71A
+>e457	e4 c7					.word GONE+3			;$C7E4
+>e459	86 ce					.word EVAL+3			;$CE86
+.e45b					INITV
+.e45b	a2 0b		ldx #$0b		LDX #$0B			;move 12 bytes
+.e45d					TVLOOP
+.e45d	bd 4f e4	lda $e44f,x		LDA BVTRS,X			;load from BASIC vector table
+.e460	9d 00 03	sta $0300,x		STA ERRVPT,X			;copy to $0300
+.e463	ca		dex			DEX
+.e464	10 f7		bpl $e45d		BPL TVLOOP
+.e466	60		rts			RTS
+.e467					BASSFT
+.e467	20 cc ff	jsr $ffcc		JSR CLRCH			;reset I/O channels
+.e46a	a9 00		lda #$00		LDA #$00
+.e46c	85 13		sta $13			STA IOPMPT			;set input device as keyboard
+.e46e	20 7a c6	jsr $c67a		JSR CLEAR2			;$c67a CLEAR
+.e471	58		cli			CLI				;clear interrupts
+.e472	4c 74 c4	jmp $c474		JMP READY
+>e475	e8					.byte $E8 ;$41				;appears nowhere
+.e476					BASSLN
+.e476	20 33 c5	jsr $c533		JSR LNKPRG			;rechain BASIC lines
+.e479	4c 77 c6	jmp $c677		JMP CLEAR1			;$c677 CLEAR
+.e47c					FIXUP1
+>e47c	ff ff ff ff ff ff ff ff			.byte	$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
+>e484	ff ff ff ff ff ff ff ff
+>e48c	ff ff ff ff ff ff ff ff			.byte	$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
+>e494	ff ff ff ff ff ff ff ff
+>e49c	ff ff ff ff				.byte	$FF,$FF,$FF,$FF					;ends at $ef9f
+.e4a0					SOUT1
+.e4a0	ad 2c 91	lda $912c		LDA VV912C			;load PCR
+.e4a3	29 df		and #$df		AND #%11011111			;$DF turn off CB2
+.e4a5	8d 2c 91	sta $912c		STA VV912C			;save change
+.e4a8	60		rts			RTS
+.e4a9					SOUT0
+.e4a9	ad 2c 91	lda $912c		LDA VV912C			;load PCR
+.e4ac	09 20		ora #$20		ORA #%00100000			;$20 turn on CB2
+.e4ae	8d 2c 91	sta $912c		STA VV912C			;save change
+.e4b1	60		rts			RTS
+.e4b2					SDCLK
+.e4b2	ad 1f 91	lda $911f		LDA VV911F			;load register
+.e4b5	cd 1f 91	cmp $911f		CMP VV911F			;any change?
+.e4b8	d0 f8		bne $e4b2		BNE SDCLK			;yes (unstable), loop
+.e4ba	4a		lsr a			LSR A				;shift Bit0 to .A
+.e4bb	60		rts			RTS
+.e4bc					SSADR
+.e4bc	a6 b9		ldx $b9			LDX SECADR			;get secondary address
+.e4be	4c 47 f6	jmp $f647		JMP SRCHMS			;print "Searching..."
+.e4c1					SLDPCH
+.e4c1	8a		txa			TXA
+.e4c2	d0 08		bne $e4cc		BNE SLDEXIT			;load location not set in LOAD call, so
+.e4c4	a5 c3		lda $c3			LDA MEMUSS			;get specified load address from call...
+.e4c6	85 ae		sta $ae			STA EAL				;and save as program start address
+.e4c8	a5 c4		lda $c4			LDA MEMUSS+1
+.e4ca	85 af		sta $af			STA EAL+1
+.e4cc					SLDEXIT
+.e4cc	4c 6a f6	jmp $f66a		JMP LOADMS			;print "Loading"
+.e4cf					TPWPCH
+.e4cf	20 e3 f8	jsr $f8e3		JSR TPWRIT			;write to tape
+.e4d2	90 03		bcc $e4d7		BCC TPWCHEX			;error? close
+.e4d4	68		pla			PLA				;set exit code
+.e4d5	a9 00		lda #$00		LDA #$00
+.e4d7					TPWCHEX
+.e4d7	4c 9e f3	jmp $f39e		JMP ICLSE2			;External entry into ICLOSE
+.e4da					FIXUP2
+>e4da	ff ff ff ff ff ff ff ff			.byte	$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
+>e4e2	ff ff ff ff ff ff ff ff
+>e4ea	ff ff ff ff ff ff ff ff			.byte	$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
+>e4f2	ff ff ff ff ff ff ff ff
+>e4fa	ff ff ff ff ff ff			.byte	$FF,$FF,$FF,$FF,$FF,$FF
+.e500					IIOBASE
+.e500	a2 10		ldx #$10		LDX #$10			;return $9110 as IO Base
+.e502	a0 91		ldy #$91		LDY #$91
+.e504	60		rts			RTS
+.e505					ISCREN
+.e505	a2 16		ldx #$16		LDX #$16        		;return 22 cols x 23 rows
+.e507	a0 17		ldy #$17		LDY #$17
+.e509	60		rts			RTS
+.e50a					IPLOT
+.e50a	b0 07		bcs $e513		BCS READPL			;carry set? yes, read position
+.e50c	86 d6		stx $d6			STX CURROW			;save row...
+.e50e	84 d3		sty $d3			STY CSRIDX			;...and column
+.e510	20 87 e5	jsr $e587		JSR SCNPTR			;update position
+.e513					READPL
+.e513	a6 d6		ldx $d6			LDX CURROW			;return row...
+.e515	a4 d3		ldy $d3			LDY CSRIDX			;...and column
+.e517	60		rts			RTS
+.e518					CINT1
+.e518	20 bb e5	jsr $e5bb		JSR IODEF1			;set deflt I/O and init VIC chip
+.e51b	ad 88 02	lda $0288		LDA HIPAGE			;get screen memory page
+.e51e	29 fd		and #$fd		AND #%11111101			;$FD MS nibble is ChrROM and
+.e520	0a		asl a			ASL A				;LS nibble is ChrRAM
+.e521	0a		asl a			ASL A
+.e522	09 80		ora #$80		ORA #%10000000			;$80
+.e524	8d 05 90	sta $9005		STA VV9005			;set chargen ROM to $8000
+.e527	ad 88 02	lda $0288		LDA HIPAGE			;get screen mem page
+.e52a	29 02		and #$02		AND #%00000010			;$02 check for screen RAM at
+.e52c	f0 08		beq $e536		BEQ CINT1A			;$E536 $1E page
+.e52e	a9 80		lda #$80		LDA #%10000000			;$80 screen RAM is at $10 page
+.e530	0d 02 90	ora $9002		ORA VV9002			;set Bit7
+.e533	8d 02 90	sta $9002		STA VV9002
+.e536					CINT1A
+.e536	a9 00		lda #$00		LDA #$00
+.e538	8d 91 02	sta $0291		STA SHMODE			;enable shift-C=
+.e53b	85 cf		sta $cf			STA BLNON			;start at no blink
+.e53d	a9 dc		lda #$dc		LDA #$DC ;#$EA 			;FIXUP1+34;#$DC
+.e53f	8d 8f 02	sta $028f		STA FCEVAL
+.e542	a9 eb		lda #$eb		LDA #$EB ;#$EA 			;FIXUP1+35;#$EB
+.e544	8d 90 02	sta $0290		STA FCEVAL+1			;shift mode evaluation
+.e547	a9 0a		lda #$0a		LDA #$0A
+.e549	8d 89 02	sta $0289		STA KBMAXL			;key buffer=16
+.e54c	8d 8c 02	sta $028c		STA KRPTDL			;repeat delay=16ms
+.e54f	a9 06		lda #$06		LDA #$06
+.e551	8d 86 02	sta $0286		STA CLCODE			;color=6(blue)
+.e554	a9 04		lda #$04		LDA #$04
+.e556	8d 8b 02	sta $028b		STA KRPTSP			;repeat speed
+.e559	a9 0c		lda #$0c		LDA #$0C
+.e55b	85 cd		sta $cd			STA BLNCT			;blink timer=12ms
+.e55d	85 cc		sta $cc			STA BLNSW			;set for solid cursor
+.e55f					CLRSCN
+.e55f	ad 88 02	lda $0288		LDA HIPAGE			;mem page for screen RAM
+.e562	09 80		ora #$80		ORA #%10000000			;$80
+.e564	a8		tay			TAY
+.e565	a9 00		lda #$00		LDA #$00
+.e567	aa		tax			TAX
+.e568					CLRLP1
+.e568	94 d9		sty $d9,x		STY SLLTBL,X			;address of screen line
+.e56a	18		clc			CLC
+.e56b	69 16		adc #$16		ADC #$16			;add 22
+.e56d	90 01		bcc $e570		BCC CLRSC1
+.e56f	c8		iny			INY
+.e570					CLRSC1
+.e570	e8		inx			INX
+.e571	e0 18		cpx #$18		CPX #$18			;all rows done?
+.e573	d0 f3		bne $e568		BNE CLRLP1
+.e575	a9 ff		lda #$ff		LDA #$FF
+.e577	95 d9		sta $d9,x		STA SLLTBL,X
+.e579	a2 16		ldx #$16		LDX #$16
+.e57b					CLRLP2
+.e57b	20 8d ea	jsr $ea8d		JSR CLRLIN			;clear line
+.e57e	ca		dex			DEX
+.e57f	10 fa		bpl $e57b		BPL CLRLP2
+.e581					HOME
+.e581	a0 00		ldy #$00		LDY #$00
+.e583	84 d3		sty $d3			STY CSRIDX			;set col to 0
+.e585	84 d6		sty $d6			STY CURROW			;and row, too
+.e587					SCNPTR
+.e587	a6 d6		ldx $d6			LDX CURROW
+.e589	a5 d3		lda $d3			LDA CSRIDX
+.e58b					SCNPLP
+.e58b	b4 d9		ldy $d9,x		LDY SLLTBL,X
+.e58d	30 08		bmi $e597		BMI SCNPT1
+.e58f	18		clc			CLC
+.e590	69 16		adc #$16		ADC #$16
+.e592	85 d3		sta $d3			STA CSRIDX
+.e594	ca		dex			DEX
+.e595	10 f4		bpl $e58b		BPL SCNPLP
+.e597					SCNPT1
+.e597	b5 d9		lda $d9,x		LDA SLLTBL,X
+.e599	29 03		and #$03		AND #$03
+.e59b	0d 88 02	ora $0288		ORA HIPAGE
+.e59e	85 d2		sta $d2			STA LINPTR+1
+.e5a0	bd fd ed	lda $edfd,x		LDA LBSCAD,X
+.e5a3	85 d1		sta $d1			STA LINPTR
+.e5a5	a9 15		lda #$15		LDA #$15
+.e5a7	e8		inx			INX
+.e5a8					SCNLP1
+.e5a8	b4 d9		ldy $d9,x		LDY SLLTBL,X
+.e5aa	30 06		bmi $e5b2		BMI SCNEXIT
+.e5ac	18		clc			CLC
+.e5ad	69 16		adc #$16		ADC #$16
+.e5af	e8		inx			INX
+.e5b0	10 f6		bpl $e5a8		BPL SCNLP1
+.e5b2					SCNEXIT
+.e5b2	85 d5		sta $d5			STA LINLEN
+.e5b4	60		rts			RTS
+.e5b5					PANIC
+.e5b5	20 bb e5	jsr $e5bb		JSR IODEF1			;reset devices and VIC regs
+.e5b8	4c 81 e5	jmp $e581		JMP HOME			;home cursor
+.e5bb					IODEF1
+.e5bb	a9 03		lda #$03		LDA #$03
+.e5bd	85 9a		sta $9a			STA OUTDEV			;reset output device to screen
+.e5bf	a9 00		lda #$00		LDA #$00
+.e5c1	85 99		sta $99			STA INDEV			;reset input device to keyboard
+.e5c3	a2 10		ldx #$10		LDX #$10			;move 16 VIC registers
+.e5c5					V6561I
+.e5c5	bd e3 ed	lda $ede3,x		LDA VICSUP-1,X			;$ede3	register value table
+.e5c8	9d ff 8f	sta $8fff,x		STA $8FFF,X			;save to VIC regs
+.e5cb	ca		dex			DEX
+.e5cc	d0 f7		bne $e5c5		BNE V6561I			;loop to next register
+.e5ce	60		rts			RTS
+.e5cf					LP2
+.e5cf	ac 77 02	ldy $0277		LDY KBUFFR			;get char at head of buffer
+.e5d2	a2 00		ldx #$00		LDX #$00
+.e5d4					LP2LOOP
+.e5d4	bd 78 02	lda $0278,x		LDA KBUFFR+1,X			;move next char "up" in list
+.e5d7	9d 77 02	sta $0277,x		STA KBUFFR,X
+.e5da	e8		inx			INX				;loop until all remaining waiting keys
+.e5db	e4 c6		cpx $c6			CPX KEYCNT			;are copied
+.e5dd	d0 f5		bne $e5d4		BNE LP2LOOP
+.e5df	c6 c6		dec $c6			DEC KEYCNT			;one less key in buffer
+.e5e1	98		tya			TYA				;return key in .A
+.e5e2	58		cli			CLI				;
+.e5e3	18		clc			CLC				;return no error
+.e5e4	60		rts			RTS
+.e5e5					INKEY
+.e5e5	20 42 e7	jsr $e742		JSR OUTSCR			;output character
+.e5e8					KEYLP1
+.e5e8	a5 c6		lda $c6			LDA KEYCNT			;# of keys
+.e5ea	85 cc		sta $cc			STA BLNSW
+.e5ec	8d 92 02	sta $0292		STA SCRLFL
+.e5ef	f0 f7		beq $e5e8		BEQ KEYLP1
+.e5f1	78		sei			SEI
+.e5f2	a5 cf		lda $cf			LDA BLNON			;in blink phase?
+.e5f4	f0 0c		beq $e602		BEQ INKEY1
+.e5f6	a5 ce		lda $ce			LDA GDBLN
+.e5f8	ae 87 02	ldx $0287		LDX CSRCLR
+.e5fb	a0 00		ldy #$00		LDY #$00
+.e5fd	84 cf		sty $cf			STY BLNON
+.e5ff	20 a1 ea	jsr $eaa1		JSR PRNSCR
+.e602					INKEY1
+.e602	20 cf e5	jsr $e5cf		JSR LP2
+.e605	c9 83		cmp #$83		CMP #$83			;shift-run combo
+.e607	d0 10		bne $e619		BNE INKEY2			;no, continue
+.e609	a2 09		ldx #$09		LDX #$09			;9 characters
+.e60b	78		sei			SEI
+.e60c	86 c6		stx $c6			STX KEYCNT			;save # of chars
+.e60e					KEYLP2
+.e60e	bd f3 ed	lda $edf3,x		LDA RUNSHF-1,X			;process run-shift meta key
+.e611	9d 76 02	sta $0276,x		STA KBUFFR-1,X			;stuff into buffer
+.e614	ca		dex			DEX
+.e615	d0 f7		bne $e60e		BNE KEYLP2
+.e617	f0 cf		beq $e5e8		BEQ KEYLP1
+.e619					INKEY2
+.e619	c9 0d		cmp #$0d		CMP #$0D			;return yet?
+.e61b	d0 c8		bne $e5e5		BNE INKEY			;no, loop
+.e61d	a4 d5		ldy $d5			LDY LINLEN
+.e61f	84 d0		sty $d0			STY INSRC			;set cr-flag
+.e621					KEYLP3
+.e621	b1 d1		lda ($d1),y		LDA (LINPTR),Y			;get char from screen
+.e623	c9 20		cmp #$20		CMP #$20			;space?
+.e625	d0 03		bne $e62a		BNE INKEY3			;no, continue
+.e627	88		dey			DEY				;elim space at line end
+.e628	d0 f7		bne $e621		BNE KEYLP3
+.e62a					INKEY3
+.e62a	c8		iny			INY
+.e62b	84 c8		sty $c8			STY EOLPTR			;save position as index
+.e62d	a0 00		ldy #$00		LDY #$00
+.e62f	8c 92 02	sty $0292		STY SCRLFL			;reset modes
+.e632	84 d3		sty $d3			STY CSRIDX
+.e634	84 d4		sty $d4			STY CSRMOD
+.e636	a5 c9		lda $c9			LDA ICRROW
+.e638	30 1d		bmi $e657		BMI INSCR1
+.e63a	a6 d6		ldx $d6			LDX CURROW
+.e63c	20 19 e7	jsr $e719		JSR CSRMIN+4			;$E719
+.e63f	e4 c9		cpx $c9			CPX ICRROW
+.e641	d0 14		bne $e657		BNE INSCR1			;$E657
+.e643	d0 12		bne $e657		BNE INSCR1
+.e645	a5 ca		lda $ca			LDA ICRCOL			;last column
+.e647	85 d3		sta $d3			STA CSRIDX			;save as column pointer
+.e649	c5 c8		cmp $c8			CMP EOLPTR			;compare with index
+.e64b	90 0a		bcc $e657		BCC INSCR1
+.e64d	b0 42		bcs $e691		BCS INSCR4A
+.e64f					INSCR
+.e64f	98		tya			TYA
+.e650	48		pha			PHA
+.e651	8a		txa			TXA
+.e652	48		pha			PHA
+.e653	a5 d0		lda $d0			LDA INSRC			;CR flag
+.e655	f0 91		beq $e5e8		BEQ KEYLP1			;no, wait more
+.e657					INSCR1
+.e657	a4 d3		ldy $d3			LDY CSRIDX			;get column
+.e659	b1 d1		lda ($d1),y		LDA (LINPTR),Y			;get char from screen
+>e65b	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>e663	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>e66b	ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea
+.e672	85 d7		sta $d7			STA LASTKY
+.e674	29 3f		and #$3f		AND #%00111111			;$3F
+.e676	06 d7		asl $d7			ASL LASTKY			;change to ASCII
+.e678	24 d7		bit $d7			BIT LASTKY
+.e67a	10 02		bpl $e67e		BPL INSCR2
+.e67c	09 80		ora #$80		ORA #%10000000			;$B0/80
+.e67e					INSCR2
+.e67e	90 04		bcc $e684		BCC INSCR3
+.e680	a6 d4		ldx $d4			LDX CSRMOD
+.e682	d0 04		bne $e688		BNE INSCR4
+.e684					INSCR3
+.e684	70 02		bvs $e688		BVS INSCR4
+.e686	09 40		ora #$40		ORA #%01000000			;$40
+.e688					INSCR4
+.e688	e6 d3		inc $d3			INC CSRIDX			;move cursor forward
+.e68a	20 b8 e6	jsr $e6b8		JSR QUOTET			;check on high-comma
+.e68d	c4 c8		cpy $c8			CPY EOLPTR			;cursor in last column?
+.e68f	d0 17		bne $e6a8		BNE INSCR7
+.e691					INSCR4A
+.e691	a9 00		lda #$00		LDA #$00
+.e693	85 d0		sta $d0			STA INSRC			;CR flag
+.e695	a9 0d		lda #$0d		LDA #$0D
+.e697	a6 99		ldx $99			LDX INDEV
+.e699	e0 03		cpx #$03		CPX #$03			;is input from screen?
+.e69b	f0 06		beq $e6a3		BEQ INSCR5			;yes, send it
+.e69d	a6 9a		ldx $9a			LDX OUTDEV
+.e69f	e0 03		cpx #$03		CPX #$03			;output to screen?
+.e6a1	f0 03		beq $e6a6		BEQ INSCR6			;yes, continue
+.e6a3					INSCR5
+.e6a3	20 42 e7	jsr $e742		JSR OUTSCR			;write char to screen
+.e6a6					INSCR6
+.e6a6	a9 0d		lda #$0d		LDA #$0D
+.e6a8					INSCR7
+.e6a8	85 d7		sta $d7			STA LASTKY			;save CR as last key
+.e6aa	68		pla			PLA
+.e6ab	aa		tax			TAX
+.e6ac	68		pla			PLA
+.e6ad	a8		tay			TAY
+.e6ae	a5 d7		lda $d7			LDA LASTKY			;screen code
+.e6b0	c9 de		cmp #$de		CMP #$DE			;is it pi??
+.e6b2	d0 02		bne $e6b6		BNE INSCREX			;no, exit
+.e6b4	a9 ff		lda #$ff		LDA #$FF			;yes, substitute BASIC token for pi
+.e6b6					INSCREX
+.e6b6	18		clc			CLC
+.e6b7	60		rts			RTS
+.e6b8					QUOTET
+.e6b8	c9 22		cmp #$22		CMP #$22			;quote char?
+.e6ba	d0 08		bne $e6c4		BNE QUOTEX			;no, exit
+.e6bc	a5 d4		lda $d4			LDA CSRMOD			;yes, set CursorMode to programmed
+.e6be	49 01		eor #$01		EOR #%00000001			;$01
+.e6c0	85 d4		sta $d4			STA CSRMOD
+.e6c2	a9 22		lda #$22		LDA #$22			;restore quote char
+.e6c4					QUOTEX
+.e6c4	60		rts			RTS
+.e6c5					CMD4
+.e6c5	09 40		ora #$40		ORA #%01000000			;$40
+.e6c7	a6 c7		ldx $c7			LDX RVS
+.e6c9	f0 02		beq $e6cd		BEQ CMD41			;$e6cd
+.e6cb	09 80		ora #$80		ORA #%10000000			;80
+.e6cd					CMD41
+.e6cd	a6 d8		ldx $d8			LDX INSRTO
+.e6cf	f0 02		beq $e6d3		BEQ CMD42			;$e6d3
+.e6d1	c6 d8		dec $d8			DEC INSRTO
+.e6d3					CMD42
+.e6d3	ae 86 02	ldx $0286		LDX CLCODE			;get color code
+.e6d6	20 a1 ea	jsr $eaa1		JSR PRNSCR			;print it
+.e6d9	20 ea e6	jsr $e6ea		JSR CSRPLS			;update line-start table
+.e6dc					CMD42A
+.e6dc	68		pla			PLA
+.e6dd	a8		tay			TAY
+.e6de	a5 d8		lda $d8			LDA INSRTO			;any INSERTs outstanding?
+.e6e0	f0 02		beq $e6e4		BEQ CMD4SK			;$E6E4 no, exit
+.e6e2	46 d4		lsr $d4			LSR CSRMOD
+.e6e4					CMD4SK
+.e6e4	68		pla			PLA
+.e6e5	aa		tax			TAX
+.e6e6	68		pla			PLA
+.e6e7	18		clc			CLC
+.e6e8	58		cli			CLI
+.e6e9	60		rts			RTS
+.e6ea					CSRPLS
+.e6ea	20 fa e8	jsr $e8fa		JSR CKLNPL
+.e6ed	e6 d3		inc $d3			INC CSRIDX
+.e6ef	a5 d5		lda $d5			LDA LINLEN
+.e6f1	c5 d3		cmp $d3			CMP CSRIDX
+.e6f3	b0 37		bcs $e72c		BCS CSREXIT			;$E72C
+.e6f5	c9 57		cmp #$57		CMP #$57			;#of chars (88 = 4 lines)
+.e6f7	f0 2a		beq $e723		BEQ CSRDEC			;$E723
+.e6f9	ad 92 02	lda $0292		LDA SCRLFL
+.e6fc	f0 03		beq $e701		BEQ CSRPSK			;$E701
+.e6fe	4c f0 e9	jmp $e9f0		JMP INSSLOP			;$E9F0
+.e701					CSRPSK
+.e701	a6 d6		ldx $d6			LDX CURROW
+.e703	e0 17		cpx #$17		CPX #$17
+.e705	90 07		bcc $e70e		BCC CSRSK2			;$E70E
+.e707	20 75 e9	jsr $e975		JSR SCRLSC
+.e70a	c6 d6		dec $d6			DEC CURROW
+.e70c	a6 d6		ldx $d6			LDX CURROW
+.e70e					CSRSK2
+.e70e	16 d9		asl $d9,x		ASL SLLTBL,X
+.e710	56 d9		lsr $d9,x		LSR SLLTBL,X
+.e712	4c 5b ed	jmp $ed5b		JMP G4
+.e715					CSRMIN
+.e715	69 16		adc #$16		ADC #$16			;add 22d (screen line length)
+.e717	85 d5		sta $d5			STA LINLEN
+.e719					CSRMLP
+.e719	b5 d9		lda $d9,x		LDA SLLTBL,X
+.e71b	30 03		bmi $e720		BMI CSRMIN1			;$E720
+.e71d	ca		dex			DEX
+.e71e	d0 f9		bne $e719		BNE CSRMLP			;$E719
+.e720					CSRMIN1
+.e720	4c 7e ea	jmp $ea7e		JMP LINSTR
+.e723					CSRDEC
+.e723	c6 d6		dec $d6			DEC CURROW
+.e725	20 c3 e8	jsr $e8c3		JSR NEWLIN
+.e728	a9 00		lda #$00		LDA #$00
+.e72a	85 d3		sta $d3			STA CSRIDX
+.e72c					CSREXIT
+.e72c	60		rts			RTS
+.e72d					CSRUP
+.e72d	a6 d6		ldx $d6			LDX CURROW
+.e72f	d0 06		bne $e737		BNE CSRUP1			;$E737
+.e731	86 d3		stx $d3			STX CSRIDX
+.e733	68		pla			PLA
+.e734	68		pla			PLA
+.e735	d0 a5		bne $e6dc		BNE CMD42A			;$E6DC
+.e737					CSRUP1
+.e737	ca		dex			DEX
+.e738	86 d6		stx $d6			STX CURROW
+.e73a	20 87 e5	jsr $e587		JSR SCNPTR
+.e73d	a4 d5		ldy $d5			LDY LINLEN
+.e73f	84 d3		sty $d3			STY CSRIDX
+.e741	60		rts			RTS
+.e742					OUTSCR
+.e742	48		pha			PHA
+.e743	85 d7		sta $d7			STA LASTKY
+.e745	8a		txa			TXA
+.e746	48		pha			PHA
+.e747	98		tya			TYA
+.e748	48		pha			PHA
+.e749	a9 00		lda #$00		LDA #$00
+.e74b	85 d0		sta $d0			STA INSRC
+.e74d	a4 d3		ldy $d3			LDY CSRIDX
+.e74f	a5 d7		lda $d7			LDA LASTKY
+.e751	10 03		bpl $e756		BPL NOSHCH			;$E756
+.e753	4c 00 e8	jmp $e800		JMP SHCHRS
+.e756					NOSHCH
+.e756	c9 0d		cmp #$0d		CMP #$0D
+.e758	d0 03		bne $e75d		BNE NOTCR			;$E75D
+.e75a	4c d8 e8	jmp $e8d8		JMP CR
+.e75d					NOTCR
+.e75d	c9 20		cmp #$20		CMP #$20			;{space}
+.e75f	90 10		bcc $e771		BCC CTRLCODE			;$E771
+.e761	c9 60		cmp #$60		CMP #$60			;last standard ASCII
+.e763	90 04		bcc $e769		BCC ALPHA			;$E769
+.e765	29 df		and #$df		AND #%11011111			;$DF
+.e767	d0 02		bne $e76b		BNE ALPHA1			;$E76B
+.e769					ALPHA
+.e769	29 3f		and #$3f		AND #%00111111			;$3F
+.e76b					ALPHA1
+.e76b	20 b8 e6	jsr $e6b8		JSR QUOTET
+.e76e	4c c7 e6	jmp $e6c7		JMP CMD4+2			;$E6C7
+.e771					CTRLCODE
+.e771	a6 d8		ldx $d8			LDX INSRTO
+.e773	f0 03		beq $e778		BEQ NOINSERT			;$E778
+.e775	4c cb e6	jmp $e6cb		JMP CMD41-2			;$E6CB
+.e778					NOINSERT
+.e778	c9 14		cmp #$14		CMP #$14			;{delete}
+.e77a	d0 2e		bne $e7aa		BNE NOTDEL			;$E7AA
+.e77c	98		tya			TYA
+.e77d	d0 06		bne $e785		BNE DEL				;$E785
+.e77f	20 2d e7	jsr $e72d		JSR CSRUP			;$E72D
+.e782	4c 9f e7	jmp $e79f		JMP NOSHCH1			;$E79F
+.e785					DEL
+.e785	20 e8 e8	jsr $e8e8		JSR CKLNMI			;$E8E8
+.e788	88		dey			DEY
+.e789	84 d3		sty $d3			STY CSRIDX
+.e78b	20 b2 ea	jsr $eab2		JSR CCOLRAM
+.e78e					NOSHLP1
+.e78e	c8		iny			INY
+.e78f	b1 d1		lda ($d1),y		LDA (LINPTR),Y
+.e791	88		dey			DEY
+.e792	91 d1		sta ($d1),y		STA (LINPTR),Y
+.e794	c8		iny			INY
+.e795	b1 f3		lda ($f3),y		LDA (COLRPT),Y
+.e797	88		dey			DEY
+.e798	91 f3		sta ($f3),y		STA (COLRPT),Y
+.e79a	c8		iny			INY
+.e79b	c4 d5		cpy $d5			CPY LINLEN
+.e79d	d0 ef		bne $e78e		BNE NOSHLP1			;$E78E
+.e79f					NOSHCH1
+.e79f	a9 20		lda #$20		LDA #$20
+.e7a1	91 d1		sta ($d1),y		STA (LINPTR),Y
+.e7a3	ad 86 02	lda $0286		LDA CLCODE
+.e7a6	91 f3		sta ($f3),y		STA (COLRPT),Y
+.e7a8	10 4d		bpl $e7f7		BPL NOTRT1A			;$E7F7
+.e7aa					NOTDEL
+.e7aa	a6 d4		ldx $d4			LDX CSRMOD
+.e7ac	f0 03		beq $e7b1		BEQ NOTDEL1			;$E7B1
+.e7ae	4c cb e6	jmp $e6cb		JMP CMD41-2			;$E6CB
+.e7b1					NOTDEL1
+.e7b1	c9 12		cmp #$12		CMP #$12			;{RVS}
+.e7b3	d0 02		bne $e7b7		BNE NOTRVS			;$E7B7
+.e7b5	85 c7		sta $c7			STA RVS
+.e7b7					NOTRVS
+.e7b7	c9 13		cmp #$13		CMP #$13			;{HOME}
+.e7b9	d0 03		bne $e7be		BNE NOTHOME			;$E7BE
+.e7bb	20 81 e5	jsr $e581		JSR HOME
+.e7be					NOTHOME
+.e7be	c9 1d		cmp #$1d		CMP #$1D			;{RIGHT}
+.e7c0	d0 17		bne $e7d9		BNE NOTRT			;$E7D9
+.e7c2	c8		iny			INY				;right
+.e7c3	20 fa e8	jsr $e8fa		JSR CKLNPL
+.e7c6	84 d3		sty $d3			STY CSRIDX
+.e7c8	88		dey			DEY
+.e7c9	c4 d5		cpy $d5			CPY LINLEN
+.e7cb	90 09		bcc $e7d6		BCC CSRRTEX			;$E7D6
+.e7cd	c6 d6		dec $d6			DEC CURROW
+.e7cf	20 c3 e8	jsr $e8c3		JSR NEWLIN
+.e7d2	a0 00		ldy #$00		LDY #$00
+.e7d4	84 d3		sty $d3			STY CSRIDX
+.e7d6					CSRRTEX
+.e7d6	4c dc e6	jmp $e6dc		JMP CMD42A			;$E6DC
+.e7d9					NOTRT
+.e7d9	c9 11		cmp #$11		CMP #$11			;{DOWN}
+.e7db	d0 1d		bne $e7fa		BNE NOTDOWN			;$E7FA
+.e7dd	18		clc			CLC				;down
+.e7de	98		tya			TYA
+.e7df	69 16		adc #$16		ADC #$16
+.e7e1	a8		tay			TAY
+.e7e2	e6 d6		inc $d6			INC CURROW
+.e7e4	c5 d5		cmp $d5			CMP LINLEN
+.e7e6	90 ec		bcc $e7d4		BCC CSRRTEX-2			;$E7D4
+.e7e8	f0 ea		beq $e7d4		BEQ CSRRTEX-2			;$E7D4
+.e7ea	c6 d6		dec $d6			DEC CURROW
+.e7ec					NOTRTLP
+.e7ec	e9 16		sbc #$16		SBC #$16
+.e7ee	90 04		bcc $e7f4		BCC NOTRT1			;$E7F4
+.e7f0	85 d3		sta $d3			STA CSRIDX
+.e7f2	d0 f8		bne $e7ec		BNE NOTRTLP			;$E7EC
+.e7f4					NOTRT1
+.e7f4	20 c3 e8	jsr $e8c3		JSR NEWLIN
+.e7f7					NOTRT1A
+.e7f7	4c dc e6	jmp $e6dc		JMP CMD42A
+.e7fa					NOTDOWN
+.e7fa	20 12 e9	jsr $e912		JSR STCLRC			;$E912
+.e7fd	4c 21 ed	jmp $ed21		JMP GRTXTF			;$ED21
+.e800					SHCHRS
+>e800	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>e808	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>e810	ea ea ea ea ea				.byte $ea, $ea, $ea, $ea, $ea
+.e815	29 7f		and #$7f		AND #%01111111			;$7F
+.e817	c9 7f		cmp #$7f		CMP #%01111111			;$7F
+.e819	d0 02		bne $e81d		BNE SRCH_S1			;$E81D
+.e81b	a9 5e		lda #$5e		LDA #$5E
+.e81d					SRCH_S1
+>e81d	ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea
+.e823	c9 20		cmp #$20		CMP #$20			;{space}
+.e825	90 03		bcc $e82a		BCC SRCH_S2			;$E82A
+.e827	4c c5 e6	jmp $e6c5		JMP CMD4			;$E6C5
+.e82a					SRCH_S2
+.e82a	c9 0d		cmp #$0d		CMP #$0D			;{return}
+.e82c	d0 03		bne $e831		BNE SRCH_S3			;$E831
+.e82e	4c d8 e8	jmp $e8d8		JMP CR
+.e831					SRCH_S3
+.e831	a6 d4		ldx $d4			LDX CSRMOD
+.e833	d0 3f		bne $e874		BNE SCHR2			;$E874
+.e835	c9 14		cmp #$14		CMP #$14			;{text}
+.e837	d0 37		bne $e870		BNE SCHR1			;$E870
+.e839	a4 d5		ldy $d5			LDY LINLEN
+.e83b	b1 d1		lda ($d1),y		LDA (LINPTR),Y
+.e83d	c9 20		cmp #$20		CMP #$20
+.e83f	d0 04		bne $e845		BNE SRCH_S4			;$E845
+.e841	c4 d3		cpy $d3			CPY CSRIDX
+.e843	d0 07		bne $e84c		BNE SRCH_S5			;$E84C
+.e845					SRCH_S4
+.e845	c0 57		cpy #$57		CPY #$57
+.e847	f0 24		beq $e86d		BEQ SCHR1-3			;$E86D
+.e849	20 ee e9	jsr $e9ee		JSR INSSPC			;$E9EE
+.e84c					SRCH_S5
+.e84c	a4 d5		ldy $d5			LDY LINLEN
+.e84e	20 b2 ea	jsr $eab2		JSR CCOLRAM
+.e851					SHCHLOOP
+.e851	88		dey			DEY
+.e852	b1 d1		lda ($d1),y		LDA (LINPTR),Y
+.e854	c8		iny			INY
+.e855	91 d1		sta ($d1),y		STA (LINPTR),Y
+.e857	88		dey			DEY
+.e858	b1 f3		lda ($f3),y		LDA (COLRPT),Y
+.e85a	c8		iny			INY
+.e85b	91 f3		sta ($f3),y		STA (COLRPT),Y
+.e85d	88		dey			DEY
+.e85e	c4 d3		cpy $d3			CPY CSRIDX
+.e860	d0 ef		bne $e851		BNE SHCHLOOP			;$E851
+.e862	a9 20		lda #$20		LDA #$20
+.e864	91 d1		sta ($d1),y		STA (LINPTR),Y
+.e866	ad 86 02	lda $0286		LDA CLCODE
+.e869	91 f3		sta ($f3),y		STA (COLRPT),Y
+.e86b	e6 d8		inc $d8			INC INSRTO
+.e86d	4c dc e6	jmp $e6dc		JMP CMD42A
+.e870					SCHR1
+.e870	a6 d8		ldx $d8			LDX INSRTO
+.e872	f0 05		beq $e879		BEQ SRCH_S6			;$E879
+.e874					SCHR2
+.e874	09 40		ora #$40		ORA #%01000000			;$40
+.e876	4c cb e6	jmp $e6cb		JMP CMD4+6			;$E6CB
+.e879					SRCH_S6
+.e879	c9 11		cmp #$11		CMP #$11			;{down}
+.e87b	d0 16		bne $e893		BNE SCHR3			;$E893
+.e87d	a6 d6		ldx $d6			LDX CURROW
+.e87f	f0 37		beq $e8b8		BEQ SHCHEXIT-3			;$E8B8
+.e881	c6 d6		dec $d6			DEC CURROW
+.e883	a5 d3		lda $d3			LDA CSRIDX
+.e885	38		sec			SEC
+.e886	e9 16		sbc #$16		SBC #$16
+.e888	90 04		bcc $e88e		BCC SRCH_S7			;$E88E
+.e88a	85 d3		sta $d3			STA CSRIDX
+.e88c	10 2a		bpl $e8b8		BPL SHCHEXIT-3			;$E8B8
+.e88e					SRCH_S7
+.e88e	20 87 e5	jsr $e587		JSR SCNPTR
+.e891	d0 25		bne $e8b8		BNE SHCHEXIT-3			;$E8B8
+.e893					SCHR3
+.e893	c9 12		cmp #$12		CMP #$12			;{RVS}
+.e895	d0 04		bne $e89b		BNE SRCH_S8			;$E89B
+.e897	a9 00		lda #$00		LDA #$00
+.e899	85 c7		sta $c7			STA RVS
+.e89b					SRCH_S8
+.e89b	c9 1d		cmp #$1d		CMP #$1D			;{right}
+.e89d	d0 12		bne $e8b1		BNE SHCH4			;$E8B1
+.e89f	98		tya			TYA
+.e8a0	f0 09		beq $e8ab		BEQ SRCH_S9			;$E8AB
+.e8a2	20 e8 e8	jsr $e8e8		JSR CKLNMI			;$E8E8
+.e8a5	88		dey			DEY
+.e8a6	84 d3		sty $d3			STY CSRIDX
+.e8a8	4c dc e6	jmp $e6dc		JMP CMD42A
+.e8ab					SRCH_S9
+.e8ab	20 2d e7	jsr $e72d		JSR CSRUP			;$E72D
+.e8ae	4c dc e6	jmp $e6dc		JMP CMD42A
+.e8b1					SHCH4
+.e8b1	c9 13		cmp #$13		CMP #$13			;{home}
+.e8b3	d0 06		bne $e8bb		BNE SHCHEXIT			;$E8BB
+.e8b5	20 5f e5	jsr $e55f		JSR CLRSCN			;$E55F
+.e8b8	4c dc e6	jmp $e6dc		JMP CMD42A
+.e8bb					SHCHEXIT
+.e8bb	09 80		ora #$80		ORA #%10000000			;$80
+.e8bd	20 12 e9	jsr $e912		JSR STCLRC			;$E912
+.e8c0	4c 30 ed	jmp $ed30		JMP G1				;$ED30
+.e8c3					NEWLIN
+.e8c3	46 c9		lsr $c9			LSR ICRROW			;move to next row
+.e8c5	a6 d6		ldx $d6			LDX CURROW			;get row#
+.e8c7					NWLNLP
+.e8c7	e8		inx			INX				;increment row
+.e8c8	e0 17		cpx #$17		CPX #$17			;screen bottom?
+.e8ca	d0 03		bne $e8cf		BNE NEWLIN1			;$E8CF no, increment row
+.e8cc	20 75 e9	jsr $e975		JSR SCRLSC			;yes, scroll screen
+.e8cf					NEWLIN1
+.e8cf	b5 d9		lda $d9,x		LDA SLLTBL,X			;get link pointer
+.e8d1	10 f4		bpl $e8c7		BPL NWLNLP			;$E8C7
+.e8d3	86 d6		stx $d6			STX CURROW			;save new row
+.e8d5	4c 87 e5	jmp $e587		JMP SCNPTR			;update screen
+.e8d8					CR
+.e8d8	a2 00		ldx #$00		LDX #$00			;clear...
+.e8da	86 d8		stx $d8			STX INSRTO			;  inserts outstanding
+.e8dc	86 c7		stx $c7			STX RVS				;  reverse mode
+.e8de	86 d4		stx $d4			STX CSRMOD			;  programmed cursor (make direct)
+.e8e0	86 d3		stx $d3			STX CSRIDX			;column 0 (line home)
+.e8e2	20 c3 e8	jsr $e8c3		JSR NEWLIN			;create a new line
+.e8e5	4c dc e6	jmp $e6dc		JMP CMD42A			;$E6DC exit
+.e8e8					CKLNMI
+.e8e8	a2 04		ldx #$04		LDX #$04			;loop counter (pause before scroll??)
+.e8ea	a9 00		lda #$00		LDA #$00
+.e8ec					CKLNLP
+.e8ec	c5 d3		cmp $d3			CMP CSRIDX			;beginning of line?
+.e8ee	f0 07		beq $e8f7		BEQ CKLND1			;$E8F7 yes, go to previous row
+.e8f0	18		clc			CLC				;no, go to next row
+.e8f1	69 16		adc #$16		ADC #$16
+.e8f3	ca		dex			DEX
+.e8f4	d0 f6		bne $e8ec		BNE CKLNLP			;$E8EC loop 4x
+.e8f6	60		rts			RTS
+.e8f7					CKLND1
+.e8f7	c6 d6		dec $d6			DEC CURROW			;previous row
+.e8f9	60		rts			RTS
+.e8fa					CKLNPL
+.e8fa	a2 04		ldx #$04		LDX #$04			;loop counter
+.e8fc	a9 15		lda #$15		LDA #$15			;column 15
+.e8fe					CKLNINL
+.e8fe	c5 d3		cmp $d3			CMP CSRIDX			;at EOL?
+.e900	f0 07		beq $e909		BEQ CKLNIN			;$E909 yes, go to next line
+.e902	18		clc			CLC				;no, check again
+.e903	69 16		adc #$16		ADC #$16
+.e905	ca		dex			DEX
+.e906	d0 f6		bne $e8fe		BNE CKLNINL			;$E8FE loop
+.e908	60		rts			RTS
+.e909					CKLNIN
+.e909	a6 d6		ldx $d6			LDX CURROW			;get row
+.e90b	e0 17		cpx #$17		CPX #$17			;end of screen?
+.e90d	f0 02		beq $e911		BEQ CKLNEX			;$E911 yes, return (and scroll later)
+.e90f	e6 d6		inc $d6			INC CURROW			;no, go to next row
+.e911					CKLNEX
+.e911	60		rts			RTS
+.e912					STCLRC
+.e912	a2 07		ldx #$07		LDX #$07			;8 color codes to check
+.e914					STCLRL
+.e914	dd 21 e9	cmp $e921,x		CMP COLRTB,X			;compare color code
+.e917	f0 04		beq $e91d		BEQ SETCLR			;$E91D found it? Set new color
+.e919	ca		dex			DEX				;not found, go to next color
+.e91a	10 f8		bpl $e914		BPL STCLRL			;$E914 loop
+.e91c	60		rts			RTS				;color code not found, exit
+.e91d					SETCLR
+.e91d	8e 86 02	stx $0286		STX CLCODE			;set new color code
+.e920	60		rts			RTS				;exit
+.e921					COLRTB
+>e921	90 05 1c 9f 9c 1e 1f 9e			.byte $90, $05, $1C, $9F, $9C, $1E, $1F, $9E
+.e929					XLATB1
+>e929	ef a1 df a6 e1 b1 e2 b2			.byte $EF, $A1, $DF, $A6, $E1, $B1, $E2, $B2
+>e931	e3 b3 e4 b4 e5 b5 e6 b6			.byte $E3, $B3, $E4, $B4, $E5, $B5, $E6, $B6
+>e939	e7 b7 e8 b8 e9 b9 fa ba			.byte $E7, $B7, $E8, $B8, $E9, $B9, $FA, $BA
+>e941	fb bb fc bc ec bd fe be			.byte $FB, $BB, $FC, $BC, $EC, $BD, $FE, $BE
+>e949	84 bf f7 c0 f8 db f9 dd			.byte $84, $BF, $F7, $C0, $F8, $DB, $F9, $DD
+>e951	ea de 5e e0 5b e1 5d e2			.byte $EA, $DE, $5E, $E0, $5B, $E1, $5D, $E2
+>e959	40 b0 61 b1 78 db 79 dd			.byte $40, $B0, $61, $B1, $78, $DB, $79, $DD
+>e961	66 b6 77 c0 70 f0 71 f1			.byte $66, $B6, $77, $C0, $70, $F0, $71, $F1
+>e969	72 f2 73 f3 74 f4 75 f5			.byte $72, $F2, $73, $F3, $74, $F4, $75, $F5
+>e971	76 f6 7d fd				.byte $76, $F6, $7D, $FD
+.e975					SCRLSC
+.e975	a5 ac		lda $ac			LDA SAL
+.e977	48		pha			PHA
+.e978	a5 ad		lda $ad			LDA SAL+1
+.e97a	48		pha			PHA
+.e97b	a5 ae		lda $ae			LDA EAL
+.e97d	48		pha			PHA
+.e97e	a5 af		lda $af			LDA EAL+1
+.e980	48		pha			PHA
+.e981					SCLPUSH
+.e981	a2 ff		ldx #$ff		LDX #$FF
+.e983	c6 d6		dec $d6			DEC CURROW
+.e985	c6 c9		dec $c9			DEC ICRROW
+.e987	c6 f2		dec $f2			DEC SCROWM
+.e989					SCRLP1
+.e989	e8		inx			INX
+.e98a	20 7e ea	jsr $ea7e		JSR LINSTR
+.e98d	e0 16		cpx #$16		CPX #$16
+.e98f	b0 0c		bcs $e99d		BCS SCRL_S1			;$E99D
+.e991	bd fe ed	lda $edfe,x		LDA LBSCAD+1,X			;$EDFE,X
+.e994	85 ac		sta $ac			STA SAL
+.e996	b5 da		lda $da,x		LDA SLLTBL+1,X
+.e998	20 56 ea	jsr $ea56		JSR MOVELN			;shift screen line up
+.e99b	30 ec		bmi $e989		BMI SCRLP1			;$E989
+.e99d					SCRL_S1
+.e99d	20 8d ea	jsr $ea8d		JSR CLRLIN			;clear line
+.e9a0	a2 00		ldx #$00		LDX #$00
+.e9a2					SCRLP2
+.e9a2	b5 d9		lda $d9,x		LDA SLLTBL,X
+.e9a4	29 7f		and #$7f		AND #%01111111			;$7F
+.e9a6	b4 da		ldy $da,x		LDY SLLTBL+1,X
+.e9a8	10 02		bpl $e9ac		BPL SCRL_S2			;E9AC
+.e9aa	09 80		ora #$80		ORA #%10000000			;$B0 or 80
+.e9ac					SCRL_S2
+.e9ac	95 d9		sta $d9,x		STA SLLTBL,X
+.e9ae	e8		inx			INX
+.e9af	e0 16		cpx #$16		CPX #$16
+.e9b1	d0 ef		bne $e9a2		BNE SCRLP2			;$E9A2
+.e9b3	a5 ef		lda $ef			LDA SLLTBL+22			;$EF
+.e9b5	09 80		ora #$80		ORA #%10000000			;$B0 or 80
+.e9b7	85 ef		sta $ef			STA SLLTBL+22			;$EF
+.e9b9	a5 d9		lda $d9			LDA SLLTBL
+.e9bb	10 c4		bpl $e981		BPL SCLPUSH			;$E981
+.e9bd	e6 d6		inc $d6			INC CURROW
+.e9bf	e6 f2		inc $f2			INC SCROWM
+.e9c1	a9 fb		lda #$fb		LDA #$FB
+.e9c3	8d 20 91	sta $9120		STA VV9120
+.e9c6	ad 21 91	lda $9121		LDA VV9121
+.e9c9	c9 fe		cmp #$fe		CMP #$FE			;CTRL key pressed?
+.e9cb	08		php			PHP
+.e9cc	a9 f7		lda #$f7		LDA #$F7
+.e9ce	8d 20 91	sta $9120		STA  VV9120
+.e9d1	28		plp			PLP
+.e9d2	d0 0b		bne $e9df		BNE SCRL_S3			;$E9DF
+.e9d4	a0 00		ldy #$00		LDY #$00
+.e9d6					SCRL_S2A
+.e9d6	ea		nop			NOP				;scroll pause
+.e9d7	ca		dex			DEX
+.e9d8	d0 fc		bne $e9d6		BNE SCRL_S2A			;E9D6
+.e9da	88		dey			DEY
+.e9db	d0 f9		bne $e9d6		BNE SCRL_S2A			;E9D6
+.e9dd	84 c6		sty $c6			STY KEYCNT			;#keys pressed =2
+.e9df					SCRL_S3
+.e9df	a6 d6		ldx $d6			LDX CURROW
+.e9e1	68		pla			PLA
+.e9e2	85 af		sta $af			STA EAL+1
+.e9e4	68		pla			PLA
+.e9e5	85 ae		sta $ae			STA EAL
+.e9e7	68		pla			PLA
+.e9e8	85 ad		sta $ad			STA SAL+1
+.e9ea	68		pla			PLA
+.e9eb	85 ac		sta $ac			STA SAL
+.e9ed	60		rts			RTS
+.e9ee					INSSPC
+.e9ee	a6 d6		ldx $d6			LDX CURROW
+.e9f0					INSSLOP
+.e9f0	e8		inx			INX
+.e9f1	b5 d9		lda $d9,x		LDA SLLTBL,X
+.e9f3	10 fb		bpl $e9f0		BPL INSSLOP			; $E9F0
+.e9f5	86 f2		stx $f2			STX SCROWM
+.e9f7	e0 16		cpx #$16		CPX #$16
+.e9f9	f0 0d		beq $ea08		BEQ INSSPC1			;$EA08
+.e9fb	90 0b		bcc $ea08		BCC INSSPC1
+.e9fd	20 75 e9	jsr $e975		JSR SCRLSC
+.ea00	a6 f2		ldx $f2			LDX SCROWM
+.ea02	ca		dex			DEX
+.ea03	c6 d6		dec $d6			DEC CURROW
+.ea05	4c 0e e7	jmp $e70e		JMP CSRSK2			;$E70E
+.ea08					INSSPC1
+.ea08	a5 ac		lda $ac			LDA SAL
+.ea0a	48		pha			PHA
+.ea0b	a5 ad		lda $ad			LDA SAL+1
+.ea0d	48		pha			PHA
+.ea0e	a5 ae		lda $ae			LDA EAL
+.ea10	48		pha			PHA
+.ea11	a5 af		lda $af			LDA EAL+1
+.ea13	48		pha			PHA
+.ea14	a2 17		ldx #$17		LDX #$17
+.ea16					INSSLP2
+.ea16	ca		dex			DEX
+.ea17	20 7e ea	jsr $ea7e		JSR LINSTR
+.ea1a	e4 f2		cpx $f2			CPX SCROWM
+.ea1c	90 0e		bcc $ea2c		BCC INSSPC2			;$EA2C
+.ea1e	f0 0c		beq $ea2c		BEQ INSSPC2			;$EA2C
+.ea20	bd fc ed	lda $edfc,x		LDA LBSCAD-1,X			;$EDFC
+.ea23	85 ac		sta $ac			STA SAL
+.ea25	b5 d8		lda $d8,x		LDA INSRTO,X
+.ea27	20 56 ea	jsr $ea56		JSR MOVELN
+.ea2a	30 ea		bmi $ea16		BMI INSSLP2			;$EA16
+.ea2c					INSSPC2
+.ea2c	20 8d ea	jsr $ea8d		JSR CLRLIN
+.ea2f	a2 15		ldx #$15		LDX #$15
+.ea31					INSSLP3
+.ea31	e4 f2		cpx $f2			CPX SCROWM
+.ea33	90 0f		bcc $ea44		BCC INSEXIT			;$EA44
+.ea35	b5 da		lda $da,x		LDA SLLTBL+1,X
+.ea37	29 7f		and #$7f		AND #%01111111			;$7F
+.ea39	b4 d9		ldy $d9,x		LDY SLLTBL,X
+.ea3b	10 02		bpl $ea3f		BPL INSSPC3			;$EA3F
+.ea3d	09 80		ora #$80		ORA #%10000000			;$80
+.ea3f					INSSPC3
+.ea3f	95 da		sta $da,x		STA SLLTBL+1,X
+.ea41	ca		dex			DEX
+.ea42	d0 ed		bne $ea31		BNE INSSLP3			;$EA31
+.ea44					INSEXIT
+.ea44	a6 f2		ldx $f2			LDX SCROWM
+.ea46	20 0e e7	jsr $e70e		JSR CSRSK2
+.ea49	68		pla			PLA
+.ea4a	85 af		sta $af			STA EAL+1
+.ea4c	68		pla			PLA
+.ea4d	85 ae		sta $ae			STA EAL
+.ea4f	68		pla			PLA
+.ea50	85 ad		sta $ad			STA SAL+1
+.ea52	68		pla			PLA
+.ea53	85 ac		sta $ac			STA SAL
+.ea55	60		rts			RTS
+.ea56					MOVELN
+.ea56	29 03		and #$03		AND #%00000011			;$03
+.ea58	0d 88 02	ora $0288		ORA HIPAGE
+.ea5b	85 ad		sta $ad			STA SAL+1
+.ea5d	20 6e ea	jsr $ea6e		JSR COPYCL
+.ea60	a0 15		ldy #$15		LDY #$15
+.ea62					MOVLOOP
+.ea62	b1 ac		lda ($ac),y		LDA (SAL),Y
+.ea64	91 d1		sta ($d1),y		STA (LINPTR),Y
+.ea66	b1 ae		lda ($ae),y		LDA (EAL),Y
+.ea68	91 f3		sta ($f3),y		STA (COLRPT),Y
+.ea6a	88		dey			DEY
+.ea6b	10 f5		bpl $ea62		BPL MOVLOOP			;$EA62
+.ea6d	60		rts			RTS
+.ea6e					COPYCL
+.ea6e	20 b2 ea	jsr $eab2		JSR CCOLRAM			;get loc of color RAM
+.ea71	a5 ac		lda $ac			LDA SAL				;twiddle tape buffer addresses
+.ea73	85 ae		sta $ae			STA EAL
+.ea75	a5 ad		lda $ad			LDA SAL+1
+.ea77	29 03		and #$03		AND #%00000011			;$03
+.ea79	09 94		ora #$94		ORA #%10010100			;$94
+.ea7b	85 af		sta $af			STA EAL+1
+.ea7d	60		rts			RTS
+.ea7e					LINSTR
+.ea7e	bd fd ed	lda $edfd,x		LDA LBSCAD,X			;$EDFD
+.ea81	85 d1		sta $d1			STA LINPTR
+.ea83	b5 d9		lda $d9,x		LDA SLLTBL,X
+.ea85	29 03		and #$03		AND #%00000011			;$03
+.ea87	0d 88 02	ora $0288		ORA HIPAGE
+.ea8a	85 d2		sta $d2			STA LINPTR+1
+.ea8c	60		rts			RTS
+.ea8d					CLRLIN
+.ea8d	a0 15		ldy #$15		LDY #$15			;counter (#of cols)
+.ea8f	20 7e ea	jsr $ea7e		JSR LINSTR			;set start of line
+.ea92	20 b2 ea	jsr $eab2		JSR CCOLRAM			;get loc of color RAM
+.ea95					CLEARLP
+.ea95	a9 20		lda #$20		LDA #$20			;{space}
+.ea97	91 d1		sta ($d1),y		STA (LINPTR),Y			;write {space}
+.ea99	a9 01		lda #$01		LDA #$01
+.ea9b	91 f3		sta ($f3),y		STA (COLRPT),Y			;write color 1 (white?)
+.ea9d	88		dey			DEY				;next column
+.ea9e	10 f5		bpl $ea95		BPL CLEARLP			;$EA95 done? No, loop.
+.eaa0	60		rts			RTS				;exit
+.eaa1					PRNSCR
+.eaa1	a8		tay			TAY				;save character
+.eaa2	a9 02		lda #$02		LDA #$02			;blink cursor
+.eaa4	85 cd		sta $cd			STA BLNCT			;set blink counter at repeat
+.eaa6	20 b2 ea	jsr $eab2		JSR CCOLRAM
+.eaa9	98		tya			TYA				;restore character
+.eaaa					PRNSCR1
+.eaaa	a4 d3		ldy $d3			LDY CSRIDX			;get column
+.eaac	91 d1		sta ($d1),y		STA (LINPTR),Y			;write caracter...
+.eaae	8a		txa			TXA
+.eaaf	91 f3		sta ($f3),y		STA (COLRPT),Y			;...then color
+.eab1	60		rts			RTS				;return
+.eab2					CCOLRAM
+.eab2	a5 d1		lda $d1			LDA LINPTR			;get ptr to screen RAM LSB
+.eab4	85 f3		sta $f3			STA COLRPT			;save it as color LSB
+.eab6	a5 d2		lda $d2			LDA LINPTR+1			;get screen RAM MSB
+.eab8	29 03		and #$03		AND #%00000011			;$03	twiddle
+.eaba	09 94		ora #$94		ORA #%10010100			;$94
+.eabc	85 f4		sta $f4			STA COLRPT+1			;save as color ptr MSB
+.eabe	60		rts			RTS				;exit
+.eabf					IRQVEC
+.eabf	20 ea ff	jsr $ffea		JSR UDTIM			;update clock F734
+.eac2	a5 cc		lda $cc			LDA BLNSW			;in blink phase?
+.eac4	d0 29		bne $eaef		BNE IRQVEC2			;$EAEF no, skip blink
+.eac6	c6 cd		dec $cd			DEC BLNCT			;decrement blink count
+.eac8	d0 25		bne $eaef		BNE IRQVEC2			;$EAEF not reached 0, so do cass stuff
+.eaca	a9 14		lda #$14		LDA #$14			;reset blink timer to 20ms
+.eacc	85 cd		sta $cd			STA BLNCT
+.eace	a4 d3		ldy $d3			LDY CSRIDX			;cursor column
+.ead0	46 cf		lsr $cf			LSR BLNON			;blink switch
+.ead2	ae 87 02	ldx $0287		LDX CSRCLR			;color under cursor
+.ead5	b1 d1		lda ($d1),y		LDA (LINPTR),Y			;set character code
+.ead7	b0 11		bcs $eaea		BCS IRQVEC1			;$EAEA blink already on, so continue
+.ead9	e6 cf		inc $cf			INC BLNON			;switch on
+.eadb	85 ce		sta $ce			STA GDBLN			;save char under cursor
+.eadd	20 b2 ea	jsr $eab2		JSR CCOLRAM			;get ptr to color RAM
+.eae0	b1 f3		lda ($f3),y		LDA (COLRPT),Y			;get color code
+.eae2	8d 87 02	sta $0287		STA CSRCLR			;save it
+.eae5	ae 86 02	ldx $0286		LDX CLCODE			;get color under cursor
+.eae8	a5 ce		lda $ce			LDA GDBLN			;get char again
+.eaea					IRQVEC1
+.eaea	49 80		eor #$80		EOR #%10000000			;update cursor
+.eaec	20 aa ea	jsr $eaaa		JSR PRNSCR1			;set char and color
+.eaef					IRQVEC2
+.eaef	ad 1f 91	lda $911f		LDA VV911F			;get I/O bitmap
+.eaf2	29 40		and #$40		AND #%01000000			;$40 is cass switch pressed?
+.eaf4	f0 0b		beq $eb01		BEQ IRQVEC3			;$EB01 no, turn drive off
+.eaf6	a0 00		ldy #$00		LDY #$00
+.eaf8	84 c0		sty $c0			STY CAS1			;zero motor interlock flag
+.eafa	ad 1c 91	lda $911c		LDA VV911C			;cass motor control
+.eafd	09 02		ora #$02		ORA #%00000010			;$02 set motor on
+.eaff	d0 09		bne $eb0a		BNE IRQVEC4			;$EB0A save motor status
+.eb01					IRQVEC3
+.eb01	a5 c0		lda $c0			LDA CAS1			;get interlock flag
+.eb03	d0 0d		bne $eb12		BNE IRQVEC5			;$EB12 yes, skip update
+.eb05	ad 1c 91	lda $911c		LDA VV911C			;cass motor control
+.eb08	29 fd		and #$fd		AND #%11111101			;$FD set motor off
+.eb0a					IRQVEC4
+.eb0a	2c 1e 91	bit $911e		BIT VV911E			;IER
+.eb0d	70 03		bvs $eb12		BVS IRQVEC5			;$EB12 timer 1 enabled? Yes, branch
+.eb0f	8d 1c 91	sta $911c		STA VV911C			;set motor status
+.eb12					IRQVEC5
+.eb12	20 1e eb	jsr $eb1e		JSR ISCNKY			;Eb1E scan keyboard
+.eb15	2c 24 91	bit $9124		BIT VV9124			;9124 D2T1 latch lsb
+.eb18	68		pla			PLA
+.eb19	a8		tay			TAY
+.eb1a	68		pla			PLA
+.eb1b	aa		tax			TAX
+.eb1c	68		pla			PLA
+.eb1d	40		rti			RTI
+.eb1e					ISCNKY
+.eb1e	a9 00		lda #$00		LDA #$00
+.eb20	8d 8d 02	sta $028d		STA SHFTFL
+.eb23	a0 40		ldy #$40		LDY #$40
+.eb25	84 cb		sty $cb			STY KEYDN
+.eb27	8d 20 91	sta $9120		STA VV9120
+.eb2a	ae 21 91	ldx $9121		LDX VV9121
+.eb2d	e0 ff		cpx #$ff		CPX #$FF
+.eb2f	f0 5e		beq $eb8f		BEQ PROCK1A			;$EB8F
+.eb31	a9 fe		lda #$fe		LDA #$FE
+.eb33	8d 20 91	sta $9120		STA VV9120
+.eb36	a0 00		ldy #$00		LDY #$00
+.eb38	a9 5e		lda #$5e		LDA #$5E ;#$EA 			;FIXUP2+2;#$5E
+.eb3a	85 f5		sta $f5			STA KEYTAB
+.eb3c	a9 ec		lda #$ec		LDA #$EC ;#$EA 			;FIXUP2+3;#$EC
+.eb3e	85 f6		sta $f6			STA KEYTAB+1
+.eb40					ISCKLP1
+.eb40	a2 08		ldx #$08		LDX #$08
+.eb42	ad 21 91	lda $9121		LDA VV9121
+.eb45	cd 21 91	cmp $9121		CMP VV9121
+.eb48	d0 f6		bne $eb40		BNE ISCKLP1			;$EB40
+.eb4a					ISCKLP2
+.eb4a	4a		lsr a			LSR A
+.eb4b	b0 16		bcs $eb63		BCS ISCNK1+3			;$EB63
+.eb4d	48		pha			PHA
+.eb4e	b1 f5		lda ($f5),y		LDA (KEYTAB),Y
+.eb50	c9 05		cmp #$05		CMP #$05
+.eb52	b0 0c		bcs $eb60		BCS ISCNK1			;$EB60
+.eb54	c9 03		cmp #$03		CMP #$03
+.eb56	f0 08		beq $eb60		BEQ ISCNK1			;$EB60
+.eb58	0d 8d 02	ora $028d		ORA SHFTFL
+.eb5b	8d 8d 02	sta $028d		STA SHFTFL
+.eb5e	10 02		bpl $eb62		BPL ISCNK1+2			;$EB62
+.eb60					ISCNK1
+.eb60	84 cb		sty $cb			STY KEYDN
+.eb62	68		pla			PLA
+.eb63	c8		iny			INY
+.eb64	c0 41		cpy #$41		CPY #$41
+.eb66	b0 09		bcs $eb71		BCS ISCNEXIT			;$EB71
+.eb68	ca		dex			DEX
+.eb69	d0 df		bne $eb4a		BNE ISCKLP2			;$EB4A
+.eb6b	38		sec			SEC
+.eb6c	2e 20 91	rol $9120		ROL VV9120
+.eb6f	d0 cf		bne $eb40		BNE ISCKLP1			;$EB40
+.eb71					ISCNEXIT
+.eb71	6c 8f 02	jmp ($028f)		JMP (FCEVAL)
+.eb74					PROCKY
+.eb74	a4 cb		ldy $cb			LDY KEYDN
+.eb76	b1 f5		lda ($f5),y		LDA (KEYTAB),Y
+.eb78	aa		tax			TAX
+.eb79	c4 c5		cpy $c5			CPY CURKEY
+.eb7b	f0 07		beq $eb84		BEQ PROCK1			;$EB84
+.eb7d	a0 10		ldy #$10		LDY #$10
+.eb7f	8c 8c 02	sty $028c		STY KRPTDL
+.eb82	d0 36		bne $ebba		BNE PROCK4			;$EBBA
+.eb84					PROCK1
+.eb84	29 7f		and #$7f		AND #%01111111			;$7F
+.eb86	2c 8a 02	bit $028a		BIT KEYRPT
+.eb89	30 16		bmi $eba1		BMI PROCK2			;$EBA1
+.eb8b	70 49		bvs $ebd6		BVS PROCK5			;$EBD6
+.eb8d	c9 7f		cmp #$7f		CMP #$7F
+.eb8f					PROCK1A
+.eb8f	f0 29		beq $ebba		BEQ PROCK4			;$EBBA
+.eb91	c9 14		cmp #$14		CMP #$14
+.eb93	f0 0c		beq $eba1		BEQ PROCK2			;$EBA1
+.eb95	c9 20		cmp #$20		CMP #$20
+.eb97	f0 08		beq $eba1		BEQ PROCK2			;$EBA1
+.eb99	c9 1d		cmp #$1d		CMP #$1D
+.eb9b	f0 04		beq $eba1		BEQ PROCK2			;$EBA1
+.eb9d	c9 11		cmp #$11		CMP #$11
+.eb9f	d0 35		bne $ebd6		BNE PROCK5			;$EBD6
+.eba1					PROCK2
+.eba1	ac 8c 02	ldy $028c		LDY KRPTDL
+.eba4	f0 05		beq $ebab		BEQ PROCK3			;$EBAB
+.eba6	ce 8c 02	dec $028c		DEC KRPTDL
+.eba9	d0 2b		bne $ebd6		BNE PROCK5			;$EBD6
+.ebab					PROCK3
+.ebab	ce 8b 02	dec $028b		DEC KRPTSP
+.ebae	d0 26		bne $ebd6		BNE PROCK5			;$EBD6
+.ebb0	a0 04		ldy #$04		LDY #$04
+.ebb2	8c 8b 02	sty $028b		STY KRPTSP
+.ebb5	a4 c6		ldy $c6			LDY KEYCNT
+.ebb7	88		dey			DEY
+.ebb8	10 1c		bpl $ebd6		BPL PROCK5			;$EBD6
+.ebba					PROCK4
+.ebba	a4 cb		ldy $cb			LDY KEYDN
+.ebbc	84 c5		sty $c5			STY CURKEY
+.ebbe	ac 8d 02	ldy $028d		LDY SHFTFL
+.ebc1	8c 8e 02	sty $028e		STY LSSHFT
+.ebc4	e0 ff		cpx #$ff		CPX #$FF
+.ebc6	f0 0e		beq $ebd6		BEQ PROCK5			;$EBD6
+.ebc8	8a		txa			TXA
+.ebc9	a6 c6		ldx $c6			LDX KEYCNT
+.ebcb	ec 89 02	cpx $0289		CPX KBMAXL
+.ebce	b0 06		bcs $ebd6		BCS PROCK5			;$EBD6
+.ebd0	9d 77 02	sta $0277,x		STA KBUFFR,X
+.ebd3	e8		inx			INX
+.ebd4	86 c6		stx $c6			STX KEYCNT
+.ebd6					PROCK5
+.ebd6	a9 f7		lda #$f7		LDA #$F7
+.ebd8	8d 20 91	sta $9120		STA VV9120
+.ebdb	60		rts			RTS
+.ebdc					SHEVAL
+.ebdc	ad 8d 02	lda $028d		LDA SHFTFL
+.ebdf	c9 03		cmp #$03		CMP #$03
+.ebe1	d0 2c		bne $ec0f		BNE PROCK6A			;$EC0F
+.ebe3	cd 8e 02	cmp $028e		CMP LSSHFT
+.ebe6	f0 ee		beq $ebd6		BEQ PROCK5			;$EBD6
+.ebe8	ad 91 02	lda $0291		LDA SHMODE
+.ebeb	30 56		bmi $ec43		BMI PROCKEX			;$EC43
+>ebed	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>ebf5	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>ebfd	ea ea ea				.byte $ea, $ea, $ea
+.ec00	ad 05 90	lda $9005		LDA VV9005
+.ec03	49 02		eor #$02		EOR #%00000010			;$02
+.ec05	8d 05 90	sta $9005		STA VV9005
+>ec08	ea ea ea ea				.byte $ea, $ea, $ea, $ea
+.ec0c					PROCK6
+.ec0c	4c 43 ec	jmp $ec43		JMP PROCKEX			;$EC43
+.ec0f					PROCK6A
+.ec0f	0a		asl a			ASL A
+.ec10	c9 08		cmp #$08		CMP #$08
+.ec12	90 04		bcc $ec18		BCC *+6				;$EC1B
+.ec14	a9 06		lda #$06		LDA #$06
+>ec16	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>ec1e	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>ec26	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>ec2e	ea ea ea ea ea ea ea ea			.byte $ea, $ea, $ea, $ea, $ea, $ea, $ea, $ea
+>ec36	ea ea					.byte $ea, $ea
+.ec38	aa		tax			TAX
+.ec39	bd 46 ec	lda $ec46,x		LDA KDECOD,X
+.ec3c	85 f5		sta $f5			STA KEYTAB
+.ec3e	bd 47 ec	lda $ec47,x		LDA KDECOD+1,X
+.ec41	85 f6		sta $f6			STA KEYTAB+1
+.ec43					PROCKEX
+.ec43	4c 74 eb	jmp $eb74		JMP PROCKY
+.ec46					KDECOD
+>ec46	5e ec					.word KDECD1			;$EC5E Unshifted
+>ec48	9f ec					.word KDECD2			;$EC9F Shifted
+>ec4a	e0 ec					.word KDECD3			;$ECE0 Commodore
+>ec4c	a3 ed					.word KDECD5			;$EDA3 Control
+>ec4e	5e ec					.word KDECD1			;$EC5E Unshifted
+>ec50	9f ec					.word KDECD2			;$EC9F Shifted
+>ec52	69 ed					.word KDECD4			;$ED69 Shfited
+>ec54	a3 ed					.word KDECD5			;$EDA3 Control
+>ec56	21 ed					.word GRTXTF			;$ED21 Graphics/text control
+>ec58	69 ed					.word KDECD4			;$ED69 Shifted
+>ec5a	69 ed					.word KDECD4			;$ED69 Shifted
+>ec5c	a3 ed					.word KDECD5			;$EDA3 Control
+.ec5e					KDECD1
+>ec5e	31 33 35 37 39 2b 5c 14			.byte $31, $33, $35, $37, $39, $2B, $5C, $14	;col 0
+>ec66	5f 57 52 59 49 50 2a 0d			.byte $5F, $57, $52, $59, $49, $50, $2A, $0D	;col 1
+>ec6e	04 41 44 47 4a 4c 3b 1d			.byte $04, $41, $44, $47, $4A, $4C, $3B, $1D	;col 2
+>ec76	03 01 58 56 4e 2c 2f 11			.byte $03, $01, $58, $56, $4E, $2C, $2F, $11	;col 3
+>ec7e	20 5a 43 42 4d 2e 01 85			.byte $20, $5A, $43, $42, $4D, $2E, $01, $85 	;col 4
+>ec86	02 53 46 48 4b 3a 3d 86			.byte $02, $53, $46, $48, $4B, $3A, $3D, $86	;col 5
+>ec8e	51 45 54 55 4f 40 5e 87			.byte $51, $45, $54, $55, $4F, $40, $5E, $87	;col 6
+>ec96	32 34 36 38 30 2d 13 88			.byte $32, $34, $36, $38, $30, $2D, $13, $88	;col 7
+>ec9e	ff					.byte $FF						; EOT
+.ec9f					KDECD2
+>ec9f	21 23 25 27 29				.byte $21, $23, $25, $27, $29
+>eca4	db a9 94 5f d7 d2 d9 c9			.byte $DB, $A9, $94, $5F, $D7, $D2, $D9, $C9
+>ecac	d0 c0 8d 04 c1 c4 c7 ca			.byte $D0, $C0, $8D, $04, $C1, $C4, $C7, $CA
+>ecb4	cc 5d 9d 83 01 d8 d6 ce			.byte $CC, $5D, $9D, $83, $01, $D8, $D6, $CE
+>ecbc	3c 3f 91 a0 da c3 c2 cd			.byte $3C, $3F, $91, $A0, $DA, $C3, $C2, $CD
+>ecc4	3e 01 89 02 d3 c6 c8 cb			.byte $3E, $01, $89, $02, $D3, $C6, $C8, $CB
+>eccc	5b 3d 8a d1 c5 d4 d5 cf			.byte $5B, $3D, $8A, $D1, $C5, $D4, $D5, $CF
+>ecd4	ba de 8b 22 24 26 28 30			.byte $BA, $DE, $8B, $22, $24, $26, $28, $30
+>ecdc	dd 93 8c ff				.byte $DD, $93, $8C, $FF
+.ece0					KDECD3
+>ece0	21 23 25 27				.byte $21, $23, $25, $27
+>ece4	29 a6 a8 94 5f b3 b2 b7			.byte $29, $A6, $A8, $94, $5F, $B3, $B2, $B7
+>ecec	a2 af df 8d 04 b0 ac a5			.byte $A2, $AF, $DF, $8D, $04, $B0, $AC, $A5
+>ecf4	b5 b6 5d 9d 83 01 bd be			.byte $B5, $B6, $5D, $9D, $83, $01, $BD, $BE
+>ecfc	aa 3c 3f 91 a0 ad bc bf			.byte $AA, $3C, $3F, $91, $A0, $AD, $BC, $BF
+>ed04	a7 3e 01 89 02 ae bb b4			.byte $A7, $3E, $01, $89, $02, $AE, $BB, $B4
+>ed0c	a1 5b 3d 8a ab b1 a3 b8			.byte $A1, $5B, $3D, $8A, $AB, $B1, $A3, $B8
+>ed14	b9 a4 de 8b 22 24 26 28			.byte $B9, $A4, $DE, $8B, $22, $24, $26, $28
+>ed1c	30 dc 93 8c ff				.byte $30, $DC, $93, $8C, $FF
+.ed21					GRTXTF
+.ed21	c9 0e		cmp #$0e		cmp #$0e
+.ed23	d0 0b		bne $ed30		bne G1				; +09
+.ed25	a9 02		lda #$02		lda #$02
+.ed27	0d 05 90	ora $9005		ora VV9005
+.ed2a	8d 05 90	sta $9005		sta VV9005
+.ed2d	4c dc e6	jmp $e6dc		jmp CMD42A
+.ed30					G1
+.ed30	c9 8e		cmp #$8e		cmp #$8E
+.ed32	d0 0b		bne $ed3f		bne G2
+.ed34					G1A
+.ed34	a9 fd		lda #$fd		lda #$fd
+.ed36	2d 05 90	and $9005		and VV9005
+.ed39	8d 05 90	sta $9005		sta VV9005
+.ed3c					G1A1
+.ed3c	4c dc e6	jmp $e6dc		jmp CMD42A
+.ed3f					G2
+.ed3f	c9 08		cmp #$08		cmp #$08
+.ed41	d0 0a		bne $ed4d		bne G3
+.ed43	a9 80		lda #$80		lda #$80
+.ed45	0d 91 02	ora $0291		ora SHMODE
+.ed48	8d 91 02	sta $0291		sta SHMODE
+.ed4b	30 ef		bmi $ed3c		bmi G1A1			;$-ef
+.ed4d					G3
+.ed4d	c9 09		cmp #$09		cmp #$09
+.ed4f	d0 eb		bne $ed3c		bne G1A1			;$-eb
+.ed51	a9 7f		lda #$7f		lda #%01111111			;$7f
+.ed53	2d 91 02	and $0291		and SHMODE
+.ed56	8d 91 02	sta $0291		sta SHMODE
+.ed59	10 e1		bpl $ed3c		bpl G1A1			;$-e1
+.ed5b					G4
+.ed5b	e8		inx			inx
+.ed5c					GRTX2
+.ed5c	b5 d9		lda $d9,x		lda SLLTBL,x
+.ed5e	09 80		ora #$80		ora #%10000000			;$80
+.ed60	95 d9		sta $d9,x		sta SLLTBL,x
+.ed62	ca		dex			dex
+.ed63	a5 d5		lda $d5			lda LINLEN
+.ed65	18		clc			clc
+.ed66	4c 15 e7	jmp $e715		jmp CSRMIN			;$e715
+.ed69					KDECD4
+>ed69	ff ff ff				.byte $FF, $FF, $FF
+>ed6c	ff ff ff ff ff ff 04 ff			.byte $FF, $FF, $FF, $FF, $FF, $FF, $04, $FF
+>ed74	ff ff ff ff e2 9d 83 01			.byte $FF, $FF, $FF, $FF, $E2, $9D, $83, $01
+>ed7c	ff ff ff ff ff 91 a0 ff			.byte $FF, $FF, $FF, $FF, $FF, $91, $A0, $FF
+>ed84	ff ff ff ee 01 89 02 ff			.byte $FF, $FF, $FF, $EE, $01, $89, $02, $FF
+>ed8c	ff ff ff e1 fd 8a ff ff			.byte $FF, $FF, $FF, $E1, $FD, $8A, $FF, $FF
+>ed94	ff ff ff b0 e0 8b f2 f4			.byte $FF, $FF, $FF, $B0, $E0, $8B, $F2, $F4
+>ed9c	f6 ff f0 ed 93 8c ff			.byte $F6, $FF, $F0, $ED, $93, $8C, $FF
+.eda3					KDECD5
+>eda3	90					.byte $90
+>eda4	1c 9c 1f 12 ff ff ff 06			.byte $1C, $9C, $1F, $12, $FF, $FF, $FF, $06
+>edac	ff 12 ff ff ff ff ff ff			.byte $FF, $12, $FF, $FF, $FF, $FF, $FF, $FF
+>edb4	ff ff ff ff ff ff ff ff			.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+>edbc	ff ff ff ff ff ff ff ff			.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+>edc4	ff ff ff ff ff ff ff ff			.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+>edcc	ff ff ff ff ff ff ff ff			.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+>edd4	ff ff ff ff ff ff ff 05			.byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $05
+>eddc	9f 1e 9e 92 ff ff ff ff			.byte $9F, $1E, $9E, $92, $FF, $FF, $FF, $FF
+.ede4					VICSUP
+>ede4	0c					.byte $0C ;$05	;bit7 interlace, 6-0 HCenter
+>ede5	26					.byte $26 ;$19	;VCenter
+>ede6	16					.byte $16	;bit7=video address, 6-0 #rcols
+>ede7	2e					.byte $2E	;bit6-1=#rows, bit0=8x8 or 16x8 chars
+>ede8	00					.byte $00	;current TV raster beam line
+>ede9	c0					.byte $C0	;bit0-3 start of char memory
+>edea	00					.byte $00	;Hpos of light pen
+>edeb	00					.byte $00	;Vpos of light pen
+>edec	00					.byte $00 ;Digitized value of paddle X /EDEC
+>eded	00					.byte $00 ;Digitized value of paddle Y
+>edee	00					.byte $00 ;Frequency for oscillator 1 (low)
+>edef	00					.byte $00 ;Frequency for oscillator 2 (medium)
+>edf0	00					.byte $00 ;Frequency for oscillator 3 (high)
+>edf1	00					.byte $00 ;Frequency of noise source
+>edf2	00					.byte $00 ; bit0-3 sets volume of all sound
+>edf3	1b					.byte $1B	;Screen and border color register
+.edf4					RUNSHF
+>edf4	4c 4f 41 44 0d 52 55 4e			.text "LOAD", $0D, "RUN", $0D
+>edfc	0d
+.edfd					LBSCAD
+>edfd	00 16 2c 42 58 6e 84 9a			.byte $00, $16, $2C, $42, $58, $6E, $84, $9A
+>ee05	b0 c6 dc f2 08 1e 34 4a			.byte $B0, $C6, $DC, $F2, $08, $1E, $34, $4A
+>ee0d	60 76 8c a2 b8 ce e4			.byte $60, $76, $8C, $A2, $B8, $CE, $E4
+.ee14					ITALK
+.ee14	09 40		ora #$40		ORA #%01000000			;$40 Bit6 = Talk address
+>ee16	2c					.byte $2C				;BIT $2009
+.ee17					ILISTN
+.ee17	09 20		ora #$20		ORA #%00100000			;$20 BIT5 = Listen address
+.ee19	20 60 f1	jsr $f160		JSR SBIDLE			;IEEE time-out
+.ee1c					LSNOIDLE
+.ee1c	48		pha			PHA				;save device address
+.ee1d	24 94		bit $94			BIT C3PO			;char waiting?
+.ee1f	10 0a		bpl $ee2b		BPL LISN1			;no, branch $EE2B
+.ee21	38		sec			SEC				;yes, output bit
+.ee22	66 a3		ror $a3			ROR SBITCF			;bit count
+.ee24	20 49 ee	jsr $ee49		JSR OTDSBU			;output
+.ee27	46 94		lsr $94			LSR C3PO			;go to next
+.ee29	46 a3		lsr $a3			LSR SBITCF
+.ee2b					LISN1
+.ee2b	68		pla			PLA				;restore device address
+.ee2c	85 95		sta $95			STA BSOUT			;save to xmit buffer
+.ee2e	20 a0 e4	jsr $e4a0		JSR SOUT1			;send DATA=1
+.ee31	c9 3f		cmp #$3f		CMP #%00111111			;$3F Data=0? 7-5=DATA 4=SRQ 3-1=CLK
+.ee33	d0 03		bne $ee38		BNE LISN2			;$EE38 no answer yet, send ATN
+.ee35	20 84 ef	jsr $ef84		JSR SCLK1			;send SCLK=1 answer
+.ee38					LISN2
+.ee38	ad 1f 91	lda $911f		LDA VV911F
+.ee3b	09 80		ora #$80		ORA #%10000000			;$80 set BIT7 = ATN
+.ee3d	8d 1f 91	sta $911f		STA VV911F
+.ee40					ILISTEX
+.ee40	20 8d ef	jsr $ef8d		JSR SCLK0			;send SCLK=0
+.ee43	20 a0 e4	jsr $e4a0		JSR SOUT1			;send DATA=1
+.ee46	20 96 ef	jsr $ef96		JSR DELAY			;wait
+.ee49					OTDSBU
+.ee49	78		sei			SEI				;kill interrupts
+.ee4a	20 a0 e4	jsr $e4a0		JSR SOUT1			;send DATA=1
+.ee4d	20 b2 e4	jsr $e4b2		JSR SDCLK			;wait for DATA to go low
+.ee50	4a		lsr a			LSR A				;still high?
+.ee51	b0 61		bcs $eeb4		BCS FLGERR			;yes, device not present
+.ee53	20 84 ef	jsr $ef84		JSR SCLK1			;got device ack, ack with CLK=1
+.ee56	24 a3		bit $a3			BIT SBITCF			;more bits?
+.ee58	10 0c		bpl $ee66		BPL OTDLP3			;$EE66 yes, skip EOI handler
+.ee5a					OTDLP1
+.ee5a	20 b2 e4	jsr $e4b2		JSR SDCLK			;wait for DIn=H
+.ee5d	4a		lsr a			LSR A				;roll data into carry
+.ee5e	90 fa		bcc $ee5a		BCC OTDLP1			;$EE5A
+.ee60					OTDLP2
+.ee60	20 b2 e4	jsr $e4b2		JSR SDCLK			;wait for DIn=L
+.ee63	4a		lsr a			LSR A				;roll data into carry
+.ee64	b0 fa		bcs $ee60		BCS OTDLP2			;$EE60
+.ee66					OTDLP3
+.ee66	20 b2 e4	jsr $e4b2		JSR SDCLK			;wait again for DIn=H
+.ee69	4a		lsr a			LSR A				;roll data into carry
+.ee6a	90 fa		bcc $ee66		BCC OTDLP3			;$EE66
+.ee6c	20 8d ef	jsr $ef8d		JSR SCLK0			;send CLK=0
+.ee6f	a9 08		lda #$08		LDA #$08			;bit counter
+.ee71	85 a5		sta $a5			STA CNTDN			;save as bit count-down
+.ee73					OTDLP4
+.ee73	ad 1f 91	lda $911f		LDA VV911F			;wait for idle
+.ee76	cd 1f 91	cmp $911f		CMP VV911F
+.ee79	d0 f8		bne $ee73		BNE OTDLP4			;$EE73
+.ee7b	4a		lsr a			LSR A
+.ee7c	4a		lsr a			LSR A				;not idle for 2 tests,
+.ee7d	90 38		bcc $eeb7		BCC FLGER03			;$EEB7 time-out error
+.ee7f	66 95		ror $95			ROR BSOUT			;get bit
+.ee81	b0 05		bcs $ee88		BCS OTDSB1			;$EE8B if 1, send DATA=1
+.ee83	20 a9 e4	jsr $e4a9		JSR SOUT0			;not 1, must be 0; DATA=0
+.ee86	d0 03		bne $ee8b		BNE OTDSB2			;$EE8B
+.ee88					OTDSB1
+.ee88	20 a0 e4	jsr $e4a0		JSR SOUT1			;send DATA=1
+.ee8b					OTDSB2
+.ee8b	20 84 ef	jsr $ef84		JSR SCLK1			;clock it out
+>ee8e	ea ea ea ea				.byte $EA, $EA, $EA, $EA
+.ee92	ad 2c 91	lda $912c		LDA VV912C			;get PCR
+.ee95	29 df		and #$df		AND #%11011111			;$DF DATA=1
+.ee97	09 02		ora #$02		ORA #%00000010			;$02 CLK=0
+.ee99	8d 2c 91	sta $912c		STA VV912C			;output it
+.ee9c	c6 a5		dec $a5			DEC CNTDN			;process next bit
+.ee9e	d0 d3		bne $ee73		BNE OTDLP4			;$EE73 loop
+.eea0	a9 04		lda #$04		LDA #$04			;set time-out
+.eea2	8d 29 91	sta $9129		STA VV9129
+.eea5					OTDLP5
+.eea5	ad 2d 91	lda $912d		LDA VV912D			;test timer
+.eea8	29 20		and #$20		AND #%00100000			;$20
+.eeaa	d0 0b		bne $eeb7		BNE FLGER03			;$EEB7 timed-out, buss timeout
+.eeac	20 b2 e4	jsr $e4b2		JSR SDCLK			;wait for DIn=L
+.eeaf	4a		lsr a			LSR A
+.eeb0	b0 f3		bcs $eea5		BCS OTDLP5			;$EEA5
+.eeb2	58		cli			CLI
+.eeb3	60		rts			RTS
+.eeb4					FLGERR
+.eeb4	a9 80		lda #$80		LDA #$80			; Error $80 - device not present
+>eeb6	2c					.byte $2C
+.eeb7					FLGER03
+.eeb7	a9 03		lda #$03		LDA #$03			; Error $03 - write timeout
+.eeb9	20 6a fe	jsr $fe6a		JSR ISETMS1			;$FE6A set status
+.eebc	58		cli			CLI
+.eebd	18		clc			CLC
+.eebe	90 49		bcc $ef09		BCC IUNLSN+5			;$EF09
+.eec0					ISECND
+.eec0	85 95		sta $95			STA BSOUT			;save secondary address
+.eec2	20 40 ee	jsr $ee40		JSR ILISTEX			;$EE40 output with ATN
+.eec5					CLRATN
+.eec5	ad 1f 91	lda $911f		LDA VV911F			;release ATN
+.eec8	29 7f		and #$7f		AND #%01111111			;$7F
+.eeca	8d 1f 91	sta $911f		STA VV911F
+.eecd	60		rts			RTS
+.eece					ITKSA
+.eece	85 95		sta $95			STA BSOUT     			;save secondary address to xmit
+.eed0	20 40 ee	jsr $ee40		JSR ILISTEX			;$EE40 output with ATN
+.eed3					CLKWAIT
+.eed3	78		sei			SEI				;kill interrupts
+.eed4	20 a9 e4	jsr $e4a9		JSR SOUT0			;DATA=0
+.eed7	20 c5 ee	jsr $eec5		JSR CLRATN			;clear ATN
+.eeda	20 84 ef	jsr $ef84		JSR SCLK1			;CLK=1
+.eedd					CLKWAIT1
+.eedd	20 b2 e4	jsr $e4b2		JSR SDCLK			;wait for CLK=0
+.eee0	b0 fb		bcs $eedd		BCS CLKWAIT1			;$EEDD
+.eee2	58		cli			CLI
+.eee3	60		rts			RTS
+.eee4					ICIOUT
+.eee4	24 94		bit $94			BIT C3PO       			;deferred character?
+.eee6	30 05		bmi $eeed		BMI ICIOUT1			;$EEED no, send it now
+.eee8	38		sec			SEC
+.eee9	66 94		ror $94			ROR C3PO
+.eeeb	d0 05		bne $eef2		BNE ICIOUT2			;$EEF2	send it later
+.eeed					ICIOUT1
+.eeed	48		pha			PHA				;save byte
+.eeee	20 49 ee	jsr $ee49		JSR OTDSBU			;send it immediately
+.eef1	68		pla			PLA				;restore it
+.eef2					ICIOUT2
+.eef2	85 95		sta $95			STA BSOUT			;deferred character
+.eef4	18		clc			CLC
+.eef5	60		rts			RTS
+.eef6					IUNTLK
+.eef6	20 8d ef	jsr $ef8d		JSR SCLK0			;CLK=0
+.eef9	ad 1f 91	lda $911f		LDA VV911F
+.eefc	09 80		ora #$80		ORA #%10000000			;$80 send ATN
+.eefe	8d 1f 91	sta $911f		STA VV911F
+.ef01	a9 5f		lda #$5f		LDA #$5F			;entry 1
+>ef03	2c					.byte $2C				;really BIT $3FA9 to skip EF04
+.ef04					IUNLSN
+.ef04	a9 3f		lda #$3f		LDA #$3F			;entry 2
+.ef06	20 1c ee	jsr $ee1c		JSR LSNOIDLE			;$EE1C send UNLSTN; skip idle test
+.ef09	20 c5 ee	jsr $eec5		JSR CLRATN			;clear ATN
+.ef0c	8a		txa			TXA
+.ef0d	a2 0b		ldx #$0b		LDX #$0B			;pause loop (40ms)
+.ef0f					IUNLP1
+.ef0f	ca		dex			DEX
+.ef10	d0 fd		bne $ef0f		BNE IUNLP1			;$EF0F pause
+.ef12	aa		tax			TAX
+.ef13	20 84 ef	jsr $ef84		JSR SCLK1			;CLK=1
+.ef16	4c a0 e4	jmp $e4a0		JMP SOUT1			;DATA=1
+.ef19					IACPTR
+.ef19	78		sei			SEI           			;kill interrupts
+.ef1a	a9 00		lda #$00		LDA #$00
+.ef1c	85 a5		sta $a5			STA CNTDN			;zero-out bit count
+.ef1e	20 84 ef	jsr $ef84		JSR SCLK1			;assert CLK
+.ef21					IACPLP1
+.ef21	20 b2 e4	jsr $e4b2		JSR SDCLK
+.ef24	90 fb		bcc $ef21		BCC IACPLP1			;$EF21
+.ef26	20 a0 e4	jsr $e4a0		JSR SOUT1
+.ef29					IACPTR1
+.ef29	a9 01		lda #$01		LDA #$01
+.ef2b	8d 29 91	sta $9129		STA VV9129
+.ef2e					IACPLP2
+.ef2e	ad 2d 91	lda $912d		LDA VV912D
+.ef31	29 20		and #$20		AND #%00100000			;$20
+.ef33	d0 07		bne $ef3c		BNE IACPTR2			;$EF3C
+.ef35	20 b2 e4	jsr $e4b2		JSR SDCLK
+.ef38	b0 f4		bcs $ef2e		BCS IACPLP2			;$EF2E
+.ef3a	90 18		bcc $ef54		BCC IACPTR3A			;$EF54
+.ef3c					IACPTR2
+.ef3c	a5 a5		lda $a5			LDA CNTDN
+.ef3e	f0 05		beq $ef45		BEQ IACPTR3			;$EF45
+.ef40	a9 02		lda #$02		LDA #$02			;set eerror code to 2
+.ef42	4c b9 ee	jmp $eeb9		JMP FLGER03+2			;$EEB9
+.ef45					IACPTR3
+.ef45	20 a9 e4	jsr $e4a9		JSR SOUT0
+.ef48	20 0c ef	jsr $ef0c		JSR IUNLSN+8			;$EF0C
+.ef4b	a9 40		lda #$40		LDA #$40			;EOF error
+.ef4d	20 6a fe	jsr $fe6a		JSR ISETMS+4			;$FE6A
+.ef50	e6 a5		inc $a5			INC CNTDN
+.ef52	d0 d5		bne $ef29		BNE IACPTR1			;$EF29
+.ef54					IACPTR3A
+.ef54	a9 08		lda #$08		LDA #$08
+.ef56					IACPLP3
+.ef56	85 a5		sta $a5			STA CNTDN			;set bit count
+.ef58					IACPLP4
+.ef58	ad 1f 91	lda $911f		LDA VV911F
+.ef5b	cd 1f 91	cmp $911f		CMP VV911F
+.ef5e	d0 f8		bne $ef58		BNE IACPLP4			;$EF56
+.ef60	4a		lsr a			LSR A
+.ef61	90 f5		bcc $ef58		BCC IACPLP4			;$EF58
+.ef63	4a		lsr a			LSR A
+.ef64	66 a4		ror $a4			ROR CYCLE
+.ef66					IACPLP5
+.ef66	ad 1f 91	lda $911f		LDA VV911F
+.ef69	cd 1f 91	cmp $911f		CMP VV911F
+.ef6c	d0 f8		bne $ef66		BNE IACPLP5			;$EF66
+.ef6e	4a		lsr a			LSR A
+.ef6f	b0 f5		bcs $ef66		BCS IACPLP5			;$EF66
+.ef71	c6 a5		dec $a5			DEC CNTDN
+.ef73	d0 e3		bne $ef58		BNE IACPLP4			;$EF58
+.ef75	20 a9 e4	jsr $e4a9		JSR SOUT0
+.ef78	a5 90		lda $90			LDA CSTAT
+.ef7a	f0 03		beq $ef7f		BEQ IACPEX			;$EF7F
+.ef7c	20 0c ef	jsr $ef0c		JSR IUNLSN+8
+.ef7f					IACPEX
+.ef7f	a5 a4		lda $a4			LDA CYCLE
+.ef81	58		cli			CLI
+.ef82	18		clc			CLC
+.ef83	60		rts			RTS
+.ef84					SCLK1
+.ef84	ad 2c 91	lda $912c		LDA VV912C			;PCR
+.ef87	29 fd		and #$fd		AND #%11111101			;$FD kill CA2
+.ef89	8d 2c 91	sta $912c		STA VV912C			;save it
+.ef8c	60		rts			RTS
+.ef8d					SCLK0
+.ef8d	ad 2c 91	lda $912c		LDA VV912C			;PCR
+.ef90	09 02		ora #$02		ORA #%00000010			;$02 assert CA2
+.ef92	8d 2c 91	sta $912c		STA VV912C			;save it
+.ef95	60		rts			RTS
+.ef96					DELAY
+.ef96	a9 04		lda #$04		LDA #$04			;set time-out counter
+.ef98	8d 29 91	sta $9129		STA VV9129
+.ef9b					DLYLOOP
+.ef9b	ad 2d 91	lda $912d		LDA VV912D			;IFR
+.ef9e	29 20		and #$20		AND #%00100000			;$20 time-out flagged?
+.efa0	f0 f9		beq $ef9b		BEQ DLYLOOP			;$EF9B no, loop
+.efa2	60		rts			RTS
+.efa3					SSEND
+.efa3	a5 b4		lda $b4			LDA BITTS
+.efa5	f0 47		beq $efee		BEQ SSNDN
+.efa7	30 3f		bmi $efe8		BMI SSEND1			;$EFE8
+.efa9	46 b6		lsr $b6			LSR RODATA
+.efab	a2 00		ldx #$00		LDX #$00
+.efad	90 01		bcc $efb0		BCC SSEND2			;$EFB0
+.efaf	ca		dex			DEX
+.efb0					SSEND2
+.efb0	8a		txa			TXA
+.efb1	45 bd		eor $bd			EOR ROPRTY
+.efb3	85 bd		sta $bd			STA ROPRTY
+.efb5	c6 b4		dec $b4			DEC BITTS
+.efb7	f0 06		beq $efbf		BEQ SSEND3			;$EFBF
+.efb9					SSEND2A
+.efb9	8a		txa			TXA
+.efba	29 20		and #$20		AND #%00100000			;$20
+.efbc	85 b5		sta $b5			STA NXTBIT
+.efbe	60		rts			RTS
+.efbf					SSEND3
+.efbf	a9 20		lda #$20		LDA #$20
+.efc1	2c 94 02	bit $0294		BIT M51CDR
+.efc4	f0 14		beq $efda		BEQ SSEND5			;$EFDA
+.efc6	30 1c		bmi $efe4		BMI SSEND7			;$EFE4
+.efc8	70 14		bvs $efde		BVS SSEND6			;$EFDE
+.efca	a5 bd		lda $bd			LDA ROPRTY
+.efcc	d0 01		bne $efcf		BNE SSEND4A			;$EFCF
+.efce					SSEND4
+.efce	ca		dex			DEX
+.efcf					SSEND4A
+.efcf	c6 b4		dec $b4			DEC BITTS
+.efd1	ad 93 02	lda $0293		LDA M51CTR
+.efd4	10 e3		bpl $efb9		BPL SSEND2A			;$EFB9
+.efd6	c6 b4		dec $b4			DEC BITTS
+.efd8	d0 df		bne $efb9		BNE SSEND2A			;$EFB9
+.efda					SSEND5
+.efda	e6 b4		inc $b4			INC BITTS
+.efdc	d0 f0		bne $efce		BNE SSEND4			;$EFCE
+.efde					SSEND6
+.efde	a5 bd		lda $bd			LDA ROPRTY
+.efe0	f0 ed		beq $efcf		BEQ SSEND4A			;$EFCF
+.efe2	d0 ea		bne $efce		BNE SSEND4			;$EFCE
+.efe4					SSEND7
+.efe4	70 e9		bvs $efcf		BVS SSEND4A			;$EFCF
+.efe6	50 e6		bvc $efce		BVC SSEND4			;$EFCE
+.efe8					SSEND1
+.efe8	e6 b4		inc $b4			INC BITTS
+.efea	a2 ff		ldx #$ff		LDX #$FF
+.efec	d0 cb		bne $efb9		BNE SSEND2A			;$EFB9
+.efee					SSNDN
+.efee	ad 94 02	lda $0294		LDA M51CDR
+.eff1	4a		lsr a			LSR A
+.eff2	90 07		bcc $effb		BCC SSNDN1			;$EFFB
+.eff4	2c 20 91	bit $9120		BIT VV9120
+.eff7	10 1d		bpl $f016		BPL DSRERR
+.eff9	50 1e		bvc $f019		BVC CTSERR
+.effb					SSNDN1
+.effb	a9 00		lda #$00		LDA #$00
+.effd	85 bd		sta $bd			STA ROPRTY
+.efff	85 b5		sta $b5			STA NXTBIT
+.f001	ae 98 02	ldx $0298		LDX BITNUM
+.f004	86 b4		stx $b4			STX BITTS
+.f006	ac 9d 02	ldy $029d		LDY RODBS
+.f009	cc 9e 02	cpy $029e		CPY RODBE
+.f00c	f0 13		beq $f021		BEQ DISTIM
+.f00e	b1 f9		lda ($f9),y		LDA (ROBUF),Y
+.f010	85 b6		sta $b6			STA RODATA
+.f012	ee 9d 02	inc $029d		INC RODBS
+.f015	60		rts			RTS
+.f016					DSRERR
+.f016	a9 40		lda #$40		LDA #%01000000			;$40 no DSR
+>f018	2c					.byte $2C				;bit $10a9
+.f019					CTSERR
+.f019	a9 10		lda #$10		LDA #%00010000			;$10 no CTS
+.f01b	0d 97 02	ora $0297		ORA RSSTAT			;set DSR/CTS status
+.f01e	8d 97 02	sta $0297		STA RSSTAT			;save it
+.f021					DISTIM
+.f021	a9 40		lda #$40		LDA #%01000000			;$40 disable timer
+.f023	8d 1e 91	sta $911e		STA VV911E
+.f026	60		rts			RTS
+.f027					BITCNT
+.f027	a2 09		ldx #$09		LDX #$09			;8+1 bits
+.f029	a9 20		lda #$20		LDA #$20
+.f02b	2c 93 02	bit $0293		BIT M51CTR			;control word
+.f02e	f0 01		beq $f031		BEQ BITCNT1			;$F031
+.f030	ca		dex			DEX				;.X= number of bits
+.f031					BITCNT1
+.f031	50 02		bvc $f035		BVC BITEXIT			;$F035
+.f033	ca		dex			DEX
+.f034	ca		dex			DEX
+.f035					BITEXIT
+.f035	60		rts			RTS
+.f036					SERRX
+.f036	a6 a9		ldx $a9			LDX RINONE
+.f038	d0 2e		bne $f068		BNE PROCSB
+.f03a	c6 a8		dec $a8			DEC BITCI
+.f03c	f0 31		beq $f06f		BEQ PROCSB1			;$F06F
+.f03e	30 0d		bmi $f04d		BMI SERRX1			;$F04D
+.f040	a5 a7		lda $a7			LDA INBIT
+.f042	45 ab		eor $ab			EOR RIPRTY
+.f044	85 ab		sta $ab			STA RIPRTY
+.f046	46 a7		lsr $a7			LSR INBIT
+.f048	66 aa		ror $aa			ROR RIDATA
+.f04a					SERRXEX
+.f04a	60		rts			RTS
+.f04b	c6 a8		dec $a8			DEC BITCI
+.f04d					SERRX1
+.f04d	a5 a7		lda $a7			LDA INBIT
+.f04f	f0 62		beq $f0b3		BEQ PRSBEX			;$F0B3
+.f051	ad 93 02	lda $0293		LDA M51CTR
+.f054	0a		asl a			ASL A
+.f055	a9 01		lda #$01		LDA #$01
+.f057	65 a8		adc $a8			ADC BITCI
+.f059	d0 ef		bne $f04a		BNE SERRXEX			;$F04A
+.f05b					RXSET
+.f05b	a9 90		lda #$90		LDA #$90
+.f05d	8d 1e 91	sta $911e		STA VV911E
+.f060	85 a9		sta $a9			STA RINONE
+.f062	a9 20		lda #$20		LDA #$20
+.f064	8d 1e 91	sta $911e		STA VV911E
+.f067	60		rts			RTS
+.f068					PROCSB
+.f068	a5 a7		lda $a7			LDA INBIT
+.f06a	d0 ef		bne $f05b		BNE RXSET
+.f06c	85 a9		sta $a9			STA RINONE
+.f06e	60		rts			RTS
+.f06f					PROCSB1
+.f06f	ac 9b 02	ldy $029b		LDY RIDBE
+.f072	c8		iny			INY
+.f073	cc 9c 02	cpy $029c		CPY RIDBS
+.f076	f0 2a		beq $f0a2		BEQ SBE04			;$F0A2
+.f078	8c 9b 02	sty $029b		STY RIDBE
+.f07b	88		dey			DEY
+.f07c	a5 aa		lda $aa			LDA RIDATA
+.f07e	ae 98 02	ldx $0298		LDX BITNUM
+.f081					PRSBLP1
+.f081	e0 09		cpx #$09		CPX #$09
+.f083	f0 04		beq $f089		BEQ PROCSB2			;$F089
+.f085	4a		lsr a			LSR A
+.f086	e8		inx			INX
+.f087	d0 f8		bne $f081		BNE PRSBLP1			;$F081
+.f089					PROCSB2
+.f089	91 f7		sta ($f7),y		STA (RIBUF),Y
+.f08b	a9 20		lda #$20		LDA #$20
+.f08d	2c 94 02	bit $0294		BIT M51CDR
+.f090	f0 b9		beq $f04b		BEQ SERRX1-2			;$F04B
+.f092	30 b6		bmi $f04a		BMI SERRXEX			;$F04A RTS
+.f094	a5 a7		lda $a7			LDA INBIT
+.f096	45 ab		eor $ab			EOR RIPRTY
+.f098	f0 03		beq $f09d		BEQ PROC_S1			;$F09D
+.f09a	70 ae		bvs $f04a		BVS SERRXEX			;$F04A
+>f09c	2c					.byte $2C
+.f09d					PROC_S1
+.f09d	50 ab		bvc $f04a		BVC SERRXEX			;BIT $A850 = BVC+A8 f14b
+.f09f					SBE01
+.f09f	a9 01		lda #$01		LDA #$01			;Parity error
+>f0a1	2c					.byte $2C
+.f0a2					SBE04
+.f0a2	a9 04		lda #$04		LDA #$04			;Receive buffer overrun
+>f0a4	2c					.byte $2C
+.f0a5					SBE80
+.f0a5	a9 80		lda #$80		LDA #$80			;Receiver BREAK received
+>f0a7	2c					.byte $2C
+.f0a8					SBE02
+.f0a8	a9 02		lda #$02		LDA #$02			;Framing error
+.f0aa	0d 97 02	ora $0297		ORA RSSTAT
+.f0ad	8d 97 02	sta $0297		STA RSSTAT
+.f0b0	4c 5b f0	jmp $f05b		JMP RXSET			;set RS232 error code
+.f0b3					PRSBEX
+.f0b3	a5 aa		lda $aa			LDA RIDATA
+.f0b5	d0 f1		bne $f0a8		BNE SBE02			;$F0A8
+.f0b7	f0 ec		beq $f0a5		BEQ SBE80			;$F0A5
+.f0b9	4c 96 f7	jmp $f796	JJF0B9 JMP IOERMS9			;$F796 "ILLEGAL DEVICE" error
+.f0bc					SSUBBT
+.f0bc	85 9a		sta $9a			STA OUTDEV
+.f0be	ad 94 02	lda $0294		LDA M51CDR
+.f0c1	4a		lsr a			LSR A
+.f0c2	90 27		bcc $f0eb		BCC SSRETC			;$F0EB return OK
+.f0c4	a9 02		lda #$02		LDA #$02
+.f0c6	2c 10 91	bit $9110		BIT VV9110
+.f0c9	10 1d		bpl $f0e8		BPL SSRETE			;$F0E8 return DSR error
+.f0cb	d0 1e		bne $f0eb		BNE SSRETC			;$F0EB
+.f0cd					SSLOOP1
+.f0cd	ad 1e 91	lda $911e		LDA VV911E
+.f0d0	29 30		and #$30		AND #%00110000			;$30
+.f0d2	d0 f9		bne $f0cd		BNE SSLOOP1			;$F0CD
+.f0d4					SSLOOP2
+.f0d4	2c 10 91	bit $9110		BIT VV9110
+.f0d7	70 fb		bvs $f0d4		BVS SSLOOP2			;$F0D4
+.f0d9	ad 10 91	lda $9110		LDA VV9110
+.f0dc	09 02		ora #$02		ORA #$02
+.f0de	8d 10 91	sta $9110		STA VV9110
+.f0e1					SSLOOP3
+.f0e1	2c 10 91	bit $9110		BIT VV9110
+.f0e4	70 05		bvs $f0eb		BVS SSRETC			;$F0EB
+.f0e6	30 f9		bmi $f0e1		BMI SSLOOP3			;$F0E1
+.f0e8					SSRETE
+.f0e8	20 16 f0	jsr $f016		JSR DSRERR			;set DSR error
+.f0eb					SSRETC
+.f0eb	18		clc			CLC
+.f0ec	60		rts			RTS
+.f0ed					SSENDB
+.f0ed	ac 9e 02	ldy $029e		LDY RODBE
+.f0f0	c8		iny			INY
+.f0f1	cc 9d 02	cpy $029d		CPY RODBS
+.f0f4	f0 f7		beq $f0ed		BEQ SSENDB
+.f0f6	8c 9e 02	sty $029e		STY RODBE
+.f0f9	88		dey			DEY
+.f0fa	91 f9		sta ($f9),y		STA (ROBUF),Y
+.f0fc	2c 1e 91	bit $911e		BIT VV911E
+.f0ff	50 01		bvc $f102		BVC SNDB1			;$F102
+.f101	60		rts			RTS
+.f102					SNDB1
+.f102	ad 99 02	lda $0299		LDA BAUDOF
+.f105	8d 14 91	sta $9114		STA VV9114
+.f108	ad 9a 02	lda $029a		LDA BAUDOF+1
+.f10b	8d 15 91	sta $9115		STA VV9114+1
+.f10e	a9 c0		lda #$c0		LDA #%11000000			;$C0
+.f110	8d 1e 91	sta $911e		STA VV911E
+.f113	4c ee ef	jmp $efee		JMP SSNDN
+.f116					SERINP
+.f116	85 99		sta $99			STA INDEV
+.f118	ad 94 02	lda $0294		LDA M51CDR
+.f11b	4a		lsr a			LSR A
+.f11c	90 28		bcc $f146		BCC SINPEX2			;$F146
+.f11e	29 08		and #$08		AND #%00001000			;$08
+.f120	f0 24		beq $f146		BEQ SINPEX2			;$F146
+.f122	a9 02		lda #$02		LDA #$02
+.f124	2c 10 91	bit $9110		BIT VV9110
+.f127	10 bf		bpl $f0e8		BPL SSRETE			;$F0E8 DSR error
+.f129	f0 19		beq $f144		BEQ SINRETC			;$F144
+.f12b					SINPLP1
+.f12b	2c 1e 91	bit $911e		BIT VV911E
+.f12e	70 fb		bvs $f12b		BVS SINPLP1			;$F12B
+.f130	ad 10 91	lda $9110		LDA VV9110
+.f133	29 fd		and #$fd		AND #%11111101			;$FD
+.f135	8d 10 91	sta $9110		STA VV9110
+.f138					SINLP2
+.f138	ad 10 91	lda $9110		LDA VV9110
+.f13b	29 04		and #$04		AND #%00000100			;$04
+.f13d	f0 f9		beq $f138		BEQ SINLP2			;$F138
+.f13f					SINPEX1
+.f13f	a9 90		lda #$90		LDA #%10010000			;$90
+.f141	8d 1e 91	sta $911e		STA VV911E
+.f144					SINRETC
+.f144	18		clc			CLC
+.f145	60		rts			RTS
+.f146					SINPEX2
+.f146	ad 1e 91	lda $911e		LDA VV911E
+.f149	29 30		and #$30		AND #%00110000			;$30
+.f14b	f0 f2		beq $f13f		BEQ SINPEX1			;$F13F
+.f14d	18		clc			CLC
+.f14e	60		rts			RTS
+.f14f					SERGET
+.f14f	ac 9c 02	ldy $029c		LDY RIDBS			;buffer pointer
+.f152	cc 9b 02	cpy $029b		CPY RIDBE
+.f155	f0 06		beq $f15d		BEQ SERGET1			;$F15D empty? Yes, exit
+.f157	b1 f7		lda ($f7),y		LDA (RIBUF),Y			;get byte from buffer
+.f159	ee 9c 02	inc $029c		INC RIDBS			;increment pointer
+.f15c	60		rts			RTS
+.f15d					SERGET1
+.f15d	a9 00		lda #$00		LDA #$00			;transfer 0 chars
+.f15f	60		rts			RTS
+.f160					SBIDLE
+.f160	48		pha			PHA				;save .A
+.f161	ad 1e 91	lda $911e		LDA VV911E			;get IER
+.f164	f0 0c		beq $f172		BEQ SBIDLEX			;$F172 no interrupts pending, exit
+.f166					SBIDLLP
+.f166	ad 1e 91	lda $911e		LDA VV911E			;get IER
+.f169	29 60		and #$60		AND #%01100000			;$60 T1 & T2
+.f16b	d0 f9		bne $f166		BNE SBIDLLP			;$F166
+.f16d	a9 10		lda #$10		LDA #%00010000			;$10 kill CB1 RS232
+.f16f	8d 1e 91	sta $911e		STA VV911E
+.f172					SBIDLEX
+.f172	68		pla			PLA
+.f173	60		rts			RTS
+.f174					KIOMSG
+>f174	0d 49 2f 4f 20 45 52 52			.text $0D, "I/O ERROR ", $A3			;0$00
+>f17c	4f 52 20 a3
+>f180	0d 53 45 41 52 43 48 49			.text $0D, "SEARCHING", $A0, "FOR", $A0		;0Ch
+>f188	4e 47 a0 46 4f 52 a0
+>f18f	0d 50 52 45 53 53 20 50			.text $0D, "PRESS PLAY ON TAP", $C5		;1Bh
+>f197	4c 41 59 20 4f 4e 20 54 41 50 c5
+>f1a2	50 52 45 53 53 20 52 45			.text "PRESS RECORD & PLAY ON TAP", $C5		;2Eh
+>f1aa	43 4f 52 44 20 26 20 50 4c 41 59 20 4f 4e 20 54
+>f1ba	41 50 c5
+>f1bd	0d 4c 4f 41 44 49 4e c7			.text $0D, "LOADIN", $C7				;49h
+>f1c5	0d 53 41 56 49 4e 47 a0			.text $0D, "SAVING", $A0				;51h
+>f1cd	0d 56 45 52 49 46 59 49			.text $0D, "VERIFYIN", $C7			;59h
+>f1d5	4e c7
+>f1d7	0d 46 4f 55 4e 44 a0			.text $0D, "FOUND", $A0				;63h
+>f1de	0d 4f 4b 8d				.text $0D, "OK", $8D				;6Ah
+.f1e2					DIRMSG
+.f1e2	24 9d		bit $9d			BIT CMDMOD			;programmed/direct?
+.f1e4	10 0d		bpl $f1f3		BPL MSGEXIT			;$F1F3 exit if programmed
+.f1e6					MSG
+.f1e6	b9 74 f1	lda $f174,y		LDA KIOMSG,Y			;
+.f1e9	08		php			PHP				;save character
+.f1ea	29 7f		and #$7f		AND #%01111111			;$7F clear character shift
+.f1ec	20 d2 ff	jsr $ffd2		JSR CHROUT			;output character
+.f1ef	c8		iny			INY				;increment
+.f1f0	28		plp			PLP
+.f1f1	10 f3		bpl $f1e6		BPL MSG				;loop
+.f1f3					MSGEXIT
+.f1f3	18		clc			CLC
+.f1f4	60		rts			RTS				;exit clear
+.f1f5					IGETIN
+.f1f5	a5 99		lda $99			LDA INDEV      			;input device
+.f1f7	d0 08		bne $f201		BNE IGET232			;$F201 not keyboard, check RS232
+.f1f9	a5 c6		lda $c6			LDA KEYCNT			;yes keyboard, get # of keys
+.f1fb	f0 6d		beq $f26a		BEQ GTSCEXC			;$F26A none, skip to tape & IEEE
+.f1fd	78		sei			SEI				;get chars from buffer
+.f1fe	4c cf e5	jmp $e5cf		JMP LP2
+.f201					IGET232
+.f201	c9 02		cmp #$02		CMP #$02			;input from RS-232?
+.f203	d0 18		bne $f21d		BNE CHINSCRN			;$F21D no, maybe screen
+.f205					IGETIN1
+.f205	84 97		sty $97			STY REGSAV			;get from RS232
+.f207	20 4f f1	jsr $f14f		JSR SERGET
+.f20a	a4 97		ldy $97			LDY REGSAV			;restore registers
+.f20c	18		clc			CLC
+.f20d	60		rts			RTS				;exit
+.f20e					ICHRIN
+.f20e	a5 99		lda $99			LDA INDEV			;get input device
+.f210	d0 0b		bne $f21d		BNE CHINSCRN			;$F21D not 0, must not be keyboard
+.f212	a5 d3		lda $d3			LDA CSRIDX			;keyboard input. Set input row/col
+.f214	85 ca		sta $ca			STA ICRCOL			;to current position
+.f216	a5 d6		lda $d6			LDA CURROW
+.f218	85 c9		sta $c9			STA ICRROW
+.f21a	4c 4f e6	jmp $e64f		JMP INSCR			;$E64F input from screen until <RET>
+.f21d					CHINSCRN
+.f21d	c9 03		cmp #$03		CMP #$03			;input from screen?
+.f21f	d0 09		bne $f22a		BNE ICHRIN1			;$F22A no, check next device range
+.f221	85 d0		sta $d0			STA INSRC			;set screen as source
+.f223	a5 d5		lda $d5			LDA LINLEN
+.f225	85 c8		sta $c8			STA EOLPTR
+.f227	4c 4f e6	jmp $e64f		JMP INSCR			;$E64F input until <RET>
+.f22a					ICHRIN1
+.f22a	b0 38		bcs $f264		BCS GTTSCH1			;$F264 device >3, must be IEEE
+.f22c	c9 02		cmp #$02		CMP #$02			;RS-232?
+.f22e	f0 3f		beq $f26f		BEQ GTSCHLP			;$F26F yes, process
+.f230	86 97		stx $97			STX REGSAV			;only device left is the tape drive
+.f232	20 50 f2	jsr $f250		JSR GTTSCH			;get character
+.f235	b0 16		bcs $f24d		BCS ICHREXIT			;$F24D
+.f237	48		pha			PHA
+.f238	20 50 f2	jsr $f250		JSR GTTSCH			;get char from tape
+.f23b	b0 0d		bcs $f24a		BCS ICHRIN3			;$F24A
+.f23d	d0 05		bne $f244		BNE ICHRIN2			;$F244 last one? No, branch
+.f23f	a9 40		lda #$40		LDA #%01000000			;$40 stat bit: EOF tape, EOI line IEEE
+.f241	20 6a fe	jsr $fe6a		JSR ISETMS+4			;$FE6A OR with CSTAT
+.f244					ICHRIN2
+.f244	c6 a6		dec $a6			DEC BUFPNT			;decrement tape buffer pointer
+.f246	a6 97		ldx $97			LDX REGSAV			;restore .X
+.f248	68		pla			PLA
+.f249	60		rts			RTS
+.f24a					ICHRIN3
+.f24a	aa		tax			TAX				;clean-up stack
+.f24b	68		pla			PLA
+.f24c	8a		txa			TXA				;character inputted
+.f24d					ICHREXIT
+.f24d	a6 97		ldx $97			LDX REGSAV			;restore .X
+.f24f	60		rts			RTS
+.f250					GTTSCH
+.f250	20 8a f8	jsr $f88a		JSR INCTPT			;increment pointer in tape buffer
+.f253	d0 0b		bne $f260		BNE GTTSCEX			;$F260 ptr <> #$C0 (not top of buffr?)
+.f255	20 c0 f8	jsr $f8c0		JSR TPREAD			;read block from tape
+.f258	b0 11		bcs $f26b		BCS GTSCEXC+1			;$F26B error, just return
+.f25a	a9 00		lda #$00		LDA #$00
+.f25c	85 a6		sta $a6			STA BUFPNT			;reset pointer to 0
+.f25e	f0 f0		beq $f250		BEQ GTTSCH			;$F250 loop
+.f260					GTTSCEX
+.f260	b1 b2		lda ($b2),y		LDA (TAPE1),Y			;return character from buffer at
+.f262	18		clc			CLC				;pointer location
+.f263	60		rts			RTS
+.f264					GTTSCH1
+.f264	a5 90		lda $90			LDA CSTAT			;any IEEE errors?
+.f266	f0 04		beq $f26c		BEQ GTTSCH2			;$F26C no, get next char from device
+.f268	a9 0d		lda #$0d		LDA #$0D			;yes, return <CR>
+.f26a					GTSCEXC
+.f26a	18		clc			CLC
+.f26b	60		rts			RTS			;exit
+.f26c					GTTSCH2
+.f26c	4c 19 ef	jmp $ef19		JMP IACPTR			;get next char from IEEE
+.f26f					GTSCHLP
+.f26f	20 05 f2	jsr $f205		JSR IGETIN1			;get from RS-232
+.f272	b0 05		bcs $f279		BCS GTSCEX2			;$F279 error? Yes, exit
+.f274	c9 00		cmp #$00		CMP #$00			;any chars to process?
+.f276	f0 f7		beq $f26f		BEQ GTSCHLP			;$F26F no, loop
+.f278	18		clc			CLC
+.f279					GTSCEX2
+.f279	60		rts			RTS				;exit
+.f27a					ICHROT
+.f27a	48		pha			PHA				;save character
+.f27b	a5 9a		lda $9a			LDA OUTDEV			;get output device
+.f27d	c9 03		cmp #$03		CMP #$03			;is it screen?
+.f27f	d0 04		bne $f285		BNE ONOTSCR			;$F285 no, skip
+.f281	68		pla			PLA				;yes, restore character and...
+.f282	4c 42 e7	jmp $e742		JMP OUTSCR			;send it to the screen
+.f285					ONOTSCR
+.f285	90 04		bcc $f28b		BCC OTIEEE			;$F28B <3, must be serial RS232
+.f287	68		pla			PLA				;restore character and...
+.f288	4c e4 ee	jmp $eee4		JMP ICIOUT			;send to IEEE
+.f28b					OTIEEE
+.f28b	c9 02		cmp #$02		CMP #$02			;RS-232?
+.f28d	f0 2a		beq $f2b9		BEQ OTRS232			;$F2B9 yes, send to RS232
+.f28f	68		pla			PLA				;must be tape. Restore character
+.f290					OTIEEE1
+.f290	85 9e		sta $9e			STA TPTR1			;process character to tape buffer
+.f292	48		pha			PHA				;save registers
+.f293	8a		txa			TXA
+.f294	48		pha			PHA
+.f295	98		tya			TYA
+.f296	48		pha			PHA
+.f297	20 8a f8	jsr $f88a		JSR INCTPT			;increment tape pointer
+.f29a	d0 0e		bne $f2aa		BNE CHROT1			;$F2AA buffer full? No, buffer char
+.f29c	20 e3 f8	jsr $f8e3		JSR TPWRIT			;buffer full, so write bufr to device
+.f29f	b0 0e		bcs $f2af		BCS CHROT1A			;$F2AF error, restore regs and exit
+.f2a1	a9 02		lda #$02		LDA #$02			;control byte for data block
+.f2a3	a0 00		ldy #$00		LDY #$00			;TAPE1 defaults to $0360
+.f2a5	91 b2		sta ($b2),y		STA (TAPE1),Y			;save $02 in first buffer location
+.f2a7	c8		iny			INY				;increment buffer pointer
+.f2a8	84 a6		sty $a6			STY BUFPNT			;save pointer location
+.f2aa					CHROT1
+.f2aa	a5 9e		lda $9e			LDA TPTR1			;move character to buffer
+.f2ac	91 b2		sta ($b2),y		STA (TAPE1),Y
+.f2ae	18		clc			CLC
+.f2af					CHROT1A
+.f2af	68		pla			PLA				;restore registers
+.f2b0					CHROT2
+.f2b0	a8		tay			TAY
+.f2b1	68		pla			PLA
+.f2b2	aa		tax			TAX
+.f2b3	68		pla			PLA
+.f2b4	90 02		bcc $f2b8		BCC CHRRET			;$F2B8
+.f2b6	a9 00		lda #$00		LDA #$00
+.f2b8					CHRRET
+.f2b8	60		rts			RTS				;exit
+.f2b9					OTRS232
+.f2b9	68		pla			PLA				;RS232; restore character
+.f2ba	86 97		stx $97			STX REGSAV			;save regs
+.f2bc	84 9e		sty $9e			STY TPTR1
+.f2be	20 ed f0	jsr $f0ed		JSR SSENDB			;send to RS232 buffer
+.f2c1	a6 97		ldx $97			LDX REGSAV			;restore regs
+.f2c3	a4 9e		ldy $9e			LDY TPTR1
+.f2c5	18		clc			CLC
+.f2c6	60		rts			RTS				;return clear
+.f2c7					ICHKIN
+.f2c7	20 cf f3	jsr $f3cf		JSR FIND			;find file# in tables
+.f2ca	f0 03		beq $f2cf		BEQ ICHKI1			;$F2CF found, continue
+.f2cc	4c 84 f7	jmp $f784		JMP IOERMS3			;$F784 'FILE NOT OPEN' error
+.f2cf					ICHKI1
+.f2cf	20 df f3	jsr $f3df		JSR FLATRB			;set file# params
+.f2d2	a5 ba		lda $ba			LDA CHANNL			;get device
+.f2d4	f0 16		beq $f2ec		BEQ ICHKI2			;$F2EC keyboard? Set INDEV and exit
+.f2d6	c9 03		cmp #$03		CMP #$03			;SCREEN?
+.f2d8	f0 12		beq $f2ec		BEQ ICHKI2			;$F2EC yes, set INDEV
+.f2da	b0 14		bcs $f2f0		BCS ICHKI3			;$F2F0 IEEE? yes, handle IEEE
+.f2dc	c9 02		cmp #$02		CMP #$02			;RS232?
+.f2de	d0 03		bne $f2e3		BNE ICHK_S1			;$F2E3 no, must be tape; handle it
+.f2e0	4c 16 f1	jmp $f116		JMP SERINP			;go to serial input
+.f2e3					ICHK_S1
+.f2e3	a6 b9		ldx $b9			LDX SECADR			;handle tape
+.f2e5	e0 60		cpx #$60		CPX #$60			;is SA=0 (read)?
+.f2e7	f0 03		beq $f2ec		BEQ ICHKI2			;$F2EC yes, set INDEV and exit
+.f2e9	4c 8d f7	jmp $f78d		JMP IOERMS6			;$F78D 'NOT INPUT FILE' error
+.f2ec					ICHKI2
+.f2ec	85 99		sta $99			STA INDEV			;save input device...
+.f2ee	18		clc			CLC
+.f2ef	60		rts			RTS				;...and exit
+.f2f0					ICHKI3
+.f2f0	aa		tax			TAX				;copy device
+.f2f1	20 14 ee	jsr $ee14		JSR ITALK			;command device to talk
+.f2f4	a5 b9		lda $b9			LDA SECADR			;is there a secondary address?
+.f2f6	10 06		bpl $f2fe		BPL ICHKI4			;$F2FE yes, send it
+.f2f8	20 d3 ee	jsr $eed3		JSR CLKWAIT			;no, sent regular talk command
+.f2fb	4c 01 f3	jmp $f301		JMP ICHKI4+3			;$F301
+.f2fe					ICHKI4
+.f2fe	20 ce ee	jsr $eece		JSR ITKSA			;send secondary address talk
+.f301	8a		txa			TXA				;restore device#
+.f302	24 90		bit $90			BIT CSTAT			;BIT7= EOT or Dev not present
+.f304	10 e6		bpl $f2ec		BPL ICHKI2			;$F2EC all clear, exit
+.f306	4c 8a f7	jmp $f78a		JMP IOERMS5			;$F78A "DEVICE NOT PRESENT" error
+.f309					ICHKOT
+.f309	20 cf f3	jsr $f3cf		JSR FIND			;locate file# in tables
+.f30c	f0 03		beq $f311		BEQ ICHKO_S1			;$F311 found, continue
+.f30e	4c 84 f7	jmp $f784		JMP IOERMS3			;$F784 "FILE NOT OPEN" error
+.f311					ICHKO_S1
+.f311	20 df f3	jsr $f3df		JSR FLATRB			;set file attributes
+.f314	a5 ba		lda $ba			LDA CHANNL			;get device
+.f316	d0 03		bne $f31b		BNE ICHKO_S2			;$F31B not keyboard, branch
+.f318					ICHKER7
+.f318	4c 90 f7	jmp $f790		JMP IOERMS7			;$F790 "NOT OUTPUT FILE" error
+.f31b					ICHKO_S2
+.f31b	c9 03		cmp #$03		CMP #$03			;screen?
+.f31d	f0 0f		beq $f32e		BEQ ICHKO1			;$F32E yes, set OUTDEV
+.f31f	b0 11		bcs $f332		BCS ICHKO2			;$F332 IEEE no, process IEEE
+.f321	c9 02		cmp #$02		CMP #$02			;RS232?
+.f323	d0 03		bne $f328		BNE ICHKO_S3			;$F328 no, must be tape; process
+.f325	4c bc f0	jmp $f0bc		JMP SSUBBT			;process RS232
+.f328					ICHKO_S3
+.f328	a6 b9		ldx $b9			LDX SECADR			;devs 1 tape
+.f32a	e0 60		cpx #$60		CPX #$60			;SA set for read
+.f32c	f0 ea		beq $f318		BEQ ICHKER7			;$F318 yes, perform tape verify
+.f32e					ICHKO1
+.f32e	85 9a		sta $9a			STA OUTDEV			;set OUTDEV and exit
+.f330	18		clc			CLC
+.f331	60		rts			RTS
+.f332					ICHKO2
+.f332	aa		tax			TAX				;save device#
+.f333	20 17 ee	jsr $ee17		JSR ILISTN ;+1			;command device to listen
+.f336	a5 b9		lda $b9			LDA SECADR			;is there an SA?
+.f338	10 05		bpl $f33f		BPL ICHKO_S4			;$F33F yes, send SA
+.f33a	20 c5 ee	jsr $eec5		JSR CLRATN			;no, send listen
+.f33d	d0 03		bne $f342		BNE ICHKO_S5			;$F342
+.f33f					ICHKO_S4
+.f33f	20 c0 ee	jsr $eec0		JSR ISECND			;send SA
+.f342					ICHKO_S5
+.f342	8a		txa			TXA				;restore device#
+.f343	24 90		bit $90			BIT CSTAT			;BIT7=EOT or Dev not present
+.f345	10 e7		bpl $f32e		BPL ICHKO1			;$F32E
+.f347	4c 8a f7	jmp $f78a		JMP IOERMS5			;$F78A "DEVICE NOT PRESENT" error
+.f34a					ICLOSE
+.f34a	20 d4 f3	jsr $f3d4		JSR FIND1			;$F3D4 locate file#
+.f34d	f0 02		beq $f351		BEQ ICLSE			;$F351 found it, go to closer
+.f34f	18		clc			CLC
+.f350	60		rts			RTS				;not found, return clear
+.f351					ICLSE
+.f351	20 df f3	jsr $f3df		JSR FLATRB			;get file attributes
+.f354	8a		txa			TXA				;save table offset
+.f355	48		pha			PHA				;push it
+.f356	a5 ba		lda $ba			LDA CHANNL			;get device
+.f358	f0 57		beq $f3b1		BEQ ICLSE4			;$F3B1 keyboard? Yes, go to closer
+.f35a	c9 03		cmp #$03		CMP #$03			;screen?
+.f35c	f0 53		beq $f3b1		BEQ ICLSE4			;$F3B1 yes, close it
+.f35e	b0 4e		bcs $f3ae		BCS ICLSE3			;$F3AE device#>3, close IEEE
+.f360	c9 02		cmp #$02		CMP #$02			;RS232?
+.f362	d0 29		bne $f38d		BNE ICLSE1			;$F38D no, must be tape; close it
+.f364	68		pla			PLA
+.f365	20 b2 f3	jsr $f3b2		JSR ICLSE4+1			;$F3B2 clear file entry in table
+.f368	a9 7d		lda #$7d		LDA #%01111101			;$7D
+.f36a	8d 1e 91	sta $911e		STA VV911E
+.f36d	a9 06		lda #$06		LDA #%00000110			;$06 restore VIAs
+.f36f	8d 10 91	sta $9110		STA VV9110
+.f372	a9 ee		lda #$ee		LDA #%11101110			;$EE
+.f374	8d 1c 91	sta $911c		STA VV911C
+.f377	20 75 fe	jsr $fe75		JSR IMEMTP+2			;$FE75
+.f37a	a5 f8		lda $f8			LDA RIBUF+1			;input buffer
+.f37c	f0 01		beq $f37f		BEQ ICLSE_S1			;$F37F
+.f37e	c8		iny			INY
+.f37f					ICLSE_S1
+.f37f	a5 fa		lda $fa			LDA ROBUF+1
+.f381	f0 01		beq $f384		BEQ ICLSE_S2			;$F384	output buffer
+.f383	c8		iny			INY
+.f384					ICLSE_S2
+.f384	a9 00		lda #$00		LDA #$00			;mark buffers as "free"
+.f386	85 f8		sta $f8			STA RIBUF+1
+.f388	85 fa		sta $fa			STA ROBUF+1
+.f38a	4c 3c f5	jmp $f53c		JMP SEROPN4			;$F53C
+.f38d					ICLSE1
+.f38d	a5 b9		lda $b9			LDA SECADR			;secondary address
+.f38f	29 0f		and #$0f		AND #%00001111			;$0F file open for reading?
+.f391	f0 1e		beq $f3b1		BEQ ICLSE4			;$F3B1 yes, go to closer
+.f393	20 4d f8	jsr $f84d		JSR GETBFA			;$F84D purge tape buffer to tape
+.f396	a9 00		lda #$00		LDA #$00
+.f398	20 90 f2	jsr $f290		JSR OTIEEE1			;$F290 skips channel check
+.f39b	4c cf e4	jmp $e4cf		JMP TPWPCH			;$E4CF
+.f39e					ICLSE2
+.f39e	b0 2e		bcs $f3ce		BCS ICLSEEX			;$F3CE
+.f3a0	a5 b9		lda $b9			LDA SECADR			;get SA
+.f3a2	c9 62		cmp #$62		CMP #$62			;SA=2 write EOT?
+.f3a4	d0 0b		bne $f3b1		BNE ICLSE4			;$F3B1 no, continue
+.f3a6	a9 05		lda #$05		LDA #$05			;control byte for EOT marker
+.f3a8	20 e7 f7	jsr $f7e7		JSR WRTPHD			;write block to tape
+.f3ab	4c b1 f3	jmp $f3b1		JMP ICLSE4			;$F3B1
+.f3ae					ICLSE3
+.f3ae	20 da f6	jsr $f6da		JSR SERSAV1A			;close IEEE
+.f3b1					ICLSE4
+.f3b1	68		pla			PLA				;closer
+.f3b2	aa		tax			TAX
+.f3b3	c6 98		dec $98			DEC COPNFL			;decrement # of open files
+.f3b5	e4 98		cpx $98			CPX COPNFL			;no more files open, go to ready
+.f3b7	f0 14		beq $f3cd		BEQ ICLSEEX-1			;$F3CD return CY=0
+.f3b9	a4 98		ldy $98			LDY COPNFL			;delete device by moving last entry
+.f3bb	b9 59 02	lda $0259,y	 	LDA FILTBL,Y			;in table into deleted position
+.f3be	9d 59 02	sta $0259,x		STA FILTBL,X
+.f3c1	b9 63 02	lda $0263,y		LDA DEVTBL,Y
+.f3c4	9d 63 02	sta $0263,x		STA DEVTBL,X
+.f3c7	b9 6d 02	lda $026d,y		LDA SECATB,Y
+.f3ca	9d 6d 02	sta $026d,x		STA SECATB,X
+.f3cd	18		clc			CLC
+.f3ce					ICLSEEX
+.f3ce	60		rts			RTS				;exit clear
+.f3cf					FIND
+.f3cf	a9 00		lda #$00		LDA #$00
+.f3d1	85 90		sta $90			STA CSTAT			;clear status
+.f3d3	8a		txa			TXA
+.f3d4					FIND1
+.f3d4	a6 98		ldx $98			LDX COPNFL			;get #of open files
+.f3d6					FINDLOOP
+.f3d6	ca		dex			DEX
+.f3d7	30 15		bmi $f3ee		BMI FLATRBX			;$F3EE reached 0, then exit
+.f3d9	dd 59 02	cmp $0259,x		CMP FILTBL,X			;is this the one?
+.f3dc	d0 f8		bne $f3d6		BNE FINDLOOP			;$F3D6 no, try again
+.f3de	60		rts			RTS				;return
+.f3df					FLATRB
+.f3df	bd 59 02	lda $0259,x		LDA FILTBL,X
+.f3e2	85 b8		sta $b8			STA LOGFIL			;get file#
+.f3e4	bd 63 02	lda $0263,x		LDA DEVTBL,X
+.f3e7	85 ba		sta $ba			STA CHANNL			;get device
+.f3e9	bd 6d 02	lda $026d,x		LDA SECATB,X
+.f3ec	85 b9		sta $b9			STA SECADR			;get SA
+.f3ee					FLATRBX
+.f3ee	60		rts			RTS
+.f3ef					ICLALL
+.f3ef	a9 00		lda #$00		LDA #$00
+.f3f1	85 98		sta $98			STA COPNFL			;zero-out count of open files
+.f3f3					ICLRCH
+.f3f3	a2 03		ldx #$03		LDX #$03
+.f3f5	e4 9a		cpx $9a			CPX OUTDEV			;is output device <=3?
+.f3f7	b0 03		bcs $f3fc		BCS ICLRCH_S1			;$F3FC yes, continue
+.f3f9	20 04 ef	jsr $ef04		JSR IUNLSN			;no, send unlisten command to IEEE
+.f3fc					ICLRCH_S1
+.f3fc	e4 99		cpx $99			CPX INDEV			;is input device <=3?
+.f3fe	b0 03		bcs $f403		BCS ICLRCH_S2			;$F403 yes, continue
+.f400	20 f6 ee	jsr $eef6		JSR IUNTLK			;send untalk
+.f403					ICLRCH_S2
+.f403	86 9a		stx $9a			STX OUTDEV			;restore default I/O devices
+.f405	a9 00		lda #$00		LDA #$00
+.f407	85 99		sta $99			STA INDEV
+.f409	60		rts			RTS
+.f40a					IOPEN
+.f40a	a6 b8		ldx $b8			LDX LOGFIL			;get file number
+.f40c	d0 03		bne $f411		BNE IOPEN_S1			;F411 <>0 not "save"
+.f40e	4c 8d f7	jmp $f78d		JMP IOERMS6			;$F78D "NOT INPUT FILE" error
+.f411					IOPEN_S1
+.f411	20 cf f3	jsr $f3cf		JSR FIND			;locate file# in table
+.f414	d0 03		bne $f419		BNE IOPEN_S2			;F419 not found; any more free spots
+.f416	4c 81 f7	jmp $f781		JMP IOERMS2			;$F781 "FILE OPEN" error
+.f419					IOPEN_S2
+.f419	a6 98		ldx $98			LDX COPNFL			;get # of open files
+.f41b	e0 0a		cpx #$0a		CPX #$0A			;10 files open?
+.f41d	90 03		bcc $f422		BCC IOPEN_S3			;F422 no, OK to open it
+.f41f	4c 7e f7	jmp $f77e		JMP IOERMS1			;"TOO MANY FILES" error
+.f422					IOPEN_S3
+.f422	e6 98		inc $98			INC COPNFL			;bump count
+.f424	a5 b8		lda $b8			LDA LOGFIL
+.f426	9d 59 02	sta $0259,x		STA FILTBL,X			;save file# in table
+.f429	a5 b9		lda $b9			LDA SECADR			;flag and save SA
+.f42b	09 60		ora #$60		ORA #%01100000			;$60
+.f42d	85 b9		sta $b9			STA SECADR
+.f42f	9d 6d 02	sta $026d,x		STA SECATB,X
+.f432	a5 ba		lda $ba			LDA CHANNL			;save device
+.f434	9d 63 02	sta $0263,x		STA DEVTBL,X
+.f437	f0 5a		beq $f493		BEQ IOPENRC			;$F493 if keyboard, return clear
+.f439	c9 03		cmp #$03		CMP #$03			;screen?
+.f43b	f0 56		beq $f493		BEQ IOPENRC			;$F493 yes, exit
+.f43d	90 05		bcc $f444		BCC IOPEN_S4			;F444 branch for tape or RS232
+.f43f	20 95 f4	jsr $f495		JSR SENDSA			;send secondary to IEEE
+.f442	90 4f		bcc $f493		BCC IOPENRC			;$F493 return clear
+.f444					IOPEN_S4
+.f444	c9 02		cmp #$02		CMP #$02			;RS232?
+.f446	d0 03		bne $f44b		BNE IOPEN_S5			;F44B not RS232, process tape
+.f448	4c c7 f4	jmp $f4c7		JMP SEROPN			;open RS232 device
+.f44b					IOPEN_S5
+.f44b	20 4d f8	jsr $f84d		JSR GETBFA			;must be tape. Get buffer address
+.f44e	b0 03		bcs $f453		BCS IOPEN_S6			;F453 MSB>2? No, continue with open
+.f450	4c 96 f7	jmp $f796		JMP IOERMS9			;$F796 "ILLEGAL DEVICE NUMBER" error
+.f453					IOPEN_S6
+.f453	a5 b9		lda $b9			LDA SECADR			;get SA
+.f455	29 0f		and #$0f		AND #%00001111			;$0F
+.f457	d0 1f		bne $f478		BNE IOPEN2			;$F478
+.f459	20 94 f8	jsr $f894		JSR PLAYMS			;wait for "PLAY" key
+.f45c	b0 36		bcs $f494		BCS IOPENRC+1			;$F494 return CY=1
+.f45e	20 47 f6	jsr $f647		JSR SRCHMS			;print "Searching for [name]" message
+.f461	a5 b7		lda $b7			LDA FNMLEN			;length of filename
+.f463	f0 0a		beq $f46f		BEQ IOPEN1			;F46F no name, continue
+.f465	20 67 f8	jsr $f867		JSR LOCSPH			;search for desired tape header
+.f468	90 18		bcc $f482		BCC IOPEN3			;$F482
+.f46a	f0 28		beq $f494		BEQ IOPENRC+1			;$F494 return CY=1
+.f46c					IOPENA
+.f46c	4c 87 f7	jmp $f787		JMP IOERMS4			;F787 "FILE NOT FOUND"
+.f46f					IOPEN1
+.f46f	20 af f7	jsr $f7af		JSR LOCTPH			;search for next header
+.f472	f0 20		beq $f494		BEQ IOPENRC+1			;$F494
+.f474	90 0c		bcc $f482		BCC IOPEN3			;$F482
+.f476	b0 f4		bcs $f46c		BCS IOPENA			;$F46C
+.f478					IOPEN2
+.f478	20 b7 f8	jsr $f8b7		JSR RECDMS			;wait for REC & PLAY
+.f47b	b0 17		bcs $f494		BCS IOPENRC+1			;$F494 return CY=1
+.f47d	a9 04		lda #$04		LDA #$04			;control byte for data header
+.f47f	20 e7 f7	jsr $f7e7		JSR WRTPHD			;write header
+.f482					IOPEN3
+.f482	a9 bf		lda #$bf		LDA #$BF			;pointer to tape buffer head
+.f484	a4 b9		ldy $b9			LDY SECADR
+.f486	c0 60		cpy #$60		CPY #$60			;SA=0 (read), continue
+.f488	f0 07		beq $f491		BEQ IOPENRC-2			;$F491
+.f48a	a0 00		ldy #$00		LDY #$00
+.f48c	a9 02		lda #$02		LDA #$02			;control block for data block
+.f48e	91 b2		sta ($b2),y		STA (TAPE1),Y			;write it to buffer
+.f490	98		tya			TYA
+.f491	85 a6		sta $a6			STA BUFPNT			;save pointer
+.f493					IOPENRC
+.f493	18		clc			CLC
+.f494	60		rts			RTS
+.f495					SENDSA
+.f495	a5 b9		lda $b9			LDA SECADR			;get SA
+.f497	30 2c		bmi $f4c5		BMI SNDSARC			;$F4C5 neg, exit
+.f499	a4 b7		ldy $b7			LDY FNMLEN			;get filename length
+.f49b	f0 28		beq $f4c5		BEQ SNDSARC			;$F4C5 0, error
+.f49d	a5 ba		lda $ba			LDA CHANNL			;get device
+.f49f	20 17 ee	jsr $ee17		JSR ILISTN ;+1			;command it to listen
+.f4a2	a5 b9		lda $b9			LDA SECADR			;get SA
+.f4a4	09 f0		ora #$f0		ORA #%11110000			;$F0
+.f4a6	20 c0 ee	jsr $eec0		JSR ISECND			;$EEC0	sent it
+.f4a9	a5 90		lda $90			LDA CSTAT			;status
+.f4ab	10 05		bpl $f4b2		BPL SENDSA1			;$F4B2 OK, continue
+.f4ad	68		pla			PLA				;error, set RTS for caller's caller
+.f4ae	68		pla			PLA
+.f4af	4c 8a f7	jmp $f78a		JMP IOERMS5			;$F78A "DEVICE NOT PRESENT" error
+.f4b2					SENDSA1
+.f4b2	a5 b7		lda $b7			LDA FNMLEN			;get filename length
+.f4b4	f0 0c		beq $f4c2		BEQ SNDSARU			;$F4C2 0, send unlisten
+.f4b6	a0 00		ldy #$00		LDY #$00
+.f4b8					SENDSALP
+.f4b8	b1 bb		lda ($bb),y		LDA (FNPTR),Y			;output filename to IEEE
+.f4ba	20 e4 ee	jsr $eee4		JSR ICIOUT			;send it
+.f4bd	c8		iny			INY
+.f4be	c4 b7		cpy $b7			CPY FNMLEN
+.f4c0	d0 f6		bne $f4b8		BNE SENDSALP			;$F4B8 loop
+.f4c2					SNDSARU
+.f4c2	20 04 ef	jsr $ef04		JSR IUNLSN			;done, send unlisten command
+.f4c5					SNDSARC
+.f4c5	18		clc			CLC
+.f4c6	60		rts			RTS
+.f4c7					SEROPN
+.f4c7	a9 06		lda #$06		LDA #%00000110			;$06 set VIAs
+.f4c9	8d 12 91	sta $9112		STA VV9112
+.f4cc	8d 10 91	sta $9110		STA VV9110
+.f4cf	a9 ee		lda #$ee		LDA #%11101110			;$EE
+.f4d1	8d 1c 91	sta $911c		STA VV911C
+.f4d4	a0 00		ldy #$00		LDY #$00			;zero-out status byte
+.f4d6	8c 97 02	sty $0297		STY RSSTAT
+.f4d9					SEROPLP
+.f4d9	c4 b7		cpy $b7			CPY FNMLEN			;get filename length
+.f4db	f0 0a		beq $f4e7		BEQ SEROPN1			;$F4E7 none, go to open
+.f4dd	b1 bb		lda ($bb),y		LDA (FNPTR),Y			;copy first 4 chars of filename
+.f4df	99 93 02	sta $0293,y		STA M51CTR,Y			;to buffer
+.f4e2	c8		iny			INY
+.f4e3	c0 04		cpy #$04		CPY #$04
+.f4e5	d0 f2		bne $f4d9		BNE SEROPLP			;$F4D9
+.f4e7					SEROPN1
+.f4e7	20 27 f0	jsr $f027		JSR BITCNT			;get number of data bits
+.f4ea	8e 98 02	stx $0298		STX BITNUM			;save count
+.f4ed	ad 93 02	lda $0293		LDA M51CTR			;control register
+.f4f0	29 0f		and #$0f		AND #%00001111			;$0F isolate baud rate bits
+.f4f2	d0 00		bne $f4f4		BNE *+2				;F4F4
+.f4f4	0a		asl a			ASL A				;*2
+.f4f5	aa		tax			TAX
+.f4f6	bd 5a ff	lda $ff5a,x		LDA R232TB-2,X			;$FF5A,X baud rate H
+.f4f9	0a		asl a			ASL A
+.f4fa	a8		tay			TAY
+.f4fb	bd 5b ff	lda $ff5b,x		LDA R232TB-1,X			;$FF5B,X baud rate L
+.f4fe	2a		rol a			ROL A
+.f4ff	48		pha			PHA
+.f500	98		tya			TYA
+.f501	69 c8		adc #$c8		ADC #$C8
+.f503	8d 99 02	sta $0299		STA BAUDOF			;save baud rate codes
+.f506	68		pla			PLA
+.f507	69 00		adc #$00		ADC #$00
+.f509	8d 9a 02	sta $029a		STA BAUDOF+1
+.f50c	ad 94 02	lda $0294		LDA M51CDR
+.f50f	4a		lsr a			LSR A
+.f510	90 09		bcc $f51b		BCC SEROPN2			;$F51B
+.f512	ad 20 91	lda $9120		LDA VV9120			;check DSR
+.f515	0a		asl a			ASL A
+.f516	b0 03		bcs $f51b		BCS SEROPN2			;$F51B ready, continue
+.f518	4c 16 f0	jmp $f016		JMP DSRERR			;not ready, DRS error
+.f51b					SEROPN2
+.f51b	ad 9b 02	lda $029b		LDA RIDBE			;set buffer pointer to RS232
+.f51e	8d 9c 02	sta $029c		STA RIDBS
+.f521	ad 9e 02	lda $029e		LDA RODBE
+.f524	8d 9d 02	sta $029d		STA RODBS
+.f527	20 75 fe	jsr $fe75		JSR IMEMTP+2			;$FE75 get MEMTOP
+.f52a	a5 f8		lda $f8			LDA RIBUF+1			;has input buffer already been created?
+.f52c	d0 05		bne $f533		BNE SEROPN3			;$F533 yes, skip create
+.f52e	88		dey			DEY
+.f52f	84 f8		sty $f8			STY RIBUF+1			;create input buffer
+.f531	86 f7		stx $f7			STX RIBUF
+.f533					SEROPN3
+.f533	a5 fa		lda $fa			LDA ROBUF+1			;output buffer created?
+.f535	d0 05		bne $f53c		BNE SEROPN4			;$F53C yes, skip create
+.f537	88		dey			DEY
+.f538	84 fa		sty $fa			STY ROBUF+1			;create output buffer
+.f53a	86 f9		stx $f9			STX ROBUF
+.f53c					SEROPN4
+.f53c	38		sec			SEC
+.f53d	a9 f0		lda #$f0		LDA #$F0
+.f53f	4c 7b fe	jmp $fe7b		JMP STOTOP			;$FE7B set new MEMTOP
+.f542					ILOAD
+.f542	86 c3		stx $c3			STX MEMUSS			;save load location from call
+.f544	84 c4		sty $c4			STY MEMUSS+1
+.f546	6c 30 03	jmp ($0330)		JMP (LLODVP)			;jump to Load routine
+.f549					LNKLOD
+.f549	85 93		sta $93			STA IOFLG2			;load/verify flag
+.f54b	a9 00		lda #$00		LDA #$00
+.f54d	85 90		sta $90			STA CSTAT			;clear ST
+.f54f	a5 ba		lda $ba			LDA CHANNL			;get device
+.f551	d0 03		bne $f556		BNE LINK_S1			;$F556 not 0 (keyboard), continue
+.f553					LNKLDEX
+.f553	4c 96 f7	jmp $f796		JMP IOERMS9			;$F796 "ILLEGAL DEVICE" error
+.f556					LINK_S1
+.f556	c9 03		cmp #$03		CMP #$03			;screen?
+.f558	f0 f9		beq $f553		BEQ LNKLDEX			;$F553 yes, error
+.f55a	90 6e		bcc $f5ca		BCC TAPLOA			;F5CA <3, must be tape
+.f55c					SERLOA
+.f55c	a4 b7		ldy $b7			LDY FNMLEN			;get filename length
+.f55e	d0 03		bne $f563		BNE SERLO_S1			;F563 filename required on IEEE
+.f560	4c 93 f7	jmp $f793		JMP IOERMS8			;$F793 "FILENAME MISSING" error
+.f563					SERLO_S1
+.f563	20 bc e4	jsr $e4bc		JSR SSADR			;$E4BC print "Searching"
+.f566	a9 60		lda #$60		LDA #$60
+.f568	85 b9		sta $b9			STA SECADR			;set default SA to 0
+.f56a	20 95 f4	jsr $f495		JSR SENDSA			;send it
+.f56d	a5 ba		lda $ba			LDA CHANNL			;get device
+.f56f	20 14 ee	jsr $ee14		JSR ITALK			;command it to talk
+.f572	a5 b9		lda $b9			LDA SECADR			;get SA
+.f574	20 ce ee	jsr $eece		JSR ITKSA			;send SA for talk
+.f577	20 19 ef	jsr $ef19		JSR IACPTR			;get char
+.f57a	85 ae		sta $ae			STA EAL				;save it as start address L
+.f57c	a5 90		lda $90			LDA CSTAT			;status
+.f57e	4a		lsr a			LSR A
+.f57f	4a		lsr a			LSR A
+.f580	b0 45		bcs $f5c7		BCS SERLDEX			;$F5C7 timeout? Yes, error
+.f582	20 19 ef	jsr $ef19		JSR IACPTR			;get next char
+.f585	85 af		sta $af			STA EAL+1			;save as start address H
+.f587	20 c1 e4	jsr $e4c1		JSR SLDPCH			;$E4C1 print "Loading" msg and set load
+.f58a					SERLDLP
+.f58a	a9 fd		lda #$fd		LDA #%11111101			;$FD timeout bit
+.f58c	25 90		and $90			AND CSTAT			;clear it
+.f58e	85 90		sta $90			STA CSTAT			;save ST
+.f590	20 e1 ff	jsr $ffe1		JSR STOP			;check for STOP key
+.f593	d0 03		bne $f598		BNE SERLO_S2			;F598 not pressed, continue
+.f595	4c cb f6	jmp $f6cb		JMP SAVEXIT1			;$F6CE close file
+.f598					SERLO_S2
+.f598	20 19 ef	jsr $ef19		JSR IACPTR			;get next char - program byte
+.f59b	aa		tax			TAX				;save it
+.f59c	a5 90		lda $90			LDA CSTAT			;chect status
+.f59e	4a		lsr a			LSR A
+.f59f	4a		lsr a			LSR A
+.f5a0	b0 e8		bcs $f58a		BCS SERLDLP			;$F58A error, interrupt process
+.f5a2	8a		txa			TXA				;restore char
+.f5a3	a4 93		ldy $93			LDY IOFLG2			;check load/verify flag
+.f5a5	f0 0c		beq $f5b3		BEQ SERLD1			;$F5B3 =0, load
+.f5a7	a0 00		ldy #$00		LDY #$00			;verify comparison
+.f5a9	d1 ae		cmp ($ae),y		CMP (EAL),Y
+.f5ab	f0 08		beq $f5b5		BEQ SERLD2			;$F5B5 match, continue
+.f5ad	a9 10		lda #$10		LDA #$10			;not a match, error
+.f5af	20 6a fe	jsr $fe6a		JSR ISETMS1			;$FE6A set status
+>f5b2	2c					.byte $2C				;bit $ae91
+.f5b3					SERLD1
+.f5b3	91 ae		sta ($ae),y		STA (EAL),Y			;save byte
+.f5b5					SERLD2
+.f5b5	e6 ae		inc $ae			INC EAL				;increment address
+.f5b7	d0 02		bne $f5bb		BNE SERLO_S3			;$F5BB
+.f5b9	e6 af		inc $af			INC EAL+1
+.f5bb					SERLO_S3
+.f5bb	24 90		bit $90			BIT CSTAT			;test for EOF
+.f5bd	50 cb		bvc $f58a		BVC SERLDLP			;$F58A not EOF, loop
+.f5bf	20 f6 ee	jsr $eef6		JSR IUNTLK			;EOF, send untalk
+.f5c2	20 da f6	jsr $f6da		JSR SERSAV1A			;close file
+.f5c5	90 7a		bcc $f641		BCC TPLOAEX			;$F641 exit no error
+.f5c7					SERLDEX
+.f5c7	4c 87 f7	jmp $f787		JMP IOERMS4			;$F787 "FILE NOT FOUND" error
+.f5ca					TAPLOA
+.f5ca	c9 02		cmp #$02		CMP #$02			;RS232?
+.f5cc	d0 03		bne $f5d1		BNE TPLOA_S1			;F5D1 no, load from tape
+.f5ce	4c b9 f0	jmp $f0b9		JMP SSUBBT-3			;IOERMS9 "ILLEGAL DEVICE" error
+.f5d1					TPLOA_S1
+.f5d1	20 4d f8	jsr $f84d		JSR GETBFA			;get buffer start
+.f5d4	b0 03		bcs $f5d9		BCS TPLOA_S2			;F5D9
+.f5d6	4c 96 f7	jmp $f796		JMP IOERMS9			;$F796 "ILLEGAL DEVICE NUMBER" error
+.f5d9					TPLOA_S2
+.f5d9	20 94 f8	jsr $f894		JSR PLAYMS			;wait for PLAY key
+.f5dc	b0 68		bcs $f646		BCS TPLORTS
+.f5de	20 47 f6	jsr $f647		JSR SRCHMS			;print "Searching for [name]"
+.f5e1					TAPLOALP
+.f5e1	a5 b7		lda $b7			LDA FNMLEN			;get filename length
+.f5e3	f0 09		beq $f5ee		BEQ TAPLOA1			;$F5EE no filename, search for next
+.f5e5	20 67 f8	jsr $f867		JSR LOCSPH			;locate specified header
+.f5e8	90 0b		bcc $f5f5		BCC TAPLOA2			;$F5F5 found, continue
+.f5ea	f0 5a		beq $f646		BEQ TPLORTS			;return clear
+.f5ec	b0 d9		bcs $f5c7		BCS SERLDEX			;$F5C7 error, file not found
+.f5ee					TAPLOA1
+.f5ee	20 af f7	jsr $f7af		JSR LOCTPH			;search for next header
+.f5f1	f0 53		beq $f646		BEQ TPLORTS			;return clear
+.f5f3	b0 d2		bcs $f5c7		BCS SERLDEX			;$F5C7 none found, error
+.f5f5					TAPLOA2
+.f5f5	a5 90		lda $90			LDA CSTAT			;get status
+.f5f7	29 10		and #$10		AND #%00010000			;$10 unrecoverable error?
+.f5f9	38		sec			SEC				;return error
+.f5fa	d0 4a		bne $f646		BNE TPLORTS			;exit with error
+.f5fc	e0 01		cpx #$01		CPX #$01			;header type 1= BASIC pgm (relocatable)
+.f5fe	f0 11		beq $f611		BEQ TAPLOA3			;$F611
+.f600	e0 03		cpx #$03		CPX #$03			;3=machine program (nonrelocatable)
+.f602					TAPLOA2A
+.f602	d0 dd		bne $f5e1		BNE TAPLOALP			;$F5E1 not ML, next file
+.f604					TAPLOALP2
+.f604	a0 01		ldy #$01		LDY #$01			;ML program, get load address from
+.f606	b1 b2		lda ($b2),y		LDA (TAPE1),Y			;header stored in tape buffer.
+.f608	85 c3		sta $c3			STA MEMUSS
+.f60a	c8		iny			INY
+.f60b	b1 b2		lda ($b2),y		LDA (TAPE1),Y
+.f60d	85 c4		sta $c4			STA MEMUSS+1
+.f60f	b0 04		bcs $f615		BCS TAPLOA4			;$F615
+.f611					TAPLOA3
+.f611	a5 b9		lda $b9			LDA SECADR			;SA
+.f613	d0 ef		bne $f604		BNE TAPLOALP2			;F604 not 0, absolute load
+.f615					TAPLOA4
+.f615	a0 03		ldy #$03		LDY #$03			;calc program length. Start with low
+.f617	b1 b2		lda ($b2),y		LDA (TAPE1),Y			;bytes...
+.f619	a0 01		ldy #$01		LDY #$01
+.f61b	f1 b2		sbc ($b2),y		SBC (TAPE1),Y
+.f61d	aa		tax			TAX
+.f61e	a0 04		ldy #$04		LDY #$04			;...then high bytes
+.f620	b1 b2		lda ($b2),y		LDA (TAPE1),Y
+.f622	a0 02		ldy #$02		LDY #$02
+.f624	f1 b2		sbc ($b2),y		SBC (TAPE1),Y
+.f626	a8		tay			TAY				;save length
+.f627	18		clc			CLC
+.f628	8a		txa			TXA
+.f629	65 c3		adc $c3			ADC MEMUSS			;pgm length + start address
+.f62b	85 ae		sta $ae			STA EAL				;equals end address
+.f62d	98		tya			TYA
+.f62e	65 c4		adc $c4			ADC MEMUSS+1
+.f630	85 af		sta $af			STA EAL+1
+.f632	a5 c3		lda $c3			LDA MEMUSS
+.f634	85 c1		sta $c1			STA STAL
+.f636	a5 c4		lda $c4			LDA MEMUSS+1
+.f638	85 c2		sta $c2			STA STAL+1
+.f63a	20 6a f6	jsr $f66a		JSR LOADMS			;output "Loading/Verifying" message
+.f63d	20 c9 f8	jsr $f8c9		JSR TPREAD2			;$F8C9 load file from tape
+>f640	24					.byte $24				;BIT LASTPT+1
+.f641					TPLOAEX
+.f641	18		clc			CLC
+.f642	a6 ae		ldx $ae			LDX EAL				;return program end address
+.f644	a4 af		ldy $af			LDY EAL+1
+.f646					TPLORTS
+.f646	60		rts			RTS
+.f647					SRCHMS
+.f647	a5 9d		lda $9d			LDA CMDMOD			;direct mode?
+.f649	10 1e		bpl $f669		BPL SRCHEX			;$F669 no, exit
+.f64b	a0 0c		ldy #$0c		LDY #KIM_SRCH			;"Searching for"
+.f64d	20 e6 f1	jsr $f1e6		JSR MSG				;output message
+.f650	a5 b7		lda $b7			LDA FNMLEN			;filename length
+.f652	f0 15		beq $f669		BEQ SRCHEX			;$F669 no filename, skip "for"
+.f654	a0 17		ldy #$17		LDY #$17			;point to "FOR" in "Searching For"
+.f656	20 e6 f1	jsr $f1e6		JSR MSG				;print it
+.f659					FLNMMS
+.f659	a4 b7		ldy $b7			LDY FNMLEN			;get filename length
+.f65b	f0 0c		beq $f669		BEQ SRCHEX			;$F669 no filename, exit
+.f65d	a0 00		ldy #$00		LDY #$00
+.f65f					FLNMLP
+.f65f	b1 bb		lda ($bb),y		LDA (FNPTR),Y			;print filename
+.f661	20 d2 ff	jsr $ffd2		JSR CHROUT
+.f664	c8		iny			INY
+.f665	c4 b7		cpy $b7			CPY FNMLEN
+.f667	d0 f6		bne $f65f		BNE FLNMLP			;$F65F
+.f669					SRCHEX
+.f669	60		rts			RTS				;exit
+.f66a					LOADMS
+.f66a	a0 49		ldy #$49		LDY #KIM_LOAD			;"Loading" assumed
+.f66c	a5 93		lda $93			LDA IOFLG2			;check load/verify flag-0=load
+.f66e	f0 02		beq $f672		BEQ DOMESG			;$F672 load, print message
+.f670	a0 59		ldy #$59		LDY #KIM_VERF			;flag=1, "Verifying"
+.f672					DOMESG
+.f672	4c e2 f1	jmp $f1e2		JMP DIRMSG			;print message
+.f675					ISAVE
+.f675	86 ae		stx $ae			STX EAL				;copy "save to" address
+.f677	84 af		sty $af			STY EAL+1
+.f679	aa		tax			TAX
+.f67a	b5 00		lda $00,x		LDA USRPOK,X
+.f67c	85 c1		sta $c1			STA STAL			;save start address L
+.f67e	b5 01		lda $01,x		LDA USRVEC,X
+.f680	85 c2		sta $c2			STA STAL+1			;save start address H
+.f682	6c 32 03	jmp ($0332)		JMP (LSAVVP)			;save it
+.f685					LNKSAV
+.f685	a5 ba		lda $ba			LDA CHANNL			;Get current device
+.f687	d0 03		bne $f68c		BNE LNKSV_S2			;F68C Not keyboard, continue
+.f689					LNKSV_S1
+.f689	4c 96 f7	jmp $f796		JMP IOERMS9			;$F796 "ILLEGAL DEVICE NUMBER" errro
+.f68c					LNKSV_S2
+.f68c	c9 03		cmp #$03		CMP #$03			;screen?
+.f68e	f0 f9		beq $f689		BEQ LNKSV_S1			;$F689 yes, error
+.f690	90 5f		bcc $f6f1		BCC TAPESV			;no, continue
+.f692					SERSAV
+.f692	a9 61		lda #$61		LDA #$61			;SA=1
+.f694	85 b9		sta $b9			STA SECADR			;set it
+.f696	a4 b7		ldy $b7			LDY FNMLEN			;get filename length
+.f698	d0 03		bne $f69d		BNE SERSAV_S1			;$F69D not 0, continue
+.f69a	4c 93 f7	jmp $f793		JMP IOERMS8			;$F793 "FILENAME MISSING" error
+.f69d					SERSAV_S1
+.f69d	20 95 f4	jsr $f495		JSR SENDSA			;send filename
+.f6a0	20 28 f7	jsr $f728		JSR SAVEMS			;print "Saving" message
+.f6a3	a5 ba		lda $ba			LDA CHANNL			;get device
+.f6a5	20 17 ee	jsr $ee17		JSR ILISTN			;command it to listen EE17
+.f6a8	a5 b9		lda $b9			LDA SECADR			;get SA
+.f6aa	20 c0 ee	jsr $eec0		JSR ISECND			;send it
+.f6ad	a0 00		ldy #$00		LDY #$00
+.f6af	20 d2 fb	jsr $fbd2		JSR RSTTPP			;save start address to SAL
+.f6b2	a5 ac		lda $ac			LDA SAL
+.f6b4	20 e4 ee	jsr $eee4		JSR ICIOUT			;send start address L...
+.f6b7	a5 ad		lda $ad			LDA SAL+1
+.f6b9	20 e4 ee	jsr $eee4		JSR ICIOUT			;...and start address H
+.f6bc					SERSAVLP
+.f6bc	20 11 fd	jsr $fd11		JSR CKWRPT			;reached end yet?
+.f6bf	b0 16		bcs $f6d7		BCS SERSAV1			;$F6D7 yes, go to ready
+.f6c1	b1 ac		lda ($ac),y		LDA (SAL),Y			;get program byte
+.f6c3	20 e4 ee	jsr $eee4		JSR ICIOUT			;send it
+.f6c6	20 e1 ff	jsr $ffe1		JSR STOP			;check for STOP key
+.f6c9	d0 07		bne $f6d2		BNE SAVEXIT2			;not pressed, continue
+.f6cb					SAVEXIT1
+.f6cb	20 da f6	jsr $f6da		JSR SERSAV1A			;$F6DA close channel
+.f6ce					SAVEXIT
+.f6ce	a9 00		lda #$00		LDA #$00			;set flag for "BREAK"
+.f6d0	38		sec			SEC
+.f6d1	60		rts			RTS				;exit
+.f6d2					SAVEXIT2
+.f6d2	20 1b fd	jsr $fd1b		JSR INCRDP			;$FD1B bump current address
+.f6d5	d0 e5		bne $f6bc		BNE SERSAVLP			;$F6BC continue saving
+.f6d7					SERSAV1
+.f6d7	20 04 ef	jsr $ef04		JSR IUNLSN			;send unlisten
+.f6da					SERSAV1A
+.f6da	24 b9		bit $b9			BIT SECADR
+.f6dc	30 11		bmi $f6ef		BMI SERSAVRC			;$F6EF
+.f6de	a5 ba		lda $ba			LDA CHANNL			;get device
+.f6e0	20 17 ee	jsr $ee17		JSR ILISTN			;command it to listen
+.f6e3	a5 b9		lda $b9			LDA SECADR			;get SA
+.f6e5	29 ef		and #$ef		AND #%11101111			;$EF twiddle some bits
+.f6e7	09 e0		ora #$e0		ORA #%11100000			;$E0
+.f6e9	20 c0 ee	jsr $eec0		JSR ISECND			;send SA
+.f6ec	20 04 ef	jsr $ef04		JSR IUNLSN			;send unlisten
+.f6ef					SERSAVRC
+.f6ef	18		clc			CLC
+.f6f0	60		rts			RTS				;return clear
+.f6f1					TAPESV
+.f6f1	c9 02		cmp #$02		CMP #$02			;RS232?
+.f6f3	d0 03		bne $f6f8		BNE TPSAV_S1			;$F6F8 no, continue with tape
+.f6f5	4c b9 f0	jmp $f0b9		JMP JJF0B9 ;IOERMS9			;IOERMS9 "ILLEGAL DEVICE NUMBER" error
+.f6f8					TPSAV_S1
+.f6f8	20 4d f8	jsr $f84d		JSR GETBFA			;get buffer start
+.f6fb	90 8c		bcc $f689		BCC LNKSAV+4			;$F689 JMP IOERMS9 "ILLEGAL DEVICE"
+.f6fd	20 b7 f8	jsr $f8b7		JSR RECDMS			;wait for play and rec
+.f700	b0 25		bcs $f727		BCS TPSVRET			;$F727 error, exit
+.f702	20 28 f7	jsr $f728		JSR SAVEMS			;print "saving" message
+.f705	a2 03		ldx #$03		LDX #$03			;header type 3-ML program
+.f707	a5 b9		lda $b9			LDA SECADR			;ger SA
+.f709	29 01		and #$01		AND #%00000001			;$01 BIT0 set (SA=1 or 3)
+.f70b	d0 02		bne $f70f		BNE TPSAV_S2			;$F70F yes, save ML program
+.f70d	a2 01		ldx #$01		LDX #$01			;no, must be BASIC program
+.f70f					TPSAV_S2
+.f70f	8a		txa			TXA
+.f710	20 e7 f7	jsr $f7e7		JSR WRTPHD			;write header
+.f713	b0 12		bcs $f727		BCS TPSVRET			;$F727 exit at STOP key
+.f715	20 e6 f8	jsr $f8e6		JSR TPWRIT+3			;$F8E6 save program
+.f718	b0 0d		bcs $f727		BCS TPSVRET			;$F727 exit at STOP key
+.f71a	a5 b9		lda $b9			LDA SECADR			;get SA
+.f71c	29 02		and #$02		AND #%00000010			;$02 BIT1 set (SA=2 or 3)
+.f71e	f0 06		beq $f726		BEQ TPSVRET-1			;$F726 no, exit with CLC
+.f720	a9 05		lda #$05		LDA #$05			;yes, write EOT control byte
+.f722	20 e7 f7	jsr $f7e7		JSR WRTPHD			;write block
+>f725	24					.byte $24				; BIT $18
+.f726	18		clc			CLC
+.f727					TPSVRET
+.f727	60		rts			RTS
+.f728					SAVEMS
+.f728	a5 9d		lda $9d			LDA CMDMOD			;direct mode?
+.f72a	10 fb		bpl $f727		BPL TPSVRET			;$F727 no, exit
+.f72c	a0 51		ldy #$51		LDY #KIM_SAVE			;yes, print 'Saving
+.f72e	20 e6 f1	jsr $f1e6		JSR MSG				;print message
+.f731	4c 59 f6	jmp $f659		JMP FLNMMS			;print filename
+.f734					IUDTIM
+.f734	a2 00		ldx #$00		LDX #$00
+.f736	e6 a2		inc $a2			INC CTIMR2			;increase time tick
+.f738	d0 06		bne $f740		BNE UDTIM1			;$F740
+.f73a	e6 a1		inc $a1			INC CTIMR1
+.f73c	d0 02		bne $f740		BNE UDTIM1			;$F740
+.f73e	e6 a0		inc $a0			INC CTIMR0
+.f740					UDTIM1
+.f740	38		sec			SEC
+.f741	a5 a2		lda $a2			LDA CTIMR2
+.f743	e9 01		sbc #$01		SBC #$01
+.f745	a5 a1		lda $a1			LDA CTIMR1			;check for 24hr
+.f747	e9 1a		sbc #$1a		SBC #$1A
+.f749	a5 a0		lda $a0			LDA CTIMR0
+.f74b	e9 4f		sbc #$4f		SBC #$4F
+.f74d	90 06		bcc $f755		BCC UDTIM2			;$F755 smaller, ok
+.f74f	86 a0		stx $a0			STX CTIMR0			;roll-over, reset timer to 0
+.f751	86 a1		stx $a1			STX CTIMR1
+.f753	86 a2		stx $a2			STX CTIMR2
+.f755					UDTIM2
+.f755	ad 2f 91	lda $912f		LDA VV912F 			;check for STOP key
+.f758	cd 2f 91	cmp $912f		CMP VV912F
+.f75b	d0 f8		bne $f755		BNE UDTIM2			;$F755
+.f75d	85 91		sta $91			STA STKEY			;got STOP, set flag
+.f75f	60		rts			RTS
+.f760					IRDTIM
+.f760	78		sei			SEI
+.f761	a5 a2		lda $a2			LDA CTIMR2
+.f763	a6 a1		ldx $a1			LDX CTIMR1
+.f765	a4 a0		ldy $a0			LDY CTIMR0
+.f767					ISETTM
+.f767	78		sei			SEI
+.f768	85 a2		sta $a2			STA CTIMR2
+.f76a	86 a1		stx $a1			STX CTIMR1
+.f76c	84 a0		sty $a0			STY CTIMR0
+.f76e	58		cli			CLI
+.f76f	60		rts			RTS
+.f770					ISTOP
+.f770	a5 91		lda $91			LDA STKEY			;check for STOP flag
+.f772	c9 fe		cmp #$fe		CMP #%11111110			;$FE set?
+.f774	d0 07		bne $f77d		BNE ISTOPEX			;$F77D no, exit
+.f776	08		php			PHP				;got STOP...
+.f777	20 cc ff	jsr $ffcc		JSR CLRCH			;clear I/O channels
+.f77a	85 c6		sta $c6			STA KEYCNT			;clear keybuff
+.f77c	28		plp			PLP
+.f77d					ISTOPEX
+.f77d	60		rts			RTS				;exit
+.f77e					IOERMS1
+.f77e	a9 01		lda #$01		LDA #$01			;Too Many Files
+>f780	2c					.byte $2C
+.f781					IOERMS2
+.f781	a9 02		lda #$02		LDA #$02			;File Already Open
+>f783	2c					.byte $2C
+.f784					IOERMS3
+.f784	a9 03		lda #$03		LDA #$03			;File Not Open
+>f786	2c					.byte $2C
+.f787					IOERMS4
+.f787	a9 04		lda #$04		LDA #$04			;File Not Found
+>f789	2c					.byte $2C
+.f78a					IOERMS5
+.f78a	a9 05		lda #$05		LDA #$05			;Device Not Present
+>f78c	2c					.byte $2C
+.f78d					IOERMS6
+.f78d	a9 06		lda #$06		LDA #$06			;Not Input File
+>f78f	2c					.byte $2C
+.f790					IOERMS7
+.f790	a9 07		lda #$07		LDA #$07			;Not Output File
+>f792	2c					.byte $2C
+.f793					IOERMS8
+.f793	a9 08		lda #$08		LDA #$08			;Missing File Name
+>f795	2c					.byte $2C
+.f796					IOERMS9
+.f796	a9 09		lda #$09		LDA #$09			;Illegal Device Number
+.f798	48		pha			PHA				;save error#
+.f799	20 cc ff	jsr $ffcc		JSR CLRCH			;clear I/O channel
+.f79c	a0 00		ldy #$00		LDY #$00
+.f79e	24 9d		bit $9d			BIT CMDMOD			;BIT7=1 for direct
+.f7a0	50 0a		bvc $f7ac		BVC IOERMSEX			;$F7AC must be RUN mode, exit
+.f7a2	20 e6 f1	jsr $f1e6		JSR MSG				;print "I/O ERROR #" message
+.f7a5	68		pla			PLA				;get error#
+.f7a6	48		pha			PHA
+.f7a7	09 30		ora #$30		ORA #%00110000			;$30 convert to ASCII
+.f7a9	20 d2 ff	jsr $ffd2		JSR CHROUT			;output error#
+.f7ac					IOERMSEX
+.f7ac	68		pla			PLA
+.f7ad	38		sec			SEC
+.f7ae	60		rts			RTS
+.f7af					LOCTPH
+.f7af	a5 93		lda $93			LDA IOFLG2
+.f7b1	48		pha			PHA				;save load/verif flag
+.f7b2	20 c0 f8	jsr $f8c0		JSR TPREAD			;read block
+.f7b5	68		pla			PLA
+.f7b6	85 93		sta $93			STA IOFLG2			;restore flag
+.f7b8	b0 2c		bcs $f7e6		BCS LOCTPEX			;F7E6 error, end
+.f7ba	a0 00		ldy #$00		LDY #$00			;index reg
+.f7bc	b1 b2		lda ($b2),y		LDA (TAPE1),Y			;get header type
+.f7be	c9 05		cmp #$05		CMP #$05			;EOT?
+.f7c0	f0 24		beq $f7e6		BEQ LOCTPEX			;$F7E6 yes, exit
+.f7c2	c9 01		cmp #$01		CMP #$01			;BASIC program?
+.f7c4	f0 08		beq $f7ce		BEQ LOCTP1			;$F7CE yes, branch
+.f7c6	c9 03		cmp #$03		CMP #$03			;ML program?
+.f7c8	f0 04		beq $f7ce		BEQ LOCTP1			;$F7CE yes, branch
+.f7ca	c9 04		cmp #$04		CMP #$04			;data block header?
+.f7cc	d0 e1		bne $f7af		BNE LOCTPH			;data block, so read next header
+.f7ce					LOCTP1
+.f7ce	aa		tax			TAX
+.f7cf	24 9d		bit $9d			BIT CMDMOD			;direct mode?
+.f7d1	10 11		bpl $f7e4		BPL LOCTPEX-2			;$F7E4 no, continue
+.f7d3	a0 63		ldy #$63		LDY #KIM_FOUN			;setup for "Found" msg
+.f7d5	20 e6 f1	jsr $f1e6		JSR MSG				;print it
+.f7d8	a0 05		ldy #$05		LDY #$05			;offset to file name
+.f7da					LOCLOOP
+.f7da	b1 b2		lda ($b2),y		LDA (TAPE1),Y			;print loop
+.f7dc	20 d2 ff	jsr $ffd2		JSR CHROUT
+.f7df	c8		iny			INY
+.f7e0	c0 15		cpy #$15		CPY #$15			;16 characters
+.f7e2	d0 f6		bne $f7da		BNE LOCLOOP			;$F7DA loop
+.f7e4	18		clc			CLC
+.f7e5	88		dey			DEY
+.f7e6					LOCTPEX
+.f7e6	60		rts			RTS
+.f7e7					WRTPHD
+.f7e7	85 9e		sta $9e			STA TPTR1			;save header type
+.f7e9	20 4d f8	jsr $f84d		JSR GETBFA			;get buffer address
+.f7ec	90 5e		bcc $f84c		BCC WRTPEX			;$F84C
+.f7ee	a5 c2		lda $c2			LDA STAL+1
+.f7f0	48		pha			PHA				;save...start H
+.f7f1	a5 c1		lda $c1			LDA STAL
+.f7f3	48		pha			PHA				;...start L
+.f7f4	a5 af		lda $af			LDA EAL+1
+.f7f6	48		pha			PHA				;...end H
+.f7f7	a5 ae		lda $ae			LDA EAL
+.f7f9	48		pha			PHA				;...end L
+.f7fa	a0 bf		ldy #$bf		LDY #$BF			;buffer length
+.f7fc	a9 20		lda #$20		LDA #$20
+.f7fe					WRTPLP1
+.f7fe	91 b2		sta ($b2),y		STA (TAPE1),Y			;clear buffer
+.f800	88		dey			DEY
+.f801	d0 fb		bne $f7fe		BNE WRTPLP1			;$F7FE
+.f803	a5 9e		lda $9e			LDA TPTR1			;get header type
+.f805	91 b2		sta ($b2),y		STA (TAPE1),Y			;write it
+.f807	c8		iny			INY
+.f808	a5 c1		lda $c1			LDA STAL			;get start L
+.f80a	91 b2		sta ($b2),y		STA (TAPE1),Y			;write it
+.f80c	c8		iny			INY
+.f80d	a5 c2		lda $c2			LDA STAL+1			;get start H
+.f80f	91 b2		sta ($b2),y		STA (TAPE1),Y			;write it
+.f811	c8		iny			INY
+.f812	a5 ae		lda $ae			LDA EAL				;get end L
+.f814	91 b2		sta ($b2),y		STA (TAPE1),Y			;write it
+.f816	c8		iny			INY
+.f817	a5 af		lda $af			LDA EAL+1			;get end H
+.f819	91 b2		sta ($b2),y		STA (TAPE1),Y			;write it
+.f81b	c8		iny			INY
+.f81c	84 9f		sty $9f			STY TPTR2			;save buffer offset
+.f81e	a0 00		ldy #$00		LDY #$00			;filename loop counter
+.f820	84 9e		sty $9e			STY TPTR1			;save loop counter
+.f822					WRTPLP2
+.f822	a4 9e		ldy $9e			LDY TPTR1			;get loop counter
+.f824	c4 b7		cpy $b7			CPY FNMLEN			;compare filename length
+.f826	f0 0c		beq $f834		BEQ WRTPH1			;$F834 done
+.f828	b1 bb		lda ($bb),y		LDA (FNPTR),Y			;get filename char
+.f82a	a4 9f		ldy $9f			LDY TPTR2			;get tape buffer pointer
+.f82c	91 b2		sta ($b2),y		STA (TAPE1),Y			;write char to buffer
+.f82e	e6 9e		inc $9e			INC TPTR1			;increment loop counters
+.f830	e6 9f		inc $9f			INC TPTR2
+.f832	d0 ee		bne $f822		BNE WRTPLP2			;$F822 loop
+.f834					WRTPH1
+.f834	20 54 f8	jsr $f854		JSR SETBST			;set start and end address pointers
+.f837	a9 69		lda #$69		LDA #$69			;chacksum block ID
+.f839	85 ab		sta $ab			STA RIPRTY			;save parity character
+.f83b	20 ea f8	jsr $f8ea		JSR TPWRIT1			;$F8EA write block
+.f83e	a8		tay			TAY				;restore start and end addresses
+.f83f	68		pla			PLA
+.f840	85 ae		sta $ae			STA EAL
+.f842	68		pla			PLA
+.f843	85 af		sta $af			STA EAL+1
+.f845	68		pla			PLA
+.f846	85 c1		sta $c1			STA STAL
+.f848	68		pla			PLA
+.f849	85 c2		sta $c2			STA STAL+1
+.f84b	98		tya			TYA
+.f84c					WRTPEX
+.f84c	60		rts			RTS				;exit
+.f84d					GETBFA
+.f84d	a6 b2		ldx $b2			LDX TAPE1
+.f84f	a4 b3		ldy $b3			LDY TAPE1+1
+.f851	c0 02		cpy #$02		CPY #$02			;is buffer at $02xx?
+.f853	60		rts			RTS
+.f854					SETBST
+.f854	20 4d f8	jsr $f84d		JSR GETBFA			;get buffer address
+.f857	8a		txa			TXA
+.f858	85 c1		sta $c1			STA STAL			;start=start of buffer
+.f85a	18		clc			CLC
+.f85b	69 c0		adc #$c0		ADC #$C0			;end=start+192
+.f85d	85 ae		sta $ae			STA EAL
+.f85f	98		tya			TYA
+.f860	85 c2		sta $c2			STA STAL+1
+.f862	69 00		adc #$00		ADC #$00
+.f864	85 af		sta $af			STA EAL+1
+.f866	60		rts			RTS
+.f867					LOCSPH
+.f867	20 af f7	jsr $f7af		JSR LOCTPH			;search for next header
+.f86a	b0 1d		bcs $f889		BCS LCSPEXC+1			;$F889 return EOT? Go to ready
+.f86c	a0 05		ldy #$05		LDY #$05			;filename offset
+.f86e	84 9f		sty $9f			STY TPTR2			;save offset
+.f870	a0 00		ldy #$00		LDY #$00			;loop counter
+.f872	84 9e		sty $9e			STY TPTR1			;save it
+.f874					LCSPHLP
+.f874	c4 b7		cpy $b7			CPY FNMLEN			;compare filename length
+.f876	f0 10		beq $f888		BEQ LCSPEXC			;$F888 conter 0, done
+.f878	b1 bb		lda ($bb),y		LDA (FNPTR),Y			;get filename letter
+.f87a	a4 9f		ldy $9f			LDY TPTR2
+.f87c	d1 b2		cmp ($b2),y		CMP (TAPE1),Y			;compare to tape header
+.f87e	d0 e7		bne $f867		BNE LOCSPH			;f867 different, get next header
+.f880	e6 9e		inc $9e			INC TPTR1			;increment counters
+.f882	e6 9f		inc $9f			INC TPTR2
+.f884	a4 9e		ldy $9e			LDY TPTR1
+.f886	d0 ec		bne $f874		BNE LCSPHLP			;$F874 loop
+.f888					LCSPEXC
+.f888	18		clc			CLC
+.f889	60		rts			RTS
+.f88a					INCTPT
+.f88a	20 4d f8	jsr $f84d		JSR GETBFA			;get buffer to .X/.Y
+.f88d	e6 a6		inc $a6			INC BUFPNT			;increment pointer in buffer
+.f88f	a4 a6		ldy $a6			LDY BUFPNT			;get pointer
+.f891	c0 c0		cpy #$c0		CPY #$C0			;at top of buffer?
+.f893	60		rts			RTS				;return
+.f894					PLAYMS
+.f894	20 ab f8	jsr $f8ab		JSR TPSTAT			;get key status
+.f897	f0 1c		beq $f8b5		BEQ TPSTEX			;$F8B5 pressed, exit
+.f899	a0 1b		ldy #$1b		LDY #KIM_PLAY			;offset for "Press Play..." message
+.f89b					PLAYMS1
+.f89b	20 e6 f1	jsr $f1e6		JSR MSG				;print it
+.f89e					WTPLAY
+.f89e	20 4b f9	jsr $f94b		JSR TPSTOP
+.f8a1	20 ab f8	jsr $f8ab		JSR TPSTAT			;get key status
+.f8a4	d0 f8		bne $f89e		BNE WTPLAY			;$F89E wait for PLAY switch
+.f8a6	a0 6a		ldy #$6a		LDY #KIM_OK			;offset for "OK"
+.f8a8	4c e6 f1	jmp $f1e6		JMP MSG				;print it
+.f8ab					TPSTAT
+.f8ab	a9 40		lda #$40		LDA #%01000000			;$40
+.f8ad	2c 1f 91	bit $911f		BIT VV911F			;switch sense
+.f8b0	d0 03		bne $f8b5		BNE TPSTEX			;$F8B5 not pressed, exit
+.f8b2	2c 1f 91	bit $911f		BIT VV911F			;button pressed. Setup for another
+.f8b5					TPSTEX
+.f8b5	18		clc			CLC
+.f8b6	60		rts			RTS				;return clear
+.f8b7					RECDMS
+.f8b7	20 ab f8	jsr $f8ab		JSR TPSTAT			;get button status
+.f8ba	f0 f9		beq $f8b5		BEQ TPSTEX			;$F8B5 pressed? Yes, continue
+.f8bc	a0 2e		ldy #$2e		LDY #KIM_RECP			;no, remind to "Press Play & Record"
+.f8be	d0 db		bne $f89b		BNE PLAYMS1			;$F89B JSR MSG
+.f8c0					TPREAD
+.f8c0	a9 00		lda #$00		LDA #$00
+.f8c2	85 90		sta $90			STA CSTAT			;clear status variable...
+.f8c4	85 93		sta $93			STA IOFLG2			;and read/verif flag
+.f8c6					TPREAD1
+.f8c6	20 54 f8	jsr $f854		JSR SETBST			;set tape buffer pointers
+.f8c9					TPREAD2
+.f8c9	20 94 f8	jsr $f894		JSR PLAYMS			;wait for Play key
+.f8cc	b0 1f		bcs $f8ed		BCS TPCODE-2			;$F8ED
+.f8ce	78		sei			SEI				;disable interrupts
+.f8cf	a9 00		lda #$00		LDA #$00			;clear work memory for IRQ routines
+.f8d1	85 aa		sta $aa			STA RIDATA
+.f8d3	85 b4		sta $b4			STA BITTS
+.f8d5	85 b0		sta $b0			STA TPCON1
+.f8d7	85 9e		sta $9e			STA TPTR1
+.f8d9	85 9f		sta $9f			STA TPTR2
+.f8db	85 9c		sta $9c			STA BYTINF
+.f8dd	a9 82		lda #$82		LDA #$82			;Timer H constant
+.f8df	a2 0e		ldx #$0e		LDX #$0E			;number for IRQ vector
+.f8e1	d0 11		bne $f8f4		BNE TPCODE1			;$F8F4
+.f8e3					TPWRIT
+.f8e3	20 54 f8	jsr $f854		JSR SETBST			;get buffer pointers
+.f8e6	a9 14		lda #$14		LDA #$14			;checksum
+.f8e8	85 ab		sta $ab			STA RIPRTY			;save it
+.f8ea					TPWRIT1
+.f8ea	20 b7 f8	jsr $f8b7		JSR RECDMS			;wait for Record+Play keys
+.f8ed	b0 68		bcs $f957		BCS TPSTPX1			;$F957 exit
+.f8ef					TPCODE
+.f8ef	78		sei			SEI				;disable interrupts
+.f8f0	a9 a0		lda #$a0		LDA #%10100000			;$A0 Timer H constant
+.f8f2	a2 08		ldx #$08		LDX #%00001000			;$08 number for IRQ vector
+.f8f4					TPCODE1
+.f8f4	a0 7f		ldy #$7f		LDY #%01111111			;$7F disable interrupts
+.f8f6	8c 2e 91	sty $912e		STY VV912E
+.f8f9	8d 2e 91	sta $912e		STA VV912E			;enable timer 2
+.f8fc	20 60 f1	jsr $f160		JSR SBIDLE			;wait for timeout
+.f8ff	ad 14 03	lda $0314		LDA IRQVP			;save current IRQ Vector
+.f902	8d 9f 02	sta $029f		STA TAPIRQ
+.f905	ad 15 03	lda $0315		LDA IRQVP+1
+.f908	8d a0 02	sta $02a0		STA TAPIRQ+1
+.f90b	20 fb fc	jsr $fcfb		JSR STOIRQ1			;$FCFB .X=8 set tape IRQ vectors
+.f90e	a9 02		lda #$02		LDA #$02			;read # of blocks
+.f910	85 be		sta $be			STA FSBLK
+.f912	20 db fb	jsr $fbdb		JSR NCHAR			;set bit counter for serial output
+.f915	ad 1c 91	lda $911c		LDA VV911C
+.f918	29 fd		and #$fd		AND #%11111101			;$FD CA2 manual low
+.f91a	09 0c		ora #$0c		ORA #%00001100			;$0C force bits 2,3 high
+.f91c	8d 1c 91	sta $911c		STA VV911C			;switch on tape drive
+.f91f	85 c0		sta $c0			STA CAS1			;flag as on
+.f921	a2 ff		ldx #$ff		LDX #$FF			;delay loop for high (outter)
+.f923	a0 ff		ldy #$ff		LDY #$FF			;inner loop
+.f925					TPCDLP1
+.f925	88		dey			DEY
+.f926	d0 fd		bne $f925		BNE TPCDLP1			;$F925
+.f928	ca		dex			DEX
+.f929	d0 f8		bne $f923		BNE TPCDLP1-2			;$F923 outside loop
+.f92b	8d 29 91	sta $9129		STA VV9129
+.f92e	58		cli			CLI			;allow tape interrupts
+.f92f					TPCDLP2
+.f92f	ad a0 02	lda $02a0		LDA TAPIRQ+1			;check IRQ direction
+.f932	cd 15 03	cmp $0315		CMP IRQVP+1			;standard vector?
+.f935	18		clc			CLC
+.f936	f0 1f		beq $f957		BEQ TPSTPX1			;$F957 yes, ready
+.f938	20 4b f9	jsr $f94b		JSR TPSTOP			;no, check STOP key
+.f93b	ad 2d 91	lda $912d		LDA VV912D			;timer 1 IF clear?
+.f93e	29 40		and #$40		AND #%01000000			;$40
+.f940	f0 ed		beq $f92f		BEQ TPCDLP2			;$F92F continue
+.f942	ad 14 91	lda $9114		LDA VV9114
+.f945	20 34 f7	jsr $f734		JSR IUDTIM			;update RTC
+.f948	4c 2f f9	jmp $f92f		JMP TPCDLP2			;$F92F loop
+.f94b					TPSTOP
+.f94b	20 e1 ff	jsr $ffe1		JSR STOP			;scan STOP key
+.f94e	18		clc			CLC
+.f94f	d0 0b		bne $f95c		BNE TPSTPX			;$F95C not pressed, return
+.f951	20 cf fc	jsr $fccf		JSR RESIRQ			;pressed, turn drive off and restore IRQ
+.f954	38		sec			SEC				;set error flag
+.f955	68		pla			PLA				;pop return address
+.f956	68		pla			PLA
+.f957					TPSTPX1
+.f957	a9 00		lda #$00		LDA #$00			;flag normal IRQ vector
+.f959	8d a0 02	sta $02a0		STA TAPIRQ+1
+.f95c					TPSTPX
+.f95c	60		rts			RTS
+.f95d					SETRDT
+.f95d	86 b1		stx $b1			STX TPCON2
+.f95f	a5 b0		lda $b0			LDA TPCON1
+.f961	0a		asl a			ASL A
+.f962	0a		asl a			ASL A
+.f963	18		clc			CLC
+.f964	65 b0		adc $b0			ADC TPCON1
+.f966	18		clc			CLC
+.f967	65 b1		adc $b1			ADC TPCON2
+.f969	85 b1		sta $b1			STA TPCON2
+.f96b	a9 00		lda #$00		LDA #$00
+.f96d	24 b0		bit $b0			BIT TPCON1
+.f96f	30 01		bmi $f972		BMI SETRD_S1			;$F972
+.f971	2a		rol a			ROL A
+.f972					SETRD_S1
+.f972	06 b1		asl $b1			ASL TPCON2
+.f974	2a		rol a			ROL A
+.f975	06 b1		asl $b1			ASL TPCON2
+.f977	2a		rol a			ROL A
+.f978	aa		tax			TAX
+.f979					RDTLP1
+.f979	ad 28 91	lda $9128		LDA VV9128
+.f97c	c9 15		cmp #$15		CMP #$15
+.f97e	90 f9		bcc $f979		BCC RDTLP1			;$F979
+.f980	65 b1		adc $b1			ADC TPCON2
+.f982	8d 24 91	sta $9124		STA VV9124
+.f985	8a		txa			TXA
+.f986	6d 29 91	adc $9129		ADC VV9129
+.f989	8d 25 91	sta $9125		STA VV9124+1
+.f98c	58		cli			CLI
+.f98d	60		rts			RTS
+.f98e					RDTPBT
+.f98e	ae 29 91	ldx $9129		LDX VV9129
+.f991	a0 ff		ldy #$ff		LDY #$FF
+.f993	98		tya			TYA
+.f994	ed 28 91	sbc $9128		SBC VV9128
+.f997	ec 29 91	cpx $9129		CPX VV9129
+.f99a	d0 f2		bne $f98e		BNE RDTPBT
+.f99c	86 b1		stx $b1			STX TPCON2
+.f99e	aa		tax			TAX
+.f99f	8c 28 91	sty $9128		STY VV9128
+.f9a2	8c 29 91	sty $9129		STY VV9129
+.f9a5	98		tya			TYA
+.f9a6	e5 b1		sbc $b1			SBC TPCON2
+.f9a8	86 b1		stx $b1			STX TPCON2
+.f9aa	4a		lsr a			LSR A
+.f9ab	66 b1		ror $b1			ROR TPCON2
+.f9ad	4a		lsr a			LSR A
+.f9ae	66 b1		ror $b1			ROR TPCON2
+.f9b0	a5 b0		lda $b0			LDA TPCON1
+.f9b2	18		clc			CLC
+.f9b3	69 3c		adc #$3c		ADC #$3C
+.f9b5	2c 21 91	bit $9121		BIT VV9121
+.f9b8	c5 b1		cmp $b1			CMP TPCON2
+.f9ba	b0 4a		bcs $fa06		BCS RDTP4			;$FA06
+.f9bc	a6 9c		ldx $9c			LDX BYTINF
+.f9be	f0 03		beq $f9c3		BEQ RDTPB_S1			;F9C3
+.f9c0	4c ad fa	jmp $faad		JMP STORTC			;save tape IRQs
+.f9c3					RDTPB_S1
+.f9c3	a6 a3		ldx $a3			LDX SBITCF
+.f9c5	30 1b		bmi $f9e2		BMI RDTP1			;$F9E2
+.f9c7	a2 00		ldx #$00		LDX #$00
+.f9c9	69 30		adc #$30		ADC #$30
+.f9cb	65 b0		adc $b0			ADC TPCON1
+.f9cd	c5 b1		cmp $b1			CMP TPCON2
+.f9cf	b0 1c		bcs $f9ed		BCS RDTP2			;$F9ED
+.f9d1	e8		inx			INX
+.f9d2	69 26		adc #$26		ADC #$26
+.f9d4	65 b0		adc $b0			ADC TPCON1
+.f9d6	c5 b1		cmp $b1			CMP TPCON2
+.f9d8	b0 17		bcs $f9f1		BCS RDTP3			;$F9F1
+.f9da	69 2c		adc #$2c		ADC #$2C
+.f9dc	65 b0		adc $b0			ADC TPCON1
+.f9de	c5 b1		cmp $b1			CMP TPCON2
+.f9e0	90 03		bcc $f9e5		BCC RDTPLP1			;$F9E5
+.f9e2					RDTP1
+.f9e2	4c 60 fa	jmp $fa60		JMP RDTP6A			;$FA60
+.f9e5					RDTPLP1
+.f9e5	a5 b4		lda $b4			LDA BITTS
+.f9e7	f0 1d		beq $fa06		BEQ RDTP4			;$FA06
+.f9e9	85 a8		sta $a8			STA BITCI
+.f9eb	d0 19		bne $fa06		BNE RDTP4			;$FA06
+.f9ed					RDTP2
+.f9ed	e6 a9		inc $a9			INC RINONE
+.f9ef	b0 02		bcs $f9f3		BCS RDTP3A			;$F9F3
+.f9f1					RDTP3
+.f9f1	c6 a9		dec $a9			DEC RINONE
+.f9f3					RDTP3A
+.f9f3	38		sec			SEC
+.f9f4	e9 13		sbc #$13		SBC #$13
+.f9f6	e5 b1		sbc $b1			SBC TPCON2
+.f9f8	65 92		adc $92			ADC SVXT
+.f9fa	85 92		sta $92			STA SVXT
+.f9fc	a5 a4		lda $a4			LDA CYCLE
+.f9fe	49 01		eor #$01		EOR #$01
+.fa00	85 a4		sta $a4			STA CYCLE
+.fa02	f0 21		beq $fa25		BEQ RDTP3C			;$FA25
+.fa04	86 d7		stx $d7			STX LASTKY
+.fa06					RDTP4
+.fa06	a5 b4		lda $b4			LDA BITTS
+.fa08	f0 18		beq $fa22		BEQ RDTPEX1			;$FA22
+.fa0a	2c 2d 91	bit $912d		BIT VV912D
+.fa0d	50 13		bvc $fa22		BVC RDTPEX1			;$FA22
+.fa0f	a9 00		lda #$00		LDA #$00
+.fa11	85 a4		sta $a4			STA CYCLE
+.fa13	a5 a3		lda $a3			LDA SBITCF
+.fa15	10 30		bpl $fa47		BPL RDTP6			;$FA47
+.fa17	30 c9		bmi $f9e2		BMI RDTP1			;$F9E2
+.fa19					RDTP3B
+.fa19	a2 a6		ldx #$a6		LDX #$A6
+.fa1b	20 5d f9	jsr $f95d		JSR SETRDT
+.fa1e	a5 9b		lda $9b			LDA TPRTY
+.fa20	d0 c3		bne $f9e5		BNE RDTPLP1			;$F9E5
+.fa22					RDTPEX1
+.fa22	4c 56 ff	jmp $ff56		JMP EOI				;return from interrupt
+.fa25					RDTP3C
+.fa25	a5 92		lda $92			LDA SVXT
+.fa27	f0 07		beq $fa30		BEQ RDTP5A			;$FA30
+.fa29	30 03		bmi $fa2e		BMI RDTP5			;$FA2E
+.fa2b	c6 b0		dec $b0			DEC TPCON1
+>fa2d	2c					.byte $2C				;bit $b0e6
+.fa2e					RDTP5
+.fa2e	e6 b0		inc $b0			INC TPCON1
+.fa30					RDTP5A
+.fa30	a9 00		lda #$00		LDA #$00
+.fa32	85 92		sta $92			STA SVXT
+.fa34	e4 d7		cpx $d7			CPX LASTKY
+.fa36	d0 0f		bne $fa47		BNE RDTP6			;$FA47
+.fa38	8a		txa			TXA
+.fa39	d0 aa		bne $f9e5		BNE RDTPLP1			;$F9E5
+.fa3b	a5 a9		lda $a9			LDA RINONE
+.fa3d	30 c7		bmi $fa06		BMI RDTP4			;$FA06
+.fa3f	c9 10		cmp #$10		CMP #$10
+.fa41	90 c3		bcc $fa06		BCC RDTP4			;$FA06
+.fa43	85 96		sta $96			STA EOTFLG
+.fa45	b0 bf		bcs $fa06		BCS RDTP4			;$FA06
+.fa47					RDTP6
+.fa47	8a		txa			TXA
+.fa48	45 9b		eor $9b			EOR TPRTY
+.fa4a	85 9b		sta $9b			STA TPRTY
+.fa4c	a5 b4		lda $b4			LDA BITTS
+.fa4e	f0 d2		beq $fa22		BEQ RDTPEX1			;$FA22
+.fa50	c6 a3		dec $a3			DEC SBITCF
+.fa52	30 c5		bmi $fa19		BMI RDTP3B			;$FA19
+.fa54	46 d7		lsr $d7			LSR LASTKY
+.fa56	66 bf		ror $bf			ROR MYCH
+.fa58	a2 da		ldx #$da		LDX #$DA
+.fa5a	20 5d f9	jsr $f95d		JSR SETRDT
+.fa5d	4c 56 ff	jmp $ff56		JMP EOI				;return from interrupt
+.fa60					RDTP6A
+.fa60	a5 96		lda $96			LDA EOTFLG
+.fa62	f0 04		beq $fa68		BEQ RDTP7			;$FA68
+.fa64	a5 b4		lda $b4			LDA BITTS
+.fa66	f0 04		beq $fa6c		BEQ RDTP8			;$FA6C
+.fa68					RDTP7
+.fa68	a5 a3		lda $a3			LDA SBITCF
+.fa6a	10 85		bpl $f9f1		BPL RDTP3			;$F9F1
+.fa6c					RDTP8
+.fa6c	46 b1		lsr $b1			LSR TPCON2
+.fa6e	a9 93		lda #$93		LDA #$93
+.fa70	38		sec			SEC
+.fa71	e5 b1		sbc $b1			SBC TPCON2
+.fa73	65 b0		adc $b0			ADC TPCON1
+.fa75	0a		asl a			ASL A
+.fa76	aa		tax			TAX
+.fa77	20 5d f9	jsr $f95d		JSR SETRDT
+.fa7a	e6 9c		inc $9c			INC BYTINF
+.fa7c	a5 b4		lda $b4			LDA BITTS
+.fa7e	d0 11		bne $fa91		BNE RDTP9			;$FA91
+.fa80	a5 96		lda $96			LDA EOTFLG
+.fa82	f0 26		beq $faaa		BEQ RDTPEX2			;$FAAA
+.fa84	85 a8		sta $a8			STA BITCI
+.fa86	a9 00		lda #$00		LDA #$00
+.fa88	85 96		sta $96			STA EOTFLG
+.fa8a	a9 c0		lda #$c0		LDA #%11000000			;$C0
+.fa8c	8d 2e 91	sta $912e		STA VV912E
+.fa8f	85 b4		sta $b4			STA BITTS
+.fa91					RDTP9
+.fa91	a5 96		lda $96			LDA EOTFLG
+.fa93	85 b5		sta $b5			STA NXTBIT
+.fa95	f0 09		beq $faa0		BEQ RDTP10			;$FAA0
+.fa97	a9 00		lda #$00		LDA #$00
+.fa99	85 b4		sta $b4			STA BITTS
+.fa9b	a9 40		lda #$40		LDA #%01000000			;$40
+.fa9d	8d 2e 91	sta $912e		STA VV912E
+.faa0					RDTP10
+.faa0	a5 bf		lda $bf			LDA MYCH
+.faa2	85 bd		sta $bd			STA ROPRTY
+.faa4	a5 a8		lda $a8			LDA BITCI
+.faa6	05 a9		ora $a9			ORA RINONE
+.faa8	85 b6		sta $b6			STA RODATA
+.faaa					RDTPEX2
+.faaa	4c 56 ff	jmp $ff56		JMP EOI				;return from interrupt
+.faad					STORTC
+.faad	20 db fb	jsr $fbdb		JSR NCHAR
+.fab0	85 9c		sta $9c			STA BYTINF
+.fab2	a2 da		ldx #$da		LDX #%11011010			;$DA
+.fab4	20 5d f9	jsr $f95d		JSR SETRDT
+.fab7	a5 be		lda $be			LDA FSBLK
+.fab9	f0 02		beq $fabd		BEQ STOTC_S1			;FABD
+.fabb	85 a7		sta $a7			STA INBIT
+.fabd					STOTC_S1
+.fabd	a9 0f		lda #$0f		LDA #$0F
+.fabf	24 aa		bit $aa			BIT RIDATA
+.fac1	10 17		bpl $fada		BPL STOTC1			;FADA
+.fac3	a5 b5		lda $b5			LDA NXTBIT
+.fac5	d0 0c		bne $fad3		BNE STOTCEX1			;$FAD3
+.fac7	a6 be		ldx $be			LDX FSBLK
+.fac9	ca		dex			DEX
+.faca	d0 0b		bne $fad7		BNE STOTCEX1A			;$FAD7
+.facc	a9 08		lda #$08		LDA #$08			;I/O error 8
+.face	20 6a fe	jsr $fe6a		JSR ISETMS1			;"LONG BLOCK" error
+.fad1	d0 04		bne $fad7		BNE STOTCEX1A
+.fad3					STOTCEX1
+.fad3	a9 00		lda #$00		LDA #$00
+.fad5	85 aa		sta $aa			STA RIDATA
+.fad7					STOTCEX1A
+.fad7	4c 56 ff	jmp $ff56		JMP EOI				;return from interrupt
+.fada					STOTC1
+.fada	70 31		bvs $fb0d		BVS STOTC4A			;$FB0D
+.fadc	d0 18		bne $faf6		BNE STOTC3			;$FAF6
+.fade	a5 b5		lda $b5			LDA NXTBIT
+.fae0	d0 f5		bne $fad7		BNE STOTCEX1A
+.fae2	a5 b6		lda $b6			LDA RODATA
+.fae4	d0 f1		bne $fad7		BNE STOTCEX1A
+.fae6	a5 a7		lda $a7			LDA INBIT
+.fae8	4a		lsr a			LSR A
+.fae9	a5 bd		lda $bd			LDA ROPRTY
+.faeb	30 03		bmi $faf0		BMI STOTC2			;$FAF0
+.faed	90 18		bcc $fb07		BCC STOTC4			;$FB07
+.faef	18		clc			CLC
+.faf0					STOTC2
+.faf0	b0 15		bcs $fb07		BCS STOTC4			;$FB07
+.faf2	29 0f		and #$0f		AND #%00001111			;$0F
+.faf4	85 aa		sta $aa			STA RIDATA
+.faf6					STOTC3
+.faf6	c6 aa		dec $aa			DEC RIDATA
+.faf8	d0 dd		bne $fad7		BNE STOTCEX1A
+.fafa	a9 40		lda #$40		LDA #$40
+.fafc	85 aa		sta $aa			STA RIDATA
+.fafe	20 d2 fb	jsr $fbd2		JSR RSTTPP
+.fb01	a9 00		lda #$00		LDA #$00
+.fb03	85 ab		sta $ab			STA RIPRTY
+.fb05	f0 d0		beq $fad7		BEQ STOTCEX1A
+.fb07					STOTC4
+.fb07	a9 80		lda #$80		LDA #$80
+.fb09	85 aa		sta $aa			STA RIDATA
+.fb0b	d0 ca		bne $fad7		BNE STOTCEX1A
+.fb0d					STOTC4A
+.fb0d	a5 b5		lda $b5			LDA NXTBIT
+.fb0f	f0 0a		beq $fb1b		BEQ STOTC5			;$FB1B
+.fb11	a9 04		lda #$04		LDA #$04			;I/O error 4
+.fb13	20 6a fe	jsr $fe6a		JSR ISETMS1			;$FE6A "SHORT BLOCK" error
+.fb16	a9 00		lda #$00		LDA #$00
+.fb18	4c 97 fb	jmp $fb97		JMP STOTC11A			;$FB97
+.fb1b					STOTC5
+.fb1b	20 11 fd	jsr $fd11		JSR CKWRPT
+.fb1e	90 03		bcc $fb23		BCC STOTC_S2			;$FB23
+.fb20	4c 95 fb	jmp $fb95		JMP STOTC11			;$FB95
+.fb23					STOTC_S2
+.fb23	a6 a7		ldx $a7			LDX INBIT
+.fb25	ca		dex			DEX
+.fb26	f0 2d		beq $fb55		BEQ STOTC7			;$FB55
+.fb28	a5 93		lda $93			LDA IOFLG2
+.fb2a	f0 0c		beq $fb38		BEQ STOTC6			;$FB38
+.fb2c	a0 00		ldy #$00		LDY #$00
+.fb2e	a5 bd		lda $bd			LDA ROPRTY
+.fb30	d1 ac		cmp ($ac),y		CMP (SAL),Y
+.fb32	f0 04		beq $fb38		BEQ STOTC6			;$FB38
+.fb34	a9 01		lda #$01		LDA #$01
+.fb36	85 b6		sta $b6			STA RODATA
+.fb38					STOTC6
+.fb38	a5 b6		lda $b6			LDA RODATA
+.fb3a	f0 4b		beq $fb87		BEQ STOTC10			;$FB87
+.fb3c	a2 3d		ldx #$3d		LDX #$3D
+.fb3e	e4 9e		cpx $9e			CPX TPTR1
+.fb40	90 3e		bcc $fb80		BCC STOTC9			;$FB80
+.fb42	a6 9e		ldx $9e			LDX TPTR1
+.fb44	a5 ad		lda $ad			LDA SAL+1
+.fb46	9d 01 01	sta $0101,x		STA FBUFFR+1,X
+.fb49	a5 ac		lda $ac			LDA SAL
+.fb4b	9d 00 01	sta $0100,x		STA FBUFFR,X
+.fb4e	e8		inx			INX
+.fb4f	e8		inx			INX
+.fb50	86 9e		stx $9e			STX TPTR1
+.fb52	4c 87 fb	jmp $fb87		JMP STOTC10			;$FB87
+.fb55					STOTC7
+.fb55	a6 9f		ldx $9f			LDX TPTR2
+.fb57	e4 9e		cpx $9e			CPX TPTR1
+.fb59	f0 35		beq $fb90		BEQ STOTC10A			;$FB90
+.fb5b	a5 ac		lda $ac			LDA SAL				;error correction pass #2
+.fb5d	dd 00 01	cmp $0100,x		CMP FBUFFR,X
+.fb60	d0 2e		bne $fb90		BNE STOTC10A			;$FB90
+.fb62	a5 ad		lda $ad			LDA SAL+1
+.fb64	dd 01 01	cmp $0101,x		CMP FBUFFR+1,X
+.fb67	d0 27		bne $fb90		BNE STOTC10A			;$FB90
+.fb69	e6 9f		inc $9f			INC TPTR2
+.fb6b	e6 9f		inc $9f			INC TPTR2
+.fb6d	a5 93		lda $93			LDA IOFLG2
+.fb6f	f0 0b		beq $fb7c		BEQ STOTC8			;$FB7C
+.fb71	a5 bd		lda $bd			LDA ROPRTY			;read byte
+.fb73	a0 00		ldy #$00		LDY #$00
+.fb75	d1 ac		cmp ($ac),y		CMP (SAL),Y			;compare to memory
+.fb77	f0 17		beq $fb90		BEQ STOTC10A			;$FB90
+.fb79	c8		iny			INY
+.fb7a	84 b6		sty $b6			STY RODATA
+.fb7c					STOTC8
+.fb7c	a5 b6		lda $b6			LDA RODATA
+.fb7e	f0 07		beq $fb87		BEQ STOTC10			;$FB87
+.fb80					STOTC9
+.fb80	a9 10		lda #$10		LDA #$10			;I/O error #16
+.fb82	20 6a fe	jsr $fe6a		JSR ISETMS1			;$FE6A "SECOND PASS" error
+.fb85	d0 09		bne $fb90		BNE STOTC10A			;$FB90
+.fb87					STOTC10
+.fb87	a5 93		lda $93			LDA IOFLG2			;verify?
+.fb89	d0 05		bne $fb90		BNE STOTC10A			;$FB90 yes, branch
+.fb8b	a8		tay			TAY
+.fb8c	a5 bd		lda $bd			LDA ROPRTY			;read byte
+.fb8e	91 ac		sta ($ac),y		STA (SAL),Y			;save it
+.fb90					STOTC10A
+.fb90	20 1b fd	jsr $fd1b		JSR INCRDP			;increment address pointer
+.fb93	d0 3a		bne $fbcf		BNE STOEX			;$FBCF
+.fb95					STOTC11
+.fb95	a9 80		lda #$80		LDA #$80
+.fb97					STOTC11A
+.fb97	85 aa		sta $aa			STA RIDATA
+.fb99	a6 be		ldx $be			LDX FSBLK
+.fb9b	ca		dex			DEX			;decrement pass counter
+.fb9c	30 02		bmi $fba0		BMI STOTC_S3			;$FBA0
+.fb9e	86 be		stx $be			STX FSBLK
+.fba0					STOTC_S3
+.fba0	c6 a7		dec $a7			DEC INBIT
+.fba2	f0 08		beq $fbac		BEQ STOTC12			;$FBAC
+.fba4	a5 9e		lda $9e			LDA TPTR1
+.fba6	d0 27		bne $fbcf		BNE STOEX			;$FBCF
+.fba8	85 be		sta $be			STA FSBLK
+.fbaa	f0 23		beq $fbcf		BEQ STOEX			;$FBCF
+.fbac					STOTC12
+.fbac	20 cf fc	jsr $fccf		JSR RESIRQ			;one pass done
+.fbaf	20 d2 fb	jsr $fbd2		JSR RSTTPP			;reset address to program start
+.fbb2	a0 00		ldy #$00		LDY #$00
+.fbb4	84 ab		sty $ab			STY RIPRTY
+.fbb6					STORTLP1
+.fbb6	b1 ac		lda ($ac),y		LDA (SAL),Y			;calc program checksum
+.fbb8	45 ab		eor $ab			EOR RIPRTY
+.fbba	85 ab		sta $ab			STA RIPRTY
+.fbbc	20 1b fd	jsr $fd1b		JSR INCRDP			;increment address pointer
+.fbbf	20 11 fd	jsr $fd11		JSR CKWRPT			;reached end?
+.fbc2	90 f2		bcc $fbb6		BCC STORTLP1			;$FBB6 no, continue
+.fbc4	a5 ab		lda $ab			LDA RIPRTY			;calculate checksum
+.fbc6	45 bd		eor $bd			EOR ROPRTY			;compare with tape's checksum
+.fbc8	f0 05		beq $fbcf		BEQ STOEX			;ok
+.fbca	a9 20		lda #$20		LDA #$20			;I/O error 32
+.fbcc	20 6a fe	jsr $fe6a		JSR ISETMS1			;$FE6A "CHECKSUM" error
+.fbcf					STOEX
+.fbcf	4c 56 ff	jmp $ff56		JMP EOI			;return from interrupt
+.fbd2					RSTTPP
+.fbd2	a5 c2		lda $c2			LDA STAL+1
+.fbd4	85 ad		sta $ad			STA SAL+1
+.fbd6	a5 c1		lda $c1			LDA STAL
+.fbd8	85 ac		sta $ac			STA SAL
+.fbda	60		rts			RTS
+.fbdb					NCHAR
+.fbdb	a9 08		lda #$08		LDA #$08
+.fbdd	85 a3		sta $a3			STA SBITCF
+.fbdf	a9 00		lda #$00		LDA #$00
+.fbe1	85 a4		sta $a4			STA CYCLE
+.fbe3	85 a8		sta $a8			STA BITCI
+.fbe5	85 9b		sta $9b			STA TPRTY
+.fbe7	85 a9		sta $a9			STA RINONE
+.fbe9	60		rts			RTS
+.fbea					TONE
+.fbea	a5 bd		lda $bd			LDA ROPRTY			;get bit
+.fbec	4a		lsr a			LSR A				;determine tone length
+.fbed	a9 60		lda #$60		LDA #$60			;set short tone timing (1 bit)
+.fbef	90 02		bcc $fbf3		BCC TONE1			;$FBF3 C=clear
+.fbf1					TONEA
+.fbf1	a9 b0		lda #$b0		LDA #$B0			;set long tone time (0 bit)
+.fbf3					TONE1
+.fbf3	a2 00		ldx #$00		LDX #$00
+.fbf5	8d 28 91	sta $9128		STA VV9128
+.fbf8	8e 29 91	stx $9129		STX VV9129			;setup timer
+.fbfb	ad 20 91	lda $9120		LDA VV9120
+.fbfe	49 08		eor #$08		EOR #%00001000			;$08	invert output bit for tape
+.fc00	8d 20 91	sta $9120		STA VV9120
+.fc03	29 08		and #$08		AND #%00001000
+.fc05	60		rts			RTS
+.fc06					TWRDTA
+.fc06	38		sec			SEC
+.fc07	66 ad		ror $ad			ROR SAL+1
+.fc09	30 3c		bmi $fc47		BMI TWRDEX1			;fc47
+.fc0b					TWRD7
+.fc0b	a5 a8		lda $a8			LDA BITCI
+.fc0d	d0 12		bne $fc21		BNE TWRD1			;$FC21
+.fc0f	a9 10		lda #$10		LDA #$10
+.fc11	a2 01		ldx #$01		LDX #$01
+.fc13	20 f5 fb	jsr $fbf5		JSR TONE1+2			;$FBF5 send frequency
+.fc16	d0 2f		bne $fc47		BNE TWRDEX1			;fc47
+.fc18	e6 a8		inc $a8			INC BITCI
+.fc1a	a5 ad		lda $ad			LDA SAL+1
+.fc1c	10 29		bpl $fc47		BPL TWRDEX1			;fc47
+.fc1e	4c 95 fc	jmp $fc95		JMP WRLEDR			;write second block
+.fc21					TWRD1
+.fc21	a5 a9		lda $a9			LDA RINONE
+.fc23	d0 09		bne $fc2e		BNE TWRD2A			;$FC2B
+.fc25	20 f1 fb	jsr $fbf1		JSR TONEA			;$FBF1 write 0 bit
+.fc28	d0 1d		bne $fc47		BNE TWRDEX1			;fc47
+.fc2a					TWRD2
+.fc2a	e6 a9		inc $a9			INC RINONE			;LDA #$D0
+.fc2c	d0 19		bne $fc47		BNE TWRDEX1			;ORA Y
+.fc2e					TWRD2A
+.fc2e	20 ea fb	jsr $fbea		JSR TONE			;write bit
+.fc31	d0 14		bne $fc47		BNE TWRDEX1			;fc47
+.fc33	a5 a4		lda $a4			LDA CYCLE
+.fc35	49 01		eor #$01		EOR #$01			;invert bit for output
+.fc37	85 a4		sta $a4			STA CYCLE
+.fc39	f0 0f		beq $fc4a		BEQ TWRD3			;$FC4A
+.fc3b	a5 bd		lda $bd			LDA ROPRTY
+.fc3d	49 01		eor #$01		EOR #$01
+.fc3f	85 bd		sta $bd			STA ROPRTY
+.fc41	29 01		and #$01		AND #$01
+.fc43	45 9b		eor $9b			EOR TPRTY
+.fc45	85 9b		sta $9b			STA TPRTY
+.fc47					TWRDEX1
+.fc47	4c 56 ff	jmp $ff56		JMP EOI				;return from interrupt
+.fc4a					TWRD3
+.fc4a	46 bd		lsr $bd			LSR ROPRTY			;next bit
+.fc4c	c6 a3		dec $a3			DEC SBITCF			;decrement counter
+.fc4e	a5 a3		lda $a3			LDA SBITCF
+.fc50	f0 3a		beq $fc8c		BEQ TWRD6			;$FC8C output it
+.fc52	10 f3		bpl $fc47		BPL TWRDEX1			;fc47
+.fc54					TWRD3A
+.fc54	20 db fb	jsr $fbdb		JSR NCHAR			;reset bit counter
+.fc57	58		cli			CLI
+.fc58	a5 a5		lda $a5			LDA CNTDN
+.fc5a	f0 12		beq $fc6e		BEQ TWRD4			;$FC6E
+.fc5c	a2 00		ldx #$00		LDX #$00
+.fc5e	86 d7		stx $d7			STX LASTKY
+.fc60	c6 a5		dec $a5			DEC CNTDN
+.fc62	a6 be		ldx $be			LDX FSBLK
+.fc64	e0 02		cpx #$02		CPX #$02
+.fc66	d0 02		bne $fc6a		BNE TWRD_S1			;FC6A
+.fc68	09 80		ora #$80		ORA #%10000000			;$80
+.fc6a					TWRD_S1
+.fc6a	85 bd		sta $bd			STA ROPRTY			;$BD
+.fc6c	d0 d9		bne $fc47		BNE TWRDEX1			;fc47
+.fc6e					TWRD4
+.fc6e	20 11 fd	jsr $fd11		JSR CKWRPT			;end address reached?
+.fc71	90 0a		bcc $fc7d		BCC TWRD5			;$FC7D
+.fc73	d0 91		bne $fc06		BNE TWRDTA
+.fc75	e6 ad		inc $ad			INC SAL+1
+.fc77	a5 d7		lda $d7			LDA LASTKY
+.fc79	85 bd		sta $bd			STA ROPRTY
+.fc7b	b0 ca		bcs $fc47		BCS TWRDEX1			;fc47
+.fc7d					TWRD5
+.fc7d	a0 00		ldy #$00		LDY #$00			;loop counter
+.fc7f	b1 ac		lda ($ac),y		LDA (SAL),Y			;byte to be written
+.fc81	85 bd		sta $bd			STA ROPRTY
+.fc83	45 d7		eor $d7			EOR LASTKY
+.fc85	85 d7		sta $d7			STA LASTKY
+.fc87	20 1b fd	jsr $fd1b		JSR INCRDP			;increment address pointer
+.fc8a	d0 bb		bne $fc47		BNE TWRDEX1			;fc47
+.fc8c					TWRD6
+.fc8c	a5 9b		lda $9b			LDA TPRTY
+.fc8e	49 01		eor #$01		EOR #$01
+.fc90	85 bd		sta $bd			STA ROPRTY
+.fc92					TPEOI
+.fc92	4c 56 ff	jmp $ff56		JMP EOI				;return from interrupt
+.fc95					WRLEDR
+.fc95	c6 be		dec $be			DEC FSBLK			;decrement block counter
+.fc97	d0 03		bne $fc9c		BNE WRLDR1			;$FC9C more to go
+.fc99	20 08 fd	jsr $fd08		JSR NOMOTR			;none left, kill motor
+.fc9c					WRLDR1
+.fc9c	a9 50		lda #$50		LDA #$50
+.fc9e	85 a7		sta $a7			STA INBIT
+.fca0	a2 08		ldx #$08		LDX #$08
+.fca2	78		sei			SEI
+.fca3	20 fb fc	jsr $fcfb		JSR STOIRQ1			;$FCFB tape IRQs
+.fca6	d0 ea		bne $fc92		BNE TPEOI			;$FC92
+.fca8					WRLDR2
+.fca8	a9 78		lda #$78		LDA #$78			;tone length??
+.fcaa	20 f3 fb	jsr $fbf3		JSR TONE1			;$FBF3 write bit on tape
+.fcad	d0 e3		bne $fc92		BNE TPEOI			;$FC92
+.fcaf	c6 a7		dec $a7			DEC INBIT
+.fcb1	d0 df		bne $fc92		BNE TPEOI			;$FC92
+.fcb3	20 db fb	jsr $fbdb		JSR NCHAR			;set bit counter
+.fcb6	c6 ab		dec $ab			DEC RIPRTY
+.fcb8	10 d8		bpl $fc92		BPL TPEOI			;$FC92
+.fcba	a2 0a		ldx #$0a		LDX #$0A			;IRQ number
+.fcbc	20 fb fc	jsr $fcfb		JSR STOIRQ1			;$FCFB set tape IRQ routine
+.fcbf	58		cli			CLI				;allow interrupts
+.fcc0	e6 ab		inc $ab			INC RIPRTY
+.fcc2	a5 be		lda $be			LDA FSBLK
+.fcc4	f0 30		beq $fcf6		BEQ STOIRQ			;$FCF6
+.fcc6	20 d2 fb	jsr $fbd2		JSR RSTTPP			;set address to start
+.fcc9	a2 09		ldx #$09		LDX #$09
+.fccb	86 a5		stx $a5			STX CNTDN
+.fccd	d0 85		bne $fc54		BNE TWRD3A			;$FC54
+.fccf					RESIRQ
+.fccf	08		php			PHP
+.fcd0	78		sei			SEI				;kill interrupts
+.fcd1	20 08 fd	jsr $fd08		JSR NOMOTR			;kill motor
+.fcd4	a9 7f		lda #$7f		LDA #%01111111			;$7F
+.fcd6	8d 2e 91	sta $912e		STA VV912E			;restore screen
+.fcd9	a9 f7		lda #$f7		LDA #%11110111			;$F7
+.fcdb	8d 20 91	sta $9120		STA VV9120
+.fcde	a9 40		lda #$40		LDA #%01000000			;$40
+.fce0	8d 2b 91	sta $912b		STA VV912B
+.fce3	20 39 fe	jsr $fe39		JSR ENABTM			;enable timers
+.fce6	ad a0 02	lda $02a0		LDA TAPIRQ+1
+.fce9	f0 09		beq $fcf4		BEQ RSIRQEX			;$FCF4
+.fceb	8d 15 03	sta $0315		STA IRQVP+1			;restore IRQs
+.fcee	ad 9f 02	lda $029f		LDA TAPIRQ
+.fcf1	8d 14 03	sta $0314		STA IRQVP
+.fcf4					RSIRQEX
+.fcf4	28		plp			PLP
+.fcf5	60		rts			RTS
+.fcf6					STOIRQ
+.fcf6	20 cf fc	jsr $fccf		JSR RESIRQ			;restore std IRQs
+.fcf9	f0 97		beq $fc92		BEQ TPEOI			;$FC92
+.fcfb					STOIRQ1
+.fcfb	bd e9 fd	lda $fde9,x		LDA RATS3,X			;$FDE9,X set vectors from table
+.fcfe	8d 14 03	sta $0314		STA IRQVP
+.fd01	bd ea fd	lda $fdea,x		LDA RATS3+1,X			;$FDEA,X
+.fd04	8d 15 03	sta $0315		STA IRQVP+1
+.fd07	60		rts			RTS
+.fd08					NOMOTR
+.fd08	ad 1c 91	lda $911c		LDA VV911C
+.fd0b	09 0e		ora #$0e		ORA #%00001110			;$0E
+.fd0d	8d 1c 91	sta $911c		STA VV911C
+.fd10	60		rts			RTS
+.fd11					CKWRPT
+.fd11	38		sec			SEC
+.fd12	a5 ac		lda $ac			LDA SAL				;SAL is current address
+.fd14	e5 ae		sbc $ae			SBC EAL				;EAL is end address
+.fd16	a5 ad		lda $ad			LDA SAL+1
+.fd18	e5 af		sbc $af			SBC EAL+1
+.fd1a	60		rts			RTS
+.fd1b					INCRDP
+.fd1b	e6 ac		inc $ac			INC SAL
+.fd1d	d0 02		bne $fd21		BNE INCRSK			;$FD21
+.fd1f	e6 ad		inc $ad			INC SAL+1
+.fd21					INCRSK
+.fd21	60		rts			RTS
+.fd22					RESET
+.fd22	a2 ff		ldx #$ff		LDX #$FF
+.fd24	78		sei			SEI				;kill interrupts
+.fd25	9a		txs			TXS				;set stack top
+.fd26	d8		cld			CLD
+.fd27	20 3f fd	jsr $fd3f		JSR SCNROM			;check for autostart ROM
+.fd2a	d0 03		bne $fd2f		BNE SKIPA0			;$FD2F not there, skip init
+.fd2c	6c 00 a0	jmp ($a000)		JMP (A0BASE)			;jump to ROM
+.fd2f					SKIPA0
+.fd2f	20 8d fd	jsr $fd8d		JSR RAMTAS			;test RAM
+.fd32	20 52 fd	jsr $fd52		JSR IRESTR			;init work memory
+.fd35	20 f9 fd	jsr $fdf9		JSR IOINIT			;setup hardware
+.fd38	20 18 e5	jsr $e518		JSR CINT1			;init video
+.fd3b	58		cli			CLI
+.fd3c	6c 00 c0	jmp ($c000)		JMP (BENTER)			;enter BASIC
+.fd3f					SCNROM
+.fd3f	a2 05		ldx #$05		LDX #$05			;5 chars to compare
+.fd41					SCNLOOP
+.fd41	bd 4c fd	lda $fd4c,x		LDA SCANEX,X			;$FD4C,X
+.fd44	dd 03 a0	cmp $a003,x		CMP A0BASE+3,X			;$A003,X
+.fd47	d0 03		bne $fd4c		BNE SCANEX			;$FD4C
+.fd49	ca		dex			DEX
+.fd4a	d0 f5		bne $fd41		BNE SCNLOOP			;$FD41
+.fd4c					SCANEX
+.fd4c	60		rts			RTS
+.fd4d					ROMSIG
+>fd4d	41 30 c3 c2 cd				.text "A0", $C3, $C2, $CD		;A0CBM
+.fd52					IRESTR
+.fd52	a2 6d		ldx #$6d		LDX #$6D ;#$EA 			;FIXUP2;#$6D
+.fd54	a0 fd		ldy #$fd		LDY #$FD ;#$EA 			;FIXUP2+1;#$FD $FD6D KERNEL vecs
+.fd56	18		clc			CLC
+.fd57					IVECTR
+.fd57	86 c3		stx $c3			STX MEMUSS			;save vector to temp
+.fd59	84 c4		sty $c4			STY MEMUSS+1
+.fd5b	a0 1f		ldy #$1f		LDY #$1F			;# of bytes to move
+.fd5d					VECLOOP
+.fd5d	b9 14 03	lda $0314,y		LDA IRQVP,Y
+.fd60	b0 02		bcs $fd64		BCS VECSK			;$FD64 branch on CY=1
+.fd62	b1 c3		lda ($c3),y		LDA (MEMUSS),Y
+.fd64					VECSK
+.fd64	91 c3		sta ($c3),y		STA (MEMUSS),Y
+.fd66	99 14 03	sta $0314,y		STA IRQVP,Y
+.fd69	88		dey			DEY
+.fd6a	10 f1		bpl $fd5d		BPL VECLOOP			;$FD5D loop
+.fd6c	60		rts			RTS
+.fd6d					KNRLSV
+>fd6d	bf ea d2 fe ad fe 0a f4			.word IRQVEC, WARMST, LNKNMI, IOPEN
+>fd75	4a f3 c7 f2 09 f3 f3 f3			.word ICLOSE, ICHKIN, ICHKOT, ICLRCH
+>fd7d	0e f2 7a f2 70 f7 f5 f1			.word ICHRIN, ICHROT, ISTOP,  IGETIN
+>fd85	ef f3 d2 fe 49 f5 85 f6			.word ICLALL, WARMST, LNKLOD, LNKSAV
+.fd8d					RAMTAS
+.fd8d	a9 00		lda #$00		LDA #$00
+.fd8f	aa		tax			TAX
+.fd90					RAMTSLP1
+.fd90	95 00		sta $00,x		STA USRPOK,X			;zero page
+.fd92	9d 00 02	sta $0200,x		STA BUF,X			;clear page 2
+.fd95	9d 00 03	sta $0300,x		STA ERRVPT,X			;clear page 3
+.fd98	e8		inx			INX
+.fd99	d0 f5		bne $fd90		BNE RAMTSLP1			;$FD90
+.fd9b	a2 3c		ldx #$3c		LDX #$3C			;setup cassette buffer
+.fd9d	a0 03		ldy #$03		LDY #$03
+.fd9f	86 b2		stx $b2			STX TAPE1
+.fda1	84 b3		sty $b3			STY TAPE1+1
+.fda3	85 c1		sta $c1			STA STAL
+.fda5	85 97		sta $97			STA REGSAV
+.fda7	8d 81 02	sta $0281		STA OSSTAR
+.fdaa	a8		tay			TAY
+.fdab	a9 04		lda #$04		LDA #$04			;check RAM from $0500
+.fdad	85 c2		sta $c2			STA STAL+1
+.fdaf					RAMTASLP2
+.fdaf	e6 c1		inc $c1			INC STAL
+.fdb1	d0 02		bne $fdb5		BNE RAMTAS1			;$FDB5
+.fdb3	e6 c2		inc $c2			INC STAL+1
+.fdb5					RAMTAS1
+.fdb5	20 91 fe	jsr $fe91		JSR MEMTST			;test RAM
+.fdb8	a5 97		lda $97			LDA REGSAV
+.fdba	f0 22		beq $fdde		BEQ RAMTAS3			;$FDDE
+.fdbc	b0 f1		bcs $fdaf		BCS RAMTASLP2			;$FDAF
+.fdbe	a4 c2		ldy $c2			LDY STAL+1			;RAM top
+.fdc0	a6 c1		ldx $c1			LDX STAL
+.fdc2	c0 20		cpy #$20		CPY #$20
+.fdc4	90 25		bcc $fdeb		BCC I6561LP			;$FDEB
+.fdc6	c0 21		cpy #$21		CPY #$21
+.fdc8	b0 08		bcs $fdd2		BCS RAMTAS2			;$FDD2
+.fdca	a0 1e		ldy #$1e		LDY #$1E
+.fdcc	8c 88 02	sty $0288		STY HIPAGE
+.fdcf					RAMTAS1A
+.fdcf	4c 7b fe	jmp $fe7b		JMP STOTOP			;$FE7B set RAM top
+.fdd2					RAMTAS2
+.fdd2	a9 12		lda #$12		LDA #$12
+.fdd4	8d 82 02	sta $0282		STA OSSTAR+1			;set BASIC bottom
+.fdd7	a9 10		lda #$10		LDA #$10
+.fdd9	8d 88 02	sta $0288		STA HIPAGE
+.fddc	d0 f1		bne $fdcf		BNE RAMTAS1A			;$FDCF
+.fdde					RAMTAS3
+.fdde	90 cf		bcc $fdaf		BCC RAMTASLP2			;$FDAF
+.fde0	a5 c2		lda $c2			LDA STAL+1
+.fde2	8d 82 02	sta $0282		STA OSSTAR+1
+.fde5	85 97		sta $97			STA REGSAV
+.fde7	c9 11		cmp #$11		CMP #$11
+.fde9					RATS3
+.fde9	90 c4		bcc $fdaf		BCC RAMTASLP2			;$FDAF
+.fdeb					I6561LP
+.fdeb	20 c3 e5	jsr $e5c3		JSR V6561I-2			;$E5C3 init VIC regs
+.fdee	4c eb fd	jmp $fdeb		JMP I6561LP			;$FDEB
+.fdf1					TAPEVC
+>fdf1	a8 fc 0b fc bf ea 8e f9			.word WRLDR2, TWRD7, IRQVEC, RDTPBT
+.fdf9					IOINIT
+.fdf9	a9 7f		lda #$7f		LDA #%01111111			;$7F
+.fdfb	8d 1e 91	sta $911e		STA VV911E
+.fdfe	8d 2e 91	sta $912e		STA VV912E
+.fe01	a9 40		lda #$40		LDA #%01000000			;$40
+.fe03	8d 2b 91	sta $912b		STA VV912B
+.fe06	a9 40		lda #$40		LDA #%01000000			;$40
+.fe08	8d 1b 91	sta $911b		STA VV911B
+.fe0b	a9 fe		lda #$fe		LDA #%11111110			;$FE
+.fe0d	8d 1c 91	sta $911c		STA VV911C
+.fe10	a9 de		lda #$de		LDA #%11011110			;$DE
+.fe12	8d 2c 91	sta $912c		STA VV912C
+.fe15	a2 00		ldx #$00		LDX #$00
+.fe17	8e 12 91	stx $9112		STX VV9112
+.fe1a	a2 ff		ldx #$ff		LDX #%11111111			;$FF
+.fe1c	8e 22 91	stx $9122		STX VV9122
+.fe1f	a2 00		ldx #$00		LDX #$00
+.fe21	8e 23 91	stx $9123		STX VV9123
+.fe24	a2 80		ldx #$80		LDX #%10000000			;$80
+.fe26	8e 13 91	stx $9113		STX VV9113
+.fe29	a2 00		ldx #$00		LDX #$00
+.fe2b	8e 1f 91	stx $911f		STX VV911F
+.fe2e	20 84 ef	jsr $ef84		JSR SCLK1
+.fe31	a9 82		lda #$82		LDA #%10000010			;$82
+.fe33	8d 1e 91	sta $911e		STA VV911E
+.fe36	20 8d ef	jsr $ef8d		JSR SCLK0
+.fe39					ENABTM
+.fe39	a9 c0		lda #$c0		LDA #%11000000			;$C0
+.fe3b	8d 2e 91	sta $912e		STA VV912E
+.fe3e	a9 26		lda #$26		LDA #$26 ;#%10001001			;$89
+.fe40	8d 24 91	sta $9124		STA VV9124
+.fe43	a9 48		lda #$48		LDA #$48 ;#%01000010			;$42
+.fe45	8d 25 91	sta $9125		STA VV9124+1
+.fe48	60		rts			RTS
+.fe49					ISETNM
+.fe49	85 b7		sta $b7			STA FNMLEN			;set length
+.fe4b	86 bb		stx $bb			STX FNPTR			;ptr L
+.fe4d	84 bc		sty $bc			STY FNPTR+1			;ptr H
+.fe4f	60		rts			RTS
+.fe50					ISETLF
+.fe50	85 b8		sta $b8			STA LOGFIL			;file#
+.fe52	86 ba		stx $ba			STX CHANNL			;device
+.fe54	84 b9		sty $b9			STY SECADR			;secondary address
+.fe56	60		rts			RTS
+.fe57					IRDST
+.fe57	a5 ba		lda $ba			LDA CHANNL			;get device
+.fe59	c9 02		cmp #$02		CMP #$02			;RS232?
+.fe5b	d0 0b		bne $fe68		BNE ISETMS+2			;$FE68 no, branch to OS messages
+.fe5d	ad 97 02	lda $0297		LDA RSSTAT			;get RS232 status
+.fe60	a9 00		lda #$00		LDA #$00
+.fe62	8d 97 02	sta $0297		STA RSSTAT
+.fe65	60		rts			RTS
+.fe66					ISETMS
+.fe66	85 9d		sta $9d			STA CMDMOD			;save message #
+.fe68	a5 90		lda $90			LDA CSTAT			;get status
+.fe6a					ISETMS1
+.fe6a	05 90		ora $90			ORA CSTAT			;twiddle bits
+.fe6c	85 90		sta $90			STA CSTAT			;save status
+.fe6e	60		rts			RTS
+.fe6f					ISETTO
+.fe6f	8d 85 02	sta $0285		STA STIMOT
+.fe72	60		rts			RTS
+.fe73					IMEMTP
+.fe73	90 06		bcc $fe7b		BCC STOTOP			;$FE7B
+.fe75	ae 83 02	ldx $0283		LDX OSTOP
+.fe78	ac 84 02	ldy $0284		LDY OSTOP+1
+.fe7b					STOTOP
+.fe7b	8e 83 02	stx $0283		STX OSTOP
+.fe7e	8c 84 02	sty $0284		STY OSTOP+1
+.fe81	60		rts			RTS
+.fe82					IMEMBT
+.fe82	90 06		bcc $fe8a		BCC STOBOT			;$FE8A
+.fe84	ae 81 02	ldx $0281		LDX OSSTAR
+.fe87	ac 82 02	ldy $0282		LDY OSSTAR+1
+.fe8a					STOBOT
+.fe8a	8e 81 02	stx $0281		STX OSSTAR
+.fe8d	8c 82 02	sty $0282		STY OSSTAR+1
+.fe90	60		rts			RTS
+.fe91					MEMTST
+.fe91	b1 c1		lda ($c1),y		LDA (STAL),Y
+.fe93	aa		tax			TAX
+.fe94	a9 55		lda #$55		LDA #%01010101			;$55
+.fe96	91 c1		sta ($c1),y		STA (STAL),Y
+.fe98	d1 c1		cmp ($c1),y		CMP (STAL),Y
+.fe9a	d0 08		bne $fea4		BNE MEMTS1			;$FEA4
+.fe9c	6a		ror a			ROR A				;%10101010
+.fe9d	91 c1		sta ($c1),y		STA (STAL),Y
+.fe9f	d1 c1		cmp ($c1),y		CMP (STAL),Y
+.fea1	d0 01		bne $fea4		BNE MEMTS1			;$FEA4
+>fea3	a9					.byte $A9				;LDA #$18
+.fea4					MEMTS1
+.fea4	18		clc			CLC
+.fea5	8a		txa			TXA
+.fea6	91 c1		sta ($c1),y		STA (STAL), Y
+.fea8	60		rts			RTS
+.fea9					NMI
+.fea9	78		sei			SEI
+.feaa	6c 18 03	jmp ($0318)		JMP (NMIVP)			;$FEAD
+.fead					LNKNMI
+.fead	48		pha			PHA				;save regs
+.feae	8a		txa			TXA
+.feaf	48		pha			PHA
+.feb0	98		tya			TYA
+.feb1	48		pha			PHA
+.feb2	ad 1d 91	lda $911d		LDA VV911D			;check VIA interrupt flag
+.feb5	10 48		bpl $feff		BPL WARMEOI			;no flag, then issue EOI
+.feb7	2d 1e 91	and $911e		AND VV911E			; see if interrupt is allowed
+.feba	aa		tax			TAX				; based on IER mask
+.febb	29 02		and #$02		AND #%00000010			;CA1 - RESTOR key?
+.febd	f0 1f		beq $fede		BEQ WARM1			;no? Process RS232
+.febf	20 3f fd	jsr $fd3f		JSR SCNROM			;scan for A000
+.fec2	d0 03		bne $fec7		BNE LNKNMI1			;not present, don't call A0 entry
+.fec4	6c 02 a0	jmp ($a002)		JMP (A0BASE+2)			;jump to ROM NMI routine
+.fec7					LNKNMI1
+.fec7	2c 11 91	bit $9111		BIT VV9111			;test ATN IN (7)/cass sw(6)
+.feca	20 34 f7	jsr $f734		JSR IUDTIM			;update TOD clock
+.fecd	20 e1 ff	jsr $ffe1		JSR STOP			;check STOP key - Z=1 for press
+.fed0	d0 2d		bne $feff		BNE WARMEOI			;no stop key, so skip warm start calls
+.fed2					WARMST
+.fed2	20 52 fd	jsr $fd52		JSR IRESTR			;restore default vectors
+.fed5	20 f9 fd	jsr $fdf9		JSR IOINIT			;init I/O
+.fed8	20 18 e5	jsr $e518		JSR CINT1			;init screen editor
+.fedb	6c 02 c0	jmp ($c002)		JMP (BENTER+2)			;jump to BASIC NMI entry
+.fede					WARM1
+.fede	ad 1e 91	lda $911e		LDA VV911E			;get IER bitmap
+.fee1	09 80		ora #$80		ORA #%10000000			;$80 set mask for enabling interrupts
+.fee3	48		pha			PHA				; according to existing bitmap
+.fee4	a9 7f		lda #$7f		LDA #%01111111			;$7F mask - disable all VIA1 interrupts
+.fee6	8d 1e 91	sta $911e		STA VV911E
+.fee9	8a		txa			TXA				;restore mask for active interrupts
+.feea	29 40		and #$40		AND #%01000000			;$40 IFR bit6=TIMER1 time-out (RS232 clock)
+.feec	f0 14		beq $ff02		BEQ WARM2			;$FF02 T1 done, go to RS232 RX
+.feee	a9 ce		lda #$ce		LDA #%11001110			;$CE set/reset bit5 xmit char
+.fef0	05 b5		ora $b5			ORA NXTBIT			;RS232 transmit - next bit to send
+.fef2	8d 1c 91	sta $911c		STA VV911C			;CB2 manual L/H; CB1 neg trans for
+.fef5	ad 14 91	lda $9114		LDA VV9114			;get VIA1/T1 count byte low
+.fef8	68		pla			PLA				;restore IER bitmap
+.fef9	8d 1e 91	sta $911e		STA VV911E			; and save it
+.fefc	20 a3 ef	jsr $efa3		JSR SSEND			;send RS232 char
+.feff					WARMEOI
+.feff	4c 56 ff	jmp $ff56		JMP EOI				;end of interrupt
+.ff02					WARM2
+.ff02	8a		txa			TXA				;restore IFR mask from above
+.ff03	29 20		and #$20		AND #%00100000			;$20 VIA1/T2 time-out (done receiving
+.ff05	f0 25		beq $ff2c		BEQ WARM3			;$FF2C yes, move byte to buffer
+.ff07	ad 10 91	lda $9110		LDA VV9110			;get user port bitmap
+.ff0a	29 01		and #$01		AND #%00000001			;$01 bit0=RS232/RX
+.ff0c	85 a7		sta $a7			STA INBIT			;save received bit
+.ff0e	ad 18 91	lda $9118		LDA VV9118			;get VIA1/T2L count
+.ff11	e9 16		sbc #$16		SBC #$16			; subtract 22d
+.ff13	6d 99 02	adc $0299		ADC BAUDOF			; add low word of bit transmit time
+.ff16	8d 18 91	sta $9118		STA VV9118			; save it
+.ff19	ad 19 91	lda $9119		LDA VV9118+1			;get VIA1/T2H count
+.ff1c	6d 9a 02	adc $029a		ADC BAUDOF+1			; add high word of bit xmit time
+.ff1f	8d 19 91	sta $9119		STA VV9118+1			; save it
+.ff22	68		pla			PLA				;restore old IFR bitmap
+.ff23	8d 1e 91	sta $911e		STA VV911E			; and save it
+.ff26	20 36 f0	jsr $f036		JSR SERRX			;signal RS232 receive routine
+.ff29	4c 56 ff	jmp $ff56		JMP EOI				;end of interrupt
+.ff2c					WARM3
+.ff2c	8a		txa			TXA
+.ff2d	29 10		and #$10		AND #%00010000			;$10 CB1 interrupt (RX data bit transition)
+.ff2f	f0 25		beq $ff56		BEQ EOI				;no bit, exit
+.ff31	ad 93 02	lda $0293		LDA M51CTR			;RS232 control register
+.ff34	29 0f		and #$0f		AND #%00001111			;$0F pass the baud rate param only
+.ff36	d0 00		bne $ff38		BNE *+2				;$FF38 I/O delay
+.ff38	0a		asl a			ASL A				;shift left
+.ff39	aa		tax			TAX				;save shifted baud rate bitmask and
+.ff3a	bd 5a ff	lda $ff5a,x		LDA R232TB-2,X			;$FF5A,X index into divisor data table
+.ff3d	8d 18 91	sta $9118		STA VV9118			; save divisor into the VIA
+.ff40	bd 5b ff	lda $ff5b,x		LDA R232TB-1,X			;$FF5B,X
+.ff43	8d 19 91	sta $9119		STA VV9118+1
+.ff46	ad 10 91	lda $9110		LDA VV9110			;read RS232 output register
+.ff49	68		pla			PLA				;restore IFR bitmap
+.ff4a	09 20		ora #$20		ORA #%00100000			;$20 T2 interrupt flag
+.ff4c	29 ef		and #$ef		AND #%11101111			;$EF pass only T2 flag and not T1
+.ff4e	8d 1e 91	sta $911e		STA VV911E			;save new interrupt bitmap
+.ff51	ae 98 02	ldx $0298		LDX BITNUM			;get total number of bits to TX/RX
+.ff54	86 a8		stx $a8			STX BITCI			;save as receiver bit count
+.ff56					EOI
+.ff56	68		pla			PLA				;restore registers
+.ff57	a8		tay			TAY
+.ff58	68		pla			PLA
+.ff59	aa		tax			TAX
+.ff5a	68		pla			PLA
+.ff5b	40		rti			RTI				;return from interrupt
+.ff5c					R232TB
+>ff5c	e6 2a					.word	$2AE6			;   50   baud
+>ff5e	78 1c					.word	$1C78			;   75   baud
+>ff60	49 13					.word	$1349			;  110   baud
+>ff62	b1 0f					.word	$0FB1			;  134.5 baud
+>ff64	0a 0e					.word	$0E0A			;  150   baud
+>ff66	d3 06					.word	$06D3			;  300   baud
+>ff68	38 03					.word	$0338			;  600   baud
+>ff6a	6a 01					.word	$016A			; 1200   baud
+>ff6c	d0 00					.word	$00D0			; 1800   baud
+>ff6e	83 00					.word	$0083			; 2400   baud
+>ff70	36 00					.word	$0036			; 3600   baud
+.ff72					IRQ
+.ff72	48		pha			PHA				;save registers
+.ff73	8a		txa			TXA
+.ff74	48		pha			PHA
+.ff75	98		tya			TYA
+.ff76	48		pha			PHA
+.ff77	ba		tsx			TSX
+.ff78	bd 04 01	lda $0104,x		LDA FBUFFR+4,X			;$0104,X look in status
+.ff7b	29 10		and #$10		AND #%00010000			;$10	breakpoint or IRQ
+.ff7d	f0 03		beq $ff82		BEQ BRKSKIP			;$FF82 IRQ, branch
+.ff7f	6c 16 03	jmp ($0316)		JMP (BRKVP)			;jump to breakpoint $FED2
+.ff82					BRKSKIP
+.ff82	6c 14 03	jmp ($0314)		JMP (IRQVP)			;jump to IRQ $EABF
+>ff85	ff ff					.word $FFFF			;sentinal (KERNAL version??)
+>ff87	ff					.byte $FF				;unused JMP
+>ff88	ff ff					.word $FFFF			;unused vector
+.ff8a	4c 52 fd	jmp $fd52		JMP IRESTR			;$FD52 RESTOR
+.ff8d	4c 57 fd	jmp $fd57		JMP IVECTR			;$FD57 VECTOR
+.ff90	4c 66 fe	jmp $fe66		JMP ISETMS			;$FE66 SETMSG
+.ff93	4c c0 ee	jmp $eec0		JMP ISECND			;$EEC0 SECND
+.ff96	4c ce ee	jmp $eece		JMP ITKSA			;$EECE
+.ff99	4c 73 fe	jmp $fe73		JMP IMEMTP			;$FE73
+.ff9c	4c 82 fe	jmp $fe82		JMP IMEMBT			;$FE82
+.ff9f	4c 1e eb	jmp $eb1e		JMP ISCNKY			;$EB1E
+.ffa2	4c 6f fe	jmp $fe6f		JMP ISETTO			;$FE6F SETTMO
+.ffa5	4c 19 ef	jmp $ef19		JMP IACPTR			;$EF19 ACPTR
+.ffa8	4c e4 ee	jmp $eee4		JMP ICIOUT			;$EEE4
+.ffab	4c f6 ee	jmp $eef6		JMP IUNTLK			;$EEF6
+.ffae	4c 04 ef	jmp $ef04		JMP IUNLSN			;$EF04
+.ffb1	4c 17 ee	jmp $ee17		JMP ILISTN			;$EE17
+.ffb4	4c 14 ee	jmp $ee14		JMP ITALK			;$EE14
+.ffb7	4c 57 fe	jmp $fe57		JMP IRDST			;$FE57 READST
+.ffba	4c 50 fe	jmp $fe50		JMP ISETLF			;$FE50 SETLFS
+.ffbd	4c 49 fe	jmp $fe49		JMP ISETNM			;$FE49
+.ffc0	6c 1a 03	jmp ($031a)		JMP (OPENVP)			;$F40A OPEN
+.ffc3	6c 1c 03	jmp ($031c)		JMP (CLOSVP)			;$F34A CLOSE
+.ffc6	6c 1e 03	jmp ($031e)		JMP (CKINVP)			;$F2C7 CHKIN
+.ffc9	6c 20 03	jmp ($0320)		JMP (CKOTVP)			;$F309 CHKOUT
+.ffcc	6c 22 03	jmp ($0322)		JMP (CLCHVP)			;$F3F3 CLRCH
+.ffcf	6c 24 03	jmp ($0324)		JMP (CHINVP)			;$F20E CHRIN
+.ffd2	6c 26 03	jmp ($0326)		JMP (CHOTVP)			;$F27A CHROUT
+.ffd5	4c 42 f5	jmp $f542		JMP ILOAD			;$F542
+.ffd8	4c 75 f6	jmp $f675		JMP ISAVE			;$F675
+.ffdb	4c 67 f7	jmp $f767		JMP ISETTM			;$F767 SETTIM
+.ffde	4c 60 f7	jmp $f760		JMP IRDTIM			;$F760
+.ffe1	6c 28 03	jmp ($0328)		JMP (STOPVP)			;$F770 STOP
+.ffe4	6c 2a 03	jmp ($032a)		JMP (GTINVP)			;$F1F5 GETIN
+.ffe7	6c 2c 03	jmp ($032c)		JMP (CLALVP)			;$F3EF CLALL
+.ffea	4c 34 f7	jmp $f734		JMP IUDTIM			;$F734
+.ffed	4c 05 e5	jmp $e505		JMP ISCREN			;$E505
+.fff0	4c 0a e5	jmp $e50a		JMP IPLOT			;$E50A
+.fff3	4c 00 e5	jmp $e500		JMP IIOBASE			;$E500
+>fff6	ff					.byte $FF				;unused JMP
+>fff7	ff ff					.word $FFFF			;unused vector
+>fff9	ff					.byte $FF				;sentinal (kernal version number??)
+>fffa	a9 fe					.word NMI				;$FEA9
+>fffc	22 fd					.word RESET			;$FD22
+>fffe	72 ff					.word IRQ				;$FF72
+
+;******  End of listing

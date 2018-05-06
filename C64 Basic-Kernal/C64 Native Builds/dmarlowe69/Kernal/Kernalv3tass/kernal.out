@@ -1,0 +1,13 @@
+
+C:\Users\denton\Desktop\My Commodore\Commodore MADS Projects\C64 Basic Kernal\Kernal\Kernalv3tass>64tass kernal.asm -L kernal.lst -o kernal.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   kernal.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $e000-$ffff   $2000
+
+C:\Users\denton\Desktop\My Commodore\Commodore MADS Projects\C64 Basic Kernal\Kernal\Kernalv3tass>rem pause 

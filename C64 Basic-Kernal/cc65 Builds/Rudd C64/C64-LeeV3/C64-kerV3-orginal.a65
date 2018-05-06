@@ -1,0 +1,105 @@
+;******************************************************************************
+;******************************************************************************
+;
+;         The almost completely commented C64 BASIC ROM disassembly. 
+;                 Based on version V1.01 by Lee Davison 2012
+;
+;******************************************************************************
+;
+; start of the kernal ROM
+;
+; version 901227-03
+;
+
+
+.org $E4AC
+E4AC:	.byte	$81			; unused byte ??
+
+
+.org $E4B7
+.fb $AA, 28
+
+;******************************************************************************
+;
+; flag the RS232 start bit and set the parity
+;
+RS232_SaveSet:				;				[E4D3]
+	sta	RINONE			; save the start bit check flag, set
+					; start bit received
+	lda	#$01			; set the initial parity state
+	sta	RIPRTY			; save the receiver parity bit
+
+	rts
+
+
+;******************************************************************************
+;
+; save the current colour to the colour RAM
+;
+SaveCurColour:				;				[E4DA]
+	lda	COLOR			; get the current colour code
+
+
+.ba $E57C
+A_E57C:					;				[E57C]
+	jsr	FetchScreenAddr		; fetch a screen address	[E9F0]
+
+	lda	#$27			; set the line length
+
+	inx				; increment the cursor row
+A_E582:					;				[E582]
+	ldy	LDTB1,X			; get the start of line X pointer HB
+	bmi	A_E58C			; if logical line start exit
+
+	clc				; else clear carry for add
+	adc	#$28			; add one line length to the current
+					; line length
+	inx				; increment the cursor row
+	bpl	A_E582			; loop, branch always
+
+A_E58C:					;				[E58C]
+	sta	CurLineLeng		; save current screen line length
+
+	jmp	PtrCurLineColRAM	; calculate the pointer to colour RAM
+					; and return			[EA24]
+
+SetPtrLogLine:				;				[E591]
+	cpx	CursorRow		; compare it with the input cursor row
+	beq	A_E598			; if there just exit
+
+	jmp	GoStartOfLine		; else go ??			[E6ED]
+
+A_E598:					;				[E598]
+	rts
+
+	nop
+
+
+.ba $E621
+	jsr	SetPtrLogLine		; find and set the pointers for the
+
+
+.ba $EA07
+A_EA07:					;				[EA07]
+	jsr	SaveCurColour		; save current colour to colour RAM
+					;				[E4DA]
+	lda	#' '			; set [SPACE]
+	sta	(CurScrLine),Y		; clear character in current screen line
+
+	dey				; decrement index
+	bpl	A_EA07			; loop if more to do
+
+	rts
+
+	nop				; unused
+
+
+.ba $EF94
+	jmp	RS232_SaveSet		; flag RS232 start bit and set parity
+					;				[E4D3]
+
+
+.ba $FF80
+FF80:	.byte	$03			; checksum ??
+
+

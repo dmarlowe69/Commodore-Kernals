@@ -1,0 +1,3934 @@
+
+; 64tass Turbo Assembler Macro V1.53.1515 listing file
+; 64tass -L C64BASICROMDisassembly.lst -o C64BASICROMDisassembly.prg C64BASICROMDisassembly.asm
+; Mon Jan 15 20:20:49 2018
+
+;Offset	;Hex		;Monitor	;Source
+
+;******  Processing input file: C64BASICROMDisassembly.asm
+
+>a000	94 e3				A000   .word $E394   ; RESET
+>a002	7b e3				A002   .word $E37B   ; Warm Start
+>a004	43 42 4d 42 41 53 49 43		A004   .byte $43,$42,$4D,$42,$41,$53,$49,$43
+>a00c	30 a8				A00C   .word $A830   ; end
+>a00e	41 a7				A00E   .word $A741   ; for
+>a010	1d ad				A010   .word $AD1D   ; next
+>a012	f7 a8				A012   .word $A8F7   ; data
+>a014	a4 ab				A014   .word $ABA4   ; input#
+>a016	be ab				A016   .word $ABBE   ; input
+>a018	80 b0				A018   .word $B080   ; dim
+>a01a	05 ac				A01A   .word $AC05   ; read
+>a01c	a4 a9				A01C   .word $A9A4   ; let
+>a01e	9f a8				A01E   .word $A89F   ; goto
+>a020	70 a8				A020   .word $A870   ; run
+>a022	27 a9				A022   .word $A927   ; if
+>a024	1c a8				A024   .word $A81C   ; restore
+>a026	82 a8				A026   .word $A882   ; gosub
+>a028	d1 a8				A028   .word $A8D1   ; return
+>a02a	3a a9				A02A   .word $A93A   ; rem
+>a02c	2e a8				A02C   .word $A82E   ; stop
+>a02e	4a a9				A02E   .word $A94A   ; on
+>a030	2c b8				A030   .word $B82C   ; wait
+>a032	67 e1				A032   .word $E167   ; load
+>a034	55 e1				A034   .word $E155   ; save
+>a036	64 e1				A036   .word $E164   ; verify
+>a038	b2 b3				A038   .word $B3B2   ; def
+>a03a	23 b8				A03A   .word $B823   ; poke
+>a03c	7f aa				A03C   .word $AA7F   ; print#
+>a03e	9f aa				A03E   .word $AA9F   ; print
+>a040	56 a8				A040   .word $A856   ; cont
+>a042	9b a6				A042   .word $A69B   ; list
+>a044	5d a6				A044   .word $A65D   ; clr
+>a046	85 aa				A046   .word $AA85   ; cmd
+>a048	29 e1				A048   .word $E129   ; sys
+>a04a	bd e1				A04A   .word $E1BD   ; open
+>a04c	c6 e1				A04C   .word $E1C6   ; close
+>a04e	7a ab				A04E   .word $AB7A   ; get
+>a050	41 a6				A050   .word $A641   ; new
+>a052	39 bc				A052   .word $BC39   ; sgn
+>a054	cc bc				A054   .word $BCCC   ; int
+>a056	58 bc				A056   .word $BC58   ; abs
+>a058	10 03				A058   .word $0310   ; usr
+>a05a	7d b3				A05A   .word $B37D   ; fre
+>a05c	9e b3				A05C   .word $B39E   ; pos
+>a05e	71 bf				A05E   .word $BF71   ; sqr
+>a060	97 e0				A060   .word $E097   ; rnd
+>a062	ea b9				A062   .word $B9EA   ; log
+>a064	ed bf				A064   .word $BFED   ; exp
+>a066	64 e2				A066   .word $E264   ; cos
+>a068	6b e2				A068   .word $E26B   ; sin
+>a06a	b4 e2				A06A   .word $E2B4   ; tan
+>a06c	0e e3				A06C   .word $E30E   ; atn
+>a06e	0d b8				A06E   .word $B80D   ; peek
+>a070	7c b7				A070   .word $B77C   ; len
+>a072	65 b4				A072   .word $B465   ; str$
+>a074	ad b7				A074   .word $B7AD   ; val
+>a076	8b b7				A076   .word $B78B   ; asc
+>a078	ec b6				A078   .word $B6EC   ; chr$
+>a07a	00 b7				A07A   .word $B700   ; left$
+>a07c	2c b7				A07C   .word $B72C   ; right$
+>a07e	37 b7				A07E   .word $B737   ; mid$
+>a080	79				A080   .byte $79
+>a081	69 b8				A081   .word $B869   ; plus
+>a083	79				A083   .byte $79
+>a084	52 b8				A084   .word $B852   ; minus
+>a086	7b				A086   .byte $7B
+>a087	2a ba				A087   .word $BA2A   ; multiply
+>a089	7b				A089   .byte $7B
+>a08a	11 bb				A08A   .word $BB11   ; divide
+>a08c	7f				A08C   .byte $7F
+>a08d	7a bf				A08D   .word $BF7A   ; power
+>a08f	50				A08F   .byte $50
+>a090	e8 af				A090   .word $AFE8   ; AND
+>a092	46				A092   .byte $46
+>a093	e5 af				A093   .word $AFE5   ; OR
+>a095	7d				A095   .byte $7D
+>a096	b3 bf				A096   .word $BFB3   ; negative
+>a098	5a				A098   .byte $5A
+>a099	d3 ae				A099   .word $AED3   ; NOT
+>a09b	64				A09B   .byte $64
+>a09c	15 b0				A09C   .word $B015   ; greater / equal / less
+>a09e	45 4e c4			A09E   .byte $45,$4E,$C4   ; end
+>a0a1	46 4f d2			A0A1   .byte $46,$4F,$D2   ; for
+>a0a4	4e 45 58 d4			A0A4   .byte $4E,$45,$58,$D4   ; next
+>a0a8	44 41 54 c1			A0A8   .byte $44,$41,$54,$C1   ; data
+>a0ac	49 4e 50 55 54 a3		A0AC   .byte $49,$4E,$50,$55,$54,$A3   ; input#
+>a0b2	49 4e 50 55 d4			A0B2   .byte $49,$4E,$50,$55,$D4   ; input
+>a0b7	44 49 cd			A0B7   .byte $44,$49,$CD   ; dim
+>a0ba	52 45 41 c4			A0BA   .byte $52,$45,$41,$C4   ; read
+>a0be	4c 45 d4			A0BE   .byte $4C,$45,$D4   ; let
+>a0c1	47 4f 54 cf			A0C1   .byte $47,$4F,$54,$CF   ; goto
+>a0c5	52 55 ce			A0C5   .byte $52,$55,$CE   ; run
+>a0c8	49 c6				A0C8   .byte $49,$C6   ; if
+>a0ca	52 45 53 54 4f 52 c5		A0CA   .byte $52,$45,$53,$54,$4F,$52,$C5   ; restore
+>a0d1	47 4f 53 55 c2			A0D1   .byte $47,$4F,$53,$55,$C2   ; gosub
+>a0d6	52 45 54 55 52 ce		A0D6   .byte $52,$45,$54,$55,$52,$CE   ; return
+>a0dc	52 45 cd			A0DC   .byte $52,$45,$CD   ; rem
+>a0df	53 54 4f d0			A0DF   .byte $53,$54,$4F,$D0   ; stop
+>a0e3	4f ce				A0E3   .byte $4F,$CE   ; on
+>a0e5	57 41 49 d4			A0E5   .byte $57,$41,$49,$D4   ; wait
+>a0e9	4c 4f 41 c4			A0E9   .byte $4C,$4F,$41,$C4   ; load
+>a0ed	53 41 56 c5			A0ED   .byte $53,$41,$56,$C5   ; save
+>a0f1	56 45 52 49 46 d9		A0F1   .byte $56,$45,$52,$49,$46,$D9   ; verify
+>a0f7	44 45 c6			A0F7   .byte $44,$45,$C6   ; def
+>a0fa	50 4f 4b c5			A0FA   .byte $50,$4F,$4B,$C5   ; poke
+>a0fe	50 52 49 4e 54 a3		A0FE   .byte $50,$52,$49,$4E,$54,$A3   ; print#
+>a104	50 52 49 4e d4			A104   .byte $50,$52,$49,$4E,$D4   ; print
+>a109	43 4f 4e d4			A109   .byte $43,$4F,$4E,$D4   ; cont
+>a10d	4c 49 53 d4			A10D   .byte $4C,$49,$53,$D4   ; list
+>a111	43 4c d2			A111   .byte $43,$4C,$D2   ; clr
+>a114	43 4d c4			A114   .byte $43,$4D,$C4   ; cmd
+>a117	53 59 d3			A117   .byte $53,$59,$D3   ; sys
+>a11a	4f 50 45 ce			A11A   .byte $4F,$50,$45,$CE   ; open
+>a11e	43 4c 4f 53 c5			A11E   .byte $43,$4C,$4F,$53,$C5   ; close
+>a123	47 45 d4			A123   .byte $47,$45,$D4   ; get
+>a126	4e 45 d7			A126   .byte $4E,$45,$D7   ; new
+>a129	54 41 42 a8			A129   .byte $54,$41,$42,$A8   ; tab(
+>a12d	54 cf				A12D   .byte $54,$CF   ; to
+>a12f	46 ce				A12F   .byte $46,$CE   ; fn
+>a131	53 50 43 a8			A131   .byte $53,$50,$43,$A8   ; spc(
+>a135	54 48 45 ce			A135   .byte $54,$48,$45,$CE   ; then
+>a139	4e 4f d4			A139   .byte $4E,$4F,$D4   ; not
+>a13c	53 54 45 d0			A13C   .byte $53,$54,$45,$D0   ; step
+>a140	ab				A140   .byte $AB   ; plus
+>a141	ad				A141   .byte $AD   ; minus
+>a142	aa				A142   .byte $AA   ; multiply
+>a143	af				A143   .byte $AF   ; divide
+>a144	de				A144   .byte $DE   ; power
+>a145	41 4e c4			A145   .byte $41,$4E,$C4   ; and
+>a148	4f d2				A148   .byte $4F,$D2   ; on
+>a14a	be				A14A   .byte $BE   ; greater
+>a14b	bd				A14B   .byte $BD   ; equal
+>a14c	bc				A14C   .byte $BC   ; less
+>a14d	53 47 ce			A14D   .byte $53,$47,$CE   ; sgn
+>a150	49 4e d4			A150   .byte $49,$4E,$D4   ; int
+>a153	41 42 d3			A153   .byte $41,$42,$D3   ; abs
+>a156	55 53 d2			A156   .byte $55,$53,$D2   ; usr
+>a159	46 52 c5			A159   .byte $46,$52,$C5   ; fre
+>a15c	50 4f d3			A15C   .byte $50,$4F,$D3   ; pos
+>a15f	53 51 d2			A15F   .byte $53,$51,$D2   ; sqr
+>a162	52 4e c4			A162   .byte $52,$4E,$C4   ; rnd
+>a165	4c 4f c7			A165   .byte $4C,$4F,$C7   ; log
+>a168	45 58 d0			A168   .byte $45,$58,$D0   ; exp
+>a16b	43 4f d3			A16B   .byte $43,$4F,$D3   ; cos
+>a16e	53 49 ce			A16E   .byte $53,$49,$CE   ; sin
+>a171	54 41 ce			A171   .byte $54,$41,$CE   ; tan
+>a174	41 54 ce			A174   .byte $41,$54,$CE   ; atn
+>a177	50 45 45 cb			A177   .byte $50,$45,$45,$CB   ; peek
+>a17b	4c 45 ce			A17B   .byte $4C,$45,$CE   ; len
+>a17e	53 54 52 a4			A17E   .byte $53,$54,$52,$A4   ; str$
+>a182	56 41 cc			A182   .byte $56,$41,$CC   ; val
+>a185	41 53 c3			A185   .byte $41,$53,$C3   ; asc
+>a188	43 48 52 a4			A188   .byte $43,$48,$52,$A4   ; chr$
+>a18c	4c 45 46 54 a4			A18C   .byte $4C,$45,$46,$54,$A4   ; left$
+>a191	52 49 47 48 54 a4		A191   .byte $52,$49,$47,$48,$54,$A4   ; right$
+>a197	4d 49 44 a4			A197   .byte $4D,$49,$44,$A4   ; mid$
+>a19b	47 cf				A19B   .byte $47,$CF   ; go
+>a19d	00				A19D   .byte $00
+>a19e	54 4f 4f			A19E   .byte $54,$4F,$4F
+>a1a1	20 4d 41 4e 59			A1A1   .byte $20,$4D,$41,$4E,$59
+>a1a6	20 46 49 4c 45 d3		A1A6   .byte $20,$46,$49,$4C,$45,$D3
+>a1ac	46 49 4c 45			A1AC   .byte $46,$49,$4C,$45
+>a1b0	20 4f 50 45 ce			A1B0   .byte $20,$4F,$50,$45,$CE
+>a1b5	46 49 4c 45			A1B5   .byte $46,$49,$4C,$45
+>a1b9	20 4e 4f 54			A1B9   .byte $20,$4E,$4F,$54
+>a1bd	20 4f 50 45 ce			A1BD   .byte $20,$4F,$50,$45,$CE
+>a1c2	46 49 4c 45			A1C2   .byte $46,$49,$4C,$45
+>a1c6	20 4e 4f 54			A1C6   .byte $20,$4E,$4F,$54
+>a1ca	20 46 4f 55 4e c4		A1CA   .byte $20,$46,$4F,$55,$4E,$C4
+>a1d0	44 45 56 49 43 45		A1D0   .byte $44,$45,$56,$49,$43,$45
+>a1d6	20 4e 4f 54			A1D6   .byte $20,$4E,$4F,$54
+>a1da	20 50 52 45 53 45 4e d4		A1DA   .byte $20,$50,$52,$45,$53,$45,$4E,$D4
+>a1e2	4e 4f 54			A1E2   .byte $4E,$4F,$54
+>a1e5	20 49 4e 50 55 54		A1E5   .byte $20,$49,$4E,$50,$55,$54
+>a1eb	20 46 49 4c c5			A1EB   .byte $20,$46,$49,$4C,$C5
+>a1f0	4e 4f 54			A1F0   .byte $4E,$4F,$54
+>a1f3	20 4f 55 54 50 55 54		A1F3   .byte $20,$4F,$55,$54,$50,$55,$54
+>a1fa	20 46 49 4c c5			A1FA   .byte $20,$46,$49,$4C,$C5
+>a1ff	4d 49 53 53 49 4e 47		A1FF   .byte $4D,$49,$53,$53,$49,$4E,$47
+>a206	20 46 49 4c 45			A206   .byte $20,$46,$49,$4C,$45
+>a20b	20 4e 41 4d c5			A20B   .byte $20,$4E,$41,$4D,$C5
+>a210	49 4c 4c 45 47 41 4c		A210   .byte $49,$4C,$4C,$45,$47,$41,$4C
+>a217	20 44 45 56 49 43 45		A217   .byte $20,$44,$45,$56,$49,$43,$45
+>a21e	20 4e 55 4d 42 45 d2		A21E   .byte $20,$4E,$55,$4D,$42,$45,$D2
+>a225	4e 45 58 54			A225   .byte $4E,$45,$58,$54
+>a229	20 57 49 54 48 4f 55 54		A229   .byte $20,$57,$49,$54,$48,$4F,$55,$54
+>a231	20 46 4f d2			A231   .byte $20,$46,$4F,$D2
+>a235	53 59 4e 54 41 d8		A235   .byte $53,$59,$4E,$54,$41,$D8
+>a23b	52 45 54 55 52 4e		A23B   .byte $52,$45,$54,$55,$52,$4E
+>a241	20 57 49 54 48 4f 55 54		A241   .byte $20,$57,$49,$54,$48,$4F,$55,$54
+>a249	20 47 4f 53 55 c2		A249   .byte $20,$47,$4F,$53,$55,$C2
+>a24f	4f 55 54			A24F   .byte $4F,$55,$54
+>a252	20 4f 46			A252   .byte $20,$4F,$46
+>a255	20 44 41 54 c1			A255   .byte $20,$44,$41,$54,$C1
+>a25a	49 4c 4c 45 47 41 4c		A25A   .byte $49,$4C,$4C,$45,$47,$41,$4C
+>a261	20 51 55 41 4e 54 49 54		A261   .byte $20,$51,$55,$41,$4E,$54,$49,$54,$D9
+>a269	d9
+>a26a	4f 56 45 52 46 4c 4f d7		A26A   .byte $4F,$56,$45,$52,$46,$4C,$4F,$D7
+>a272	4f 55 54			A272   .byte $4F,$55,$54
+>a275	20 4f 46			A275   .byte $20,$4F,$46
+>a278	20 4d 45 4d 4f 52 d9		A278   .byte $20,$4D,$45,$4D,$4F,$52,$D9
+>a27f	55 4e 44 45 46 27 44		A27F   .byte $55,$4E,$44,$45,$46,$27,$44
+>a286	20 53 54 41 54 45 4d 45		A286   .byte $20,$53,$54,$41,$54,$45,$4D,$45,$4E,$D4
+>a28e	4e d4
+>a290	42 41 44			A290   .byte $42,$41,$44
+>a293	20 53 55 42 53 43 52 49		A293   .byte $20,$53,$55,$42,$53,$43,$52,$49,$50,$D4
+>a29b	50 d4
+>a29d	52 45 44 49 4d 27 44		A29D   .byte $52,$45,$44,$49,$4D,$27,$44
+>a2a4	20 41 52 52 41 d9		A2A4   .byte $20,$41,$52,$52,$41,$D9
+>a2aa	44 49 56 49 53 49 4f 4e		A2AA   .byte $44,$49,$56,$49,$53,$49,$4F,$4E
+>a2b2	20 42 59			A2B2   .byte $20,$42,$59
+>a2b5	20 5a 45 52 cf			A2B5   .byte $20,$5A,$45,$52,$CF
+>a2ba	49 4c 4c 45 47 41 4c		A2BA   .byte $49,$4C,$4C,$45,$47,$41,$4C
+>a2c1	20 44 49 52 45 43 d4		A2C1   .byte $20,$44,$49,$52,$45,$43,$D4
+>a2c8	54 59 50 45			A2C8   .byte $54,$59,$50,$45
+>a2cc	20 4d 49 53 4d 41 54 43		A2CC   .byte $20,$4D,$49,$53,$4D,$41,$54,$43,$C8
+>a2d4	c8
+>a2d5	53 54 52 49 4e 47		A2D5   .byte $53,$54,$52,$49,$4E,$47
+>a2db	20 54 4f 4f			A2DB   .byte $20,$54,$4F,$4F
+>a2df	20 4c 4f 4e c7			A2DF   .byte $20,$4C,$4F,$4E,$C7
+>a2e4	46 49 4c 45			A2E4   .byte $46,$49,$4C,$45
+>a2e8	20 44 41 54 c1			A2E8   .byte $20,$44,$41,$54,$C1
+>a2ed	46 4f 52 4d 55 4c 41		A2ED   .byte $46,$4F,$52,$4D,$55,$4C,$41
+>a2f4	20 54 4f 4f			A2F4   .byte $20,$54,$4F,$4F
+>a2f8	20 43 4f 4d 50 4c 45 d8		A2F8   .byte $20,$43,$4F,$4D,$50,$4C,$45,$D8
+>a300	43 41 4e 27 54			A300   .byte $43,$41,$4E,$27,$54
+>a305	20 43 4f 4e 54 49 4e 55		A305   .byte $20,$43,$4F,$4E,$54,$49,$4E,$55,$C5
+>a30d	c5
+>a30e	55 4e 44 45 46 27 44		A30E   .byte $55,$4E,$44,$45,$46,$27,$44
+>a315	20 46 55 4e 43 54 49 4f		A315   .byte $20,$46,$55,$4E,$43,$54,$49,$4F,$CE
+>a31d	ce
+>a31e	56 45 52 49 46 d9		A31E   .byte $56,$45,$52,$49,$46,$D9
+>a324	4c 4f 41 c4			A324   .byte $4C,$4F,$41,$C4
+>a328	9e a1				A328   .word $A19E   ; 01 too many files
+>a32a	ac a1				A32A   .word $A1AC   ; 02 file open
+>a32c	b5 a1				A32C   .word $A1B5   ; 03 file not open
+>a32e	c2 a1				A32E   .word $A1C2   ; 04 file not found
+>a330	d0 a1				A330   .word $A1D0   ; 05 device not present
+>a332	e2 a1				A332   .word $A1E2   ; 06 not input file
+>a334	f0 a1				A334   .word $A1F0   ; 07 not output file
+>a336	ff a1				A336   .word $A1FF   ; 08 missing file name
+>a338	10 a2				A338   .word $A210   ; 09 illegal device number
+>a33a	25 a2				A33A   .word $A225   ; 0A next without for
+>a33c	35 a2				A33C   .word $A235   ; 0B syntax
+>a33e	3b a2				A33E   .word $A23B   ; 0C return without gosub
+>a340	4f a2				A340   .word $A24F   ; 0D out of data
+>a342	5a a2				A342   .word $A25A   ; 0E illegal quantity
+>a344	6a a2				A344   .word $A26A   ; 0F overflow
+>a346	72 a2				A346   .word $A272   ; 10 out of memory
+>a348	7f a2				A348   .word $A27F   ; 11 undef'd statment
+>a34a	90 a2				A34A   .word $A290   ; 12 bad subscript
+>a34c	9d a2				A34C   .word $A29D   ; 13 redim'd array
+>a34e	aa a2				A34E   .word $A2AA   ; 14 devision by zero
+>a350	ba a2				A350   .word $A2BA   ; 15 illegal direct
+>a352	c8 a2				A352   .word $A2C8   ; 16 type mismatch
+>a354	d5 a2				A354   .word $A2D5   ; 17 string too long
+>a356	e4 a2				A356   .word $A2E4   ; 18 file data
+>a358	ed a2				A358   .word $A2ED   ; 19 formula too complex
+>a35a	00 a3				A35A   .word $A300   ; 1A can't continue
+>a35c	0e a3				A35C   .word $A30E   ; 1B undef'd function
+>a35e	1e a3				A35E   .word $A31E   ; 1C verify
+>a360	24 a3				A360   .word $A324   ; 1D load
+>a362	83 a3				A362   .word $A383   ; 1E break
+>a364	0d 4f 4b 0d			A364   .byte $0D,$4F,$4B,$0D
+>a368	00				A368   .byte $00
+>a369	20 20 45 52 52 4f 52		A369   .byte $20,$20,$45,$52,$52,$4F,$52
+>a370	00				A370   .byte $00
+>a371	20 49 4e 20			A371   .byte $20,$49,$4E,$20
+>a375	00				A375   .byte $00
+>a376	0d 0a 52 45 41 44 59 2e		A376   .byte $0D,$0A,$52,$45,$41,$44,$59,$2E,$0D,$0A
+>a37e	0d 0a
+>a380	00				A380   .byte $00
+>a381	0d 0a				A381   .byte $0D,$0A
+>a383	42 52 45 41 4b			A383   .byte $42,$52,$45,$41,$4B
+>a388	00				A388   .byte $00
+>a389	a0				A389   .byte $A0
+.a38a	ba		tsx		A38A   TSX
+.a38b	e8		inx		A38B   INX
+.a38c	e8		inx		A38C   INX
+.a38d	e8		inx		A38D   INX
+.a38e	e8		inx		A38E   INX
+.a38f	bd 01 01	lda $0101,x	A38F   LDA $0101,X
+.a392	c9 81		cmp #$81	A392   CMP #$81   ; for block code
+.a394	d0 21		bne $a3b7	A394   BNE $A3B7
+.a396	a5 4a		lda $4a		A396   LDA $4A
+.a398	d0 0a		bne $a3a4	A398   BNE $A3A4
+.a39a	bd 02 01	lda $0102,x	A39A   LDA $0102,X
+.a39d	85 49		sta $49		A39D   STA $49
+.a39f	bd 03 01	lda $0103,x	A39F   LDA $0103,X
+.a3a2	85 4a		sta $4a		A3A2   STA $4A
+.a3a4	dd 03 01	cmp $0103,x	A3A4   CMP $0103,X
+.a3a7	d0 07		bne $a3b0	A3A7   BNE $A3B0
+.a3a9	a5 49		lda $49		A3A9   LDA $49
+.a3ab	dd 02 01	cmp $0102,x	A3AB   CMP $0102,X
+.a3ae	f0 07		beq $a3b7	A3AE   BEQ $A3B7
+.a3b0	8a		txa		A3B0   TXA
+.a3b1	18		clc		A3B1   CLC
+.a3b2	69 12		adc #$12	A3B2   ADC #$12
+.a3b4	aa		tax		A3B4   TAX
+.a3b5	d0 d8		bne $a38f	A3B5   BNE $A38F
+.a3b7	60		rts		A3B7   RTS
+.a3b8	20 08 a4	jsr $a408	A3B8   JSR $A408
+.a3bb	85 31		sta $31		A3BB   STA $31
+.a3bd	84 32		sty $32		A3BD   STY $32
+.a3bf	38		sec		A3BF   SEC
+.a3c0	a5 5a		lda $5a		A3C0   LDA $5A
+.a3c2	e5 5f		sbc $5f		A3C2   SBC $5F
+.a3c4	85 22		sta $22		A3C4   STA $22
+.a3c6	a8		tay		A3C6   TAY
+.a3c7	a5 5b		lda $5b		A3C7   LDA $5B
+.a3c9	e5 60		sbc $60		A3C9   SBC $60
+.a3cb	aa		tax		A3CB   TAX
+.a3cc	e8		inx		A3CC   INX
+.a3cd	98		tya		A3CD   TYA
+.a3ce	f0 23		beq $a3f3	A3CE   BEQ $A3F3
+.a3d0	a5 5a		lda $5a		A3D0   LDA $5A
+.a3d2	38		sec		A3D2   SEC
+.a3d3	e5 22		sbc $22		A3D3   SBC $22
+.a3d5	85 5a		sta $5a		A3D5   STA $5A
+.a3d7	b0 03		bcs $a3dc	A3D7   BCS $A3DC
+.a3d9	c6 5b		dec $5b		A3D9   DEC $5B
+.a3db	38		sec		A3DB   SEC
+.a3dc	a5 58		lda $58		A3DC   LDA $58
+.a3de	e5 22		sbc $22		A3DE   SBC $22
+.a3e0	85 58		sta $58		A3E0   STA $58
+.a3e2	b0 08		bcs $a3ec	A3E2   BCS $A3EC
+.a3e4	c6 59		dec $59		A3E4   DEC $59
+.a3e6	90 04		bcc $a3ec	A3E6   BCC $A3EC
+.a3e8	b1 5a		lda ($5a),y	A3E8   LDA ($5A),Y
+.a3ea	91 58		sta ($58),y	A3EA   STA ($58),Y
+.a3ec	88		dey		A3EC   DEY
+.a3ed	d0 f9		bne $a3e8	A3ED   BNE $A3E8
+.a3ef	b1 5a		lda ($5a),y	A3EF   LDA ($5A),Y
+.a3f1	91 58		sta ($58),y	A3F1   STA ($58),Y
+.a3f3	c6 5b		dec $5b		A3F3   DEC $5B
+.a3f5	c6 59		dec $59		A3F5   DEC $59
+.a3f7	ca		dex		A3F7   DEX
+.a3f8	d0 f2		bne $a3ec	A3F8   BNE $A3EC
+.a3fa	60		rts		A3FA   RTS
+.a3fb	0a		asl a		A3FB   ASL
+.a3fc	69 3e		adc #$3e	A3FC   ADC #$3E
+.a3fe	b0 35		bcs $a435	A3FE   BCS $A435
+.a400	85 22		sta $22		A400   STA $22
+.a402	ba		tsx		A402   TSX
+.a403	e4 22		cpx $22		A403   CPX $22
+.a405	90 2e		bcc $a435	A405   BCC $A435
+.a407	60		rts		A407   RTS
+.a408	c4 34		cpy $34		A408   CPY $34
+.a40a	90 28		bcc $a434	A40A   BCC $A434
+.a40c	d0 04		bne $a412	A40C   BNE $A412
+.a40e	c5 33		cmp $33		A40E   CMP $33
+.a410	90 22		bcc $a434	A410   BCC $A434
+.a412	48		pha		A412   PHA
+.a413	a2 09		ldx #$09	A413   LDX #$09
+.a415	98		tya		A415   TYA
+.a416	48		pha		A416   PHA
+.a417	b5 57		lda $57,x	A417   LDA $57,X
+.a419	ca		dex		A419   DEX
+.a41a	10 fa		bpl $a416	A41A   BPL $A416
+.a41c	20 26 b5	jsr $b526	A41C   JSR $B526
+.a41f	a2 f7		ldx #$f7	A41F   LDX #$F7
+.a421	68		pla		A421   PLA
+.a422	95 61		sta $61,x	A422   STA $61,X
+.a424	e8		inx		A424   INX
+.a425	30 fa		bmi $a421	A425   BMI $A421
+.a427	68		pla		A427   PLA
+.a428	a8		tay		A428   TAY
+.a429	68		pla		A429   PLA
+.a42a	c4 34		cpy $34		A42A   CPY $34
+.a42c	90 06		bcc $a434	A42C   BCC $A434
+.a42e	d0 05		bne $a435	A42E   BNE $A435
+.a430	c5 33		cmp $33		A430   CMP $33
+.a432	b0 01		bcs $a435	A432   BCS $A435
+.a434	60		rts		A434   RTS
+.a435	a2 10		ldx #$10	A435   LDX #$10   ; error number
+.a437	6c 00 03	jmp ($0300)	A437   JMP ($0300)   ; normally A43A
+.a43a	8a		txa		A43A   TXA
+.a43b	0a		asl a		A43B   ASL
+.a43c	aa		tax		A43C   TAX
+.a43d	bd 26 a3	lda $a326,x	A43D   LDA $A326,X
+.a440	85 22		sta $22		A440   STA $22
+.a442	bd 27 a3	lda $a327,x	A442   LDA $A327,X
+.a445	85 23		sta $23		A445   STA $23
+.a447	20 cc ff	jsr $ffcc	A447   JSR $FFCC
+.a44a	a9 00		lda #$00	A44A   LDA #$00
+.a44c	85 13		sta $13		A44C   STA $13
+.a44e	20 d7 aa	jsr $aad7	A44E   JSR $AAD7
+.a451	20 45 ab	jsr $ab45	A451   JSR $AB45
+.a454	a0 00		ldy #$00	A454   LDY #$00
+.a456	b1 22		lda ($22),y	A456   LDA ($22),Y
+.a458	48		pha		A458   PHA
+.a459	29 7f		and #$7f	A459   AND #$7F
+.a45b	20 47 ab	jsr $ab47	A45B   JSR $AB47
+.a45e	c8		iny		A45E   INY
+.a45f	68		pla		A45F   PLA
+.a460	10 f4		bpl $a456	A460   BPL $A456
+.a462	20 7a a6	jsr $a67a	A462   JSR $A67A
+.a465	a9 69		lda #$69	A465   LDA #$69   ; low  A369
+.a467	a0 a3		ldy #$a3	A467   LDY #$A3   ; high A369
+.a469	20 1e ab	jsr $ab1e	A469   JSR $AB1E
+.a46c	a4 3a		ldy $3a		A46C   LDY $3A
+.a46e	c8		iny		A46E   INY
+.a46f	f0 03		beq $a474	A46F   BEQ $A474
+.a471	20 c2 bd	jsr $bdc2	A471   JSR $BDC2
+.a474	a9 76		lda #$76	A474   LDA #$76   ; low A376
+.a476	a0 a3		ldy #$a3	A476   LDY #$A3   ; low A376
+.a478	20 1e ab	jsr $ab1e	A478   JSR $AB1E
+.a47b	a9 80		lda #$80	A47B   LDA #$80
+.a47d	20 90 ff	jsr $ff90	A47D   JSR $FF90
+.a480	6c 02 03	jmp ($0302)	A480   JMP ($0302)   ; normally A483
+.a483	20 60 a5	jsr $a560	A483   JSR $A560
+.a486	86 7a		stx $7a		A486   STX $7A
+.a488	84 7b		sty $7b		A488   STY $7B
+.a48a	20 73 00	jsr $0073	A48A   JSR $0073
+.a48d	aa		tax		A48D   TAX
+.a48e	f0 f0		beq $a480	A48E   BEQ $A480
+.a490	a2 ff		ldx #$ff	A490   LDX #$FF
+.a492	86 3a		stx $3a		A492   STX $3A
+.a494	90 06		bcc $a49c	A494   BCC $A49C
+.a496	20 79 a5	jsr $a579	A496   JSR $A579
+.a499	4c e1 a7	jmp $a7e1	A499   JMP $A7E1
+.a49c	20 6b a9	jsr $a96b	A49C   JSR $A96B
+.a49f	20 79 a5	jsr $a579	A49F   JSR $A579
+.a4a2	84 0b		sty $0b		A4A2   STY $0B
+.a4a4	20 13 a6	jsr $a613	A4A4   JSR $A613
+.a4a7	90 44		bcc $a4ed	A4A7   BCC $A4ED
+.a4a9	a0 01		ldy #$01	A4A9   LDY #$01
+.a4ab	b1 5f		lda ($5f),y	A4AB   LDA ($5F),Y
+.a4ad	85 23		sta $23		A4AD   STA $23
+.a4af	a5 2d		lda $2d		A4AF   LDA $2D
+.a4b1	85 22		sta $22		A4B1   STA $22
+.a4b3	a5 60		lda $60		A4B3   LDA $60
+.a4b5	85 25		sta $25		A4B5   STA $25
+.a4b7	a5 5f		lda $5f		A4B7   LDA $5F
+.a4b9	88		dey		A4B9   DEY
+.a4ba	f1 5f		sbc ($5f),y	A4BA   SBC ($5F),Y
+.a4bc	18		clc		A4BC   CLC
+.a4bd	65 2d		adc $2d		A4BD   ADC $2D
+.a4bf	85 2d		sta $2d		A4BF   STA $2D
+.a4c1	85 24		sta $24		A4C1   STA $24
+.a4c3	a5 2e		lda $2e		A4C3   LDA $2E
+.a4c5	69 ff		adc #$ff	A4C5   ADC #$FF
+.a4c7	85 2e		sta $2e		A4C7   STA $2E
+.a4c9	e5 60		sbc $60		A4C9   SBC $60
+.a4cb	aa		tax		A4CB   TAX
+.a4cc	38		sec		A4CC   SEC
+.a4cd	a5 5f		lda $5f		A4CD   LDA $5F
+.a4cf	e5 2d		sbc $2d		A4CF   SBC $2D
+.a4d1	a8		tay		A4D1   TAY
+.a4d2	b0 03		bcs $a4d7	A4D2   BCS $A4D7
+.a4d4	e8		inx		A4D4   INX
+.a4d5	c6 25		dec $25		A4D5   DEC $25
+.a4d7	18		clc		A4D7   CLC
+.a4d8	65 22		adc $22		A4D8   ADC $22
+.a4da	90 03		bcc $a4df	A4DA   BCC $A4DF
+.a4dc	c6 23		dec $23		A4DC   DEC $23
+.a4de	18		clc		A4DE   CLC
+.a4df	b1 22		lda ($22),y	A4DF   LDA ($22),Y
+.a4e1	91 24		sta ($24),y	A4E1   STA ($24),Y
+.a4e3	c8		iny		A4E3   INY
+.a4e4	d0 f9		bne $a4df	A4E4   BNE $A4DF
+.a4e6	e6 23		inc $23		A4E6   INC $23
+.a4e8	e6 25		inc $25		A4E8   INC $25
+.a4ea	ca		dex		A4EA   DEX
+.a4eb	d0 f2		bne $a4df	A4EB   BNE $A4DF
+.a4ed	20 59 a6	jsr $a659	A4ED   JSR $A659
+.a4f0	20 33 a5	jsr $a533	A4F0   JSR $A533
+.a4f3	ad 00 02	lda $0200	A4F3   LDA $0200
+.a4f6	f0 88		beq $a480	A4F6   BEQ $A480
+.a4f8	18		clc		A4F8   CLC
+.a4f9	a5 2d		lda $2d		A4F9   LDA $2D
+.a4fb	85 5a		sta $5a		A4FB   STA $5A
+.a4fd	65 0b		adc $0b		A4FD   ADC $0B
+.a4ff	85 58		sta $58		A4FF   STA $58
+.a501	a4 2e		ldy $2e		A501   LDY $2E
+.a503	84 5b		sty $5b		A503   STY $5B
+.a505	90 01		bcc $a508	A505   BCC $A508
+.a507	c8		iny		A507   INY
+.a508	84 59		sty $59		A508   STY $59
+.a50a	20 b8 a3	jsr $a3b8	A50A   JSR $A3B8
+.a50d	a5 14		lda $14		A50D   LDA $14
+.a50f	a4 15		ldy $15		A50F   LDY $15
+.a511	8d fe 01	sta $01fe	A511   STA $01FE
+.a514	8c ff 01	sty $01ff	A514   STY $01FF
+.a517	a5 31		lda $31		A517   LDA $31
+.a519	a4 32		ldy $32		A519   LDY $32
+.a51b	85 2d		sta $2d		A51B   STA $2D
+.a51d	84 2e		sty $2e		A51D   STY $2E
+.a51f	a4 0b		ldy $0b		A51F   LDY $0B
+.a521	88		dey		A521   DEY
+.a522	b9 fc 01	lda $01fc,y	A522   LDA $01FC,Y
+.a525	91 5f		sta ($5f),y	A525   STA ($5F),Y
+.a527	88		dey		A527   DEY
+.a528	10 f8		bpl $a522	A528   BPL $A522
+.a52a	20 59 a6	jsr $a659	A52A   JSR $A659
+.a52d	20 33 a5	jsr $a533	A52D   JSR $A533
+.a530	4c 80 a4	jmp $a480	A530   JMP $A480
+.a533	a5 2b		lda $2b		A533   LDA $2B
+.a535	a4 2c		ldy $2c		A535   LDY $2C
+.a537	85 22		sta $22		A537   STA $22
+.a539	84 23		sty $23		A539   STY $23
+.a53b	18		clc		A53B   CLC
+.a53c	a0 01		ldy #$01	A53C   LDY #$01
+.a53e	b1 22		lda ($22),y	A53E   LDA ($22),Y
+.a540	f0 1d		beq $a55f	A540   BEQ $A55F
+.a542	a0 04		ldy #$04	A542   LDY #$04
+.a544	c8		iny		A544   INY
+.a545	b1 22		lda ($22),y	A545   LDA ($22),Y
+.a547	d0 fb		bne $a544	A547   BNE $A544
+.a549	c8		iny		A549   INY
+.a54a	98		tya		A54A   TYA
+.a54b	65 22		adc $22		A54B   ADC $22
+.a54d	aa		tax		A54D   TAX
+.a54e	a0 00		ldy #$00	A54E   LDY #$00
+.a550	91 22		sta ($22),y	A550   STA ($22),Y
+.a552	a5 23		lda $23		A552   LDA $23
+.a554	69 00		adc #$00	A554   ADC #$00
+.a556	c8		iny		A556   INY
+.a557	91 22		sta ($22),y	A557   STA ($22),Y
+.a559	86 22		stx $22		A559   STX $22
+.a55b	85 23		sta $23		A55B   STA $23
+.a55d	90 dd		bcc $a53c	A55D   BCC $A53C
+.a55f	60		rts		A55F   RTS
+.a560	a2 00		ldx #$00	A560   LDX #$00
+.a562	20 12 e1	jsr $e112	A562   JSR $E112
+.a565	c9 0d		cmp #$0d	A565   CMP #$0D
+.a567	f0 0d		beq $a576	A567   BEQ $A576
+.a569	9d 00 02	sta $0200,x	A569   STA $0200,X
+.a56c	e8		inx		A56C   INX
+.a56d	e0 59		cpx #$59	A56D   CPX #$59
+.a56f	90 f1		bcc $a562	A56F   BCC $A562
+.a571	a2 17		ldx #$17	A571   LDX #$17   ; error number
+.a573	4c 37 a4	jmp $a437	A573   JMP $A437
+.a576	4c ca aa	jmp $aaca	A576   JMP $AACA   ; goto end of line
+.a579	6c 04 03	jmp ($0304)	A579   JMP ($0304)   ; normally A57C
+.a57c	a6 7a		ldx $7a		A57C   LDX $7A
+.a57e	a0 04		ldy #$04	A57E   LDY #$04
+.a580	84 0f		sty $0f		A580   STY $0F
+.a582	bd 00 02	lda $0200,x	A582   LDA $0200,X
+.a585	10 07		bpl $a58e	A585   BPL $A58E
+.a587	c9 ff		cmp #$ff	A587   CMP #$FF   ; PI
+.a589	f0 3e		beq $a5c9	A589   BEQ $A5C9
+.a58b	e8		inx		A58B   INX
+.a58c	d0 f4		bne $a582	A58C   BNE $A582
+.a58e	c9 20		cmp #$20	A58E   CMP #$20   ; space
+.a590	f0 37		beq $a5c9	A590   BEQ $A5C9
+.a592	85 08		sta $08		A592   STA $08
+.a594	c9 22		cmp #$22	A594   CMP #$22    ; quote mark
+.a596	f0 56		beq $a5ee	A596   BEQ $A5EE
+.a598	24 0f		bit $0f		A598   BIT $0F
+.a59a	70 2d		bvs $a5c9	A59A   BVS $A5C9
+.a59c	c9 3f		cmp #$3f	A59C   CMP #$3F   ; question mark
+.a59e	d0 04		bne $a5a4	A59E   BNE $A5A4
+.a5a0	a9 99		lda #$99	A5A0   LDA #$99   ; PRINT code
+.a5a2	d0 25		bne $a5c9	A5A2   BNE $A5C9
+.a5a4	c9 30		cmp #$30	A5A4   CMP #$30    ; 0
+.a5a6	90 04		bcc $a5ac	A5A6   BCC $A5AC
+.a5a8	c9 3c		cmp #$3c	A5A8   CMP #$3C
+.a5aa	90 1d		bcc $a5c9	A5AA   BCC $A5C9
+.a5ac	84 71		sty $71		A5AC   STY $71
+.a5ae	a0 00		ldy #$00	A5AE   LDY #$00
+.a5b0	84 0b		sty $0b		A5B0   STY $0B
+.a5b2	88		dey		A5B2   DEY
+.a5b3	86 7a		stx $7a		A5B3   STX $7A
+.a5b5	ca		dex		A5B5   DEX
+.a5b6	c8		iny		A5B6   INY
+.a5b7	e8		inx		A5B7   INX
+.a5b8	bd 00 02	lda $0200,x	A5B8   LDA $0200,X
+.a5bb	38		sec		A5BB   SEC
+.a5bc	f9 9e a0	sbc $a09e,y	A5BC   SBC $A09E,Y
+.a5bf	f0 f5		beq $a5b6	A5BF   BEQ $A5B6
+.a5c1	c9 80		cmp #$80	A5C1   CMP #$80
+.a5c3	d0 30		bne $a5f5	A5C3   BNE $A5F5
+.a5c5	05 0b		ora $0b		A5C5   ORA $0B
+.a5c7	a4 71		ldy $71		A5C7   LDY $71
+.a5c9	e8		inx		A5C9   INX
+.a5ca	c8		iny		A5CA   INY
+.a5cb	99 fb 01	sta $01fb,y	A5CB   STA $01FB,Y
+.a5ce	b9 fb 01	lda $01fb,y	A5CE   LDA $01FB,Y
+.a5d1	f0 36		beq $a609	A5D1   BEQ $A609
+.a5d3	38		sec		A5D3   SEC
+.a5d4	e9 3a		sbc #$3a	A5D4   SBC #$3A   ; colon
+.a5d6	f0 04		beq $a5dc	A5D6   BEQ $A5DC
+.a5d8	c9 49		cmp #$49	A5D8   CMP #$49   ; DATA code
+.a5da	d0 02		bne $a5de	A5DA   BNE $A5DE
+.a5dc	85 0f		sta $0f		A5DC   STA $0F
+.a5de	38		sec		A5DE   SEC
+.a5df	e9 55		sbc #$55	A5DF   SBC #$55   ; REM code
+.a5e1	d0 9f		bne $a582	A5E1   BNE $A582
+.a5e3	85 08		sta $08		A5E3   STA $08
+.a5e5	bd 00 02	lda $0200,x	A5E5   LDA $0200,X
+.a5e8	f0 df		beq $a5c9	A5E8   BEQ $A5C9
+.a5ea	c5 08		cmp $08		A5EA   CMP $08
+.a5ec	f0 db		beq $a5c9	A5EC   BEQ $A5C9
+.a5ee	c8		iny		A5EE   INY
+.a5ef	99 fb 01	sta $01fb,y	A5EF   STA $01FB,Y
+.a5f2	e8		inx		A5F2   INX
+.a5f3	d0 f0		bne $a5e5	A5F3   BNE $A5E5
+.a5f5	a6 7a		ldx $7a		A5F5   LDX $7A
+.a5f7	e6 0b		inc $0b		A5F7   INC $0B
+.a5f9	c8		iny		A5F9   INY
+.a5fa	b9 9d a0	lda $a09d,y	A5FA   LDA $A09D,Y
+.a5fd	10 fa		bpl $a5f9	A5FD   BPL $A5F9
+.a5ff	b9 9e a0	lda $a09e,y	A5FF   LDA $A09E,Y
+.a602	d0 b4		bne $a5b8	A602   BNE $A5B8
+.a604	bd 00 02	lda $0200,x	A604   LDA $0200,X
+.a607	10 be		bpl $a5c7	A607   BPL $A5C7
+.a609	99 fd 01	sta $01fd,y	A609   STA $01FD,Y
+.a60c	c6 7b		dec $7b		A60C   DEC $7B
+.a60e	a9 ff		lda #$ff	A60E   LDA #$FF
+.a610	85 7a		sta $7a		A610   STA $7A
+.a612	60		rts		A612   RTS
+.a613	a5 2b		lda $2b		A613   LDA $2B
+.a615	a6 2c		ldx $2c		A615   LDX $2C
+.a617	a0 01		ldy #$01	A617   LDY #$01
+.a619	85 5f		sta $5f		A619   STA $5F
+.a61b	86 60		stx $60		A61B   STX $60
+.a61d	b1 5f		lda ($5f),y	A61D   LDA ($5F),Y
+.a61f	f0 1f		beq $a640	A61F   BEQ $A640
+.a621	c8		iny		A621   INY
+.a622	c8		iny		A622   INY
+.a623	a5 15		lda $15		A623   LDA $15
+.a625	d1 5f		cmp ($5f),y	A625   CMP ($5F),Y
+.a627	90 18		bcc $a641	A627   BCC $A641
+.a629	f0 03		beq $a62e	A629   BEQ $A62E
+.a62b	88		dey		A62B   DEY
+.a62c	d0 09		bne $a637	A62C   BNE $A637
+.a62e	a5 14		lda $14		A62E   LDA $14
+.a630	88		dey		A630   DEY
+.a631	d1 5f		cmp ($5f),y	A631   CMP ($5F),Y
+.a633	90 0c		bcc $a641	A633   BCC $A641
+.a635	f0 0a		beq $a641	A635   BEQ $A641
+.a637	88		dey		A637   DEY
+.a638	b1 5f		lda ($5f),y	A638   LDA ($5F),Y
+.a63a	aa		tax		A63A   TAX
+.a63b	88		dey		A63B   DEY
+.a63c	b1 5f		lda ($5f),y	A63C   LDA ($5F),Y
+.a63e	b0 d7		bcs $a617	A63E   BCS $A617
+.a640	18		clc		A640   CLC
+.a641	60		rts		A641   RTS
+.a642	d0 fd		bne $a641	A642   BNE $A641
+.a644	a9 00		lda #$00	A644   LDA #$00
+.a646	a8		tay		A646   TAY
+.a647	91 2b		sta ($2b),y	A647   STA ($2B),Y
+.a649	c8		iny		A649   INY
+.a64a	91 2b		sta ($2b),y	A64A   STA ($2B),Y
+.a64c	a5 2b		lda $2b		A64C   LDA $2B
+.a64e	18		clc		A64E   CLC
+.a64f	69 02		adc #$02	A64F   ADC #$02
+.a651	85 2d		sta $2d		A651   STA $2D
+.a653	a5 2c		lda $2c		A653   LDA $2C
+.a655	69 00		adc #$00	A655   ADC #$00
+.a657	85 2e		sta $2e		A657   STA $2E
+.a659	20 8e a6	jsr $a68e	A659   JSR $A68E
+.a65c	a9 00		lda #$00	A65C   LDA #$00
+.a65e	d0 2d		bne $a68d	A65E   BNE $A68D
+.a660	20 e7 ff	jsr $ffe7	A660   JSR $FFE7
+.a663	a5 37		lda $37		A663   LDA $37
+.a665	a4 38		ldy $38		A665   LDY $38
+.a667	85 33		sta $33		A667   STA $33
+.a669	84 34		sty $34		A669   STY $34
+.a66b	a5 2d		lda $2d		A66B   LDA $2D
+.a66d	a4 2e		ldy $2e		A66D   LDY $2E
+.a66f	85 2f		sta $2f		A66F   STA $2F
+.a671	84 30		sty $30		A671   STY $30
+.a673	85 31		sta $31		A673   STA $31
+.a675	84 32		sty $32		A675   STY $32
+.a677	20 1d a8	jsr $a81d	A677   JSR $A81D
+.a67a	a2 19		ldx #$19	A67A   LDX #$19
+.a67c	86 16		stx $16		A67C   STX $16
+.a67e	68		pla		A67E   PLA
+.a67f	a8		tay		A67F   TAY
+.a680	68		pla		A680   PLA
+.a681	a2 fa		ldx #$fa	A681   LDX #$FA
+.a683	9a		txs		A683   TXS
+.a684	48		pha		A684   PHA
+.a685	98		tya		A685   TYA
+.a686	48		pha		A686   PHA
+.a687	a9 00		lda #$00	A687   LDA #$00
+.a689	85 3e		sta $3e		A689   STA $3E
+.a68b	85 10		sta $10		A68B   STA $10
+.a68d	60		rts		A68D   RTS
+.a68e	18		clc		A68E   CLC
+.a68f	a5 2b		lda $2b		A68F   LDA $2B
+.a691	69 ff		adc #$ff	A691   ADC #$FF
+.a693	85 7a		sta $7a		A693   STA $7A
+.a695	a5 2c		lda $2c		A695   LDA $2C
+.a697	69 ff		adc #$ff	A697   ADC #$FF
+.a699	85 7b		sta $7b		A699   STA $7B
+.a69b	60		rts		A69B   RTS
+.a69c	90 06		bcc $a6a4	A69C   BCC $A6A4
+.a69e	f0 04		beq $a6a4	A69E   BEQ $A6A4
+.a6a0	c9 ab		cmp #$ab	A6A0   CMP #$AB
+.a6a2	d0 e9		bne $a68d	A6A2   BNE $A68D
+.a6a4	20 6b a9	jsr $a96b	A6A4   JSR $A96B
+.a6a7	20 13 a6	jsr $a613	A6A7   JSR $A613
+.a6aa	20 79 00	jsr $0079	A6AA   JSR $0079
+.a6ad	f0 0c		beq $a6bb	A6AD   BEQ $A6BB
+.a6af	c9 ab		cmp #$ab	A6AF   CMP #$AB
+.a6b1	d0 8e		bne $a641	A6B1   BNE $A641
+.a6b3	20 73 00	jsr $0073	A6B3   JSR $0073
+.a6b6	20 6b a9	jsr $a96b	A6B6   JSR $A96B
+.a6b9	d0 86		bne $a641	A6B9   BNE $A641
+.a6bb	68		pla		A6BB   PLA
+.a6bc	68		pla		A6BC   PLA
+.a6bd	a5 14		lda $14		A6BD   LDA $14
+.a6bf	05 15		ora $15		A6BF   ORA $15
+.a6c1	d0 06		bne $a6c9	A6C1   BNE $A6C9
+.a6c3	a9 ff		lda #$ff	A6C3   LDA #$FF
+.a6c5	85 14		sta $14		A6C5   STA $14
+.a6c7	85 15		sta $15		A6C7   STA $15
+.a6c9	a0 01		ldy #$01	A6C9   LDY #$01
+.a6cb	84 0f		sty $0f		A6CB   STY $0F
+.a6cd	b1 5f		lda ($5f),y	A6CD   LDA ($5F),Y
+.a6cf	f0 43		beq $a714	A6CF   BEQ $A714
+.a6d1	20 2c a8	jsr $a82c	A6D1   JSR $A82C
+.a6d4	20 d7 aa	jsr $aad7	A6D4   JSR $AAD7
+.a6d7	c8		iny		A6D7   INY
+.a6d8	b1 5f		lda ($5f),y	A6D8   LDA ($5F),Y
+.a6da	aa		tax		A6DA   TAX
+.a6db	c8		iny		A6DB   INY
+.a6dc	b1 5f		lda ($5f),y	A6DC   LDA ($5F),Y
+.a6de	c5 15		cmp $15		A6DE   CMP $15
+.a6e0	d0 04		bne $a6e6	A6E0   BNE $A6E6
+.a6e2	e4 14		cpx $14		A6E2   CPX $14
+.a6e4	f0 02		beq $a6e8	A6E4   BEQ $A6E8
+.a6e6	b0 2c		bcs $a714	A6E6   BCS $A714
+.a6e8	84 49		sty $49		A6E8   STY $49
+.a6ea	20 cd bd	jsr $bdcd	A6EA   JSR $BDCD
+.a6ed	a9 20		lda #$20	A6ED   LDA #$20
+.a6ef	a4 49		ldy $49		A6EF   LDY $49
+.a6f1	29 7f		and #$7f	A6F1   AND #$7F
+.a6f3	20 47 ab	jsr $ab47	A6F3   JSR $AB47
+.a6f6	c9 22		cmp #$22	A6F6   CMP #$22
+.a6f8	d0 06		bne $a700	A6F8   BNE $A700
+.a6fa	a5 0f		lda $0f		A6FA   LDA $0F
+.a6fc	49 ff		eor #$ff	A6FC   EOR #$FF
+.a6fe	85 0f		sta $0f		A6FE   STA $0F
+.a700	c8		iny		A700   INY
+.a701	f0 11		beq $a714	A701   BEQ $A714
+.a703	b1 5f		lda ($5f),y	A703   LDA ($5F),Y
+.a705	d0 10		bne $a717	A705   BNE $A717
+.a707	a8		tay		A707   TAY
+.a708	b1 5f		lda ($5f),y	A708   LDA ($5F),Y
+.a70a	aa		tax		A70A   TAX
+.a70b	c8		iny		A70B   INY
+.a70c	b1 5f		lda ($5f),y	A70C   LDA ($5F),Y
+.a70e	86 5f		stx $5f		A70E   STX $5F
+.a710	85 60		sta $60		A710   STA $60
+.a712	d0 b5		bne $a6c9	A712   BNE $A6C9
+.a714	4c 86 e3	jmp $e386	A714   JMP $E386
+.a717	6c 06 03	jmp ($0306)	A717   JMP ($0306)   ; normally A71A
+.a71a	10 d7		bpl $a6f3	A71A   BPL $A6F3
+.a71c	c9 ff		cmp #$ff	A71C   CMP #$FF
+.a71e	f0 d3		beq $a6f3	A71E   BEQ $A6F3
+.a720	24 0f		bit $0f		A720   BIT $0F
+.a722	30 cf		bmi $a6f3	A722   BMI $A6F3
+.a724	38		sec		A724   SEC
+.a725	e9 7f		sbc #$7f	A725   SBC #$7F
+.a727	aa		tax		A727   TAX
+.a728	84 49		sty $49		A728   STY $49
+.a72a	a0 ff		ldy #$ff	A72A   LDY #$FF
+.a72c	ca		dex		A72C   DEX
+.a72d	f0 08		beq $a737	A72D   BEQ $A737
+.a72f	c8		iny		A72F   INY
+.a730	b9 9e a0	lda $a09e,y	A730   LDA $A09E,Y
+.a733	10 fa		bpl $a72f	A733   BPL $A72F
+.a735	30 f5		bmi $a72c	A735   BMI $A72C
+.a737	c8		iny		A737   INY
+.a738	b9 9e a0	lda $a09e,y	A738   LDA $A09E,Y
+.a73b	30 b2		bmi $a6ef	A73B   BMI $A6EF
+.a73d	20 47 ab	jsr $ab47	A73D   JSR $AB47
+.a740	d0 f5		bne $a737	A740   BNE $A737
+.a742	a9 80		lda #$80	A742   LDA #$80
+.a744	85 10		sta $10		A744   STA $10
+.a746	20 a5 a9	jsr $a9a5	A746   JSR $A9A5
+.a749	20 8a a3	jsr $a38a	A749   JSR $A38A
+.a74c	d0 05		bne $a753	A74C   BNE $A753
+.a74e	8a		txa		A74E   TXA
+.a74f	69 0f		adc #$0f	A74F   ADC #$0F
+.a751	aa		tax		A751   TAX
+.a752	9a		txs		A752   TXS
+.a753	68		pla		A753   PLA
+.a754	68		pla		A754   PLA
+.a755	a9 09		lda #$09	A755   LDA #$09
+.a757	20 fb a3	jsr $a3fb	A757   JSR $A3FB
+.a75a	20 06 a9	jsr $a906	A75A   JSR $A906
+.a75d	18		clc		A75D   CLC
+.a75e	98		tya		A75E   TYA
+.a75f	65 7a		adc $7a		A75F   ADC $7A
+.a761	48		pha		A761   PHA
+.a762	a5 7b		lda $7b		A762   LDA $7B
+.a764	69 00		adc #$00	A764   ADC #$00
+.a766	48		pha		A766   PHA
+.a767	a5 3a		lda $3a		A767   LDA $3A
+.a769	48		pha		A769   PHA
+.a76a	a5 39		lda $39		A76A   LDA $39
+.a76c	48		pha		A76C   PHA
+.a76d	a9 a4		lda #$a4	A76D   LDA #$A4
+.a76f	20 ff ae	jsr $aeff	A76F   JSR $AEFF
+.a772	20 8d ad	jsr $ad8d	A772   JSR $AD8D
+.a775	20 8a ad	jsr $ad8a	A775   JSR $AD8A
+.a778	a5 66		lda $66		A778   LDA $66
+.a77a	09 7f		ora #$7f	A77A   ORA #$7F
+.a77c	25 62		and $62		A77C   AND $62
+.a77e	85 62		sta $62		A77E   STA $62
+.a780	a9 8b		lda #$8b	A780   LDA #$8B   ; low  A78B
+.a782	a0 a7		ldy #$a7	A782   LDY #$A7   ; high A78B
+.a784	85 22		sta $22		A784   STA $22
+.a786	84 23		sty $23		A786   STY $23
+.a788	4c 43 ae	jmp $ae43	A788   JMP $AE43
+.a78b	a9 bc		lda #$bc	A78B   LDA #$BC   ; low  B9BC
+.a78d	a0 b9		ldy #$b9	A78D   LDY #$B9   ; high B9BC
+.a78f	20 a2 bb	jsr $bba2	A78F   JSR $BBA2
+.a792	20 79 00	jsr $0079	A792   JSR $0079
+.a795	c9 a9		cmp #$a9	A795   CMP #$A9
+.a797	d0 06		bne $a79f	A797   BNE $A79F
+.a799	20 73 00	jsr $0073	A799   JSR $0073
+.a79c	20 8a ad	jsr $ad8a	A79C   JSR $AD8A
+.a79f	20 2b bc	jsr $bc2b	A79F   JSR $BC2B
+.a7a2	20 38 ae	jsr $ae38	A7A2   JSR $AE38
+.a7a5	a5 4a		lda $4a		A7A5   LDA $4A
+.a7a7	48		pha		A7A7   PHA
+.a7a8	a5 49		lda $49		A7A8   LDA $49
+.a7aa	48		pha		A7AA   PHA
+.a7ab	a9 81		lda #$81	A7AB   LDA #$81   ; FOR block code
+.a7ad	48		pha		A7AD   PHA
+.a7ae	20 2c a8	jsr $a82c	A7AE   JSR $A82C
+.a7b1	a5 7a		lda $7a		A7B1   LDA $7A
+.a7b3	a4 7b		ldy $7b		A7B3   LDY $7B
+.a7b5	c0 02		cpy #$02	A7B5   CPY #$02
+.a7b7	ea		nop		A7B7   NOP
+.a7b8	f0 04		beq $a7be	A7B8   BEQ $A7BE
+.a7ba	85 3d		sta $3d		A7BA   STA $3D
+.a7bc	84 3e		sty $3e		A7BC   STY $3E
+.a7be	a0 00		ldy #$00	A7BE   LDY #$00
+.a7c0	b1 7a		lda ($7a),y	A7C0   LDA ($7A),Y
+.a7c2	d0 43		bne $a807	A7C2   BNE $A807
+.a7c4	a0 02		ldy #$02	A7C4   LDY #$02
+.a7c6	b1 7a		lda ($7a),y	A7C6   LDA ($7A),Y
+.a7c8	18		clc		A7C8   CLC
+.a7c9	d0 03		bne $a7ce	A7C9   BNE $A7CE
+.a7cb	4c 4b a8	jmp $a84b	A7CB   JMP $A84B
+.a7ce	c8		iny		A7CE   INY
+.a7cf	b1 7a		lda ($7a),y	A7CF   LDA ($7A),Y
+.a7d1	85 39		sta $39		A7D1   STA $39
+.a7d3	c8		iny		A7D3   INY
+.a7d4	b1 7a		lda ($7a),y	A7D4   LDA ($7A),Y
+.a7d6	85 3a		sta $3a		A7D6   STA $3A
+.a7d8	98		tya		A7D8   TYA
+.a7d9	65 7a		adc $7a		A7D9   ADC $7A
+.a7db	85 7a		sta $7a		A7DB   STA $7A
+.a7dd	90 02		bcc $a7e1	A7DD   BCC $A7E1
+.a7df	e6 7b		inc $7b		A7DF   INC $7B
+.a7e1	6c 08 03	jmp ($0308)	A7E1   JMP ($0308)   ; normally A7E4
+.a7e4	20 73 00	jsr $0073	A7E4   JSR $0073
+.a7e7	20 ed a7	jsr $a7ed	A7E7   JSR $A7ED
+.a7ea	4c ae a7	jmp $a7ae	A7EA   JMP $A7AE
+.a7ed	f0 3c		beq $a82b	A7ED   BEQ $A82B
+.a7ef	e9 80		sbc #$80	A7EF   SBC #$80
+.a7f1	90 11		bcc $a804	A7F1   BCC $A804
+.a7f3	c9 23		cmp #$23	A7F3   CMP #$23
+.a7f5	b0 17		bcs $a80e	A7F5   BCS $A80E
+.a7f7	0a		asl a		A7F7   ASL
+.a7f8	a8		tay		A7F8   TAY
+.a7f9	b9 0d a0	lda $a00d,y	A7F9   LDA $A00D,Y
+.a7fc	48		pha		A7FC   PHA
+.a7fd	b9 0c a0	lda $a00c,y	A7FD   LDA $A00C,Y
+.a800	48		pha		A800   PHA
+.a801	4c 73 00	jmp $0073	A801   JMP $0073
+.a804	4c a5 a9	jmp $a9a5	A804   JMP $A9A5
+.a807	c9 3a		cmp #$3a	A807   CMP #$3A   ; colon
+.a809	f0 d6		beq $a7e1	A809   BEQ $A7E1
+.a80b	4c 08 af	jmp $af08	A80B   JMP $AF08
+.a80e	c9 4b		cmp #$4b	A80E   CMP #$4B   ; GO code
+.a810	d0 f9		bne $a80b	A810   BNE $A80B
+.a812	20 73 00	jsr $0073	A812   JSR $0073
+.a815	a9 a4		lda #$a4	A815   LDA #$A4   ; TO code
+.a817	20 ff ae	jsr $aeff	A817   JSR $AEFF
+.a81a	4c a0 a8	jmp $a8a0	A81A   JMP $A8A0   ; do GOTO
+.a81d	38		sec		A81D   SEC
+.a81e	a5 2b		lda $2b		A81E   LDA $2B
+.a820	e9 01		sbc #$01	A820   SBC #$01
+.a822	a4 2c		ldy $2c		A822   LDY $2C
+.a824	b0 01		bcs $a827	A824   BCS $A827
+.a826	88		dey		A826   DEY
+.a827	85 41		sta $41		A827   STA $41
+.a829	84 42		sty $42		A829   STY $42
+.a82b	60		rts		A82B   RTS
+.a82c	20 e1 ff	jsr $ffe1	A82C   JSR $FFE1   ; test stop key
+.a82f	b0 01		bcs $a832	A82F   BCS $A832
+.a831	18		clc		A831   CLC
+.a832	d0 3c		bne $a870	A832   BNE $A870
+.a834	a5 7a		lda $7a		A834   LDA $7A
+.a836	a4 7b		ldy $7b		A836   LDY $7B
+.a838	a6 3a		ldx $3a		A838   LDX $3A
+.a83a	e8		inx		A83A   INX
+.a83b	f0 0c		beq $a849	A83B   BEQ $A849
+.a83d	85 3d		sta $3d		A83D   STA $3D
+.a83f	84 3e		sty $3e		A83F   STY $3E
+.a841	a5 39		lda $39		A841   LDA $39
+.a843	a4 3a		ldy $3a		A843   LDY $3A
+.a845	85 3b		sta $3b		A845   STA $3B
+.a847	84 3c		sty $3c		A847   STY $3C
+.a849	68		pla		A849   PLA
+.a84a	68		pla		A84A   PLA
+.a84b	a9 81		lda #$81	A84B   LDA #$81   ; low  A381
+.a84d	a0 a3		ldy #$a3	A84D   LDY #$A3   ; high A381
+.a84f	90 03		bcc $a854	A84F   BCC $A854
+.a851	4c 69 a4	jmp $a469	A851   JMP $A469
+.a854	4c 86 e3	jmp $e386	A854   JMP $E386
+.a857	d0 17		bne $a870	A857   BNE $A870
+.a859	a2 1a		ldx #$1a	A859   LDX #$1A   ; error number
+.a85b	a4 3e		ldy $3e		A85B   LDY $3E
+.a85d	d0 03		bne $a862	A85D   BNE $A862
+.a85f	4c 37 a4	jmp $a437	A85F   JMP $A437
+.a862	a5 3d		lda $3d		A862   LDA $3D
+.a864	85 7a		sta $7a		A864   STA $7A
+.a866	84 7b		sty $7b		A866   STY $7B
+.a868	a5 3b		lda $3b		A868   LDA $3B
+.a86a	a4 3c		ldy $3c		A86A   LDY $3C
+.a86c	85 39		sta $39		A86C   STA $39
+.a86e	84 3a		sty $3a		A86E   STY $3A
+.a870	60		rts		A870   RTS
+.a871	08		php		A871   PHP
+.a872	a9 00		lda #$00	A872   LDA #$00
+.a874	20 90 ff	jsr $ff90	A874   JSR $FF90
+.a877	28		plp		A877   PLP
+.a878	d0 03		bne $a87d	A878   BNE $A87D
+.a87a	4c 59 a6	jmp $a659	A87A   JMP $A659
+.a87d	20 60 a6	jsr $a660	A87D   JSR $A660   ; do CLR
+.a880	4c 97 a8	jmp $a897	A880   JMP $A897   ; do GOTO
+.a883	a9 03		lda #$03	A883   LDA #$03
+.a885	20 fb a3	jsr $a3fb	A885   JSR $A3FB
+.a888	a5 7b		lda $7b		A888   LDA $7B
+.a88a	48		pha		A88A   PHA
+.a88b	a5 7a		lda $7a		A88B   LDA $7A
+.a88d	48		pha		A88D   PHA
+.a88e	a5 3a		lda $3a		A88E   LDA $3A
+.a890	48		pha		A890   PHA
+.a891	a5 39		lda $39		A891   LDA $39
+.a893	48		pha		A893   PHA
+.a894	a9 8d		lda #$8d	A894   LDA #$8D
+.a896	48		pha		A896   PHA
+.a897	20 79 00	jsr $0079	A897   JSR $0079
+.a89a	20 a0 a8	jsr $a8a0	A89A   JSR $A8A0
+.a89d	4c ae a7	jmp $a7ae	A89D   JMP $A7AE
+.a8a0	20 6b a9	jsr $a96b	A8A0   JSR $A96B
+.a8a3	20 09 a9	jsr $a909	A8A3   JSR $A909
+.a8a6	38		sec		A8A6   SEC
+.a8a7	a5 39		lda $39		A8A7   LDA $39
+.a8a9	e5 14		sbc $14		A8A9   SBC $14
+.a8ab	a5 3a		lda $3a		A8AB   LDA $3A
+.a8ad	e5 15		sbc $15		A8AD   SBC $15
+.a8af	b0 0b		bcs $a8bc	A8AF   BCS $A8BC
+.a8b1	98		tya		A8B1   TYA
+.a8b2	38		sec		A8B2   SEC
+.a8b3	65 7a		adc $7a		A8B3   ADC $7A
+.a8b5	a6 7b		ldx $7b		A8B5   LDX $7B
+.a8b7	90 07		bcc $a8c0	A8B7   BCC $A8C0
+.a8b9	e8		inx		A8B9   INX
+.a8ba	b0 04		bcs $a8c0	A8BA   BCS $A8C0
+.a8bc	a5 2b		lda $2b		A8BC   LDA $2B
+.a8be	a6 2c		ldx $2c		A8BE   LDX $2C
+.a8c0	20 17 a6	jsr $a617	A8C0   JSR $A617
+.a8c3	90 1e		bcc $a8e3	A8C3   BCC $A8E3
+.a8c5	a5 5f		lda $5f		A8C5   LDA $5F
+.a8c7	e9 01		sbc #$01	A8C7   SBC #$01
+.a8c9	85 7a		sta $7a		A8C9   STA $7A
+.a8cb	a5 60		lda $60		A8CB   LDA $60
+.a8cd	e9 00		sbc #$00	A8CD   SBC #$00
+.a8cf	85 7b		sta $7b		A8CF   STA $7B
+.a8d1	60		rts		A8D1   RTS
+.a8d2	d0 fd		bne $a8d1	A8D2   BNE $A8D1
+.a8d4	a9 ff		lda #$ff	A8D4   LDA #$FF
+.a8d6	85 4a		sta $4a		A8D6   STA $4A
+.a8d8	20 8a a3	jsr $a38a	A8D8   JSR $A38A
+.a8db	9a		txs		A8DB   TXS
+.a8dc	c9 8d		cmp #$8d	A8DC   CMP #$8D
+.a8de	f0 0b		beq $a8eb	A8DE   BEQ $A8EB
+.a8e0	a2 0c		ldx #$0c	A8E0   LDX #$0C
+>a8e2	2c				A8E2   .byte $2C
+.a8e3	a2 11		ldx #$11	A8E3   LDX #$11
+.a8e5	4c 37 a4	jmp $a437	A8E5   JMP $A437
+.a8e8	4c 08 af	jmp $af08	A8E8   JMP $AF08
+.a8eb	68		pla		A8EB   PLA
+.a8ec	68		pla		A8EC   PLA
+.a8ed	85 39		sta $39		A8ED   STA $39
+.a8ef	68		pla		A8EF   PLA
+.a8f0	85 3a		sta $3a		A8F0   STA $3A
+.a8f2	68		pla		A8F2   PLA
+.a8f3	85 7a		sta $7a		A8F3   STA $7A
+.a8f5	68		pla		A8F5   PLA
+.a8f6	85 7b		sta $7b		A8F6   STA $7B
+.a8f8	20 06 a9	jsr $a906	A8F8   JSR $A906
+.a8fb	98		tya		A8FB   TYA
+.a8fc	18		clc		A8FC   CLC
+.a8fd	65 7a		adc $7a		A8FD   ADC $7A
+.a8ff	85 7a		sta $7a		A8FF   STA $7A
+.a901	90 02		bcc $a905	A901   BCC $A905
+.a903	e6 7b		inc $7b		A903   INC $7B
+.a905	60		rts		A905   RTS
+.a906	a2 3a		ldx #$3a	A906   LDX #$3A   ; colon
+>a908	2c				A908   .byte $2C
+.a909	a2 00		ldx #$00	A909   LDX #$00
+.a90b	86 07		stx $07		A90B   STX $07
+.a90d	a0 00		ldy #$00	A90D   LDY #$00
+.a90f	84 08		sty $08		A90F   STY $08
+.a911	a5 08		lda $08		A911   LDA $08
+.a913	a6 07		ldx $07		A913   LDX $07
+.a915	85 07		sta $07		A915   STA $07
+.a917	86 08		stx $08		A917   STX $08
+.a919	b1 7a		lda ($7a),y	A919   LDA ($7A),Y
+.a91b	f0 e8		beq $a905	A91B   BEQ $A905
+.a91d	c5 08		cmp $08		A91D   CMP $08
+.a91f	f0 e4		beq $a905	A91F   BEQ $A905
+.a921	c8		iny		A921   INY
+.a922	c9 22		cmp #$22	A922   CMP #$22   ; quote mark
+.a924	d0 f3		bne $a919	A924   BNE $A919
+.a926	f0 e9		beq $a911	A926   BEQ $A911
+.a928	20 9e ad	jsr $ad9e	A928   JSR $AD9E
+.a92b	20 79 00	jsr $0079	A92B   JSR $0079
+.a92e	c9 89		cmp #$89	A92E   CMP #$89
+.a930	f0 05		beq $a937	A930   BEQ $A937
+.a932	a9 a7		lda #$a7	A932   LDA #$A7
+.a934	20 ff ae	jsr $aeff	A934   JSR $AEFF
+.a937	a5 61		lda $61		A937   LDA $61
+.a939	d0 05		bne $a940	A939   BNE $A940
+.a93b	20 09 a9	jsr $a909	A93B   JSR $A909
+.a93e	f0 bb		beq $a8fb	A93E   BEQ $A8FB
+.a940	20 79 00	jsr $0079	A940   JSR $0079
+.a943	b0 03		bcs $a948	A943   BCS $A948
+.a945	4c a0 a8	jmp $a8a0	A945   JMP $A8A0   ; do GOTO
+.a948	4c ed a7	jmp $a7ed	A948   JMP $A7ED
+.a94b	20 9e b7	jsr $b79e	A94B   JSR $B79E
+.a94e	48		pha		A94E   PHA
+.a94f	c9 8d		cmp #$8d	A94F   CMP #$8D   ; GOSUB code
+.a951	f0 04		beq $a957	A951   BEQ $A957
+.a953	c9 89		cmp #$89	A953   CMP #$89   ; GOTO code
+.a955	d0 91		bne $a8e8	A955   BNE $A8E8
+.a957	c6 65		dec $65		A957   DEC $65
+.a959	d0 04		bne $a95f	A959   BNE $A95F
+.a95b	68		pla		A95B   PLA
+.a95c	4c ef a7	jmp $a7ef	A95C   JMP $A7EF
+.a95f	20 73 00	jsr $0073	A95F   JSR $0073
+.a962	20 6b a9	jsr $a96b	A962   JSR $A96B
+.a965	c9 2c		cmp #$2c	A965   CMP #$2C   ; comma
+.a967	f0 ee		beq $a957	A967   BEQ $A957
+.a969	68		pla		A969   PLA
+.a96a	60		rts		A96A   RTS
+.a96b	a2 00		ldx #$00	A96B   LDX #$00
+.a96d	86 14		stx $14		A96D   STX $14
+.a96f	86 15		stx $15		A96F   STX $15
+.a971	b0 f7		bcs $a96a	A971   BCS $A96A
+.a973	e9 2f		sbc #$2f	A973   SBC #$2F
+.a975	85 07		sta $07		A975   STA $07
+.a977	a5 15		lda $15		A977   LDA $15
+.a979	85 22		sta $22		A979   STA $22
+.a97b	c9 19		cmp #$19	A97B   CMP #$19
+.a97d	b0 d4		bcs $a953	A97D   BCS $A953
+.a97f	a5 14		lda $14		A97F   LDA $14
+.a981	0a		asl a		A981   ASL   ; times 2
+.a982	26 22		rol $22		A982   ROL $22
+.a984	0a		asl a		A984   ASL   ; times 2
+.a985	26 22		rol $22		A985   ROL $22
+.a987	65 14		adc $14		A987   ADC $14   ; add original
+.a989	85 14		sta $14		A989   STA $14
+.a98b	a5 22		lda $22		A98B   LDA $22
+.a98d	65 15		adc $15		A98D   ADC $15
+.a98f	85 15		sta $15		A98F   STA $15
+.a991	06 14		asl $14		A991   ASL $14   ; times 2
+.a993	26 15		rol $15		A993   ROL $15   ; = times 10 overall
+.a995	a5 14		lda $14		A995   LDA $14
+.a997	65 07		adc $07		A997   ADC $07
+.a999	85 14		sta $14		A999   STA $14
+.a99b	90 02		bcc $a99f	A99B   BCC $A99F
+.a99d	e6 15		inc $15		A99D   INC $15
+.a99f	20 73 00	jsr $0073	A99F   JSR $0073
+.a9a2	4c 71 a9	jmp $a971	A9A2   JMP $A971
+.a9a5	20 8b b0	jsr $b08b	A9A5   JSR $B08B
+.a9a8	85 49		sta $49		A9A8   STA $49
+.a9aa	84 4a		sty $4a		A9AA   STY $4A
+.a9ac	a9 b2		lda #$b2	A9AC   LDA #$B2    ; equals code
+.a9ae	20 ff ae	jsr $aeff	A9AE   JSR $AEFF
+.a9b1	a5 0e		lda $0e		A9B1   LDA $0E
+.a9b3	48		pha		A9B3   PHA
+.a9b4	a5 0d		lda $0d		A9B4   LDA $0D
+.a9b6	48		pha		A9B6   PHA
+.a9b7	20 9e ad	jsr $ad9e	A9B7   JSR $AD9E
+.a9ba	68		pla		A9BA   PLA
+.a9bb	2a		rol a		A9BB   ROL
+.a9bc	20 90 ad	jsr $ad90	A9BC   JSR $AD90
+.a9bf	d0 18		bne $a9d9	A9BF   BNE $A9D9
+.a9c1	68		pla		A9C1   PLA
+.a9c2	10 12		bpl $a9d6	A9C2   BPL $A9D6
+.a9c4	20 1b bc	jsr $bc1b	A9C4   JSR $BC1B
+.a9c7	20 bf b1	jsr $b1bf	A9C7   JSR $B1BF
+.a9ca	a0 00		ldy #$00	A9CA   LDY #$00
+.a9cc	a5 64		lda $64		A9CC   LDA $64
+.a9ce	91 49		sta ($49),y	A9CE   STA ($49),Y
+.a9d0	c8		iny		A9D0   INY
+.a9d1	a5 65		lda $65		A9D1   LDA $65
+.a9d3	91 49		sta ($49),y	A9D3   STA ($49),Y
+.a9d5	60		rts		A9D5   RTS
+.a9d6	4c d0 bb	jmp $bbd0	A9D6   JMP $BBD0
+.a9d9	68		pla		A9D9   PLA
+.a9da	a4 4a		ldy $4a		A9DA   LDY $4A
+.a9dc	c0 bf		cpy #$bf	A9DC   CPY #$BF
+.a9de	d0 4c		bne $aa2c	A9DE   BNE $AA2C
+.a9e0	20 a6 b6	jsr $b6a6	A9E0   JSR $B6A6
+.a9e3	c9 06		cmp #$06	A9E3   CMP #$06   ; length 6
+.a9e5	d0 3d		bne $aa24	A9E5   BNE $AA24
+.a9e7	a0 00		ldy #$00	A9E7   LDY #$00
+.a9e9	84 61		sty $61		A9E9   STY $61
+.a9eb	84 66		sty $66		A9EB   STY $66
+.a9ed	84 71		sty $71		A9ED   STY $71
+.a9ef	20 1d aa	jsr $aa1d	A9EF   JSR $AA1D
+.a9f2	20 e2 ba	jsr $bae2	A9F2   JSR $BAE2
+.a9f5	e6 71		inc $71		A9F5   INC $71
+.a9f7	a4 71		ldy $71		A9F7   LDY $71
+.a9f9	20 1d aa	jsr $aa1d	A9F9   JSR $AA1D
+.a9fc	20 0c bc	jsr $bc0c	A9FC   JSR $BC0C
+.a9ff	aa		tax		A9FF   TAX
+.aa00	f0 05		beq $aa07	AA00   BEQ $AA07
+.aa02	e8		inx		AA02   INX
+.aa03	8a		txa		AA03   TXA
+.aa04	20 ed ba	jsr $baed	AA04   JSR $BAED
+.aa07	a4 71		ldy $71		AA07   LDY $71
+.aa09	c8		iny		AA09   INY
+.aa0a	c0 06		cpy #$06	AA0A   CPY #$06
+.aa0c	d0 df		bne $a9ed	AA0C   BNE $A9ED
+.aa0e	20 e2 ba	jsr $bae2	AA0E   JSR $BAE2
+.aa11	20 9b bc	jsr $bc9b	AA11   JSR $BC9B
+.aa14	a6 64		ldx $64		AA14   LDX $64
+.aa16	a4 63		ldy $63		AA16   LDY $63
+.aa18	a5 65		lda $65		AA18   LDA $65
+.aa1a	4c db ff	jmp $ffdb	AA1A   JMP $FFDB
+.aa1d	b1 22		lda ($22),y	AA1D   LDA ($22),Y
+.aa1f	20 80 00	jsr $0080	AA1F   JSR $0080
+.aa22	90 03		bcc $aa27	AA22   BCC $AA27
+.aa24	4c 48 b2	jmp $b248	AA24   JMP $B248
+.aa27	e9 2f		sbc #$2f	AA27   SBC #$2F
+.aa29	4c 7e bd	jmp $bd7e	AA29   JMP $BD7E
+.aa2c	a0 02		ldy #$02	AA2C   LDY #$02
+.aa2e	b1 64		lda ($64),y	AA2E   LDA ($64),Y
+.aa30	c5 34		cmp $34		AA30   CMP $34
+.aa32	90 17		bcc $aa4b	AA32   BCC $AA4B
+.aa34	d0 07		bne $aa3d	AA34   BNE $AA3D
+.aa36	88		dey		AA36   DEY
+.aa37	b1 64		lda ($64),y	AA37   LDA ($64),Y
+.aa39	c5 33		cmp $33		AA39   CMP $33
+.aa3b	90 0e		bcc $aa4b	AA3B   BCC $AA4B
+.aa3d	a4 65		ldy $65		AA3D   LDY $65
+.aa3f	c4 2e		cpy $2e		AA3F   CPY $2E
+.aa41	90 08		bcc $aa4b	AA41   BCC $AA4B
+.aa43	d0 0d		bne $aa52	AA43   BNE $AA52
+.aa45	a5 64		lda $64		AA45   LDA $64
+.aa47	c5 2d		cmp $2d		AA47   CMP $2D
+.aa49	b0 07		bcs $aa52	AA49   BCS $AA52
+.aa4b	a5 64		lda $64		AA4B   LDA $64
+.aa4d	a4 65		ldy $65		AA4D   LDY $65
+.aa4f	4c 68 aa	jmp $aa68	AA4F   JMP $AA68
+.aa52	a0 00		ldy #$00	AA52   LDY #$00
+.aa54	b1 64		lda ($64),y	AA54   LDA ($64),Y
+.aa56	20 75 b4	jsr $b475	AA56   JSR $B475
+.aa59	a5 50		lda $50		AA59   LDA $50
+.aa5b	a4 51		ldy $51		AA5B   LDY $51
+.aa5d	85 6f		sta $6f		AA5D   STA $6F
+.aa5f	84 70		sty $70		AA5F   STY $70
+.aa61	20 7a b6	jsr $b67a	AA61   JSR $B67A
+.aa64	a9 61		lda #$61	AA64   LDA #$61   ; low  0061
+.aa66	a0 00		ldy #$00	AA66   LDY #$00   ; high 0061
+.aa68	85 50		sta $50		AA68   STA $50
+.aa6a	84 51		sty $51		AA6A   STY $51
+.aa6c	20 db b6	jsr $b6db	AA6C   JSR $B6DB
+.aa6f	a0 00		ldy #$00	AA6F   LDY #$00
+.aa71	b1 50		lda ($50),y	AA71   LDA ($50),Y
+.aa73	91 49		sta ($49),y	AA73   STA ($49),Y
+.aa75	c8		iny		AA75   INY
+.aa76	b1 50		lda ($50),y	AA76   LDA ($50),Y
+.aa78	91 49		sta ($49),y	AA78   STA ($49),Y
+.aa7a	c8		iny		AA7A   INY
+.aa7b	b1 50		lda ($50),y	AA7B   LDA ($50),Y
+.aa7d	91 49		sta ($49),y	AA7D   STA ($49),Y
+.aa7f	60		rts		AA7F   RTS
+.aa80	20 86 aa	jsr $aa86	AA80   JSR $AA86
+.aa83	4c b5 ab	jmp $abb5	AA83   JMP $ABB5
+.aa86	20 9e b7	jsr $b79e	AA86   JSR $B79E
+.aa89	f0 05		beq $aa90	AA89   BEQ $AA90
+.aa8b	a9 2c		lda #$2c	AA8B   LDA #$2C    ; comma
+.aa8d	20 ff ae	jsr $aeff	AA8D   JSR $AEFF
+.aa90	08		php		AA90   PHP
+.aa91	86 13		stx $13		AA91   STX $13
+.aa93	20 18 e1	jsr $e118	AA93   JSR $E118
+.aa96	28		plp		AA96   PLP
+.aa97	4c a0 aa	jmp $aaa0	AA97   JMP $AAA0   ; do PRINT
+.aa9a	20 21 ab	jsr $ab21	AA9A   JSR $AB21
+.aa9d	20 79 00	jsr $0079	AA9D   JSR $0079
+.aaa0	f0 35		beq $aad7	AAA0   BEQ $AAD7
+.aaa2	f0 43		beq $aae7	AAA2   BEQ $AAE7
+.aaa4	c9 a3		cmp #$a3	AAA4   CMP #$A3   ; TAB( code
+.aaa6	f0 50		beq $aaf8	AAA6   BEQ $AAF8
+.aaa8	c9 a6		cmp #$a6	AAA8   CMP #$A6   ; SPC( code
+.aaaa	18		clc		AAAA   CLC
+.aaab	f0 4b		beq $aaf8	AAAB   BEQ $AAF8
+.aaad	c9 2c		cmp #$2c	AAAD   CMP #$2C   ; comma
+.aaaf	f0 37		beq $aae8	AAAF   BEQ $AAE8
+.aab1	c9 3b		cmp #$3b	AAB1   CMP #$3B   ; semi-colon
+.aab3	f0 5e		beq $ab13	AAB3   BEQ $AB13
+.aab5	20 9e ad	jsr $ad9e	AAB5   JSR $AD9E
+.aab8	24 0d		bit $0d		AAB8   BIT $0D
+.aaba	30 de		bmi $aa9a	AABA   BMI $AA9A
+.aabc	20 dd bd	jsr $bddd	AABC   JSR $BDDD
+.aabf	20 87 b4	jsr $b487	AABF   JSR $B487
+.aac2	20 21 ab	jsr $ab21	AAC2   JSR $AB21
+.aac5	20 3b ab	jsr $ab3b	AAC5   JSR $AB3B
+.aac8	d0 d3		bne $aa9d	AAC8   BNE $AA9D
+.aaca	a9 00		lda #$00	AACA   LDA #$00
+.aacc	9d 00 02	sta $0200,x	AACC   STA $0200,X
+.aacf	a2 ff		ldx #$ff	AACF   LDX #$FF
+.aad1	a0 01		ldy #$01	AAD1   LDY #$01
+.aad3	a5 13		lda $13		AAD3   LDA $13
+.aad5	d0 10		bne $aae7	AAD5   BNE $AAE7
+.aad7	a9 0d		lda #$0d	AAD7   LDA #$0D
+.aad9	20 47 ab	jsr $ab47	AAD9   JSR $AB47
+.aadc	24 13		bit $13		AADC   BIT $13
+.aade	10 05		bpl $aae5	AADE   BPL $AAE5
+.aae0	a9 0a		lda #$0a	AAE0   LDA #$0A
+.aae2	20 47 ab	jsr $ab47	AAE2   JSR $AB47
+.aae5	49 ff		eor #$ff	AAE5   EOR #$FF
+.aae7	60		rts		AAE7   RTS
+.aae8	38		sec		AAE8   SEC
+.aae9	20 f0 ff	jsr $fff0	AAE9   JSR $FFF0
+.aaec	98		tya		AAEC   TYA
+.aaed	38		sec		AAED   SEC
+.aaee	e9 0a		sbc #$0a	AAEE   SBC #$0A
+.aaf0	b0 fc		bcs $aaee	AAF0   BCS $AAEE
+.aaf2	49 ff		eor #$ff	AAF2   EOR #$FF
+.aaf4	69 01		adc #$01	AAF4   ADC #$01
+.aaf6	d0 16		bne $ab0e	AAF6   BNE $AB0E
+.aaf8	08		php		AAF8   PHP
+.aaf9	38		sec		AAF9   SEC
+.aafa	20 f0 ff	jsr $fff0	AAFA   JSR $FFF0
+.aafd	84 09		sty $09		AAFD   STY $09
+.aaff	20 9b b7	jsr $b79b	AAFF   JSR $B79B
+.ab02	c9 29		cmp #$29	AB02   CMP #$29   ; )
+.ab04	d0 59		bne $ab5f	AB04   BNE $AB5F
+.ab06	28		plp		AB06   PLP
+.ab07	90 06		bcc $ab0f	AB07   BCC $AB0F
+.ab09	8a		txa		AB09   TXA
+.ab0a	e5 09		sbc $09		AB0A   SBC $09
+.ab0c	90 05		bcc $ab13	AB0C   BCC $AB13
+.ab0e	aa		tax		AB0E   TAX
+.ab0f	e8		inx		AB0F   INX
+.ab10	ca		dex		AB10   DEX
+.ab11	d0 06		bne $ab19	AB11   BNE $AB19
+.ab13	20 73 00	jsr $0073	AB13   JSR $0073
+.ab16	4c a2 aa	jmp $aaa2	AB16   JMP $AAA2
+.ab19	20 3b ab	jsr $ab3b	AB19   JSR $AB3B
+.ab1c	d0 f2		bne $ab10	AB1C   BNE $AB10
+.ab1e	20 87 b4	jsr $b487	AB1E   JSR $B487
+.ab21	20 a6 b6	jsr $b6a6	AB21   JSR $B6A6
+.ab24	aa		tax		AB24   TAX
+.ab25	a0 00		ldy #$00	AB25   LDY #$00
+.ab27	e8		inx		AB27   INX
+.ab28	ca		dex		AB28   DEX
+.ab29	f0 bc		beq $aae7	AB29   BEQ $AAE7
+.ab2b	b1 22		lda ($22),y	AB2B   LDA ($22),Y
+.ab2d	20 47 ab	jsr $ab47	AB2D   JSR $AB47
+.ab30	c8		iny		AB30   INY
+.ab31	c9 0d		cmp #$0d	AB31   CMP #$0D
+.ab33	d0 f3		bne $ab28	AB33   BNE $AB28
+.ab35	20 e5 aa	jsr $aae5	AB35   JSR $AAE5
+.ab38	4c 28 ab	jmp $ab28	AB38   JMP $AB28
+.ab3b	a5 13		lda $13		AB3B   LDA $13
+.ab3d	f0 03		beq $ab42	AB3D   BEQ $AB42
+.ab3f	a9 20		lda #$20	AB3F   LDA #$20   ; space
+>ab41	2c				AB41   .byte $2C
+.ab42	a9 1d		lda #$1d	AB42   LDA #$1D   ; csr right
+>ab44	2c				AB44   .byte $2C
+.ab45	a9 3f		lda #$3f	AB45   LDA #$3F   ; question mark
+.ab47	20 0c e1	jsr $e10c	AB47   JSR $E10C
+.ab4a	29 ff		and #$ff	AB4A   AND #$FF
+.ab4c	60		rts		AB4C   RTS
+.ab4d	a5 11		lda $11		AB4D   LDA $11
+.ab4f	f0 11		beq $ab62	AB4F   BEQ $AB62
+.ab51	30 04		bmi $ab57	AB51   BMI $AB57
+.ab53	a0 ff		ldy #$ff	AB53   LDY #$FF
+.ab55	d0 04		bne $ab5b	AB55   BNE $AB5B
+.ab57	a5 3f		lda $3f		AB57   LDA $3F
+.ab59	a4 40		ldy $40		AB59   LDY $40
+.ab5b	85 39		sta $39		AB5B   STA $39
+.ab5d	84 3a		sty $3a		AB5D   STY $3A
+.ab5f	4c 08 af	jmp $af08	AB5F   JMP $AF08
+.ab62	a5 13		lda $13		AB62   LDA $13
+.ab64	f0 05		beq $ab6b	AB64   BEQ $AB6B
+.ab66	a2 18		ldx #$18	AB66   LDX #$18
+.ab68	4c 37 a4	jmp $a437	AB68   JMP $A437
+.ab6b	a9 0c		lda #$0c	AB6B   LDA #$0C   ; low  AD0C
+.ab6d	a0 ad		ldy #$ad	AB6D   LDY #$AD   ; high AD0C
+.ab6f	20 1e ab	jsr $ab1e	AB6F   JSR $AB1E
+.ab72	a5 3d		lda $3d		AB72   LDA $3D
+.ab74	a4 3e		ldy $3e		AB74   LDY $3E
+.ab76	85 7a		sta $7a		AB76   STA $7A
+.ab78	84 7b		sty $7b		AB78   STY $7B
+.ab7a	60		rts		AB7A   RTS
+.ab7b	20 a6 b3	jsr $b3a6	AB7B   JSR $B3A6
+.ab7e	c9 23		cmp #$23	AB7E   CMP #$23   ; #
+.ab80	d0 10		bne $ab92	AB80   BNE $AB92
+.ab82	20 73 00	jsr $0073	AB82   JSR $0073
+.ab85	20 9e b7	jsr $b79e	AB85   JSR $B79E
+.ab88	a9 2c		lda #$2c	AB88   LDA #$2C   ; comma
+.ab8a	20 ff ae	jsr $aeff	AB8A   JSR $AEFF
+.ab8d	86 13		stx $13		AB8D   STX $13
+.ab8f	20 1e e1	jsr $e11e	AB8F   JSR $E11E
+.ab92	a2 01		ldx #$01	AB92   LDX #$01
+.ab94	a0 02		ldy #$02	AB94   LDY #$02
+.ab96	a9 00		lda #$00	AB96   LDA #$00
+.ab98	8d 01 02	sta $0201	AB98   STA $0201
+.ab9b	a9 40		lda #$40	AB9B   LDA #$40   ; GET code
+.ab9d	20 0f ac	jsr $ac0f	AB9D   JSR $AC0F
+.aba0	a6 13		ldx $13		ABA0   LDX $13
+.aba2	d0 13		bne $abb7	ABA2   BNE $ABB7
+.aba4	60		rts		ABA4   RTS
+.aba5	20 9e b7	jsr $b79e	ABA5   JSR $B79E
+.aba8	a9 2c		lda #$2c	ABA8   LDA #$2C   ; comma
+.abaa	20 ff ae	jsr $aeff	ABAA   JSR $AEFF
+.abad	86 13		stx $13		ABAD   STX $13
+.abaf	20 1e e1	jsr $e11e	ABAF   JSR $E11E
+.abb2	20 ce ab	jsr $abce	ABB2   JSR $ABCE
+.abb5	a5 13		lda $13		ABB5   LDA $13
+.abb7	20 cc ff	jsr $ffcc	ABB7   JSR $FFCC
+.abba	a2 00		ldx #$00	ABBA   LDX #$00
+.abbc	86 13		stx $13		ABBC   STX $13
+.abbe	60		rts		ABBE   RTS
+.abbf	c9 22		cmp #$22	ABBF   CMP #$22   ; quote mark
+.abc1	d0 0b		bne $abce	ABC1   BNE $ABCE
+.abc3	20 bd ae	jsr $aebd	ABC3   JSR $AEBD
+.abc6	a9 3b		lda #$3b	ABC6   LDA #$3B   ; semi-colon
+.abc8	20 ff ae	jsr $aeff	ABC8   JSR $AEFF
+.abcb	20 21 ab	jsr $ab21	ABCB   JSR $AB21
+.abce	20 a6 b3	jsr $b3a6	ABCE   JSR $B3A6
+.abd1	a9 2c		lda #$2c	ABD1   LDA #$2C   ; comma
+.abd3	8d ff 01	sta $01ff	ABD3   STA $01FF
+.abd6	20 f9 ab	jsr $abf9	ABD6   JSR $ABF9
+.abd9	a5 13		lda $13		ABD9   LDA $13
+.abdb	f0 0d		beq $abea	ABDB   BEQ $ABEA
+.abdd	20 b7 ff	jsr $ffb7	ABDD   JSR $FFB7
+.abe0	29 02		and #$02	ABE0   AND #$02
+.abe2	f0 06		beq $abea	ABE2   BEQ $ABEA
+.abe4	20 b5 ab	jsr $abb5	ABE4   JSR $ABB5
+.abe7	4c f8 a8	jmp $a8f8	ABE7   JMP $A8F8   ; do DATA
+.abea	ad 00 02	lda $0200	ABEA   LDA $0200
+.abed	d0 1e		bne $ac0d	ABED   BNE $AC0D
+.abef	a5 13		lda $13		ABEF   LDA $13
+.abf1	d0 e3		bne $abd6	ABF1   BNE $ABD6
+.abf3	20 06 a9	jsr $a906	ABF3   JSR $A906
+.abf6	4c fb a8	jmp $a8fb	ABF6   JMP $A8FB
+.abf9	a5 13		lda $13		ABF9   LDA $13
+.abfb	d0 06		bne $ac03	ABFB   BNE $AC03
+.abfd	20 45 ab	jsr $ab45	ABFD   JSR $AB45
+.ac00	20 3b ab	jsr $ab3b	AC00   JSR $AB3B
+.ac03	4c 60 a5	jmp $a560	AC03   JMP $A560
+.ac06	a6 41		ldx $41		AC06   LDX $41
+.ac08	a4 42		ldy $42		AC08   LDY $42
+.ac0a	a9 98		lda #$98	AC0A   LDA #$98   ; READ code
+>ac0c	2c				AC0C   .byte $2C
+.ac0d	a9 00		lda #$00	AC0D   LDA #$00
+.ac0f	85 11		sta $11		AC0F   STA $11
+.ac11	86 43		stx $43		AC11   STX $43
+.ac13	84 44		sty $44		AC13   STY $44
+.ac15	20 8b b0	jsr $b08b	AC15   JSR $B08B
+.ac18	85 49		sta $49		AC18   STA $49
+.ac1a	84 4a		sty $4a		AC1A   STY $4A
+.ac1c	a5 7a		lda $7a		AC1C   LDA $7A
+.ac1e	a4 7b		ldy $7b		AC1E   LDY $7B
+.ac20	85 4b		sta $4b		AC20   STA $4B
+.ac22	84 4c		sty $4c		AC22   STY $4C
+.ac24	a6 43		ldx $43		AC24   LDX $43
+.ac26	a4 44		ldy $44		AC26   LDY $44
+.ac28	86 7a		stx $7a		AC28   STX $7A
+.ac2a	84 7b		sty $7b		AC2A   STY $7B
+.ac2c	20 79 00	jsr $0079	AC2C   JSR $0079
+.ac2f	d0 20		bne $ac51	AC2F   BNE $AC51
+.ac31	24 11		bit $11		AC31   BIT $11
+.ac33	50 0c		bvc $ac41	AC33   BVC $AC41
+.ac35	20 24 e1	jsr $e124	AC35   JSR $E124
+.ac38	8d 00 02	sta $0200	AC38   STA $0200
+.ac3b	a2 ff		ldx #$ff	AC3B   LDX #$FF
+.ac3d	a0 01		ldy #$01	AC3D   LDY #$01
+.ac3f	d0 0c		bne $ac4d	AC3F   BNE $AC4D
+.ac41	30 75		bmi $acb8	AC41   BMI $ACB8
+.ac43	a5 13		lda $13		AC43   LDA $13
+.ac45	d0 03		bne $ac4a	AC45   BNE $AC4A
+.ac47	20 45 ab	jsr $ab45	AC47   JSR $AB45
+.ac4a	20 f9 ab	jsr $abf9	AC4A   JSR $ABF9
+.ac4d	86 7a		stx $7a		AC4D   STX $7A
+.ac4f	84 7b		sty $7b		AC4F   STY $7B
+.ac51	20 73 00	jsr $0073	AC51   JSR $0073
+.ac54	24 0d		bit $0d		AC54   BIT $0D
+.ac56	10 31		bpl $ac89	AC56   BPL $AC89
+.ac58	24 11		bit $11		AC58   BIT $11
+.ac5a	50 09		bvc $ac65	AC5A   BVC $AC65
+.ac5c	e8		inx		AC5C   INX
+.ac5d	86 7a		stx $7a		AC5D   STX $7A
+.ac5f	a9 00		lda #$00	AC5F   LDA #$00
+.ac61	85 07		sta $07		AC61   STA $07
+.ac63	f0 0c		beq $ac71	AC63   BEQ $AC71
+.ac65	85 07		sta $07		AC65   STA $07
+.ac67	c9 22		cmp #$22	AC67   CMP #$22   ; quote mark
+.ac69	f0 07		beq $ac72	AC69   BEQ $AC72
+.ac6b	a9 3a		lda #$3a	AC6B   LDA #$3A   ; colon
+.ac6d	85 07		sta $07		AC6D   STA $07
+.ac6f	a9 2c		lda #$2c	AC6F   LDA #$2C   ; comma
+.ac71	18		clc		AC71   CLC
+.ac72	85 08		sta $08		AC72   STA $08
+.ac74	a5 7a		lda $7a		AC74   LDA $7A
+.ac76	a4 7b		ldy $7b		AC76   LDY $7B
+.ac78	69 00		adc #$00	AC78   ADC #$00
+.ac7a	90 01		bcc $ac7d	AC7A   BCC $AC7D
+.ac7c	c8		iny		AC7C   INY
+.ac7d	20 8d b4	jsr $b48d	AC7D   JSR $B48D
+.ac80	20 e2 b7	jsr $b7e2	AC80   JSR $B7E2
+.ac83	20 da a9	jsr $a9da	AC83   JSR $A9DA
+.ac86	4c 91 ac	jmp $ac91	AC86   JMP $AC91
+.ac89	20 f3 bc	jsr $bcf3	AC89   JSR $BCF3
+.ac8c	a5 0e		lda $0e		AC8C   LDA $0E
+.ac8e	20 c2 a9	jsr $a9c2	AC8E   JSR $A9C2
+.ac91	20 79 00	jsr $0079	AC91   JSR $0079
+.ac94	f0 07		beq $ac9d	AC94   BEQ $AC9D
+.ac96	c9 2c		cmp #$2c	AC96   CMP #$2C   ; comma
+.ac98	f0 03		beq $ac9d	AC98   BEQ $AC9D
+.ac9a	4c 4d ab	jmp $ab4d	AC9A   JMP $AB4D
+.ac9d	a5 7a		lda $7a		AC9D   LDA $7A
+.ac9f	a4 7b		ldy $7b		AC9F   LDY $7B
+.aca1	85 43		sta $43		ACA1   STA $43
+.aca3	84 44		sty $44		ACA3   STY $44
+.aca5	a5 4b		lda $4b		ACA5   LDA $4B
+.aca7	a4 4c		ldy $4c		ACA7   LDY $4C
+.aca9	85 7a		sta $7a		ACA9   STA $7A
+.acab	84 7b		sty $7b		ACAB   STY $7B
+.acad	20 79 00	jsr $0079	ACAD   JSR $0079
+.acb0	f0 2d		beq $acdf	ACB0   BEQ $ACDF
+.acb2	20 fd ae	jsr $aefd	ACB2   JSR $AEFD
+.acb5	4c 15 ac	jmp $ac15	ACB5   JMP $AC15
+.acb8	20 06 a9	jsr $a906	ACB8   JSR $A906
+.acbb	c8		iny		ACBB   INY
+.acbc	aa		tax		ACBC   TAX
+.acbd	d0 12		bne $acd1	ACBD   BNE $ACD1
+.acbf	a2 0d		ldx #$0d	ACBF   LDX #$0D   ; error number
+.acc1	c8		iny		ACC1   INY
+.acc2	b1 7a		lda ($7a),y	ACC2   LDA ($7A),Y
+.acc4	f0 6c		beq $ad32	ACC4   BEQ $AD32
+.acc6	c8		iny		ACC6   INY
+.acc7	b1 7a		lda ($7a),y	ACC7   LDA ($7A),Y
+.acc9	85 3f		sta $3f		ACC9   STA $3F
+.accb	c8		iny		ACCB   INY
+.accc	b1 7a		lda ($7a),y	ACCC   LDA ($7A),Y
+.acce	c8		iny		ACCE   INY
+.accf	85 40		sta $40		ACCF   STA $40
+.acd1	20 fb a8	jsr $a8fb	ACD1   JSR $A8FB
+.acd4	20 79 00	jsr $0079	ACD4   JSR $0079
+.acd7	aa		tax		ACD7   TAX
+.acd8	e0 83		cpx #$83	ACD8   CPX #$83   ; DATA code
+.acda	d0 dc		bne $acb8	ACDA   BNE $ACB8
+.acdc	4c 51 ac	jmp $ac51	ACDC   JMP $AC51
+.acdf	a5 43		lda $43		ACDF   LDA $43
+.ace1	a4 44		ldy $44		ACE1   LDY $44
+.ace3	a6 11		ldx $11		ACE3   LDX $11
+.ace5	10 03		bpl $acea	ACE5   BPL $ACEA
+.ace7	4c 27 a8	jmp $a827	ACE7   JMP $A827
+.acea	a0 00		ldy #$00	ACEA   LDY #$00
+.acec	b1 43		lda ($43),y	ACEC   LDA ($43),Y
+.acee	f0 0b		beq $acfb	ACEE   BEQ $ACFB
+.acf0	a5 13		lda $13		ACF0   LDA $13
+.acf2	d0 07		bne $acfb	ACF2   BNE $ACFB
+.acf4	a9 fc		lda #$fc	ACF4   LDA #$FC   ; low  ACFC
+.acf6	a0 ac		ldy #$ac	ACF6   LDY #$AC   ; high ACFC
+.acf8	4c 1e ab	jmp $ab1e	ACF8   JMP $AB1E
+.acfb	60		rts		ACFB   RTS
+>acfc	3f 45 58 54 52 41		ACFC   .byte $3F,$45,$58,$54,$52,$41
+>ad02	20 49 47 4e 4f 52 45 44		AD02   .byte $20,$49,$47,$4E,$4F,$52,$45,$44
+>ad0a	0d 00				AD0A   .byte $0D,$00
+>ad0c	3f 52 45 44 4f			AD0C   .byte $3F,$52,$45,$44,$4F
+>ad11	20 46 52 4f 4d			AD11   .byte $20,$46,$52,$4F,$4D
+>ad16	20 53 54 41 52 54		AD16   .byte $20,$53,$54,$41,$52,$54
+>ad1c	0d 00				AD1C   .byte $0D,$00
+.ad1e	d0 04		bne $ad24	AD1E   BNE $AD24
+.ad20	a0 00		ldy #$00	AD20   LDY #$00
+.ad22	f0 03		beq $ad27	AD22   BEQ $AD27
+.ad24	20 8b b0	jsr $b08b	AD24   JSR $B08B
+.ad27	85 49		sta $49		AD27   STA $49
+.ad29	84 4a		sty $4a		AD29   STY $4A
+.ad2b	20 8a a3	jsr $a38a	AD2B   JSR $A38A
+.ad2e	f0 05		beq $ad35	AD2E   BEQ $AD35
+.ad30	a2 0a		ldx #$0a	AD30   LDX #$0A   ; error number
+.ad32	4c 37 a4	jmp $a437	AD32   JMP $A437
+.ad35	9a		txs		AD35   TXS
+.ad36	8a		txa		AD36   TXA
+.ad37	18		clc		AD37   CLC
+.ad38	69 04		adc #$04	AD38   ADC #$04
+.ad3a	48		pha		AD3A   PHA
+.ad3b	69 06		adc #$06	AD3B   ADC #$06
+.ad3d	85 24		sta $24		AD3D   STA $24
+.ad3f	68		pla		AD3F   PLA
+.ad40	a0 01		ldy #$01	AD40   LDY #$01
+.ad42	20 a2 bb	jsr $bba2	AD42   JSR $BBA2
+.ad45	ba		tsx		AD45   TSX
+.ad46	bd 09 01	lda $0109,x	AD46   LDA $0109,X
+.ad49	85 66		sta $66		AD49   STA $66
+.ad4b	a5 49		lda $49		AD4B   LDA $49
+.ad4d	a4 4a		ldy $4a		AD4D   LDY $4A
+.ad4f	20 67 b8	jsr $b867	AD4F   JSR $B867
+.ad52	20 d0 bb	jsr $bbd0	AD52   JSR $BBD0
+.ad55	a0 01		ldy #$01	AD55   LDY #$01
+.ad57	20 5d bc	jsr $bc5d	AD57   JSR $BC5D
+.ad5a	ba		tsx		AD5A   TSX
+.ad5b	38		sec		AD5B   SEC
+.ad5c	fd 09 01	sbc $0109,x	AD5C   SBC $0109,X
+.ad5f	f0 17		beq $ad78	AD5F   BEQ $AD78
+.ad61	bd 0f 01	lda $010f,x	AD61   LDA $010F,X
+.ad64	85 39		sta $39		AD64   STA $39
+.ad66	bd 10 01	lda $0110,x	AD66   LDA $0110,X
+.ad69	85 3a		sta $3a		AD69   STA $3A
+.ad6b	bd 12 01	lda $0112,x	AD6B   LDA $0112,X
+.ad6e	85 7a		sta $7a		AD6E   STA $7A
+.ad70	bd 11 01	lda $0111,x	AD70   LDA $0111,X
+.ad73	85 7b		sta $7b		AD73   STA $7B
+.ad75	4c ae a7	jmp $a7ae	AD75   JMP $A7AE
+.ad78	8a		txa		AD78   TXA
+.ad79	69 11		adc #$11	AD79   ADC #$11
+.ad7b	aa		tax		AD7B   TAX
+.ad7c	9a		txs		AD7C   TXS
+.ad7d	20 79 00	jsr $0079	AD7D   JSR $0079
+.ad80	c9 2c		cmp #$2c	AD80   CMP #$2C   ; comma
+.ad82	d0 f1		bne $ad75	AD82   BNE $AD75
+.ad84	20 73 00	jsr $0073	AD84   JSR $0073
+.ad87	20 24 ad	jsr $ad24	AD87   JSR $AD24
+.ad8a	20 9e ad	jsr $ad9e	AD8A   JSR $AD9E
+.ad8d	18		clc		AD8D   CLC
+>ad8e	24				AD8E   .byte $24
+.ad8f	38		sec		AD8F   SEC
+.ad90	24 0d		bit $0d		AD90   BIT $0D
+.ad92	30 03		bmi $ad97	AD92   BMI $AD97
+.ad94	b0 03		bcs $ad99	AD94   BCS $AD99
+.ad96	60		rts		AD96   RTS
+.ad97	b0 fd		bcs $ad96	AD97   BCS $AD96
+.ad99	a2 16		ldx #$16	AD99   LDX #$16
+.ad9b	4c 37 a4	jmp $a437	AD9B   JMP $A437
+.ad9e	a6 7a		ldx $7a		AD9E   LDX $7A
+.ada0	d0 02		bne $ada4	ADA0   BNE $ADA4
+.ada2	c6 7b		dec $7b		ADA2   DEC $7B
+.ada4	c6 7a		dec $7a		ADA4   DEC $7A
+.ada6	a2 00		ldx #$00	ADA6   LDX #$00
+>ada8	24				ADA8   .byte $24
+.ada9	48		pha		ADA9   PHA
+.adaa	8a		txa		ADAA   TXA
+.adab	48		pha		ADAB   PHA
+.adac	a9 01		lda #$01	ADAC   LDA #$01
+.adae	20 fb a3	jsr $a3fb	ADAE   JSR $A3FB
+.adb1	20 83 ae	jsr $ae83	ADB1   JSR $AE83
+.adb4	a9 00		lda #$00	ADB4   LDA #$00
+.adb6	85 4d		sta $4d		ADB6   STA $4D
+.adb8	20 79 00	jsr $0079	ADB8   JSR $0079
+.adbb	38		sec		ADBB   SEC
+.adbc	e9 b1		sbc #$b1	ADBC   SBC #$B1   ; code for greater than
+.adbe	90 17		bcc $add7	ADBE   BCC $ADD7
+.adc0	c9 03		cmp #$03	ADC0   CMP #$03
+.adc2	b0 13		bcs $add7	ADC2   BCS $ADD7
+.adc4	c9 01		cmp #$01	ADC4   CMP #$01
+.adc6	2a		rol a		ADC6   ROL
+.adc7	49 01		eor #$01	ADC7   EOR #$01
+.adc9	45 4d		eor $4d		ADC9   EOR $4D
+.adcb	c5 4d		cmp $4d		ADCB   CMP $4D
+.adcd	90 61		bcc $ae30	ADCD   BCC $AE30
+.adcf	85 4d		sta $4d		ADCF   STA $4D
+.add1	20 73 00	jsr $0073	ADD1   JSR $0073
+.add4	4c bb ad	jmp $adbb	ADD4   JMP $ADBB
+.add7	a6 4d		ldx $4d		ADD7   LDX $4D
+.add9	d0 2c		bne $ae07	ADD9   BNE $AE07
+.addb	b0 7b		bcs $ae58	ADDB   BCS $AE58
+.addd	69 07		adc #$07	ADDD   ADC #$07
+.addf	90 77		bcc $ae58	ADDF   BCC $AE58
+.ade1	65 0d		adc $0d		ADE1   ADC $0D
+.ade3	d0 03		bne $ade8	ADE3   BNE $ADE8
+.ade5	4c 3d b6	jmp $b63d	ADE5   JMP $B63D
+.ade8	69 ff		adc #$ff	ADE8   ADC #$FF
+.adea	85 22		sta $22		ADEA   STA $22
+.adec	0a		asl a		ADEC   ASL
+.aded	65 22		adc $22		ADED   ADC $22
+.adef	a8		tay		ADEF   TAY
+.adf0	68		pla		ADF0   PLA
+.adf1	d9 80 a0	cmp $a080,y	ADF1   CMP $A080,Y
+.adf4	b0 67		bcs $ae5d	ADF4   BCS $AE5D
+.adf6	20 8d ad	jsr $ad8d	ADF6   JSR $AD8D
+.adf9	48		pha		ADF9   PHA
+.adfa	20 20 ae	jsr $ae20	ADFA   JSR $AE20
+.adfd	68		pla		ADFD   PLA
+.adfe	a4 4b		ldy $4b		ADFE   LDY $4B
+.ae00	10 17		bpl $ae19	AE00   BPL $AE19
+.ae02	aa		tax		AE02   TAX
+.ae03	f0 56		beq $ae5b	AE03   BEQ $AE5B
+.ae05	d0 5f		bne $ae66	AE05   BNE $AE66
+.ae07	46 0d		lsr $0d		AE07   LSR $0D
+.ae09	8a		txa		AE09   TXA
+.ae0a	2a		rol a		AE0A   ROL
+.ae0b	a6 7a		ldx $7a		AE0B   LDX $7A
+.ae0d	d0 02		bne $ae11	AE0D   BNE $AE11
+.ae0f	c6 7b		dec $7b		AE0F   DEC $7B
+.ae11	c6 7a		dec $7a		AE11   DEC $7A
+.ae13	a0 1b		ldy #$1b	AE13   LDY #$1B
+.ae15	85 4d		sta $4d		AE15   STA $4D
+.ae17	d0 d7		bne $adf0	AE17   BNE $ADF0
+.ae19	d9 80 a0	cmp $a080,y	AE19   CMP $A080,Y
+.ae1c	b0 48		bcs $ae66	AE1C   BCS $AE66
+.ae1e	90 d9		bcc $adf9	AE1E   BCC $ADF9
+.ae20	b9 82 a0	lda $a082,y	AE20   LDA $A082,Y
+.ae23	48		pha		AE23   PHA
+.ae24	b9 81 a0	lda $a081,y	AE24   LDA $A081,Y
+.ae27	48		pha		AE27   PHA
+.ae28	20 33 ae	jsr $ae33	AE28   JSR $AE33
+.ae2b	a5 4d		lda $4d		AE2B   LDA $4D
+.ae2d	4c a9 ad	jmp $ada9	AE2D   JMP $ADA9
+.ae30	4c 08 af	jmp $af08	AE30   JMP $AF08
+.ae33	a5 66		lda $66		AE33   LDA $66
+.ae35	be 80 a0	ldx $a080,y	AE35   LDX $A080,Y
+.ae38	a8		tay		AE38   TAY
+.ae39	68		pla		AE39   PLA   ; pull return address
+.ae3a	85 22		sta $22		AE3A   STA $22
+.ae3c	e6 22		inc $22		AE3C   INC $22
+.ae3e	68		pla		AE3E   PLA   ; and store in $22/$23
+.ae3f	85 23		sta $23		AE3F   STA $23
+.ae41	98		tya		AE41   TYA
+.ae42	48		pha		AE42   PHA
+.ae43	20 1b bc	jsr $bc1b	AE43   JSR $BC1B
+.ae46	a5 65		lda $65		AE46   LDA $65
+.ae48	48		pha		AE48   PHA
+.ae49	a5 64		lda $64		AE49   LDA $64
+.ae4b	48		pha		AE4B   PHA
+.ae4c	a5 63		lda $63		AE4C   LDA $63
+.ae4e	48		pha		AE4E   PHA
+.ae4f	a5 62		lda $62		AE4F   LDA $62
+.ae51	48		pha		AE51   PHA
+.ae52	a5 61		lda $61		AE52   LDA $61
+.ae54	48		pha		AE54   PHA
+.ae55	6c 22 00	jmp ($0022)	AE55   JMP ($0022)   ; return to caller
+.ae58	a0 ff		ldy #$ff	AE58   LDY #$FF
+.ae5a	68		pla		AE5A   PLA
+.ae5b	f0 23		beq $ae80	AE5B   BEQ $AE80
+.ae5d	c9 64		cmp #$64	AE5D   CMP #$64
+.ae5f	f0 03		beq $ae64	AE5F   BEQ $AE64
+.ae61	20 8d ad	jsr $ad8d	AE61   JSR $AD8D
+.ae64	84 4b		sty $4b		AE64   STY $4B
+.ae66	68		pla		AE66   PLA
+.ae67	4a		lsr a		AE67   LSR
+.ae68	85 12		sta $12		AE68   STA $12
+.ae6a	68		pla		AE6A   PLA
+.ae6b	85 69		sta $69		AE6B   STA $69
+.ae6d	68		pla		AE6D   PLA
+.ae6e	85 6a		sta $6a		AE6E   STA $6A
+.ae70	68		pla		AE70   PLA
+.ae71	85 6b		sta $6b		AE71   STA $6B
+.ae73	68		pla		AE73   PLA
+.ae74	85 6c		sta $6c		AE74   STA $6C
+.ae76	68		pla		AE76   PLA
+.ae77	85 6d		sta $6d		AE77   STA $6D
+.ae79	68		pla		AE79   PLA
+.ae7a	85 6e		sta $6e		AE7A   STA $6E
+.ae7c	45 66		eor $66		AE7C   EOR $66
+.ae7e	85 6f		sta $6f		AE7E   STA $6F
+.ae80	a5 61		lda $61		AE80   LDA $61
+.ae82	60		rts		AE82   RTS
+.ae83	6c 0a 03	jmp ($030a)	AE83   JMP ($030A)   ; normally AE86
+.ae86	a9 00		lda #$00	AE86   LDA #$00
+.ae88	85 0d		sta $0d		AE88   STA $0D
+.ae8a	20 73 00	jsr $0073	AE8A   JSR $0073
+.ae8d	b0 03		bcs $ae92	AE8D   BCS $AE92
+.ae8f	4c f3 bc	jmp $bcf3	AE8F   JMP $BCF3
+.ae92	20 13 b1	jsr $b113	AE92   JSR $B113
+.ae95	90 03		bcc $ae9a	AE95   BCC $AE9A
+.ae97	4c 28 af	jmp $af28	AE97   JMP $AF28
+.ae9a	c9 ff		cmp #$ff	AE9A   CMP #$FF   ; PI
+.ae9c	d0 0f		bne $aead	AE9C   BNE $AEAD
+.ae9e	a9 a8		lda #$a8	AE9E   LDA #$A8   ; low  AEA8
+.aea0	a0 ae		ldy #$ae	AEA0   LDY #$AE   ; high AEA8
+.aea2	20 a2 bb	jsr $bba2	AEA2   JSR $BBA2
+.aea5	4c 73 00	jmp $0073	AEA5   JMP $0073
+>aea8	82 49 0f da a1			AEA8   .byte $82,$49,$0F,$DA,$A1
+.aead	c9 2e		cmp #$2e	AEAD   CMP #$2E   ; decimal point
+.aeaf	f0 de		beq $ae8f	AEAF   BEQ $AE8F
+.aeb1	c9 ab		cmp #$ab	AEB1   CMP #$AB   ; plus code
+.aeb3	f0 58		beq $af0d	AEB3   BEQ $AF0D
+.aeb5	c9 aa		cmp #$aa	AEB5   CMP #$AA   ; times code
+.aeb7	f0 d1		beq $ae8a	AEB7   BEQ $AE8A
+.aeb9	c9 22		cmp #$22	AEB9   CMP #$22   ; quote mark
+.aebb	d0 0f		bne $aecc	AEBB   BNE $AECC
+.aebd	a5 7a		lda $7a		AEBD   LDA $7A
+.aebf	a4 7b		ldy $7b		AEBF   LDY $7B
+.aec1	69 00		adc #$00	AEC1   ADC #$00
+.aec3	90 01		bcc $aec6	AEC3   BCC $AEC6
+.aec5	c8		iny		AEC5   INY
+.aec6	20 87 b4	jsr $b487	AEC6   JSR $B487
+.aec9	4c e2 b7	jmp $b7e2	AEC9   JMP $B7E2
+.aecc	c9 a8		cmp #$a8	AECC   CMP #$A8   ; NOT code
+.aece	d0 13		bne $aee3	AECE   BNE $AEE3
+.aed0	a0 18		ldy #$18	AED0   LDY #$18
+.aed2	d0 3b		bne $af0f	AED2   BNE $AF0F
+.aed4	20 bf b1	jsr $b1bf	AED4   JSR $B1BF
+.aed7	a5 65		lda $65		AED7   LDA $65
+.aed9	49 ff		eor #$ff	AED9   EOR #$FF
+.aedb	a8		tay		AEDB   TAY
+.aedc	a5 64		lda $64		AEDC   LDA $64
+.aede	49 ff		eor #$ff	AEDE   EOR #$FF
+.aee0	4c 91 b3	jmp $b391	AEE0   JMP $B391
+.aee3	c9 a5		cmp #$a5	AEE3   CMP #$A5
+.aee5	d0 03		bne $aeea	AEE5   BNE $AEEA
+.aee7	4c f4 b3	jmp $b3f4	AEE7   JMP $B3F4
+.aeea	c9 b4		cmp #$b4	AEEA   CMP #$B4    ; SGN code or higher
+.aeec	90 03		bcc $aef1	AEEC   BCC $AEF1
+.aeee	4c a7 af	jmp $afa7	AEEE   JMP $AFA7
+.aef1	20 fa ae	jsr $aefa	AEF1   JSR $AEFA
+.aef4	20 9e ad	jsr $ad9e	AEF4   JSR $AD9E
+.aef7	a9 29		lda #$29	AEF7   LDA #$29   ; )
+>aef9	2c				AEF9   .byte $2C
+.aefa	a9 28		lda #$28	AEFA   LDA #$28   ; (
+>aefc	2c				AEFC   .byte $2C
+.aefd	a9 2c		lda #$2c	AEFD   LDA #$2C   ; comma
+.aeff	a0 00		ldy #$00	AEFF   LDY #$00
+.af01	d1 7a		cmp ($7a),y	AF01   CMP ($7A),Y
+.af03	d0 03		bne $af08	AF03   BNE $AF08
+.af05	4c 73 00	jmp $0073	AF05   JMP $0073
+.af08	a2 0b		ldx #$0b	AF08   LDX #$0B   ; error number
+.af0a	4c 37 a4	jmp $a437	AF0A   JMP $A437
+.af0d	a0 15		ldy #$15	AF0D   LDY #$15
+.af0f	68		pla		AF0F   PLA
+.af10	68		pla		AF10   PLA
+.af11	4c fa ad	jmp $adfa	AF11   JMP $ADFA
+.af14	38		sec		AF14   SEC
+.af15	a5 64		lda $64		AF15   LDA $64
+.af17	e9 00		sbc #$00	AF17   SBC #$00
+.af19	a5 65		lda $65		AF19   LDA $65
+.af1b	e9 a0		sbc #$a0	AF1B   SBC #$A0
+.af1d	90 08		bcc $af27	AF1D   BCC $AF27
+.af1f	a9 a2		lda #$a2	AF1F   LDA #$A2
+.af21	e5 64		sbc $64		AF21   SBC $64
+.af23	a9 e3		lda #$e3	AF23   LDA #$E3
+.af25	e5 65		sbc $65		AF25   SBC $65
+.af27	60		rts		AF27   RTS
+.af28	20 8b b0	jsr $b08b	AF28   JSR $B08B
+.af2b	85 64		sta $64		AF2B   STA $64
+.af2d	84 65		sty $65		AF2D   STY $65
+.af2f	a6 45		ldx $45		AF2F   LDX $45
+.af31	a4 46		ldy $46		AF31   LDY $46
+.af33	a5 0d		lda $0d		AF33   LDA $0D
+.af35	f0 26		beq $af5d	AF35   BEQ $AF5D
+.af37	a9 00		lda #$00	AF37   LDA #$00
+.af39	85 70		sta $70		AF39   STA $70
+.af3b	20 14 af	jsr $af14	AF3B   JSR $AF14
+.af3e	90 1c		bcc $af5c	AF3E   BCC $AF5C
+.af40	e0 54		cpx #$54	AF40   CPX #$54   ; T
+.af42	d0 18		bne $af5c	AF42   BNE $AF5C
+.af44	c0 c9		cpy #$c9	AF44   CPY #$C9   ; I$
+.af46	d0 14		bne $af5c	AF46   BNE $AF5C
+.af48	20 84 af	jsr $af84	AF48   JSR $AF84
+.af4b	84 5e		sty $5e		AF4B   STY $5E
+.af4d	88		dey		AF4D   DEY
+.af4e	84 71		sty $71		AF4E   STY $71
+.af50	a0 06		ldy #$06	AF50   LDY #$06
+.af52	84 5d		sty $5d		AF52   STY $5D
+.af54	a0 24		ldy #$24	AF54   LDY #$24
+.af56	20 68 be	jsr $be68	AF56   JSR $BE68
+.af59	4c 6f b4	jmp $b46f	AF59   JMP $B46F
+.af5c	60		rts		AF5C   RTS
+.af5d	24 0e		bit $0e		AF5D   BIT $0E
+.af5f	10 0d		bpl $af6e	AF5F   BPL $AF6E
+.af61	a0 00		ldy #$00	AF61   LDY #$00
+.af63	b1 64		lda ($64),y	AF63   LDA ($64),Y
+.af65	aa		tax		AF65   TAX
+.af66	c8		iny		AF66   INY
+.af67	b1 64		lda ($64),y	AF67   LDA ($64),Y
+.af69	a8		tay		AF69   TAY
+.af6a	8a		txa		AF6A   TXA
+.af6b	4c 91 b3	jmp $b391	AF6B   JMP $B391
+.af6e	20 14 af	jsr $af14	AF6E   JSR $AF14
+.af71	90 2d		bcc $afa0	AF71   BCC $AFA0
+.af73	e0 54		cpx #$54	AF73   CPX #$54   ; T
+.af75	d0 1b		bne $af92	AF75   BNE $AF92
+.af77	c0 49		cpy #$49	AF77   CPY #$49   ; I
+.af79	d0 25		bne $afa0	AF79   BNE $AFA0
+.af7b	20 84 af	jsr $af84	AF7B   JSR $AF84
+.af7e	98		tya		AF7E   TYA
+.af7f	a2 a0		ldx #$a0	AF7F   LDX #$A0
+.af81	4c 4f bc	jmp $bc4f	AF81   JMP $BC4F
+.af84	20 de ff	jsr $ffde	AF84   JSR $FFDE
+.af87	86 64		stx $64		AF87   STX $64
+.af89	84 63		sty $63		AF89   STY $63
+.af8b	85 65		sta $65		AF8B   STA $65
+.af8d	a0 00		ldy #$00	AF8D   LDY #$00
+.af8f	84 62		sty $62		AF8F   STY $62
+.af91	60		rts		AF91   RTS
+.af92	e0 53		cpx #$53	AF92   CPX #$53   ; S
+.af94	d0 0a		bne $afa0	AF94   BNE $AFA0
+.af96	c0 54		cpy #$54	AF96   CPY #$54   ; T
+.af98	d0 06		bne $afa0	AF98   BNE $AFA0
+.af9a	20 b7 ff	jsr $ffb7	AF9A   JSR $FFB7
+.af9d	4c 3c bc	jmp $bc3c	AF9D   JMP $BC3C
+.afa0	a5 64		lda $64		AFA0   LDA $64
+.afa2	a4 65		ldy $65		AFA2   LDY $65
+.afa4	4c a2 bb	jmp $bba2	AFA4   JMP $BBA2
+.afa7	0a		asl a		AFA7   ASL
+.afa8	48		pha		AFA8   PHA
+.afa9	aa		tax		AFA9   TAX
+.afaa	20 73 00	jsr $0073	AFAA   JSR $0073
+.afad	e0 8f		cpx #$8f	AFAD   CPX #$8F
+.afaf	90 20		bcc $afd1	AFAF   BCC $AFD1
+.afb1	20 fa ae	jsr $aefa	AFB1   JSR $AEFA
+.afb4	20 9e ad	jsr $ad9e	AFB4   JSR $AD9E
+.afb7	20 fd ae	jsr $aefd	AFB7   JSR $AEFD
+.afba	20 8f ad	jsr $ad8f	AFBA   JSR $AD8F
+.afbd	68		pla		AFBD   PLA
+.afbe	aa		tax		AFBE   TAX
+.afbf	a5 65		lda $65		AFBF   LDA $65
+.afc1	48		pha		AFC1   PHA
+.afc2	a5 64		lda $64		AFC2   LDA $64
+.afc4	48		pha		AFC4   PHA
+.afc5	8a		txa		AFC5   TXA
+.afc6	48		pha		AFC6   PHA
+.afc7	20 9e b7	jsr $b79e	AFC7   JSR $B79E
+.afca	68		pla		AFCA   PLA
+.afcb	a8		tay		AFCB   TAY
+.afcc	8a		txa		AFCC   TXA
+.afcd	48		pha		AFCD   PHA
+.afce	4c d6 af	jmp $afd6	AFCE   JMP $AFD6
+.afd1	20 f1 ae	jsr $aef1	AFD1   JSR $AEF1
+.afd4	68		pla		AFD4   PLA
+.afd5	a8		tay		AFD5   TAY
+.afd6	b9 ea 9f	lda $9fea,y	AFD6   LDA $9FEA,Y
+.afd9	85 55		sta $55		AFD9   STA $55
+.afdb	b9 eb 9f	lda $9feb,y	AFDB   LDA $9FEB,Y
+.afde	85 56		sta $56		AFDE   STA $56
+.afe0	20 54 00	jsr $0054	AFE0   JSR $0054
+.afe3	4c 8d ad	jmp $ad8d	AFE3   JMP $AD8D
+.afe6	a0 ff		ldy #$ff	AFE6   LDY #$FF
+>afe8	2c				AFE8   .byte $2C
+.afe9	a0 00		ldy #$00	AFE9   LDY #$00
+.afeb	84 0b		sty $0b		AFEB   STY $0B
+.afed	20 bf b1	jsr $b1bf	AFED   JSR $B1BF
+.aff0	a5 64		lda $64		AFF0   LDA $64
+.aff2	45 0b		eor $0b		AFF2   EOR $0B
+.aff4	85 07		sta $07		AFF4   STA $07
+.aff6	a5 65		lda $65		AFF6   LDA $65
+.aff8	45 0b		eor $0b		AFF8   EOR $0B
+.affa	85 08		sta $08		AFFA   STA $08
+.affc	20 fc bb	jsr $bbfc	AFFC   JSR $BBFC
+.afff	20 bf b1	jsr $b1bf	AFFF   JSR $B1BF
+.b002	a5 65		lda $65		B002   LDA $65
+.b004	45 0b		eor $0b		B004   EOR $0B
+.b006	25 08		and $08		B006   AND $08
+.b008	45 0b		eor $0b		B008   EOR $0B
+.b00a	a8		tay		B00A   TAY
+.b00b	a5 64		lda $64		B00B   LDA $64
+.b00d	45 0b		eor $0b		B00D   EOR $0B
+.b00f	25 07		and $07		B00F   AND $07
+.b011	45 0b		eor $0b		B011   EOR $0B
+.b013	4c 91 b3	jmp $b391	B013   JMP $B391
+.b016	20 90 ad	jsr $ad90	B016   JSR $AD90
+.b019	b0 13		bcs $b02e	B019   BCS $B02E
+.b01b	a5 6e		lda $6e		B01B   LDA $6E
+.b01d	09 7f		ora #$7f	B01D   ORA #$7F
+.b01f	25 6a		and $6a		B01F   AND $6A
+.b021	85 6a		sta $6a		B021   STA $6A
+.b023	a9 69		lda #$69	B023   LDA #$69
+.b025	a0 00		ldy #$00	B025   LDY #$00
+.b027	20 5b bc	jsr $bc5b	B027   JSR $BC5B
+.b02a	aa		tax		B02A   TAX
+.b02b	4c 61 b0	jmp $b061	B02B   JMP $B061
+.b02e	a9 00		lda #$00	B02E   LDA #$00
+.b030	85 0d		sta $0d		B030   STA $0D
+.b032	c6 4d		dec $4d		B032   DEC $4D
+.b034	20 a6 b6	jsr $b6a6	B034   JSR $B6A6
+.b037	85 61		sta $61		B037   STA $61
+.b039	86 62		stx $62		B039   STX $62
+.b03b	84 63		sty $63		B03B   STY $63
+.b03d	a5 6c		lda $6c		B03D   LDA $6C
+.b03f	a4 6d		ldy $6d		B03F   LDY $6D
+.b041	20 aa b6	jsr $b6aa	B041   JSR $B6AA
+.b044	86 6c		stx $6c		B044   STX $6C
+.b046	84 6d		sty $6d		B046   STY $6D
+.b048	aa		tax		B048   TAX
+.b049	38		sec		B049   SEC
+.b04a	e5 61		sbc $61		B04A   SBC $61
+.b04c	f0 08		beq $b056	B04C   BEQ $B056
+.b04e	a9 01		lda #$01	B04E   LDA #$01
+.b050	90 04		bcc $b056	B050   BCC $B056
+.b052	a6 61		ldx $61		B052   LDX $61
+.b054	a9 ff		lda #$ff	B054   LDA #$FF
+.b056	85 66		sta $66		B056   STA $66
+.b058	a0 ff		ldy #$ff	B058   LDY #$FF
+.b05a	e8		inx		B05A   INX
+.b05b	c8		iny		B05B   INY
+.b05c	ca		dex		B05C   DEX
+.b05d	d0 07		bne $b066	B05D   BNE $B066
+.b05f	a6 66		ldx $66		B05F   LDX $66
+.b061	30 0f		bmi $b072	B061   BMI $B072
+.b063	18		clc		B063   CLC
+.b064	90 0c		bcc $b072	B064   BCC $B072
+.b066	b1 6c		lda ($6c),y	B066   LDA ($6C),Y
+.b068	d1 62		cmp ($62),y	B068   CMP ($62),Y
+.b06a	f0 ef		beq $b05b	B06A   BEQ $B05B
+.b06c	a2 ff		ldx #$ff	B06C   LDX #$FF
+.b06e	b0 02		bcs $b072	B06E   BCS $B072
+.b070	a2 01		ldx #$01	B070   LDX #$01
+.b072	e8		inx		B072   INX
+.b073	8a		txa		B073   TXA
+.b074	2a		rol a		B074   ROL
+.b075	25 12		and $12		B075   AND $12
+.b077	f0 02		beq $b07b	B077   BEQ $B07B
+.b079	a9 ff		lda #$ff	B079   LDA #$FF
+.b07b	4c 3c bc	jmp $bc3c	B07B   JMP $BC3C
+.b07e	20 fd ae	jsr $aefd	B07E   JSR $AEFD
+.b081	aa		tax		B081   TAX
+.b082	20 90 b0	jsr $b090	B082   JSR $B090
+.b085	20 79 00	jsr $0079	B085   JSR $0079
+.b088	d0 f4		bne $b07e	B088   BNE $B07E
+.b08a	60		rts		B08A   RTS
+.b08b	a2 00		ldx #$00	B08B  LDX #$00
+.b08d	20 79 00	jsr $0079	B08D  JSR $0079
+.b090	86 0c		stx $0c		B090  STX $0C
+.b092	85 45		sta $45		B092  STA $45
+.b094	20 79 00	jsr $0079	B094  JSR $0079
+.b097	20 13 b1	jsr $b113	B097  JSR $B113
+.b09a	b0 03		bcs $b09f	B09A  BCS $B09F
+.b09c	4c 08 af	jmp $af08	B09C  JMP $AF08
+.b09f	a2 00		ldx #$00	B09F  LDX #$00
+.b0a1	86 0d		stx $0d		B0A1  STX $0D
+.b0a3	86 0e		stx $0e		B0A3  STX $0E
+.b0a5	20 73 00	jsr $0073	B0A5  JSR $0073
+.b0a8	90 05		bcc $b0af	B0A8  BCC $B0AF
+.b0aa	20 13 b1	jsr $b113	B0AA  JSR $B113
+.b0ad	90 0b		bcc $b0ba	B0AD  BCC $B0BA
+.b0af	aa		tax		B0AF  TAX
+.b0b0	20 73 00	jsr $0073	B0B0  JSR $0073
+.b0b3	90 fb		bcc $b0b0	B0B3  BCC $B0B0
+.b0b5	20 13 b1	jsr $b113	B0B5  JSR $B113
+.b0b8	b0 f6		bcs $b0b0	B0B8  BCS $B0B0
+.b0ba	c9 24		cmp #$24	B0BA  CMP #$24   ; $
+.b0bc	d0 06		bne $b0c4	B0BC  BNE $B0C4
+.b0be	a9 ff		lda #$ff	B0BE  LDA #$FF
+.b0c0	85 0d		sta $0d		B0C0  STA $0D
+.b0c2	d0 10		bne $b0d4	B0C2  BNE $B0D4
+.b0c4	c9 25		cmp #$25	B0C4  CMP #$25   ; %
+.b0c6	d0 13		bne $b0db	B0C6  BNE $B0DB
+.b0c8	a5 10		lda $10		B0C8  LDA $10
+.b0ca	d0 d0		bne $b09c	B0CA  BNE $B09C
+.b0cc	a9 80		lda #$80	B0CC  LDA #$80
+.b0ce	85 0e		sta $0e		B0CE  STA $0E
+.b0d0	05 45		ora $45		B0D0  ORA $45
+.b0d2	85 45		sta $45		B0D2  STA $45
+.b0d4	8a		txa		B0D4  TXA
+.b0d5	09 80		ora #$80	B0D5  ORA #$80
+.b0d7	aa		tax		B0D7  TAX
+.b0d8	20 73 00	jsr $0073	B0D8  JSR $0073
+.b0db	86 46		stx $46		B0DB  STX $46
+.b0dd	38		sec		B0DD  SEC
+.b0de	05 10		ora $10		B0DE  ORA $10
+.b0e0	e9 28		sbc #$28	B0E0  SBC #$28    ; (
+.b0e2	d0 03		bne $b0e7	B0E2  BNE $B0E7
+.b0e4	4c d1 b1	jmp $b1d1	B0E4  JMP $B1D1
+.b0e7	a0 00		ldy #$00	B0E7  LDY #$00
+.b0e9	84 10		sty $10		B0E9  STY $10
+.b0eb	a5 2d		lda $2d		B0EB  LDA $2D
+.b0ed	a6 2e		ldx $2e		B0ED  LDX $2E
+.b0ef	86 60		stx $60		B0EF  STX $60
+.b0f1	85 5f		sta $5f		B0F1  STA $5F
+.b0f3	e4 30		cpx $30		B0F3  CPX $30
+.b0f5	d0 04		bne $b0fb	B0F5  BNE $B0FB
+.b0f7	c5 2f		cmp $2f		B0F7  CMP $2F
+.b0f9	f0 22		beq $b11d	B0F9  BEQ $B11D
+.b0fb	a5 45		lda $45		B0FB  LDA $45
+.b0fd	d1 5f		cmp ($5f),y	B0FD  CMP ($5F),Y
+.b0ff	d0 08		bne $b109	B0FF  BNE $B109
+.b101	a5 46		lda $46		B101  LDA $46
+.b103	c8		iny		B103  INY
+.b104	d1 5f		cmp ($5f),y	B104  CMP ($5F),Y
+.b106	f0 7d		beq $b185	B106  BEQ $B185
+.b108	88		dey		B108  DEY
+.b109	18		clc		B109  CLC
+.b10a	a5 5f		lda $5f		B10A  LDA $5F
+.b10c	69 07		adc #$07	B10C  ADC #$07
+.b10e	90 e1		bcc $b0f1	B10E  BCC $B0F1
+.b110	e8		inx		B110  INX
+.b111	d0 dc		bne $b0ef	B111  BNE $B0EF
+.b113	c9 41		cmp #$41	B113   CMP #$41   ; A
+.b115	90 05		bcc $b11c	B115   BCC $B11C
+.b117	e9 5b		sbc #$5b	B117   SBC #$5B   ; Z
+.b119	38		sec		B119   SEC
+.b11a	e9 a5		sbc #$a5	B11A   SBC #$A5
+.b11c	60		rts		B11C   RTS
+.b11d	68		pla		B11D   PLA
+.b11e	48		pha		B11E   PHA
+.b11f	c9 2a		cmp #$2a	B11F   CMP #$2A
+.b121	d0 05		bne $b128	B121   BNE $B128
+.b123	a9 13		lda #$13	B123   LDA #$13
+.b125	a0 bf		ldy #$bf	B125   LDY #$BF
+.b127	60		rts		B127   RTS
+.b128	a5 45		lda $45		B128   LDA $45
+.b12a	a4 46		ldy $46		B12A   LDY $46
+.b12c	c9 54		cmp #$54	B12C   CMP #$54   ; T
+.b12e	d0 0b		bne $b13b	B12E   BNE $B13B
+.b130	c0 c9		cpy #$c9	B130   CPY #$C9   ; I$
+.b132	f0 ef		beq $b123	B132   BEQ $B123
+.b134	c0 49		cpy #$49	B134   CPY #$49   ; I
+.b136	d0 03		bne $b13b	B136   BNE $B13B
+.b138	4c 08 af	jmp $af08	B138   JMP $AF08
+.b13b	c9 53		cmp #$53	B13B   CMP #$53   ; S
+.b13d	d0 04		bne $b143	B13D   BNE $B143
+.b13f	c0 54		cpy #$54	B13F   CPY #$54   ; T
+.b141	f0 f5		beq $b138	B141   BEQ $B138
+.b143	a5 2f		lda $2f		B143   LDA $2F
+.b145	a4 30		ldy $30		B145   LDY $30
+.b147	85 5f		sta $5f		B147   STA $5F
+.b149	84 60		sty $60		B149   STY $60
+.b14b	a5 31		lda $31		B14B   LDA $31
+.b14d	a4 32		ldy $32		B14D   LDY $32
+.b14f	85 5a		sta $5a		B14F   STA $5A
+.b151	84 5b		sty $5b		B151   STY $5B
+.b153	18		clc		B153   CLC
+.b154	69 07		adc #$07	B154   ADC #$07
+.b156	90 01		bcc $b159	B156   BCC $B159
+.b158	c8		iny		B158   INY
+.b159	85 58		sta $58		B159   STA $58
+.b15b	84 59		sty $59		B15B   STY $59
+.b15d	20 b8 a3	jsr $a3b8	B15D   JSR $A3B8
+.b160	a5 58		lda $58		B160   LDA $58
+.b162	a4 59		ldy $59		B162   LDY $59
+.b164	c8		iny		B164   INY
+.b165	85 2f		sta $2f		B165   STA $2F
+.b167	84 30		sty $30		B167   STY $30
+.b169	a0 00		ldy #$00	B169   LDY #$00
+.b16b	a5 45		lda $45		B16B   LDA $45
+.b16d	91 5f		sta ($5f),y	B16D   STA ($5F),Y
+.b16f	c8		iny		B16F   INY
+.b170	a5 46		lda $46		B170   LDA $46
+.b172	91 5f		sta ($5f),y	B172   STA ($5F),Y
+.b174	a9 00		lda #$00	B174   LDA #$00
+.b176	c8		iny		B176   INY
+.b177	91 5f		sta ($5f),y	B177   STA ($5F),Y
+.b179	c8		iny		B179   INY
+.b17a	91 5f		sta ($5f),y	B17A   STA ($5F),Y
+.b17c	c8		iny		B17C   INY
+.b17d	91 5f		sta ($5f),y	B17D   STA ($5F),Y
+.b17f	c8		iny		B17F   INY
+.b180	91 5f		sta ($5f),y	B180   STA ($5F),Y
+.b182	c8		iny		B182   INY
+.b183	91 5f		sta ($5f),y	B183   STA ($5F),Y
+.b185	a5 5f		lda $5f		B185   LDA $5F
+.b187	18		clc		B187   CLC
+.b188	69 02		adc #$02	B188   ADC #$02
+.b18a	a4 60		ldy $60		B18A   LDY $60
+.b18c	90 01		bcc $b18f	B18C   BCC $B18F
+.b18e	c8		iny		B18E   INY
+.b18f	85 47		sta $47		B18F   STA $47
+.b191	84 48		sty $48		B191   STY $48
+.b193	60		rts		B193   RTS
+.b194	a5 0b		lda $0b		B194   LDA $0B
+.b196	0a		asl a		B196   ASL
+.b197	69 05		adc #$05	B197   ADC #$05
+.b199	65 5f		adc $5f		B199   ADC $5F
+.b19b	a4 60		ldy $60		B19B   LDY $60
+.b19d	90 01		bcc $b1a0	B19D   BCC $B1A0
+.b19f	c8		iny		B19F   INY
+.b1a0	85 58		sta $58		B1A0   STA $58
+.b1a2	84 59		sty $59		B1A2   STY $59
+.b1a4	60		rts		B1A4   RTS
+>b1a5	90 80 00 00 00			B1A5   .byte $90,$80,$00,$00,$00
+.b1aa	20 bf b1	jsr $b1bf	B1AA   JSR $B1BF
+.b1ad	a5 64		lda $64		B1AD   LDA $64
+.b1af	a4 65		ldy $65		B1AF   LDY $65
+.b1b1	60		rts		B1B1   RTS
+.b1b2	20 73 00	jsr $0073	B1B2   JSR $0073
+.b1b5	20 9e ad	jsr $ad9e	B1B5   JSR $AD9E
+.b1b8	20 8d ad	jsr $ad8d	B1B8   JSR $AD8D
+.b1bb	a5 66		lda $66		B1BB   LDA $66
+.b1bd	30 0d		bmi $b1cc	B1BD   BMI $B1CC
+.b1bf	a5 61		lda $61		B1BF   LDA $61
+.b1c1	c9 90		cmp #$90	B1C1   CMP #$90
+.b1c3	90 09		bcc $b1ce	B1C3   BCC $B1CE
+.b1c5	a9 a5		lda #$a5	B1C5   LDA #$A5   ; low  B1A5
+.b1c7	a0 b1		ldy #$b1	B1C7   LDY #$B1   ; high B1A5
+.b1c9	20 5b bc	jsr $bc5b	B1C9   JSR $BC5B
+.b1cc	d0 7a		bne $b248	B1CC   BNE $B248
+.b1ce	4c 9b bc	jmp $bc9b	B1CE   JMP $BC9B
+.b1d1	a5 0c		lda $0c		B1D1   LDA $0C
+.b1d3	05 0e		ora $0e		B1D3   ORA $0E
+.b1d5	48		pha		B1D5   PHA
+.b1d6	a5 0d		lda $0d		B1D6   LDA $0D
+.b1d8	48		pha		B1D8   PHA
+.b1d9	a0 00		ldy #$00	B1D9   LDY #$00
+.b1db	98		tya		B1DB   TYA
+.b1dc	48		pha		B1DC   PHA
+.b1dd	a5 46		lda $46		B1DD   LDA $46
+.b1df	48		pha		B1DF   PHA
+.b1e0	a5 45		lda $45		B1E0   LDA $45
+.b1e2	48		pha		B1E2   PHA
+.b1e3	20 b2 b1	jsr $b1b2	B1E3   JSR $B1B2
+.b1e6	68		pla		B1E6   PLA
+.b1e7	85 45		sta $45		B1E7   STA $45
+.b1e9	68		pla		B1E9   PLA
+.b1ea	85 46		sta $46		B1EA   STA $46
+.b1ec	68		pla		B1EC   PLA
+.b1ed	a8		tay		B1ED   TAY
+.b1ee	ba		tsx		B1EE   TSX
+.b1ef	bd 02 01	lda $0102,x	B1EF   LDA $0102,X
+.b1f2	48		pha		B1F2   PHA
+.b1f3	bd 01 01	lda $0101,x	B1F3   LDA $0101,X
+.b1f6	48		pha		B1F6   PHA
+.b1f7	a5 64		lda $64		B1F7   LDA $64
+.b1f9	9d 02 01	sta $0102,x	B1F9   STA $0102,X
+.b1fc	a5 65		lda $65		B1FC   LDA $65
+.b1fe	9d 01 01	sta $0101,x	B1FE   STA $0101,X
+.b201	c8		iny		B201   INY
+.b202	20 79 00	jsr $0079	B202   JSR $0079
+.b205	c9 2c		cmp #$2c	B205   CMP #$2C   ; comma
+.b207	f0 d2		beq $b1db	B207   BEQ $B1DB
+.b209	84 0b		sty $0b		B209   STY $0B
+.b20b	20 f7 ae	jsr $aef7	B20B   JSR $AEF7
+.b20e	68		pla		B20E   PLA
+.b20f	85 0d		sta $0d		B20F   STA $0D
+.b211	68		pla		B211   PLA
+.b212	85 0e		sta $0e		B212   STA $0E
+.b214	29 7f		and #$7f	B214   AND #$7F
+.b216	85 0c		sta $0c		B216   STA $0C
+.b218	a6 2f		ldx $2f		B218   LDX $2F
+.b21a	a5 30		lda $30		B21A   LDA $30
+.b21c	86 5f		stx $5f		B21C   STX $5F
+.b21e	85 60		sta $60		B21E   STA $60
+.b220	c5 32		cmp $32		B220   CMP $32
+.b222	d0 04		bne $b228	B222   BNE $B228
+.b224	e4 31		cpx $31		B224   CPX $31
+.b226	f0 39		beq $b261	B226   BEQ $B261
+.b228	a0 00		ldy #$00	B228   LDY #$00
+.b22a	b1 5f		lda ($5f),y	B22A   LDA ($5F),Y
+.b22c	c8		iny		B22C   INY
+.b22d	c5 45		cmp $45		B22D   CMP $45
+.b22f	d0 06		bne $b237	B22F   BNE $B237
+.b231	a5 46		lda $46		B231   LDA $46
+.b233	d1 5f		cmp ($5f),y	B233   CMP ($5F),Y
+.b235	f0 16		beq $b24d	B235   BEQ $B24D
+.b237	c8		iny		B237   INY
+.b238	b1 5f		lda ($5f),y	B238   LDA ($5F),Y
+.b23a	18		clc		B23A   CLC
+.b23b	65 5f		adc $5f		B23B   ADC $5F
+.b23d	aa		tax		B23D   TAX
+.b23e	c8		iny		B23E   INY
+.b23f	b1 5f		lda ($5f),y	B23F   LDA ($5F),Y
+.b241	65 60		adc $60		B241   ADC $60
+.b243	90 d7		bcc $b21c	B243   BCC $B21C
+.b245	a2 12		ldx #$12	B245   LDX #$12   ; error number
+>b247	2c				B247   .byte $2C
+.b248	a2 0e		ldx #$0e	B248   LDX #$0E   ; error number
+.b24a	4c 37 a4	jmp $a437	B24A   JMP $A437
+.b24d	a2 13		ldx #$13	B24D   LDX #$13   ; error number
+.b24f	a5 0c		lda $0c		B24F   LDA $0C
+.b251	d0 f7		bne $b24a	B251   BNE $B24A
+.b253	20 94 b1	jsr $b194	B253   JSR $B194
+.b256	a5 0b		lda $0b		B256   LDA $0B
+.b258	a0 04		ldy #$04	B258   LDY #$04
+.b25a	d1 5f		cmp ($5f),y	B25A   CMP ($5F),Y
+.b25c	d0 e7		bne $b245	B25C   BNE $B245
+.b25e	4c ea b2	jmp $b2ea	B25E   JMP $B2EA
+.b261	20 94 b1	jsr $b194	B261   JSR $B194
+.b264	20 08 a4	jsr $a408	B264   JSR $A408
+.b267	a0 00		ldy #$00	B267   LDY #$00
+.b269	84 72		sty $72		B269   STY $72
+.b26b	a2 05		ldx #$05	B26B   LDX #$05
+.b26d	a5 45		lda $45		B26D   LDA $45
+.b26f	91 5f		sta ($5f),y	B26F   STA ($5F),Y
+.b271	10 01		bpl $b274	B271   BPL $B274
+.b273	ca		dex		B273   DEX
+.b274	c8		iny		B274   INY
+.b275	a5 46		lda $46		B275   LDA $46
+.b277	91 5f		sta ($5f),y	B277   STA ($5F),Y
+.b279	10 02		bpl $b27d	B279   BPL $B27D
+.b27b	ca		dex		B27B   DEX
+.b27c	ca		dex		B27C   DEX
+.b27d	86 71		stx $71		B27D   STX $71
+.b27f	a5 0b		lda $0b		B27F   LDA $0B
+.b281	c8		iny		B281   INY
+.b282	c8		iny		B282   INY
+.b283	c8		iny		B283   INY
+.b284	91 5f		sta ($5f),y	B284   STA ($5F),Y
+.b286	a2 0b		ldx #$0b	B286   LDX #$0B
+.b288	a9 00		lda #$00	B288   LDA #$00
+.b28a	24 0c		bit $0c		B28A   BIT $0C
+.b28c	50 08		bvc $b296	B28C   BVC $B296
+.b28e	68		pla		B28E   PLA
+.b28f	18		clc		B28F   CLC
+.b290	69 01		adc #$01	B290   ADC #$01
+.b292	aa		tax		B292   TAX
+.b293	68		pla		B293   PLA
+.b294	69 00		adc #$00	B294   ADC #$00
+.b296	c8		iny		B296   INY
+.b297	91 5f		sta ($5f),y	B297   STA ($5F),Y
+.b299	c8		iny		B299   INY
+.b29a	8a		txa		B29A   TXA
+.b29b	91 5f		sta ($5f),y	B29B   STA ($5F),Y
+.b29d	20 4c b3	jsr $b34c	B29D   JSR $B34C
+.b2a0	86 71		stx $71		B2A0   STX $71
+.b2a2	85 72		sta $72		B2A2   STA $72
+.b2a4	a4 22		ldy $22		B2A4   LDY $22
+.b2a6	c6 0b		dec $0b		B2A6   DEC $0B
+.b2a8	d0 dc		bne $b286	B2A8   BNE $B286
+.b2aa	65 59		adc $59		B2AA   ADC $59
+.b2ac	b0 5d		bcs $b30b	B2AC   BCS $B30B
+.b2ae	85 59		sta $59		B2AE   STA $59
+.b2b0	a8		tay		B2B0   TAY
+.b2b1	8a		txa		B2B1   TXA
+.b2b2	65 58		adc $58		B2B2   ADC $58
+.b2b4	90 03		bcc $b2b9	B2B4   BCC $B2B9
+.b2b6	c8		iny		B2B6   INY
+.b2b7	f0 52		beq $b30b	B2B7   BEQ $B30B
+.b2b9	20 08 a4	jsr $a408	B2B9   JSR $A408
+.b2bc	85 31		sta $31		B2BC   STA $31
+.b2be	84 32		sty $32		B2BE   STY $32
+.b2c0	a9 00		lda #$00	B2C0   LDA #$00
+.b2c2	e6 72		inc $72		B2C2   INC $72
+.b2c4	a4 71		ldy $71		B2C4   LDY $71
+.b2c6	f0 05		beq $b2cd	B2C6   BEQ $B2CD
+.b2c8	88		dey		B2C8   DEY
+.b2c9	91 58		sta ($58),y	B2C9   STA ($58),Y
+.b2cb	d0 fb		bne $b2c8	B2CB   BNE $B2C8
+.b2cd	c6 59		dec $59		B2CD   DEC $59
+.b2cf	c6 72		dec $72		B2CF   DEC $72
+.b2d1	d0 f5		bne $b2c8	B2D1   BNE $B2C8
+.b2d3	e6 59		inc $59		B2D3   INC $59
+.b2d5	38		sec		B2D5   SEC
+.b2d6	a5 31		lda $31		B2D6   LDA $31
+.b2d8	e5 5f		sbc $5f		B2D8   SBC $5F
+.b2da	a0 02		ldy #$02	B2DA   LDY #$02
+.b2dc	91 5f		sta ($5f),y	B2DC   STA ($5F),Y
+.b2de	a5 32		lda $32		B2DE   LDA $32
+.b2e0	c8		iny		B2E0   INY
+.b2e1	e5 60		sbc $60		B2E1   SBC $60
+.b2e3	91 5f		sta ($5f),y	B2E3   STA ($5F),Y
+.b2e5	a5 0c		lda $0c		B2E5   LDA $0C
+.b2e7	d0 62		bne $b34b	B2E7   BNE $B34B
+.b2e9	c8		iny		B2E9   INY
+.b2ea	b1 5f		lda ($5f),y	B2EA   LDA ($5F),Y
+.b2ec	85 0b		sta $0b		B2EC   STA $0B
+.b2ee	a9 00		lda #$00	B2EE   LDA #$00
+.b2f0	85 71		sta $71		B2F0   STA $71
+.b2f2	85 72		sta $72		B2F2   STA $72
+.b2f4	c8		iny		B2F4   INY
+.b2f5	68		pla		B2F5   PLA
+.b2f6	aa		tax		B2F6   TAX
+.b2f7	85 64		sta $64		B2F7   STA $64
+.b2f9	68		pla		B2F9   PLA
+.b2fa	85 65		sta $65		B2FA   STA $65
+.b2fc	d1 5f		cmp ($5f),y	B2FC   CMP ($5F),Y
+.b2fe	90 0e		bcc $b30e	B2FE   BCC $B30E
+.b300	d0 06		bne $b308	B300   BNE $B308
+.b302	c8		iny		B302   INY
+.b303	8a		txa		B303   TXA
+.b304	d1 5f		cmp ($5f),y	B304   CMP ($5F),Y
+.b306	90 07		bcc $b30f	B306   BCC $B30F
+.b308	4c 45 b2	jmp $b245	B308   JMP $B245
+.b30b	4c 35 a4	jmp $a435	B30B   JMP $A435
+.b30e	c8		iny		B30E   INY
+.b30f	a5 72		lda $72		B30F   LDA $72
+.b311	05 71		ora $71		B311   ORA $71
+.b313	18		clc		B313   CLC
+.b314	f0 0a		beq $b320	B314   BEQ $B320
+.b316	20 4c b3	jsr $b34c	B316   JSR $B34C
+.b319	8a		txa		B319   TXA
+.b31a	65 64		adc $64		B31A   ADC $64
+.b31c	aa		tax		B31C   TAX
+.b31d	98		tya		B31D   TYA
+.b31e	a4 22		ldy $22		B31E   LDY $22
+.b320	65 65		adc $65		B320   ADC $65
+.b322	86 71		stx $71		B322   STX $71
+.b324	c6 0b		dec $0b		B324   DEC $0B
+.b326	d0 ca		bne $b2f2	B326   BNE $B2F2
+.b328	85 72		sta $72		B328   STA $72
+.b32a	a2 05		ldx #$05	B32A   LDX #$05
+.b32c	a5 45		lda $45		B32C   LDA $45
+.b32e	10 01		bpl $b331	B32E   BPL $B331
+.b330	ca		dex		B330   DEX
+.b331	a5 46		lda $46		B331   LDA $46
+.b333	10 02		bpl $b337	B333   BPL $B337
+.b335	ca		dex		B335   DEX
+.b336	ca		dex		B336   DEX
+.b337	86 28		stx $28		B337   STX $28
+.b339	a9 00		lda #$00	B339   LDA #$00
+.b33b	20 55 b3	jsr $b355	B33B   JSR $B355
+.b33e	8a		txa		B33E   TXA
+.b33f	65 58		adc $58		B33F   ADC $58
+.b341	85 47		sta $47		B341   STA $47
+.b343	98		tya		B343   TYA
+.b344	65 59		adc $59		B344   ADC $59
+.b346	85 48		sta $48		B346   STA $48
+.b348	a8		tay		B348   TAY
+.b349	a5 47		lda $47		B349   LDA $47
+.b34b	60		rts		B34B   RTS
+.b34c	84 22		sty $22		B34C   STY $22
+.b34e	b1 5f		lda ($5f),y	B34E   LDA ($5F),Y
+.b350	85 28		sta $28		B350   STA $28
+.b352	88		dey		B352   DEY
+.b353	b1 5f		lda ($5f),y	B353   LDA ($5F),Y
+.b355	85 29		sta $29		B355   STA $29
+.b357	a9 10		lda #$10	B357   LDA #$10
+.b359	85 5d		sta $5d		B359   STA $5D
+.b35b	a2 00		ldx #$00	B35B   LDX #$00
+.b35d	a0 00		ldy #$00	B35D   LDY #$00
+.b35f	8a		txa		B35F   TXA
+.b360	0a		asl a		B360   ASL
+.b361	aa		tax		B361   TAX
+.b362	98		tya		B362   TYA
+.b363	2a		rol a		B363   ROL
+.b364	a8		tay		B364   TAY
+.b365	b0 a4		bcs $b30b	B365   BCS $B30B
+.b367	06 71		asl $71		B367   ASL $71
+.b369	26 72		rol $72		B369   ROL $72
+.b36b	90 0b		bcc $b378	B36B   BCC $B378
+.b36d	18		clc		B36D   CLC
+.b36e	8a		txa		B36E   TXA
+.b36f	65 28		adc $28		B36F   ADC $28
+.b371	aa		tax		B371   TAX
+.b372	98		tya		B372   TYA
+.b373	65 29		adc $29		B373   ADC $29
+.b375	a8		tay		B375   TAY
+.b376	b0 93		bcs $b30b	B376   BCS $B30B
+.b378	c6 5d		dec $5d		B378   DEC $5D
+.b37a	d0 e3		bne $b35f	B37A   BNE $B35F
+.b37c	60		rts		B37C   RTS
+.b37d	a5 0d		lda $0d		B37D   LDA $0D
+.b37f	f0 03		beq $b384	B37F   BEQ $B384
+.b381	20 a6 b6	jsr $b6a6	B381   JSR $B6A6
+.b384	20 26 b5	jsr $b526	B384   JSR $B526
+.b387	38		sec		B387   SEC
+.b388	a5 33		lda $33		B388   LDA $33
+.b38a	e5 31		sbc $31		B38A   SBC $31
+.b38c	a8		tay		B38C   TAY
+.b38d	a5 34		lda $34		B38D   LDA $34
+.b38f	e5 32		sbc $32		B38F   SBC $32
+.b391	a2 00		ldx #$00	B391   LDX #$00
+.b393	86 0d		stx $0d		B393   STX $0D
+.b395	85 62		sta $62		B395   STA $62
+.b397	84 63		sty $63		B397   STY $63
+.b399	a2 90		ldx #$90	B399   LDX #$90
+.b39b	4c 44 bc	jmp $bc44	B39B   JMP $BC44
+.b39e	38		sec		B39E   SEC
+.b39f	20 f0 ff	jsr $fff0	B39F   JSR $FFF0
+.b3a2	a9 00		lda #$00	B3A2   LDA #$00
+.b3a4	f0 eb		beq $b391	B3A4   BEQ $B391
+.b3a6	a6 3a		ldx $3a		B3A6   LDX $3A
+.b3a8	e8		inx		B3A8   INX
+.b3a9	d0 a0		bne $b34b	B3A9   BNE $B34B
+.b3ab	a2 15		ldx #$15	B3AB   LDX #$15   ; error number
+>b3ad	2c				B3AD   .byte $2C
+.b3ae	a2 1b		ldx #$1b	B3AE   LDX #$1B   ; error number
+.b3b0	4c 37 a4	jmp $a437	B3B0   JMP $A437
+.b3b3	20 e1 b3	jsr $b3e1	B3B3   JSR $B3E1
+.b3b6	20 a6 b3	jsr $b3a6	B3B6   JSR $B3A6
+.b3b9	20 fa ae	jsr $aefa	B3B9   JSR $AEFA
+.b3bc	a9 80		lda #$80	B3BC   LDA #$80
+.b3be	85 10		sta $10		B3BE   STA $10
+.b3c0	20 8b b0	jsr $b08b	B3C0   JSR $B08B
+.b3c3	20 8d ad	jsr $ad8d	B3C3   JSR $AD8D
+.b3c6	20 f7 ae	jsr $aef7	B3C6   JSR $AEF7
+.b3c9	a9 b2		lda #$b2	B3C9   LDA #$B2
+.b3cb	20 ff ae	jsr $aeff	B3CB   JSR $AEFF
+.b3ce	48		pha		B3CE   PHA
+.b3cf	a5 48		lda $48		B3CF   LDA $48
+.b3d1	48		pha		B3D1   PHA
+.b3d2	a5 47		lda $47		B3D2   LDA $47
+.b3d4	48		pha		B3D4   PHA
+.b3d5	a5 7b		lda $7b		B3D5   LDA $7B
+.b3d7	48		pha		B3D7   PHA
+.b3d8	a5 7a		lda $7a		B3D8   LDA $7A
+.b3da	48		pha		B3DA   PHA
+.b3db	20 f8 a8	jsr $a8f8	B3DB   JSR $A8F8
+.b3de	4c 4f b4	jmp $b44f	B3DE   JMP $B44F
+.b3e1	a9 a5		lda #$a5	B3E1   LDA #$A5
+.b3e3	20 ff ae	jsr $aeff	B3E3   JSR $AEFF
+.b3e6	09 80		ora #$80	B3E6   ORA #$80
+.b3e8	85 10		sta $10		B3E8   STA $10
+.b3ea	20 92 b0	jsr $b092	B3EA   JSR $B092
+.b3ed	85 4e		sta $4e		B3ED   STA $4E
+.b3ef	84 4f		sty $4f		B3EF   STY $4F
+.b3f1	4c 8d ad	jmp $ad8d	B3F1   JMP $AD8D
+.b3f4	20 e1 b3	jsr $b3e1	B3F4   JSR $B3E1
+.b3f7	a5 4f		lda $4f		B3F7   LDA $4F
+.b3f9	48		pha		B3F9   PHA
+.b3fa	a5 4e		lda $4e		B3FA   LDA $4E
+.b3fc	48		pha		B3FC   PHA
+.b3fd	20 f1 ae	jsr $aef1	B3FD   JSR $AEF1
+.b400	20 8d ad	jsr $ad8d	B400   JSR $AD8D
+.b403	68		pla		B403   PLA
+.b404	85 4e		sta $4e		B404   STA $4E
+.b406	68		pla		B406   PLA
+.b407	85 4f		sta $4f		B407   STA $4F
+.b409	a0 02		ldy #$02	B409   LDY #$02
+.b40b	b1 4e		lda ($4e),y	B40B   LDA ($4E),Y
+.b40d	85 47		sta $47		B40D   STA $47
+.b40f	aa		tax		B40F   TAX
+.b410	c8		iny		B410   INY
+.b411	b1 4e		lda ($4e),y	B411   LDA ($4E),Y
+.b413	f0 99		beq $b3ae	B413   BEQ $B3AE
+.b415	85 48		sta $48		B415   STA $48
+.b417	c8		iny		B417   INY
+.b418	b1 47		lda ($47),y	B418   LDA ($47),Y
+.b41a	48		pha		B41A   PHA
+.b41b	88		dey		B41B   DEY
+.b41c	10 fa		bpl $b418	B41C   BPL $B418
+.b41e	a4 48		ldy $48		B41E   LDY $48
+.b420	20 d4 bb	jsr $bbd4	B420   JSR $BBD4
+.b423	a5 7b		lda $7b		B423   LDA $7B
+.b425	48		pha		B425   PHA
+.b426	a5 7a		lda $7a		B426   LDA $7A
+.b428	48		pha		B428   PHA
+.b429	b1 4e		lda ($4e),y	B429   LDA ($4E),Y
+.b42b	85 7a		sta $7a		B42B   STA $7A
+.b42d	c8		iny		B42D   INY
+.b42e	b1 4e		lda ($4e),y	B42E   LDA ($4E),Y
+.b430	85 7b		sta $7b		B430   STA $7B
+.b432	a5 48		lda $48		B432   LDA $48
+.b434	48		pha		B434   PHA
+.b435	a5 47		lda $47		B435   LDA $47
+.b437	48		pha		B437   PHA
+.b438	20 8a ad	jsr $ad8a	B438   JSR $AD8A
+.b43b	68		pla		B43B   PLA
+.b43c	85 4e		sta $4e		B43C   STA $4E
+.b43e	68		pla		B43E   PLA
+.b43f	85 4f		sta $4f		B43F   STA $4F
+.b441	20 79 00	jsr $0079	B441   JSR $0079
+.b444	f0 03		beq $b449	B444   BEQ $B449
+.b446	4c 08 af	jmp $af08	B446   JMP $AF08
+.b449	68		pla		B449   PLA
+.b44a	85 7a		sta $7a		B44A   STA $7A
+.b44c	68		pla		B44C   PLA
+.b44d	85 7b		sta $7b		B44D   STA $7B
+.b44f	a0 00		ldy #$00	B44F   LDY #$00
+.b451	68		pla		B451   PLA
+.b452	91 4e		sta ($4e),y	B452   STA ($4E),Y
+.b454	68		pla		B454   PLA
+.b455	c8		iny		B455   INY
+.b456	91 4e		sta ($4e),y	B456   STA ($4E),Y
+.b458	68		pla		B458   PLA
+.b459	c8		iny		B459   INY
+.b45a	91 4e		sta ($4e),y	B45A   STA ($4E),Y
+.b45c	68		pla		B45C   PLA
+.b45d	c8		iny		B45D   INY
+.b45e	91 4e		sta ($4e),y	B45E   STA ($4E),Y
+.b460	68		pla		B460   PLA
+.b461	c8		iny		B461   INY
+.b462	91 4e		sta ($4e),y	B462   STA ($4E),Y
+.b464	60		rts		B464   RTS
+.b465	20 8d ad	jsr $ad8d	B465   JSR $AD8D
+.b468	a0 00		ldy #$00	B468   LDY #$00
+.b46a	20 df bd	jsr $bddf	B46A   JSR $BDDF
+.b46d	68		pla		B46D   PLA
+.b46e	68		pla		B46E   PLA
+.b46f	a9 ff		lda #$ff	B46F   LDA #$FF
+.b471	a0 00		ldy #$00	B471   LDY #$00
+.b473	f0 12		beq $b487	B473   BEQ $B487
+.b475	a6 64		ldx $64		B475   LDX $64
+.b477	a4 65		ldy $65		B477   LDY $65
+.b479	86 50		stx $50		B479   STX $50
+.b47b	84 51		sty $51		B47B   STY $51
+.b47d	20 f4 b4	jsr $b4f4	B47D   JSR $B4F4
+.b480	86 62		stx $62		B480   STX $62
+.b482	84 63		sty $63		B482   STY $63
+.b484	85 61		sta $61		B484   STA $61
+.b486	60		rts		B486   RTS
+.b487	a2 22		ldx #$22	B487   LDX #$22   ; quote mark
+.b489	86 07		stx $07		B489   STX $07
+.b48b	86 08		stx $08		B48B   STX $08
+.b48d	85 6f		sta $6f		B48D   STA $6F
+.b48f	84 70		sty $70		B48F   STY $70
+.b491	85 62		sta $62		B491   STA $62
+.b493	84 63		sty $63		B493   STY $63
+.b495	a0 ff		ldy #$ff	B495   LDY #$FF
+.b497	c8		iny		B497   INY
+.b498	b1 6f		lda ($6f),y	B498   LDA ($6F),Y
+.b49a	f0 0c		beq $b4a8	B49A   BEQ $B4A8
+.b49c	c5 07		cmp $07		B49C   CMP $07
+.b49e	f0 04		beq $b4a4	B49E   BEQ $B4A4
+.b4a0	c5 08		cmp $08		B4A0   CMP $08
+.b4a2	d0 f3		bne $b497	B4A2   BNE $B497
+.b4a4	c9 22		cmp #$22	B4A4   CMP #$22   ; quote mark
+.b4a6	f0 01		beq $b4a9	B4A6   BEQ $B4A9
+.b4a8	18		clc		B4A8   CLC
+.b4a9	84 61		sty $61		B4A9   STY $61
+.b4ab	98		tya		B4AB   TYA
+.b4ac	65 6f		adc $6f		B4AC   ADC $6F
+.b4ae	85 71		sta $71		B4AE   STA $71
+.b4b0	a6 70		ldx $70		B4B0   LDX $70
+.b4b2	90 01		bcc $b4b5	B4B2   BCC $B4B5
+.b4b4	e8		inx		B4B4   INX
+.b4b5	86 72		stx $72		B4B5   STX $72
+.b4b7	a5 70		lda $70		B4B7   LDA $70
+.b4b9	f0 04		beq $b4bf	B4B9   BEQ $B4BF
+.b4bb	c9 02		cmp #$02	B4BB   CMP #$02
+.b4bd	d0 0b		bne $b4ca	B4BD   BNE $B4CA
+.b4bf	98		tya		B4BF   TYA
+.b4c0	20 75 b4	jsr $b475	B4C0   JSR $B475
+.b4c3	a6 6f		ldx $6f		B4C3   LDX $6F
+.b4c5	a4 70		ldy $70		B4C5   LDY $70
+.b4c7	20 88 b6	jsr $b688	B4C7   JSR $B688
+.b4ca	a6 16		ldx $16		B4CA   LDX $16
+.b4cc	e0 22		cpx #$22	B4CC   CPX #$22
+.b4ce	d0 05		bne $b4d5	B4CE   BNE $B4D5
+.b4d0	a2 19		ldx #$19	B4D0   LDX #$19
+.b4d2	4c 37 a4	jmp $a437	B4D2   JMP $A437
+.b4d5	a5 61		lda $61		B4D5   LDA $61
+.b4d7	95 00		sta $00,x	B4D7   STA $00,X
+.b4d9	a5 62		lda $62		B4D9   LDA $62
+.b4db	95 01		sta $01,x	B4DB   STA $01,X
+.b4dd	a5 63		lda $63		B4DD   LDA $63
+.b4df	95 02		sta $02,x	B4DF   STA $02,X
+.b4e1	a0 00		ldy #$00	B4E1   LDY #$00
+.b4e3	86 64		stx $64		B4E3   STX $64
+.b4e5	84 65		sty $65		B4E5   STY $65
+.b4e7	84 70		sty $70		B4E7   STY $70
+.b4e9	88		dey		B4E9   DEY
+.b4ea	84 0d		sty $0d		B4EA   STY $0D
+.b4ec	86 17		stx $17		B4EC   STX $17
+.b4ee	e8		inx		B4EE   INX
+.b4ef	e8		inx		B4EF   INX
+.b4f0	e8		inx		B4F0   INX
+.b4f1	86 16		stx $16		B4F1   STX $16
+.b4f3	60		rts		B4F3   RTS
+.b4f4	46 0f		lsr $0f		B4F4   LSR $0F
+.b4f6	48		pha		B4F6   PHA
+.b4f7	49 ff		eor #$ff	B4F7   EOR #$FF
+.b4f9	38		sec		B4F9   SEC
+.b4fa	65 33		adc $33		B4FA   ADC $33
+.b4fc	a4 34		ldy $34		B4FC   LDY $34
+.b4fe	b0 01		bcs $b501	B4FE   BCS $B501
+.b500	88		dey		B500   DEY
+.b501	c4 32		cpy $32		B501   CPY $32
+.b503	90 11		bcc $b516	B503   BCC $B516
+.b505	d0 04		bne $b50b	B505   BNE $B50B
+.b507	c5 31		cmp $31		B507   CMP $31
+.b509	90 0b		bcc $b516	B509   BCC $B516
+.b50b	85 33		sta $33		B50B   STA $33
+.b50d	84 34		sty $34		B50D   STY $34
+.b50f	85 35		sta $35		B50F   STA $35
+.b511	84 36		sty $36		B511   STY $36
+.b513	aa		tax		B513   TAX
+.b514	68		pla		B514   PLA
+.b515	60		rts		B515   RTS
+.b516	a2 10		ldx #$10	B516   LDX #$10
+.b518	a5 0f		lda $0f		B518   LDA $0F
+.b51a	30 b6		bmi $b4d2	B51A   BMI $B4D2
+.b51c	20 26 b5	jsr $b526	B51C   JSR $B526
+.b51f	a9 80		lda #$80	B51F   LDA #$80
+.b521	85 0f		sta $0f		B521   STA $0F
+.b523	68		pla		B523   PLA
+.b524	d0 d0		bne $b4f6	B524   BNE $B4F6
+.b526	a6 37		ldx $37		B526   LDX $37
+.b528	a5 38		lda $38		B528   LDA $38
+.b52a	86 33		stx $33		B52A   STX $33
+.b52c	85 34		sta $34		B52C   STA $34
+.b52e	a0 00		ldy #$00	B52E   LDY #$00
+.b530	84 4f		sty $4f		B530   STY $4F
+.b532	84 4e		sty $4e		B532   STY $4E
+.b534	a5 31		lda $31		B534   LDA $31
+.b536	a6 32		ldx $32		B536   LDX $32
+.b538	85 5f		sta $5f		B538   STA $5F
+.b53a	86 60		stx $60		B53A   STX $60
+.b53c	a9 19		lda #$19	B53C   LDA #$19   ; low  0019
+.b53e	a2 00		ldx #$00	B53E   LDX #$00   ; high 0019
+.b540	85 22		sta $22		B540   STA $22
+.b542	86 23		stx $23		B542   STX $23
+.b544	c5 16		cmp $16		B544   CMP $16
+.b546	f0 05		beq $b54d	B546   BEQ $B54D
+.b548	20 c7 b5	jsr $b5c7	B548   JSR $B5C7
+.b54b	f0 f7		beq $b544	B54B   BEQ $B544
+.b54d	a9 07		lda #$07	B54D   LDA #$07
+.b54f	85 53		sta $53		B54F   STA $53
+.b551	a5 2d		lda $2d		B551   LDA $2D
+.b553	a6 2e		ldx $2e		B553   LDX $2E
+.b555	85 22		sta $22		B555   STA $22
+.b557	86 23		stx $23		B557   STX $23
+.b559	e4 30		cpx $30		B559   CPX $30
+.b55b	d0 04		bne $b561	B55B   BNE $B561
+.b55d	c5 2f		cmp $2f		B55D   CMP $2F
+.b55f	f0 05		beq $b566	B55F   BEQ $B566
+.b561	20 bd b5	jsr $b5bd	B561   JSR $B5BD
+.b564	f0 f3		beq $b559	B564   BEQ $B559
+.b566	85 58		sta $58		B566   STA $58
+.b568	86 59		stx $59		B568   STX $59
+.b56a	a9 03		lda #$03	B56A   LDA #$03
+.b56c	85 53		sta $53		B56C   STA $53
+.b56e	a5 58		lda $58		B56E   LDA $58
+.b570	a6 59		ldx $59		B570   LDX $59
+.b572	e4 32		cpx $32		B572   CPX $32
+.b574	d0 07		bne $b57d	B574   BNE $B57D
+.b576	c5 31		cmp $31		B576   CMP $31
+.b578	d0 03		bne $b57d	B578   BNE $B57D
+.b57a	4c 06 b6	jmp $b606	B57A   JMP $B606
+.b57d	85 22		sta $22		B57D   STA $22
+.b57f	86 23		stx $23		B57F   STX $23
+.b581	a0 00		ldy #$00	B581   LDY #$00
+.b583	b1 22		lda ($22),y	B583   LDA ($22),Y
+.b585	aa		tax		B585   TAX
+.b586	c8		iny		B586   INY
+.b587	b1 22		lda ($22),y	B587   LDA ($22),Y
+.b589	08		php		B589   PHP
+.b58a	c8		iny		B58A   INY
+.b58b	b1 22		lda ($22),y	B58B   LDA ($22),Y
+.b58d	65 58		adc $58		B58D   ADC $58
+.b58f	85 58		sta $58		B58F   STA $58
+.b591	c8		iny		B591   INY
+.b592	b1 22		lda ($22),y	B592   LDA ($22),Y
+.b594	65 59		adc $59		B594   ADC $59
+.b596	85 59		sta $59		B596   STA $59
+.b598	28		plp		B598   PLP
+.b599	10 d3		bpl $b56e	B599   BPL $B56E
+.b59b	8a		txa		B59B   TXA
+.b59c	30 d0		bmi $b56e	B59C   BMI $B56E
+.b59e	c8		iny		B59E   INY
+.b59f	b1 22		lda ($22),y	B59F   LDA ($22),Y
+.b5a1	a0 00		ldy #$00	B5A1   LDY #$00
+.b5a3	0a		asl a		B5A3   ASL
+.b5a4	69 05		adc #$05	B5A4   ADC #$05
+.b5a6	65 22		adc $22		B5A6   ADC $22
+.b5a8	85 22		sta $22		B5A8   STA $22
+.b5aa	90 02		bcc $b5ae	B5AA   BCC $B5AE
+.b5ac	e6 23		inc $23		B5AC   INC $23
+.b5ae	a6 23		ldx $23		B5AE   LDX $23
+.b5b0	e4 59		cpx $59		B5B0   CPX $59
+.b5b2	d0 04		bne $b5b8	B5B2   BNE $B5B8
+.b5b4	c5 58		cmp $58		B5B4   CMP $58
+.b5b6	f0 ba		beq $b572	B5B6   BEQ $B572
+.b5b8	20 c7 b5	jsr $b5c7	B5B8   JSR $B5C7
+.b5bb	f0 f3		beq $b5b0	B5BB   BEQ $B5B0
+.b5bd	b1 22		lda ($22),y	B5BD   LDA ($22),Y
+.b5bf	30 35		bmi $b5f6	B5BF   BMI $B5F6
+.b5c1	c8		iny		B5C1   INY
+.b5c2	b1 22		lda ($22),y	B5C2   LDA ($22),Y
+.b5c4	10 30		bpl $b5f6	B5C4   BPL $B5F6
+.b5c6	c8		iny		B5C6   INY
+.b5c7	b1 22		lda ($22),y	B5C7   LDA ($22),Y
+.b5c9	f0 2b		beq $b5f6	B5C9   BEQ $B5F6
+.b5cb	c8		iny		B5CB   INY
+.b5cc	b1 22		lda ($22),y	B5CC   LDA ($22),Y
+.b5ce	aa		tax		B5CE   TAX
+.b5cf	c8		iny		B5CF   INY
+.b5d0	b1 22		lda ($22),y	B5D0   LDA ($22),Y
+.b5d2	c5 34		cmp $34		B5D2   CMP $34
+.b5d4	90 06		bcc $b5dc	B5D4   BCC $B5DC
+.b5d6	d0 1e		bne $b5f6	B5D6   BNE $B5F6
+.b5d8	e4 33		cpx $33		B5D8   CPX $33
+.b5da	b0 1a		bcs $b5f6	B5DA   BCS $B5F6
+.b5dc	c5 60		cmp $60		B5DC   CMP $60
+.b5de	90 16		bcc $b5f6	B5DE   BCC $B5F6
+.b5e0	d0 04		bne $b5e6	B5E0   BNE $B5E6
+.b5e2	e4 5f		cpx $5f		B5E2   CPX $5F
+.b5e4	90 10		bcc $b5f6	B5E4   BCC $B5F6
+.b5e6	86 5f		stx $5f		B5E6   STX $5F
+.b5e8	85 60		sta $60		B5E8   STA $60
+.b5ea	a5 22		lda $22		B5EA   LDA $22
+.b5ec	a6 23		ldx $23		B5EC   LDX $23
+.b5ee	85 4e		sta $4e		B5EE   STA $4E
+.b5f0	86 4f		stx $4f		B5F0   STX $4F
+.b5f2	a5 53		lda $53		B5F2   LDA $53
+.b5f4	85 55		sta $55		B5F4   STA $55
+.b5f6	a5 53		lda $53		B5F6   LDA $53
+.b5f8	18		clc		B5F8   CLC
+.b5f9	65 22		adc $22		B5F9   ADC $22
+.b5fb	85 22		sta $22		B5FB   STA $22
+.b5fd	90 02		bcc $b601	B5FD   BCC $B601
+.b5ff	e6 23		inc $23		B5FF   INC $23
+.b601	a6 23		ldx $23		B601   LDX $23
+.b603	a0 00		ldy #$00	B603   LDY #$00
+.b605	60		rts		B605   RTS
+.b606	a5 4f		lda $4f		B606   LDA $4F
+.b608	05 4e		ora $4e		B608   ORA $4E
+.b60a	f0 f5		beq $b601	B60A   BEQ $B601
+.b60c	a5 55		lda $55		B60C   LDA $55
+.b60e	29 04		and #$04	B60E   AND #$04
+.b610	4a		lsr a		B610   LSR
+.b611	a8		tay		B611   TAY
+.b612	85 55		sta $55		B612   STA $55
+.b614	b1 4e		lda ($4e),y	B614   LDA ($4E),Y
+.b616	65 5f		adc $5f		B616   ADC $5F
+.b618	85 5a		sta $5a		B618   STA $5A
+.b61a	a5 60		lda $60		B61A   LDA $60
+.b61c	69 00		adc #$00	B61C   ADC #$00
+.b61e	85 5b		sta $5b		B61E   STA $5B
+.b620	a5 33		lda $33		B620   LDA $33
+.b622	a6 34		ldx $34		B622   LDX $34
+.b624	85 58		sta $58		B624   STA $58
+.b626	86 59		stx $59		B626   STX $59
+.b628	20 bf a3	jsr $a3bf	B628   JSR $A3BF
+.b62b	a4 55		ldy $55		B62B   LDY $55
+.b62d	c8		iny		B62D   INY
+.b62e	a5 58		lda $58		B62E   LDA $58
+.b630	91 4e		sta ($4e),y	B630   STA ($4E),Y
+.b632	aa		tax		B632   TAX
+.b633	e6 59		inc $59		B633   INC $59
+.b635	a5 59		lda $59		B635   LDA $59
+.b637	c8		iny		B637   INY
+.b638	91 4e		sta ($4e),y	B638   STA ($4E),Y
+.b63a	4c 2a b5	jmp $b52a	B63A   JMP $B52A
+.b63d	a5 65		lda $65		B63D   LDA $65
+.b63f	48		pha		B63F   PHA
+.b640	a5 64		lda $64		B640   LDA $64
+.b642	48		pha		B642   PHA
+.b643	20 83 ae	jsr $ae83	B643   JSR $AE83
+.b646	20 8f ad	jsr $ad8f	B646   JSR $AD8F
+.b649	68		pla		B649   PLA
+.b64a	85 6f		sta $6f		B64A   STA $6F
+.b64c	68		pla		B64C   PLA
+.b64d	85 70		sta $70		B64D   STA $70
+.b64f	a0 00		ldy #$00	B64F   LDY #$00
+.b651	b1 6f		lda ($6f),y	B651   LDA ($6F),Y
+.b653	18		clc		B653   CLC
+.b654	71 64		adc ($64),y	B654   ADC ($64),Y
+.b656	90 05		bcc $b65d	B656   BCC $B65D
+.b658	a2 17		ldx #$17	B658   LDX #$17
+.b65a	4c 37 a4	jmp $a437	B65A   JMP $A437
+.b65d	20 75 b4	jsr $b475	B65D   JSR $B475
+.b660	20 7a b6	jsr $b67a	B660   JSR $B67A
+.b663	a5 50		lda $50		B663   LDA $50
+.b665	a4 51		ldy $51		B665   LDY $51
+.b667	20 aa b6	jsr $b6aa	B667   JSR $B6AA
+.b66a	20 8c b6	jsr $b68c	B66A   JSR $B68C
+.b66d	a5 6f		lda $6f		B66D   LDA $6F
+.b66f	a4 70		ldy $70		B66F   LDY $70
+.b671	20 aa b6	jsr $b6aa	B671   JSR $B6AA
+.b674	20 ca b4	jsr $b4ca	B674   JSR $B4CA
+.b677	4c b8 ad	jmp $adb8	B677   JMP $ADB8
+.b67a	a0 00		ldy #$00	B67A   LDY #$00
+.b67c	b1 6f		lda ($6f),y	B67C   LDA ($6F),Y
+.b67e	48		pha		B67E   PHA
+.b67f	c8		iny		B67F   INY
+.b680	b1 6f		lda ($6f),y	B680   LDA ($6F),Y
+.b682	aa		tax		B682   TAX
+.b683	c8		iny		B683   INY
+.b684	b1 6f		lda ($6f),y	B684   LDA ($6F),Y
+.b686	a8		tay		B686   TAY
+.b687	68		pla		B687   PLA
+.b688	86 22		stx $22		B688   STX $22
+.b68a	84 23		sty $23		B68A   STY $23
+.b68c	a8		tay		B68C   TAY
+.b68d	f0 0a		beq $b699	B68D   BEQ $B699
+.b68f	48		pha		B68F   PHA
+.b690	88		dey		B690   DEY
+.b691	b1 22		lda ($22),y	B691   LDA ($22),Y
+.b693	91 35		sta ($35),y	B693   STA ($35),Y
+.b695	98		tya		B695   TYA
+.b696	d0 f8		bne $b690	B696   BNE $B690
+.b698	68		pla		B698   PLA
+.b699	18		clc		B699   CLC
+.b69a	65 35		adc $35		B69A   ADC $35
+.b69c	85 35		sta $35		B69C   STA $35
+.b69e	90 02		bcc $b6a2	B69E   BCC $B6A2
+.b6a0	e6 36		inc $36		B6A0   INC $36
+.b6a2	60		rts		B6A2   RTS
+.b6a3	20 8f ad	jsr $ad8f	B6A3   JSR $AD8F
+.b6a6	a5 64		lda $64		B6A6   LDA $64
+.b6a8	a4 65		ldy $65		B6A8   LDY $65
+.b6aa	85 22		sta $22		B6AA   STA $22
+.b6ac	84 23		sty $23		B6AC   STY $23
+.b6ae	20 db b6	jsr $b6db	B6AE   JSR $B6DB
+.b6b1	08		php		B6B1   PHP
+.b6b2	a0 00		ldy #$00	B6B2   LDY #$00
+.b6b4	b1 22		lda ($22),y	B6B4   LDA ($22),Y
+.b6b6	48		pha		B6B6   PHA
+.b6b7	c8		iny		B6B7   INY
+.b6b8	b1 22		lda ($22),y	B6B8   LDA ($22),Y
+.b6ba	aa		tax		B6BA   TAX
+.b6bb	c8		iny		B6BB   INY
+.b6bc	b1 22		lda ($22),y	B6BC   LDA ($22),Y
+.b6be	a8		tay		B6BE   TAY
+.b6bf	68		pla		B6BF   PLA
+.b6c0	28		plp		B6C0   PLP
+.b6c1	d0 13		bne $b6d6	B6C1   BNE $B6D6
+.b6c3	c4 34		cpy $34		B6C3   CPY $34
+.b6c5	d0 0f		bne $b6d6	B6C5   BNE $B6D6
+.b6c7	e4 33		cpx $33		B6C7   CPX $33
+.b6c9	d0 0b		bne $b6d6	B6C9   BNE $B6D6
+.b6cb	48		pha		B6CB   PHA
+.b6cc	18		clc		B6CC   CLC
+.b6cd	65 33		adc $33		B6CD   ADC $33
+.b6cf	85 33		sta $33		B6CF   STA $33
+.b6d1	90 02		bcc $b6d5	B6D1   BCC $B6D5
+.b6d3	e6 34		inc $34		B6D3   INC $34
+.b6d5	68		pla		B6D5   PLA
+.b6d6	86 22		stx $22		B6D6   STX $22
+.b6d8	84 23		sty $23		B6D8   STY $23
+.b6da	60		rts		B6DA   RTS
+.b6db	c4 18		cpy $18		B6DB   CPY $18
+.b6dd	d0 0c		bne $b6eb	B6DD   BNE $B6EB
+.b6df	c5 17		cmp $17		B6DF   CMP $17
+.b6e1	d0 08		bne $b6eb	B6E1   BNE $B6EB
+.b6e3	85 16		sta $16		B6E3   STA $16
+.b6e5	e9 03		sbc #$03	B6E5   SBC #$03
+.b6e7	85 17		sta $17		B6E7   STA $17
+.b6e9	a0 00		ldy #$00	B6E9   LDY #$00
+.b6eb	60		rts		B6EB   RTS
+.b6ec	20 a1 b7	jsr $b7a1	B6EC   JSR $B7A1
+.b6ef	8a		txa		B6EF   TXA
+.b6f0	48		pha		B6F0   PHA
+.b6f1	a9 01		lda #$01	B6F1   LDA #$01
+.b6f3	20 7d b4	jsr $b47d	B6F3   JSR $B47D
+.b6f6	68		pla		B6F6   PLA
+.b6f7	a0 00		ldy #$00	B6F7   LDY #$00
+.b6f9	91 62		sta ($62),y	B6F9   STA ($62),Y
+.b6fb	68		pla		B6FB   PLA
+.b6fc	68		pla		B6FC   PLA
+.b6fd	4c ca b4	jmp $b4ca	B6FD   JMP $B4CA
+.b700	20 61 b7	jsr $b761	B700   JSR $B761
+.b703	d1 50		cmp ($50),y	B703   CMP ($50),Y
+.b705	98		tya		B705   TYA
+.b706	90 04		bcc $b70c	B706   BCC $B70C
+.b708	b1 50		lda ($50),y	B708   LDA ($50),Y
+.b70a	aa		tax		B70A   TAX
+.b70b	98		tya		B70B   TYA
+.b70c	48		pha		B70C   PHA
+.b70d	8a		txa		B70D   TXA
+.b70e	48		pha		B70E   PHA
+.b70f	20 7d b4	jsr $b47d	B70F   JSR $B47D
+.b712	a5 50		lda $50		B712   LDA $50
+.b714	a4 51		ldy $51		B714   LDY $51
+.b716	20 aa b6	jsr $b6aa	B716   JSR $B6AA
+.b719	68		pla		B719   PLA
+.b71a	a8		tay		B71A   TAY
+.b71b	68		pla		B71B   PLA
+.b71c	18		clc		B71C   CLC
+.b71d	65 22		adc $22		B71D   ADC $22
+.b71f	85 22		sta $22		B71F   STA $22
+.b721	90 02		bcc $b725	B721   BCC $B725
+.b723	e6 23		inc $23		B723   INC $23
+.b725	98		tya		B725   TYA
+.b726	20 8c b6	jsr $b68c	B726   JSR $B68C
+.b729	4c ca b4	jmp $b4ca	B729   JMP $B4CA
+.b72c	20 61 b7	jsr $b761	B72C   JSR $B761
+.b72f	18		clc		B72F   CLC
+.b730	f1 50		sbc ($50),y	B730   SBC ($50),Y
+.b732	49 ff		eor #$ff	B732   EOR #$FF
+.b734	4c 06 b7	jmp $b706	B734   JMP $B706
+.b737	a9 ff		lda #$ff	B737   LDA #$FF   ; default 3 parameter
+.b739	85 65		sta $65		B739   STA $65
+.b73b	20 79 00	jsr $0079	B73B   JSR $0079
+.b73e	c9 29		cmp #$29	B73E   CMP #$29   ; )
+.b740	f0 06		beq $b748	B740   BEQ $B748
+.b742	20 fd ae	jsr $aefd	B742   JSR $AEFD
+.b745	20 9e b7	jsr $b79e	B745   JSR $B79E
+.b748	20 61 b7	jsr $b761	B748   JSR $B761
+.b74b	f0 4b		beq $b798	B74B   BEQ $B798
+.b74d	ca		dex		B74D   DEX
+.b74e	8a		txa		B74E   TXA
+.b74f	48		pha		B74F   PHA
+.b750	18		clc		B750   CLC
+.b751	a2 00		ldx #$00	B751   LDX #$00
+.b753	f1 50		sbc ($50),y	B753   SBC ($50),Y
+.b755	b0 b6		bcs $b70d	B755   BCS $B70D
+.b757	49 ff		eor #$ff	B757   EOR #$FF
+.b759	c5 65		cmp $65		B759   CMP $65
+.b75b	90 b1		bcc $b70e	B75B   BCC $B70E
+.b75d	a5 65		lda $65		B75D   LDA $65
+.b75f	b0 ad		bcs $b70e	B75F   BCS $B70E
+.b761	20 f7 ae	jsr $aef7	B761   JSR $AEF7
+.b764	68		pla		B764   PLA
+.b765	a8		tay		B765   TAY
+.b766	68		pla		B766   PLA
+.b767	85 55		sta $55		B767   STA $55
+.b769	68		pla		B769   PLA
+.b76a	68		pla		B76A   PLA
+.b76b	68		pla		B76B   PLA
+.b76c	aa		tax		B76C   TAX
+.b76d	68		pla		B76D   PLA
+.b76e	85 50		sta $50		B76E   STA $50
+.b770	68		pla		B770   PLA
+.b771	85 51		sta $51		B771   STA $51
+.b773	a5 55		lda $55		B773   LDA $55
+.b775	48		pha		B775   PHA
+.b776	98		tya		B776   TYA
+.b777	48		pha		B777   PHA
+.b778	a0 00		ldy #$00	B778   LDY #$00
+.b77a	8a		txa		B77A   TXA
+.b77b	60		rts		B77B   RTS
+.b77c	20 82 b7	jsr $b782	B77C   JSR $B782
+.b77f	4c a2 b3	jmp $b3a2	B77F   JMP $B3A2
+.b782	20 a3 b6	jsr $b6a3	B782   JSR $B6A3
+.b785	a2 00		ldx #$00	B785   LDX #$00
+.b787	86 0d		stx $0d		B787   STX $0D
+.b789	a8		tay		B789   TAY
+.b78a	60		rts		B78A   RTS
+.b78b	20 82 b7	jsr $b782	B78B   JSR $B782
+.b78e	f0 08		beq $b798	B78E   BEQ $B798
+.b790	a0 00		ldy #$00	B790   LDY #$00
+.b792	b1 22		lda ($22),y	B792   LDA ($22),Y
+.b794	a8		tay		B794   TAY
+.b795	4c a2 b3	jmp $b3a2	B795   JMP $B3A2
+.b798	4c 48 b2	jmp $b248	B798   JMP $B248
+.b79b	20 73 00	jsr $0073	B79B   JSR $0073
+.b79e	20 8a ad	jsr $ad8a	B79E   JSR $AD8A
+.b7a1	20 b8 b1	jsr $b1b8	B7A1   JSR $B1B8
+.b7a4	a6 64		ldx $64		B7A4   LDX $64
+.b7a6	d0 f0		bne $b798	B7A6   BNE $B798
+.b7a8	a6 65		ldx $65		B7A8   LDX $65
+.b7aa	4c 79 00	jmp $0079	B7AA   JMP $0079
+.b7ad	20 82 b7	jsr $b782	B7AD   JSR $B782
+.b7b0	d0 03		bne $b7b5	B7B0   BNE $B7B5
+.b7b2	4c f7 b8	jmp $b8f7	B7B2   JMP $B8F7
+.b7b5	a6 7a		ldx $7a		B7B5   LDX $7A
+.b7b7	a4 7b		ldy $7b		B7B7   LDY $7B
+.b7b9	86 71		stx $71		B7B9   STX $71
+.b7bb	84 72		sty $72		B7BB   STY $72
+.b7bd	a6 22		ldx $22		B7BD   LDX $22
+.b7bf	86 7a		stx $7a		B7BF   STX $7A
+.b7c1	18		clc		B7C1   CLC
+.b7c2	65 22		adc $22		B7C2   ADC $22
+.b7c4	85 24		sta $24		B7C4   STA $24
+.b7c6	a6 23		ldx $23		B7C6   LDX $23
+.b7c8	86 7b		stx $7b		B7C8   STX $7B
+.b7ca	90 01		bcc $b7cd	B7CA   BCC $B7CD
+.b7cc	e8		inx		B7CC   INX
+.b7cd	86 25		stx $25		B7CD   STX $25
+.b7cf	a0 00		ldy #$00	B7CF   LDY #$00
+.b7d1	b1 24		lda ($24),y	B7D1   LDA ($24),Y
+.b7d3	48		pha		B7D3   PHA
+.b7d4	98		tya		B7D4   TYA
+.b7d5	91 24		sta ($24),y	B7D5   STA ($24),Y
+.b7d7	20 79 00	jsr $0079	B7D7   JSR $0079
+.b7da	20 f3 bc	jsr $bcf3	B7DA   JSR $BCF3
+.b7dd	68		pla		B7DD   PLA
+.b7de	a0 00		ldy #$00	B7DE   LDY #$00
+.b7e0	91 24		sta ($24),y	B7E0   STA ($24),Y
+.b7e2	a6 71		ldx $71		B7E2   LDX $71
+.b7e4	a4 72		ldy $72		B7E4   LDY $72
+.b7e6	86 7a		stx $7a		B7E6   STX $7A
+.b7e8	84 7b		sty $7b		B7E8   STY $7B
+.b7ea	60		rts		B7EA   RTS
+.b7eb	20 8a ad	jsr $ad8a	B7EB   JSR $AD8A
+.b7ee	20 f7 b7	jsr $b7f7	B7EE   JSR $B7F7
+.b7f1	20 fd ae	jsr $aefd	B7F1   JSR $AEFD
+.b7f4	4c 9e b7	jmp $b79e	B7F4   JMP $B79E
+.b7f7	a5 66		lda $66		B7F7   LDA $66
+.b7f9	30 9d		bmi $b798	B7F9   BMI $B798
+.b7fb	a5 61		lda $61		B7FB   LDA $61
+.b7fd	c9 91		cmp #$91	B7FD   CMP #$91
+.b7ff	b0 97		bcs $b798	B7FF   BCS $B798
+.b801	20 9b bc	jsr $bc9b	B801   JSR $BC9B
+.b804	a5 64		lda $64		B804   LDA $64
+.b806	a4 65		ldy $65		B806   LDY $65
+.b808	84 14		sty $14		B808   STY $14
+.b80a	85 15		sta $15		B80A   STA $15
+.b80c	60		rts		B80C   RTS
+.b80d	a5 15		lda $15		B80D   LDA $15
+.b80f	48		pha		B80F   PHA
+.b810	a5 14		lda $14		B810   LDA $14
+.b812	48		pha		B812   PHA
+.b813	20 f7 b7	jsr $b7f7	B813   JSR $B7F7
+.b816	a0 00		ldy #$00	B816   LDY #$00
+.b818	b1 14		lda ($14),y	B818   LDA ($14),Y
+.b81a	a8		tay		B81A   TAY
+.b81b	68		pla		B81B   PLA
+.b81c	85 14		sta $14		B81C   STA $14
+.b81e	68		pla		B81E   PLA
+.b81f	85 15		sta $15		B81F   STA $15
+.b821	4c a2 b3	jmp $b3a2	B821   JMP $B3A2
+.b824	20 eb b7	jsr $b7eb	B824   JSR $B7EB
+.b827	8a		txa		B827   TXA
+.b828	a0 00		ldy #$00	B828   LDY #$00
+.b82a	91 14		sta ($14),y	B82A   STA ($14),Y
+.b82c	60		rts		B82C   RTS
+.b82d	20 eb b7	jsr $b7eb	B82D   JSR $B7EB
+.b830	86 49		stx $49		B830   STX $49
+.b832	a2 00		ldx #$00	B832   LDX #$00
+.b834	20 79 00	jsr $0079	B834   JSR $0079
+.b837	f0 03		beq $b83c	B837   BEQ $B83C
+.b839	20 f1 b7	jsr $b7f1	B839   JSR $B7F1
+.b83c	86 4a		stx $4a		B83C   STX $4A
+.b83e	a0 00		ldy #$00	B83E   LDY #$00
+.b840	b1 14		lda ($14),y	B840   LDA ($14),Y
+.b842	45 4a		eor $4a		B842   EOR $4A
+.b844	25 49		and $49		B844   AND $49
+.b846	f0 f8		beq $b840	B846   BEQ $B840
+.b848	60		rts		B848   RTS
+.b849	a9 11		lda #$11	B849   LDA #$11   ; low  BF11
+.b84b	a0 bf		ldy #$bf	B84B   LDY #$BF   ; high BF11
+.b84d	4c 67 b8	jmp $b867	B84D   JMP $B867
+.b850	20 8c ba	jsr $ba8c	B850   JSR $BA8C
+.b853	a5 66		lda $66		B853   LDA $66
+.b855	49 ff		eor #$ff	B855   EOR #$FF
+.b857	85 66		sta $66		B857   STA $66
+.b859	45 6e		eor $6e		B859   EOR $6E
+.b85b	85 6f		sta $6f		B85B   STA $6F
+.b85d	a5 61		lda $61		B85D   LDA $61
+.b85f	4c 6a b8	jmp $b86a	B85F   JMP $B86A
+.b862	20 99 b9	jsr $b999	B862   JSR $B999
+.b865	90 3c		bcc $b8a3	B865   BCC $B8A3
+.b867	20 8c ba	jsr $ba8c	B867   JSR $BA8C
+.b86a	d0 03		bne $b86f	B86A   BNE $B86F
+.b86c	4c fc bb	jmp $bbfc	B86C   JMP $BBFC
+.b86f	a6 70		ldx $70		B86F   LDX $70
+.b871	86 56		stx $56		B871   STX $56
+.b873	a2 69		ldx #$69	B873   LDX #$69
+.b875	a5 69		lda $69		B875   LDA $69
+.b877	a8		tay		B877   TAY
+.b878	f0 ce		beq $b848	B878   BEQ $B848
+.b87a	38		sec		B87A   SEC
+.b87b	e5 61		sbc $61		B87B   SBC $61
+.b87d	f0 24		beq $b8a3	B87D   BEQ $B8A3
+.b87f	90 12		bcc $b893	B87F   BCC $B893
+.b881	84 61		sty $61		B881   STY $61
+.b883	a4 6e		ldy $6e		B883   LDY $6E
+.b885	84 66		sty $66		B885   STY $66
+.b887	49 ff		eor #$ff	B887   EOR #$FF
+.b889	69 00		adc #$00	B889   ADC #$00
+.b88b	a0 00		ldy #$00	B88B   LDY #$00
+.b88d	84 56		sty $56		B88D   STY $56
+.b88f	a2 61		ldx #$61	B88F   LDX #$61
+.b891	d0 04		bne $b897	B891   BNE $B897
+.b893	a0 00		ldy #$00	B893   LDY #$00
+.b895	84 70		sty $70		B895   STY $70
+.b897	c9 f9		cmp #$f9	B897   CMP #$F9
+.b899	30 c7		bmi $b862	B899   BMI $B862
+.b89b	a8		tay		B89B   TAY
+.b89c	a5 70		lda $70		B89C   LDA $70
+.b89e	56 01		lsr $01,x	B89E   LSR $01,X
+.b8a0	20 b0 b9	jsr $b9b0	B8A0   JSR $B9B0
+.b8a3	24 6f		bit $6f		B8A3   BIT $6F
+.b8a5	10 57		bpl $b8fe	B8A5   BPL $B8FE
+.b8a7	a0 61		ldy #$61	B8A7   LDY #$61
+.b8a9	e0 69		cpx #$69	B8A9   CPX #$69
+.b8ab	f0 02		beq $b8af	B8AB   BEQ $B8AF
+.b8ad	a0 69		ldy #$69	B8AD   LDY #$69
+.b8af	38		sec		B8AF   SEC
+.b8b0	49 ff		eor #$ff	B8B0   EOR #$FF
+.b8b2	65 56		adc $56		B8B2   ADC $56
+.b8b4	85 70		sta $70		B8B4   STA $70
+.b8b6	b9 04 00	lda $0004,y	B8B6   LDA $0004,Y
+.b8b9	f5 04		sbc $04,x	B8B9   SBC $04,X
+.b8bb	85 65		sta $65		B8BB   STA $65
+.b8bd	b9 03 00	lda $0003,y	B8BD   LDA $0003,Y
+.b8c0	f5 03		sbc $03,x	B8C0   SBC $03,X
+.b8c2	85 64		sta $64		B8C2   STA $64
+.b8c4	b9 02 00	lda $0002,y	B8C4   LDA $0002,Y
+.b8c7	f5 02		sbc $02,x	B8C7   SBC $02,X
+.b8c9	85 63		sta $63		B8C9   STA $63
+.b8cb	b9 01 00	lda $0001,y	B8CB   LDA $0001,Y
+.b8ce	f5 01		sbc $01,x	B8CE   SBC $01,X
+.b8d0	85 62		sta $62		B8D0   STA $62
+.b8d2	b0 03		bcs $b8d7	B8D2   BCS $B8D7
+.b8d4	20 47 b9	jsr $b947	B8D4   JSR $B947
+.b8d7	a0 00		ldy #$00	B8D7   LDY #$00
+.b8d9	98		tya		B8D9   TYA
+.b8da	18		clc		B8DA   CLC
+.b8db	a6 62		ldx $62		B8DB   LDX $62
+.b8dd	d0 4a		bne $b929	B8DD   BNE $B929
+.b8df	a6 63		ldx $63		B8DF   LDX $63
+.b8e1	86 62		stx $62		B8E1   STX $62
+.b8e3	a6 64		ldx $64		B8E3   LDX $64
+.b8e5	86 63		stx $63		B8E5   STX $63
+.b8e7	a6 65		ldx $65		B8E7   LDX $65
+.b8e9	86 64		stx $64		B8E9   STX $64
+.b8eb	a6 70		ldx $70		B8EB   LDX $70
+.b8ed	86 65		stx $65		B8ED   STX $65
+.b8ef	84 70		sty $70		B8EF   STY $70
+.b8f1	69 08		adc #$08	B8F1   ADC #$08
+.b8f3	c9 20		cmp #$20	B8F3   CMP #$20
+.b8f5	d0 e4		bne $b8db	B8F5   BNE $B8DB
+.b8f7	a9 00		lda #$00	B8F7   LDA #$00
+.b8f9	85 61		sta $61		B8F9   STA $61
+.b8fb	85 66		sta $66		B8FB   STA $66
+.b8fd	60		rts		B8FD   RTS
+.b8fe	65 56		adc $56		B8FE   ADC $56
+.b900	85 70		sta $70		B900   STA $70
+.b902	a5 65		lda $65		B902   LDA $65
+.b904	65 6d		adc $6d		B904   ADC $6D
+.b906	85 65		sta $65		B906   STA $65
+.b908	a5 64		lda $64		B908   LDA $64
+.b90a	65 6c		adc $6c		B90A   ADC $6C
+.b90c	85 64		sta $64		B90C   STA $64
+.b90e	a5 63		lda $63		B90E   LDA $63
+.b910	65 6b		adc $6b		B910   ADC $6B
+.b912	85 63		sta $63		B912   STA $63
+.b914	a5 62		lda $62		B914   LDA $62
+.b916	65 6a		adc $6a		B916   ADC $6A
+.b918	85 62		sta $62		B918   STA $62
+.b91a	4c 36 b9	jmp $b936	B91A   JMP $B936
+.b91d	69 01		adc #$01	B91D   ADC #$01
+.b91f	06 70		asl $70		B91F   ASL $70
+.b921	26 65		rol $65		B921   ROL $65
+.b923	26 64		rol $64		B923   ROL $64
+.b925	26 63		rol $63		B925   ROL $63
+.b927	26 62		rol $62		B927   ROL $62
+.b929	10 f2		bpl $b91d	B929   BPL $B91D
+.b92b	38		sec		B92B   SEC
+.b92c	e5 61		sbc $61		B92C   SBC $61
+.b92e	b0 c7		bcs $b8f7	B92E   BCS $B8F7
+.b930	49 ff		eor #$ff	B930   EOR #$FF
+.b932	69 01		adc #$01	B932   ADC #$01
+.b934	85 61		sta $61		B934   STA $61
+.b936	90 0e		bcc $b946	B936   BCC $B946
+.b938	e6 61		inc $61		B938   INC $61
+.b93a	f0 42		beq $b97e	B93A   BEQ $B97E
+.b93c	66 62		ror $62		B93C   ROR $62
+.b93e	66 63		ror $63		B93E   ROR $63
+.b940	66 64		ror $64		B940   ROR $64
+.b942	66 65		ror $65		B942   ROR $65
+.b944	66 70		ror $70		B944   ROR $70
+.b946	60		rts		B946   RTS
+.b947	a5 66		lda $66		B947   LDA $66
+.b949	49 ff		eor #$ff	B949   EOR #$FF
+.b94b	85 66		sta $66		B94B   STA $66
+.b94d	a5 62		lda $62		B94D   LDA $62
+.b94f	49 ff		eor #$ff	B94F   EOR #$FF
+.b951	85 62		sta $62		B951   STA $62
+.b953	a5 63		lda $63		B953   LDA $63
+.b955	49 ff		eor #$ff	B955   EOR #$FF
+.b957	85 63		sta $63		B957   STA $63
+.b959	a5 64		lda $64		B959   LDA $64
+.b95b	49 ff		eor #$ff	B95B   EOR #$FF
+.b95d	85 64		sta $64		B95D   STA $64
+.b95f	a5 65		lda $65		B95F   LDA $65
+.b961	49 ff		eor #$ff	B961   EOR #$FF
+.b963	85 65		sta $65		B963   STA $65
+.b965	a5 70		lda $70		B965   LDA $70
+.b967	49 ff		eor #$ff	B967   EOR #$FF
+.b969	85 70		sta $70		B969   STA $70
+.b96b	e6 70		inc $70		B96B   INC $70
+.b96d	d0 0e		bne $b97d	B96D   BNE $B97D
+.b96f	e6 65		inc $65		B96F   INC $65
+.b971	d0 0a		bne $b97d	B971   BNE $B97D
+.b973	e6 64		inc $64		B973   INC $64
+.b975	d0 06		bne $b97d	B975   BNE $B97D
+.b977	e6 63		inc $63		B977   INC $63
+.b979	d0 02		bne $b97d	B979   BNE $B97D
+.b97b	e6 62		inc $62		B97B   INC $62
+.b97d	60		rts		B97D   RTS
+.b97e	a2 0f		ldx #$0f	B97E   LDX #$0F   ; error number
+.b980	4c 37 a4	jmp $a437	B980   JMP $A437
+.b983	a2 25		ldx #$25	B983   LDX #$25
+.b985	b4 04		ldy $04,x	B985   LDY $04,X
+.b987	84 70		sty $70		B987   STY $70
+.b989	b4 03		ldy $03,x	B989   LDY $03,X
+.b98b	94 04		sty $04,x	B98B   STY $04,X
+.b98d	b4 02		ldy $02,x	B98D   LDY $02,X
+.b98f	94 03		sty $03,x	B98F   STY $03,X
+.b991	b4 01		ldy $01,x	B991   LDY $01,X
+.b993	94 02		sty $02,x	B993   STY $02,X
+.b995	a4 68		ldy $68		B995   LDY $68
+.b997	94 01		sty $01,x	B997   STY $01,X
+.b999	69 08		adc #$08	B999   ADC #$08
+.b99b	30 e8		bmi $b985	B99B   BMI $B985
+.b99d	f0 e6		beq $b985	B99D   BEQ $B985
+.b99f	e9 08		sbc #$08	B99F   SBC #$08
+.b9a1	a8		tay		B9A1   TAY
+.b9a2	a5 70		lda $70		B9A2   LDA $70
+.b9a4	b0 14		bcs $b9ba	B9A4   BCS $B9BA
+.b9a6	16 01		asl $01,x	B9A6   ASL $01,X
+.b9a8	90 02		bcc $b9ac	B9A8   BCC $B9AC
+.b9aa	f6 01		inc $01,x	B9AA   INC $01,X
+.b9ac	76 01		ror $01,x	B9AC   ROR $01,X
+.b9ae	76 01		ror $01,x	B9AE   ROR $01,X
+.b9b0	76 02		ror $02,x	B9B0   ROR $02,X
+.b9b2	76 03		ror $03,x	B9B2   ROR $03,X
+.b9b4	76 04		ror $04,x	B9B4   ROR $04,X
+.b9b6	6a		ror a		B9B6   ROR
+.b9b7	c8		iny		B9B7   INY
+.b9b8	d0 ec		bne $b9a6	B9B8   BNE $B9A6
+.b9ba	18		clc		B9BA   CLC
+.b9bb	60		rts		B9BB   RTS
+>b9bc	81 00 00 00 00			B9BC   .byte $81,$00,$00,$00,$00
+>b9c1	03				B9C1   .byte $03   ; degree 4
+>b9c2	7f 5e 56 cb 79			B9C2   .byte $7F,$5E,$56,$CB,$79
+>b9c7	80 13 9b 0b 64			B9C7   .byte $80,$13,$9B,$0B,$64
+>b9cc	80 76 38 93 16			B9CC   .byte $80,$76,$38,$93,$16
+>b9d1	82 38 aa 3b 20			B9D1   .byte $82,$38,$AA,$3B,$20
+>b9d6	80 35 04 f3 34			B9D6   .byte $80,$35,$04,$F3,$34
+>b9db	81 35 04 f3 34			B9DB   .byte $81,$35,$04,$F3,$34
+>b9e0	80 80 00 00 00			B9E0   .byte $80,$80,$00,$00,$00
+>b9e5	80 31 72 17 f8			B9E5   .byte $80,$31,$72,$17,$F8
+.b9ea	20 2b bc	jsr $bc2b	B9EA   JSR $BC2B
+.b9ed	f0 02		beq $b9f1	B9ED   BEQ $B9F1
+.b9ef	10 03		bpl $b9f4	B9EF   BPL $B9F4
+.b9f1	4c 48 b2	jmp $b248	B9F1   JMP $B248
+.b9f4	a5 61		lda $61		B9F4   LDA $61
+.b9f6	e9 7f		sbc #$7f	B9F6   SBC #$7F
+.b9f8	48		pha		B9F8   PHA
+.b9f9	a9 80		lda #$80	B9F9   LDA #$80
+.b9fb	85 61		sta $61		B9FB   STA $61
+.b9fd	a9 d6		lda #$d6	B9FD   LDA #$D6   ; low  B9D6
+.b9ff	a0 b9		ldy #$b9	B9FF   LDY #$B9   ; high B9D6
+.ba01	20 67 b8	jsr $b867	BA01   JSR $B867
+.ba04	a9 db		lda #$db	BA04   LDA #$DB   ; low  B9DB
+.ba06	a0 b9		ldy #$b9	BA06   LDY #$B9   ; high B9DB
+.ba08	20 0f bb	jsr $bb0f	BA08   JSR $BB0F
+.ba0b	a9 bc		lda #$bc	BA0B   LDA #$BC   ; low  B9BC
+.ba0d	a0 b9		ldy #$b9	BA0D   LDY #$B9   ; high B9BC
+.ba0f	20 50 b8	jsr $b850	BA0F   JSR $B850
+.ba12	a9 c1		lda #$c1	BA12   LDA #$C1   ; low  B9C1
+.ba14	a0 b9		ldy #$b9	BA14   LDY #$B9   ; high B9C1
+.ba16	20 43 e0	jsr $e043	BA16   JSR $E043
+.ba19	a9 e0		lda #$e0	BA19   LDA #$E0   ; low  B9E0
+.ba1b	a0 b9		ldy #$b9	BA1B   LDY #$B9   ; high B9E0
+.ba1d	20 67 b8	jsr $b867	BA1D   JSR $B867
+.ba20	68		pla		BA20   PLA
+.ba21	20 7e bd	jsr $bd7e	BA21   JSR $BD7E
+.ba24	a9 e5		lda #$e5	BA24   LDA #$E5   ; low  B9E5
+.ba26	a0 b9		ldy #$b9	BA26   LDY #$B9   ; high B9E5
+.ba28	20 8c ba	jsr $ba8c	BA28   JSR $BA8C
+.ba2b	d0 03		bne $ba30	BA2B   BNE $BA30
+.ba2d	4c 8b ba	jmp $ba8b	BA2D   JMP $BA8B
+.ba30	20 b7 ba	jsr $bab7	BA30   JSR $BAB7
+.ba33	a9 00		lda #$00	BA33   LDA #$00
+.ba35	85 26		sta $26		BA35   STA $26
+.ba37	85 27		sta $27		BA37   STA $27
+.ba39	85 28		sta $28		BA39   STA $28
+.ba3b	85 29		sta $29		BA3B   STA $29
+.ba3d	a5 70		lda $70		BA3D   LDA $70
+.ba3f	20 59 ba	jsr $ba59	BA3F   JSR $BA59
+.ba42	a5 65		lda $65		BA42   LDA $65
+.ba44	20 59 ba	jsr $ba59	BA44   JSR $BA59
+.ba47	a5 64		lda $64		BA47   LDA $64
+.ba49	20 59 ba	jsr $ba59	BA49   JSR $BA59
+.ba4c	a5 63		lda $63		BA4C   LDA $63
+.ba4e	20 59 ba	jsr $ba59	BA4E   JSR $BA59
+.ba51	a5 62		lda $62		BA51   LDA $62
+.ba53	20 5e ba	jsr $ba5e	BA53   JSR $BA5E
+.ba56	4c 8f bb	jmp $bb8f	BA56   JMP $BB8F
+.ba59	d0 03		bne $ba5e	BA59   BNE $BA5E
+.ba5b	4c 83 b9	jmp $b983	BA5B   JMP $B983
+.ba5e	4a		lsr a		BA5E   LSR
+.ba5f	09 80		ora #$80	BA5F   ORA #$80
+.ba61	a8		tay		BA61   TAY
+.ba62	90 19		bcc $ba7d	BA62   BCC $BA7D
+.ba64	18		clc		BA64   CLC
+.ba65	a5 29		lda $29		BA65   LDA $29
+.ba67	65 6d		adc $6d		BA67   ADC $6D
+.ba69	85 29		sta $29		BA69   STA $29
+.ba6b	a5 28		lda $28		BA6B   LDA $28
+.ba6d	65 6c		adc $6c		BA6D   ADC $6C
+.ba6f	85 28		sta $28		BA6F   STA $28
+.ba71	a5 27		lda $27		BA71   LDA $27
+.ba73	65 6b		adc $6b		BA73   ADC $6B
+.ba75	85 27		sta $27		BA75   STA $27
+.ba77	a5 26		lda $26		BA77   LDA $26
+.ba79	65 6a		adc $6a		BA79   ADC $6A
+.ba7b	85 26		sta $26		BA7B   STA $26
+.ba7d	66 26		ror $26		BA7D   ROR $26
+.ba7f	66 27		ror $27		BA7F   ROR $27
+.ba81	66 28		ror $28		BA81   ROR $28
+.ba83	66 29		ror $29		BA83   ROR $29
+.ba85	66 70		ror $70		BA85   ROR $70
+.ba87	98		tya		BA87   TYA
+.ba88	4a		lsr a		BA88   LSR
+.ba89	d0 d6		bne $ba61	BA89   BNE $BA61
+.ba8b	60		rts		BA8B   RTS
+.ba8c	85 22		sta $22		BA8C   STA $22
+.ba8e	84 23		sty $23		BA8E   STY $23
+.ba90	a0 04		ldy #$04	BA90   LDY #$04
+.ba92	b1 22		lda ($22),y	BA92   LDA ($22),Y
+.ba94	85 6d		sta $6d		BA94   STA $6D
+.ba96	88		dey		BA96   DEY
+.ba97	b1 22		lda ($22),y	BA97   LDA ($22),Y
+.ba99	85 6c		sta $6c		BA99   STA $6C
+.ba9b	88		dey		BA9B   DEY
+.ba9c	b1 22		lda ($22),y	BA9C   LDA ($22),Y
+.ba9e	85 6b		sta $6b		BA9E   STA $6B
+.baa0	88		dey		BAA0   DEY
+.baa1	b1 22		lda ($22),y	BAA1   LDA ($22),Y
+.baa3	85 6e		sta $6e		BAA3   STA $6E
+.baa5	45 66		eor $66		BAA5   EOR $66
+.baa7	85 6f		sta $6f		BAA7   STA $6F
+.baa9	a5 6e		lda $6e		BAA9   LDA $6E
+.baab	09 80		ora #$80	BAAB   ORA #$80
+.baad	85 6a		sta $6a		BAAD   STA $6A
+.baaf	88		dey		BAAF   DEY
+.bab0	b1 22		lda ($22),y	BAB0   LDA ($22),Y
+.bab2	85 69		sta $69		BAB2   STA $69
+.bab4	a5 61		lda $61		BAB4   LDA $61
+.bab6	60		rts		BAB6   RTS
+.bab7	a5 69		lda $69		BAB7   LDA $69
+.bab9	f0 1f		beq $bada	BAB9   BEQ $BADA
+.babb	18		clc		BABB   CLC
+.babc	65 61		adc $61		BABC   ADC $61
+.babe	90 04		bcc $bac4	BABE   BCC $BAC4
+.bac0	30 1d		bmi $badf	BAC0   BMI $BADF
+.bac2	18		clc		BAC2   CLC
+>bac3	2c				BAC3   .byte $2C
+.bac4	10 14		bpl $bada	BAC4   BPL $BADA
+.bac6	69 80		adc #$80	BAC6   ADC #$80
+.bac8	85 61		sta $61		BAC8   STA $61
+.baca	d0 03		bne $bacf	BACA   BNE $BACF
+.bacc	4c fb b8	jmp $b8fb	BACC   JMP $B8FB
+.bacf	a5 6f		lda $6f		BACF   LDA $6F
+.bad1	85 66		sta $66		BAD1   STA $66
+.bad3	60		rts		BAD3   RTS
+.bad4	a5 66		lda $66		BAD4   LDA $66
+.bad6	49 ff		eor #$ff	BAD6   EOR #$FF
+.bad8	30 05		bmi $badf	BAD8   BMI $BADF
+.bada	68		pla		BADA   PLA
+.badb	68		pla		BADB   PLA
+.badc	4c f7 b8	jmp $b8f7	BADC   JMP $B8F7
+.badf	4c 7e b9	jmp $b97e	BADF   JMP $B97E
+.bae2	20 0c bc	jsr $bc0c	BAE2   JSR $BC0C
+.bae5	aa		tax		BAE5   TAX
+.bae6	f0 10		beq $baf8	BAE6   BEQ $BAF8
+.bae8	18		clc		BAE8   CLC
+.bae9	69 02		adc #$02	BAE9   ADC #$02
+.baeb	b0 f2		bcs $badf	BAEB   BCS $BADF
+.baed	a2 00		ldx #$00	BAED   LDX #$00
+.baef	86 6f		stx $6f		BAEF   STX $6F
+.baf1	20 77 b8	jsr $b877	BAF1   JSR $B877
+.baf4	e6 61		inc $61		BAF4   INC $61
+.baf6	f0 e7		beq $badf	BAF6   BEQ $BADF
+.baf8	60		rts		BAF8   RTS
+>baf9	84 20 00 00 00			BAF9   .byte $84,$20,$00,$00,$00
+.bafe	20 0c bc	jsr $bc0c	BAFE   JSR $BC0C
+.bb01	a9 f9		lda #$f9	BB01   LDA #$F9   ; low  BAF9
+.bb03	a0 ba		ldy #$ba	BB03   LDY #$BA   ; high BAF9
+.bb05	a2 00		ldx #$00	BB05   LDX #$00
+.bb07	86 6f		stx $6f		BB07   STX $6F
+.bb09	20 a2 bb	jsr $bba2	BB09   JSR $BBA2
+.bb0c	4c 12 bb	jmp $bb12	BB0C   JMP $BB12
+.bb0f	20 8c ba	jsr $ba8c	BB0F   JSR $BA8C
+.bb12	f0 76		beq $bb8a	BB12   BEQ $BB8A
+.bb14	20 1b bc	jsr $bc1b	BB14   JSR $BC1B
+.bb17	a9 00		lda #$00	BB17   LDA #$00
+.bb19	38		sec		BB19   SEC
+.bb1a	e5 61		sbc $61		BB1A   SBC $61
+.bb1c	85 61		sta $61		BB1C   STA $61
+.bb1e	20 b7 ba	jsr $bab7	BB1E   JSR $BAB7
+.bb21	e6 61		inc $61		BB21   INC $61
+.bb23	f0 ba		beq $badf	BB23   BEQ $BADF
+.bb25	a2 fc		ldx #$fc	BB25   LDX #$FC
+.bb27	a9 01		lda #$01	BB27   LDA #$01
+.bb29	a4 6a		ldy $6a		BB29   LDY $6A
+.bb2b	c4 62		cpy $62		BB2B   CPY $62
+.bb2d	d0 10		bne $bb3f	BB2D   BNE $BB3F
+.bb2f	a4 6b		ldy $6b		BB2F   LDY $6B
+.bb31	c4 63		cpy $63		BB31   CPY $63
+.bb33	d0 0a		bne $bb3f	BB33   BNE $BB3F
+.bb35	a4 6c		ldy $6c		BB35   LDY $6C
+.bb37	c4 64		cpy $64		BB37   CPY $64
+.bb39	d0 04		bne $bb3f	BB39   BNE $BB3F
+.bb3b	a4 6d		ldy $6d		BB3B   LDY $6D
+.bb3d	c4 65		cpy $65		BB3D   CPY $65
+.bb3f	08		php		BB3F   PHP
+.bb40	2a		rol a		BB40   ROL
+.bb41	90 09		bcc $bb4c	BB41   BCC $BB4C
+.bb43	e8		inx		BB43   INX
+.bb44	95 29		sta $29,x	BB44   STA $29,X
+.bb46	f0 32		beq $bb7a	BB46   BEQ $BB7A
+.bb48	10 34		bpl $bb7e	BB48   BPL $BB7E
+.bb4a	a9 01		lda #$01	BB4A   LDA #$01
+.bb4c	28		plp		BB4C   PLP
+.bb4d	b0 0e		bcs $bb5d	BB4D   BCS $BB5D
+.bb4f	06 6d		asl $6d		BB4F   ASL $6D
+.bb51	26 6c		rol $6c		BB51   ROL $6C
+.bb53	26 6b		rol $6b		BB53   ROL $6B
+.bb55	26 6a		rol $6a		BB55   ROL $6A
+.bb57	b0 e6		bcs $bb3f	BB57   BCS $BB3F
+.bb59	30 ce		bmi $bb29	BB59   BMI $BB29
+.bb5b	10 e2		bpl $bb3f	BB5B   BPL $BB3F
+.bb5d	a8		tay		BB5D   TAY
+.bb5e	a5 6d		lda $6d		BB5E   LDA $6D
+.bb60	e5 65		sbc $65		BB60   SBC $65
+.bb62	85 6d		sta $6d		BB62   STA $6D
+.bb64	a5 6c		lda $6c		BB64   LDA $6C
+.bb66	e5 64		sbc $64		BB66   SBC $64
+.bb68	85 6c		sta $6c		BB68   STA $6C
+.bb6a	a5 6b		lda $6b		BB6A   LDA $6B
+.bb6c	e5 63		sbc $63		BB6C   SBC $63
+.bb6e	85 6b		sta $6b		BB6E   STA $6B
+.bb70	a5 6a		lda $6a		BB70   LDA $6A
+.bb72	e5 62		sbc $62		BB72   SBC $62
+.bb74	85 6a		sta $6a		BB74   STA $6A
+.bb76	98		tya		BB76   TYA
+.bb77	4c 4f bb	jmp $bb4f	BB77   JMP $BB4F
+.bb7a	a9 40		lda #$40	BB7A   LDA #$40
+.bb7c	d0 ce		bne $bb4c	BB7C   BNE $BB4C
+.bb7e	0a		asl a		BB7E   ASL
+.bb7f	0a		asl a		BB7F   ASL
+.bb80	0a		asl a		BB80   ASL
+.bb81	0a		asl a		BB81   ASL
+.bb82	0a		asl a		BB82   ASL
+.bb83	0a		asl a		BB83   ASL
+.bb84	85 70		sta $70		BB84   STA $70
+.bb86	28		plp		BB86   PLP
+.bb87	4c 8f bb	jmp $bb8f	BB87   JMP $BB8F
+.bb8a	a2 14		ldx #$14	BB8A   LDX #$14   ; error number
+.bb8c	4c 37 a4	jmp $a437	BB8C   JMP $A437
+.bb8f	a5 26		lda $26		BB8F   LDA $26
+.bb91	85 62		sta $62		BB91   STA $62
+.bb93	a5 27		lda $27		BB93   LDA $27
+.bb95	85 63		sta $63		BB95   STA $63
+.bb97	a5 28		lda $28		BB97   LDA $28
+.bb99	85 64		sta $64		BB99   STA $64
+.bb9b	a5 29		lda $29		BB9B   LDA $29
+.bb9d	85 65		sta $65		BB9D   STA $65
+.bb9f	4c d7 b8	jmp $b8d7	BB9F   JMP $B8D7
+.bba2	85 22		sta $22		BBA2   STA $22
+.bba4	84 23		sty $23		BBA4   STY $23
+.bba6	a0 04		ldy #$04	BBA6   LDY #$04
+.bba8	b1 22		lda ($22),y	BBA8   LDA ($22),Y
+.bbaa	85 65		sta $65		BBAA   STA $65
+.bbac	88		dey		BBAC   DEY
+.bbad	b1 22		lda ($22),y	BBAD   LDA ($22),Y
+.bbaf	85 64		sta $64		BBAF   STA $64
+.bbb1	88		dey		BBB1   DEY
+.bbb2	b1 22		lda ($22),y	BBB2   LDA ($22),Y
+.bbb4	85 63		sta $63		BBB4   STA $63
+.bbb6	88		dey		BBB6   DEY
+.bbb7	b1 22		lda ($22),y	BBB7   LDA ($22),Y
+.bbb9	85 66		sta $66		BBB9   STA $66
+.bbbb	09 80		ora #$80	BBBB   ORA #$80
+.bbbd	85 62		sta $62		BBBD   STA $62
+.bbbf	88		dey		BBBF   DEY
+.bbc0	b1 22		lda ($22),y	BBC0   LDA ($22),Y
+.bbc2	85 61		sta $61		BBC2   STA $61
+.bbc4	84 70		sty $70		BBC4   STY $70
+.bbc6	60		rts		BBC6   RTS
+.bbc7	a2 5c		ldx #$5c	BBC7   LDX #$5C   ; low  005C
+>bbc9	2c				BBC9   .byte $2C
+.bbca	a2 57		ldx #$57	BBCA   LDX #$57   ; low  0057
+.bbcc	a0 00		ldy #$00	BBCC   LDY #$00   ; high 0057
+.bbce	f0 04		beq $bbd4	BBCE   BEQ $BBD4
+.bbd0	a6 49		ldx $49		BBD0   LDX $49
+.bbd2	a4 4a		ldy $4a		BBD2   LDY $4A
+.bbd4	20 1b bc	jsr $bc1b	BBD4   JSR $BC1B
+.bbd7	86 22		stx $22		BBD7   STX $22
+.bbd9	84 23		sty $23		BBD9   STY $23
+.bbdb	a0 04		ldy #$04	BBDB   LDY #$04
+.bbdd	a5 65		lda $65		BBDD   LDA $65
+.bbdf	91 22		sta ($22),y	BBDF   STA ($22),Y
+.bbe1	88		dey		BBE1   DEY
+.bbe2	a5 64		lda $64		BBE2   LDA $64
+.bbe4	91 22		sta ($22),y	BBE4   STA ($22),Y
+.bbe6	88		dey		BBE6   DEY
+.bbe7	a5 63		lda $63		BBE7   LDA $63
+.bbe9	91 22		sta ($22),y	BBE9   STA ($22),Y
+.bbeb	88		dey		BBEB   DEY
+.bbec	a5 66		lda $66		BBEC   LDA $66
+.bbee	09 7f		ora #$7f	BBEE   ORA #$7F
+.bbf0	25 62		and $62		BBF0   AND $62
+.bbf2	91 22		sta ($22),y	BBF2   STA ($22),Y
+.bbf4	88		dey		BBF4   DEY
+.bbf5	a5 61		lda $61		BBF5   LDA $61
+.bbf7	91 22		sta ($22),y	BBF7   STA ($22),Y
+.bbf9	84 70		sty $70		BBF9   STY $70
+.bbfb	60		rts		BBFB   RTS
+.bbfc	a5 6e		lda $6e		BBFC   LDA $6E
+.bbfe	85 66		sta $66		BBFE   STA $66
+.bc00	a2 05		ldx #$05	BC00   LDX #$05
+.bc02	b5 68		lda $68,x	BC02   LDA $68,X
+.bc04	95 60		sta $60,x	BC04   STA $60,X
+.bc06	ca		dex		BC06   DEX
+.bc07	d0 f9		bne $bc02	BC07   BNE $BC02
+.bc09	86 70		stx $70		BC09   STX $70
+.bc0b	60		rts		BC0B   RTS
+.bc0c	20 1b bc	jsr $bc1b	BC0C   JSR $BC1B
+.bc0f	a2 06		ldx #$06	BC0F   LDX #$06
+.bc11	b5 60		lda $60,x	BC11   LDA $60,X
+.bc13	95 68		sta $68,x	BC13   STA $68,X
+.bc15	ca		dex		BC15   DEX
+.bc16	d0 f9		bne $bc11	BC16   BNE $BC11
+.bc18	86 70		stx $70		BC18   STX $70
+.bc1a	60		rts		BC1A   RTS
+.bc1b	a5 61		lda $61		BC1B   LDA $61
+.bc1d	f0 fb		beq $bc1a	BC1D   BEQ $BC1A
+.bc1f	06 70		asl $70		BC1F   ASL $70
+.bc21	90 f7		bcc $bc1a	BC21   BCC $BC1A
+.bc23	20 6f b9	jsr $b96f	BC23   JSR $B96F
+.bc26	d0 f2		bne $bc1a	BC26   BNE $BC1A
+.bc28	4c 38 b9	jmp $b938	BC28   JMP $B938
+.bc2b	a5 61		lda $61		BC2B   LDA $61
+.bc2d	f0 09		beq $bc38	BC2D   BEQ $BC38
+.bc2f	a5 66		lda $66		BC2F   LDA $66
+.bc31	2a		rol a		BC31   ROL
+.bc32	a9 ff		lda #$ff	BC32   LDA #$FF
+.bc34	b0 02		bcs $bc38	BC34   BCS $BC38
+.bc36	a9 01		lda #$01	BC36   LDA #$01
+.bc38	60		rts		BC38   RTS
+.bc39	20 2b bc	jsr $bc2b	BC39   JSR $BC2B
+.bc3c	85 62		sta $62		BC3C   STA $62
+.bc3e	a9 00		lda #$00	BC3E   LDA #$00
+.bc40	85 63		sta $63		BC40   STA $63
+.bc42	a2 88		ldx #$88	BC42   LDX #$88
+.bc44	a5 62		lda $62		BC44   LDA $62
+.bc46	49 ff		eor #$ff	BC46   EOR #$FF
+.bc48	2a		rol a		BC48   ROL
+.bc49	a9 00		lda #$00	BC49   LDA #$00
+.bc4b	85 65		sta $65		BC4B   STA $65
+.bc4d	85 64		sta $64		BC4D   STA $64
+.bc4f	86 61		stx $61		BC4F   STX $61
+.bc51	85 70		sta $70		BC51   STA $70
+.bc53	85 66		sta $66		BC53   STA $66
+.bc55	4c d2 b8	jmp $b8d2	BC55   JMP $B8D2
+.bc58	46 66		lsr $66		BC58   LSR $66
+.bc5a	60		rts		BC5A   RTS
+.bc5b	85 24		sta $24		BC5B   STA $24
+.bc5d	84 25		sty $25		BC5D   STY $25
+.bc5f	a0 00		ldy #$00	BC5F   LDY #$00
+.bc61	b1 24		lda ($24),y	BC61   LDA ($24),Y
+.bc63	c8		iny		BC63   INY
+.bc64	aa		tax		BC64   TAX
+.bc65	f0 c4		beq $bc2b	BC65   BEQ $BC2B
+.bc67	b1 24		lda ($24),y	BC67   LDA ($24),Y
+.bc69	45 66		eor $66		BC69   EOR $66
+.bc6b	30 c2		bmi $bc2f	BC6B   BMI $BC2F
+.bc6d	e4 61		cpx $61		BC6D   CPX $61
+.bc6f	d0 21		bne $bc92	BC6F   BNE $BC92
+.bc71	b1 24		lda ($24),y	BC71   LDA ($24),Y
+.bc73	09 80		ora #$80	BC73   ORA #$80
+.bc75	c5 62		cmp $62		BC75   CMP $62
+.bc77	d0 19		bne $bc92	BC77   BNE $BC92
+.bc79	c8		iny		BC79   INY
+.bc7a	b1 24		lda ($24),y	BC7A   LDA ($24),Y
+.bc7c	c5 63		cmp $63		BC7C   CMP $63
+.bc7e	d0 12		bne $bc92	BC7E   BNE $BC92
+.bc80	c8		iny		BC80   INY
+.bc81	b1 24		lda ($24),y	BC81   LDA ($24),Y
+.bc83	c5 64		cmp $64		BC83   CMP $64
+.bc85	d0 0b		bne $bc92	BC85   BNE $BC92
+.bc87	c8		iny		BC87   INY
+.bc88	a9 7f		lda #$7f	BC88   LDA #$7F
+.bc8a	c5 70		cmp $70		BC8A   CMP $70
+.bc8c	b1 24		lda ($24),y	BC8C   LDA ($24),Y
+.bc8e	e5 65		sbc $65		BC8E   SBC $65
+.bc90	f0 28		beq $bcba	BC90   BEQ $BCBA
+.bc92	a5 66		lda $66		BC92   LDA $66
+.bc94	90 02		bcc $bc98	BC94   BCC $BC98
+.bc96	49 ff		eor #$ff	BC96   EOR #$FF
+.bc98	4c 31 bc	jmp $bc31	BC98   JMP $BC31
+.bc9b	a5 61		lda $61		BC9B   LDA $61
+.bc9d	f0 4a		beq $bce9	BC9D   BEQ $BCE9
+.bc9f	38		sec		BC9F   SEC
+.bca0	e9 a0		sbc #$a0	BCA0   SBC #$A0
+.bca2	24 66		bit $66		BCA2   BIT $66
+.bca4	10 09		bpl $bcaf	BCA4   BPL $BCAF
+.bca6	aa		tax		BCA6   TAX
+.bca7	a9 ff		lda #$ff	BCA7   LDA #$FF
+.bca9	85 68		sta $68		BCA9   STA $68
+.bcab	20 4d b9	jsr $b94d	BCAB   JSR $B94D
+.bcae	8a		txa		BCAE   TXA
+.bcaf	a2 61		ldx #$61	BCAF   LDX #$61
+.bcb1	c9 f9		cmp #$f9	BCB1   CMP #$F9
+.bcb3	10 06		bpl $bcbb	BCB3   BPL $BCBB
+.bcb5	20 99 b9	jsr $b999	BCB5   JSR $B999
+.bcb8	84 68		sty $68		BCB8   STY $68
+.bcba	60		rts		BCBA   RTS
+.bcbb	a8		tay		BCBB   TAY
+.bcbc	a5 66		lda $66		BCBC   LDA $66
+.bcbe	29 80		and #$80	BCBE   AND #$80
+.bcc0	46 62		lsr $62		BCC0   LSR $62
+.bcc2	05 62		ora $62		BCC2   ORA $62
+.bcc4	85 62		sta $62		BCC4   STA $62
+.bcc6	20 b0 b9	jsr $b9b0	BCC6   JSR $B9B0
+.bcc9	84 68		sty $68		BCC9   STY $68
+.bccb	60		rts		BCCB   RTS
+.bccc	a5 61		lda $61		BCCC   LDA $61
+.bcce	c9 a0		cmp #$a0	BCCE   CMP #$A0
+.bcd0	b0 20		bcs $bcf2	BCD0   BCS $BCF2
+.bcd2	20 9b bc	jsr $bc9b	BCD2   JSR $BC9B
+.bcd5	84 70		sty $70		BCD5   STY $70
+.bcd7	a5 66		lda $66		BCD7   LDA $66
+.bcd9	84 66		sty $66		BCD9   STY $66
+.bcdb	49 80		eor #$80	BCDB   EOR #$80
+.bcdd	2a		rol a		BCDD   ROL
+.bcde	a9 a0		lda #$a0	BCDE   LDA #$A0
+.bce0	85 61		sta $61		BCE0   STA $61
+.bce2	a5 65		lda $65		BCE2   LDA $65
+.bce4	85 07		sta $07		BCE4   STA $07
+.bce6	4c d2 b8	jmp $b8d2	BCE6   JMP $B8D2
+.bce9	85 62		sta $62		BCE9   STA $62
+.bceb	85 63		sta $63		BCEB   STA $63
+.bced	85 64		sta $64		BCED   STA $64
+.bcef	85 65		sta $65		BCEF   STA $65
+.bcf1	a8		tay		BCF1   TAY
+.bcf2	60		rts		BCF2   RTS
+.bcf3	a0 00		ldy #$00	BCF3   LDY #$00
+.bcf5	a2 0a		ldx #$0a	BCF5   LDX #$0A
+.bcf7	94 5d		sty $5d,x	BCF7   STY $5D,X
+.bcf9	ca		dex		BCF9   DEX
+.bcfa	10 fb		bpl $bcf7	BCFA   BPL $BCF7
+.bcfc	90 0f		bcc $bd0d	BCFC   BCC $BD0D
+.bcfe	c9 2d		cmp #$2d	BCFE   CMP #$2D   ; minus
+.bd00	d0 04		bne $bd06	BD00   BNE $BD06
+.bd02	86 67		stx $67		BD02   STX $67
+.bd04	f0 04		beq $bd0a	BD04   BEQ $BD0A
+.bd06	c9 2b		cmp #$2b	BD06   CMP #$2B   ; plus
+.bd08	d0 05		bne $bd0f	BD08   BNE $BD0F
+.bd0a	20 73 00	jsr $0073	BD0A   JSR $0073
+.bd0d	90 5b		bcc $bd6a	BD0D   BCC $BD6A
+.bd0f	c9 2e		cmp #$2e	BD0F   CMP #$2E   ; decimal point
+.bd11	f0 2e		beq $bd41	BD11   BEQ $BD41
+.bd13	c9 45		cmp #$45	BD13   CMP #$45   ; E
+.bd15	d0 30		bne $bd47	BD15   BNE $BD47
+.bd17	20 73 00	jsr $0073	BD17   JSR $0073
+.bd1a	90 17		bcc $bd33	BD1A   BCC $BD33
+.bd1c	c9 ab		cmp #$ab	BD1C   CMP #$AB   ; minus code
+.bd1e	f0 0e		beq $bd2e	BD1E   BEQ $BD2E
+.bd20	c9 2d		cmp #$2d	BD20   CMP #$2D   ; minus
+.bd22	f0 0a		beq $bd2e	BD22   BEQ $BD2E
+.bd24	c9 aa		cmp #$aa	BD24   CMP #$AA   ; plus code
+.bd26	f0 08		beq $bd30	BD26   BEQ $BD30
+.bd28	c9 2b		cmp #$2b	BD28   CMP #$2B   ; plus
+.bd2a	f0 04		beq $bd30	BD2A   BEQ $BD30
+.bd2c	d0 07		bne $bd35	BD2C   BNE $BD35
+.bd2e	66 60		ror $60		BD2E   ROR $60
+.bd30	20 73 00	jsr $0073	BD30   JSR $0073
+.bd33	90 5c		bcc $bd91	BD33   BCC $BD91
+.bd35	24 60		bit $60		BD35   BIT $60
+.bd37	10 0e		bpl $bd47	BD37   BPL $BD47
+.bd39	a9 00		lda #$00	BD39   LDA #$00
+.bd3b	38		sec		BD3B   SEC
+.bd3c	e5 5e		sbc $5e		BD3C   SBC $5E
+.bd3e	4c 49 bd	jmp $bd49	BD3E   JMP $BD49
+.bd41	66 5f		ror $5f		BD41   ROR $5F
+.bd43	24 5f		bit $5f		BD43   BIT $5F
+.bd45	50 c3		bvc $bd0a	BD45   BVC $BD0A
+.bd47	a5 5e		lda $5e		BD47   LDA $5E
+.bd49	38		sec		BD49   SEC
+.bd4a	e5 5d		sbc $5d		BD4A   SBC $5D
+.bd4c	85 5e		sta $5e		BD4C   STA $5E
+.bd4e	f0 12		beq $bd62	BD4E   BEQ $BD62
+.bd50	10 09		bpl $bd5b	BD50   BPL $BD5B
+.bd52	20 fe ba	jsr $bafe	BD52   JSR $BAFE
+.bd55	e6 5e		inc $5e		BD55   INC $5E
+.bd57	d0 f9		bne $bd52	BD57   BNE $BD52
+.bd59	f0 07		beq $bd62	BD59   BEQ $BD62
+.bd5b	20 e2 ba	jsr $bae2	BD5B   JSR $BAE2
+.bd5e	c6 5e		dec $5e		BD5E   DEC $5E
+.bd60	d0 f9		bne $bd5b	BD60   BNE $BD5B
+.bd62	a5 67		lda $67		BD62   LDA $67
+.bd64	30 01		bmi $bd67	BD64   BMI $BD67
+.bd66	60		rts		BD66   RTS
+.bd67	4c b4 bf	jmp $bfb4	BD67   JMP $BFB4
+.bd6a	48		pha		BD6A   PHA
+.bd6b	24 5f		bit $5f		BD6B   BIT $5F
+.bd6d	10 02		bpl $bd71	BD6D   BPL $BD71
+.bd6f	e6 5d		inc $5d		BD6F   INC $5D
+.bd71	20 e2 ba	jsr $bae2	BD71   JSR $BAE2
+.bd74	68		pla		BD74   PLA
+.bd75	38		sec		BD75   SEC
+.bd76	e9 30		sbc #$30	BD76   SBC #$30   ; 0
+.bd78	20 7e bd	jsr $bd7e	BD78   JSR $BD7E
+.bd7b	4c 0a bd	jmp $bd0a	BD7B   JMP $BD0A
+.bd7e	48		pha		BD7E   PHA
+.bd7f	20 0c bc	jsr $bc0c	BD7F   JSR $BC0C
+.bd82	68		pla		BD82   PLA
+.bd83	20 3c bc	jsr $bc3c	BD83   JSR $BC3C
+.bd86	a5 6e		lda $6e		BD86   LDA $6E
+.bd88	45 66		eor $66		BD88   EOR $66
+.bd8a	85 6f		sta $6f		BD8A   STA $6F
+.bd8c	a6 61		ldx $61		BD8C   LDX $61
+.bd8e	4c 6a b8	jmp $b86a	BD8E   JMP $B86A
+.bd91	a5 5e		lda $5e		BD91   LDA $5E
+.bd93	c9 0a		cmp #$0a	BD93   CMP #$0A
+.bd95	90 09		bcc $bda0	BD95   BCC $BDA0
+.bd97	a9 64		lda #$64	BD97   LDA #$64
+.bd99	24 60		bit $60		BD99   BIT $60
+.bd9b	30 11		bmi $bdae	BD9B   BMI $BDAE
+.bd9d	4c 7e b9	jmp $b97e	BD9D   JMP $B97E
+.bda0	0a		asl a		BDA0   ASL
+.bda1	0a		asl a		BDA1   ASL
+.bda2	18		clc		BDA2   CLC
+.bda3	65 5e		adc $5e		BDA3   ADC $5E
+.bda5	0a		asl a		BDA5   ASL
+.bda6	18		clc		BDA6   CLC
+.bda7	a0 00		ldy #$00	BDA7   LDY #$00
+.bda9	71 7a		adc ($7a),y	BDA9   ADC ($7A),Y
+.bdab	38		sec		BDAB   SEC
+.bdac	e9 30		sbc #$30	BDAC   SBC #$30   ; 0
+.bdae	85 5e		sta $5e		BDAE   STA $5E
+.bdb0	4c 30 bd	jmp $bd30	BDB0   JMP $BD30
+>bdb3	9b 3e bc 1f fd			BDB3   .byte $9B,$3E,$BC,$1F,$FD
+>bdb8	9e 6e 6b 27 fd			BDB8   .byte $9E,$6E,$6B,$27,$FD
+>bdbd	9e 6e 6b 28 00			BDBD   .byte $9E,$6E,$6B,$28,$00
+.bdc2	a9 71		lda #$71	BDC2   LDA #$71   ; low  A371
+.bdc4	a0 a3		ldy #$a3	BDC4   LDY #$A3   ; high A371
+.bdc6	20 da bd	jsr $bdda	BDC6   JSR $BDDA
+.bdc9	a5 3a		lda $3a		BDC9   LDA $3A
+.bdcb	a6 39		ldx $39		BDCB   LDX $39
+.bdcd	85 62		sta $62		BDCD   STA $62
+.bdcf	86 63		stx $63		BDCF   STX $63
+.bdd1	a2 90		ldx #$90	BDD1   LDX #$90
+.bdd3	38		sec		BDD3   SEC
+.bdd4	20 49 bc	jsr $bc49	BDD4   JSR $BC49
+.bdd7	20 df bd	jsr $bddf	BDD7   JSR $BDDF
+.bdda	4c 1e ab	jmp $ab1e	BDDA   JMP $AB1E
+.bddd	a0 01		ldy #$01	BDDD   LDY #$01
+.bddf	a9 20		lda #$20	BDDF   LDA #$20
+.bde1	24 66		bit $66		BDE1   BIT $66
+.bde3	10 02		bpl $bde7	BDE3   BPL $BDE7
+.bde5	a9 2d		lda #$2d	BDE5   LDA #$2D   ; minus
+.bde7	99 ff 00	sta $00ff,y	BDE7   STA $00FF,Y
+.bdea	85 66		sta $66		BDEA   STA $66
+.bdec	84 71		sty $71		BDEC   STY $71
+.bdee	c8		iny		BDEE   INY
+.bdef	a9 30		lda #$30	BDEF   LDA #$30   ; 0
+.bdf1	a6 61		ldx $61		BDF1   LDX $61
+.bdf3	d0 03		bne $bdf8	BDF3   BNE $BDF8
+.bdf5	4c 04 bf	jmp $bf04	BDF5   JMP $BF04
+.bdf8	a9 00		lda #$00	BDF8   LDA #$00
+.bdfa	e0 80		cpx #$80	BDFA   CPX #$80
+.bdfc	f0 02		beq $be00	BDFC   BEQ $BE00
+.bdfe	b0 09		bcs $be09	BDFE   BCS $BE09
+.be00	a9 bd		lda #$bd	BE00   LDA #$BD   ; low  BDBD
+.be02	a0 bd		ldy #$bd	BE02   LDY #$BD   ; high BDBD
+.be04	20 28 ba	jsr $ba28	BE04   JSR $BA28
+.be07	a9 f7		lda #$f7	BE07   LDA #$F7
+.be09	85 5d		sta $5d		BE09   STA $5D
+.be0b	a9 b8		lda #$b8	BE0B   LDA #$B8   ; low  BDB8
+.be0d	a0 bd		ldy #$bd	BE0D   LDY #$BD   ; high BDB8
+.be0f	20 5b bc	jsr $bc5b	BE0F   JSR $BC5B
+.be12	f0 1e		beq $be32	BE12   BEQ $BE32
+.be14	10 12		bpl $be28	BE14   BPL $BE28
+.be16	a9 b3		lda #$b3	BE16   LDA #$B3   ; low  BDB3
+.be18	a0 bd		ldy #$bd	BE18   LDY #$BD   ; high BDB3
+.be1a	20 5b bc	jsr $bc5b	BE1A   JSR $BC5B
+.be1d	f0 02		beq $be21	BE1D   BEQ $BE21
+.be1f	10 0e		bpl $be2f	BE1F   BPL $BE2F
+.be21	20 e2 ba	jsr $bae2	BE21   JSR $BAE2
+.be24	c6 5d		dec $5d		BE24   DEC $5D
+.be26	d0 ee		bne $be16	BE26   BNE $BE16
+.be28	20 fe ba	jsr $bafe	BE28   JSR $BAFE
+.be2b	e6 5d		inc $5d		BE2B   INC $5D
+.be2d	d0 dc		bne $be0b	BE2D   BNE $BE0B
+.be2f	20 49 b8	jsr $b849	BE2F   JSR $B849
+.be32	20 9b bc	jsr $bc9b	BE32   JSR $BC9B
+.be35	a2 01		ldx #$01	BE35   LDX #$01
+.be37	a5 5d		lda $5d		BE37   LDA $5D
+.be39	18		clc		BE39   CLC
+.be3a	69 0a		adc #$0a	BE3A   ADC #$0A
+.be3c	30 09		bmi $be47	BE3C   BMI $BE47
+.be3e	c9 0b		cmp #$0b	BE3E   CMP #$0B
+.be40	b0 06		bcs $be48	BE40   BCS $BE48
+.be42	69 ff		adc #$ff	BE42   ADC #$FF
+.be44	aa		tax		BE44   TAX
+.be45	a9 02		lda #$02	BE45   LDA #$02
+.be47	38		sec		BE47   SEC
+.be48	e9 02		sbc #$02	BE48   SBC #$02
+.be4a	85 5e		sta $5e		BE4A   STA $5E
+.be4c	86 5d		stx $5d		BE4C   STX $5D
+.be4e	8a		txa		BE4E   TXA
+.be4f	f0 02		beq $be53	BE4F   BEQ $BE53
+.be51	10 13		bpl $be66	BE51   BPL $BE66
+.be53	a4 71		ldy $71		BE53   LDY $71
+.be55	a9 2e		lda #$2e	BE55   LDA #$2E   ; decimal point
+.be57	c8		iny		BE57   INY
+.be58	99 ff 00	sta $00ff,y	BE58   STA $00FF,Y
+.be5b	8a		txa		BE5B   TXA
+.be5c	f0 06		beq $be64	BE5C   BEQ $BE64
+.be5e	a9 30		lda #$30	BE5E   LDA #$30   ; 0
+.be60	c8		iny		BE60   INY
+.be61	99 ff 00	sta $00ff,y	BE61   STA $00FF,Y
+.be64	84 71		sty $71		BE64   STY $71
+.be66	a0 00		ldy #$00	BE66   LDY #$00
+.be68	a2 80		ldx #$80	BE68   LDX #$80
+.be6a	a5 65		lda $65		BE6A   LDA $65
+.be6c	18		clc		BE6C   CLC
+.be6d	79 19 bf	adc $bf19,y	BE6D   ADC $BF19,Y
+.be70	85 65		sta $65		BE70   STA $65
+.be72	a5 64		lda $64		BE72   LDA $64
+.be74	79 18 bf	adc $bf18,y	BE74   ADC $BF18,Y
+.be77	85 64		sta $64		BE77   STA $64
+.be79	a5 63		lda $63		BE79   LDA $63
+.be7b	79 17 bf	adc $bf17,y	BE7B   ADC $BF17,Y
+.be7e	85 63		sta $63		BE7E   STA $63
+.be80	a5 62		lda $62		BE80   LDA $62
+.be82	79 16 bf	adc $bf16,y	BE82   ADC $BF16,Y
+.be85	85 62		sta $62		BE85   STA $62
+.be87	e8		inx		BE87   INX
+.be88	b0 04		bcs $be8e	BE88   BCS $BE8E
+.be8a	10 de		bpl $be6a	BE8A   BPL $BE6A
+.be8c	30 02		bmi $be90	BE8C   BMI $BE90
+.be8e	30 da		bmi $be6a	BE8E   BMI $BE6A
+.be90	8a		txa		BE90   TXA
+.be91	90 04		bcc $be97	BE91   BCC $BE97
+.be93	49 ff		eor #$ff	BE93   EOR #$FF
+.be95	69 0a		adc #$0a	BE95   ADC #$0A
+.be97	69 2f		adc #$2f	BE97   ADC #$2F
+.be99	c8		iny		BE99   INY
+.be9a	c8		iny		BE9A   INY
+.be9b	c8		iny		BE9B   INY
+.be9c	c8		iny		BE9C   INY
+.be9d	84 47		sty $47		BE9D   STY $47
+.be9f	a4 71		ldy $71		BE9F   LDY $71
+.bea1	c8		iny		BEA1   INY
+.bea2	aa		tax		BEA2   TAX
+.bea3	29 7f		and #$7f	BEA3   AND #$7F
+.bea5	99 ff 00	sta $00ff,y	BEA5   STA $00FF,Y
+.bea8	c6 5d		dec $5d		BEA8   DEC $5D
+.beaa	d0 06		bne $beb2	BEAA   BNE $BEB2
+.beac	a9 2e		lda #$2e	BEAC   LDA #$2E
+.beae	c8		iny		BEAE   INY
+.beaf	99 ff 00	sta $00ff,y	BEAF   STA $00FF,Y
+.beb2	84 71		sty $71		BEB2   STY $71
+.beb4	a4 47		ldy $47		BEB4   LDY $47
+.beb6	8a		txa		BEB6   TXA
+.beb7	49 ff		eor #$ff	BEB7   EOR #$FF
+.beb9	29 80		and #$80	BEB9   AND #$80
+.bebb	aa		tax		BEBB   TAX
+.bebc	c0 24		cpy #$24	BEBC   CPY #$24
+.bebe	f0 04		beq $bec4	BEBE   BEQ $BEC4
+.bec0	c0 3c		cpy #$3c	BEC0   CPY #$3C
+.bec2	d0 a6		bne $be6a	BEC2   BNE $BE6A
+.bec4	a4 71		ldy $71		BEC4   LDY $71
+.bec6	b9 ff 00	lda $00ff,y	BEC6   LDA $00FF,Y
+.bec9	88		dey		BEC9   DEY
+.beca	c9 30		cmp #$30	BECA   CMP #$30   ; 0
+.becc	f0 f8		beq $bec6	BECC   BEQ $BEC6
+.bece	c9 2e		cmp #$2e	BECE   CMP #$2E   ; decimal point
+.bed0	f0 01		beq $bed3	BED0   BEQ $BED3
+.bed2	c8		iny		BED2   INY
+.bed3	a9 2b		lda #$2b	BED3   LDA #$2B   ; plus
+.bed5	a6 5e		ldx $5e		BED5   LDX $5E
+.bed7	f0 2e		beq $bf07	BED7   BEQ $BF07
+.bed9	10 08		bpl $bee3	BED9   BPL $BEE3
+.bedb	a9 00		lda #$00	BEDB   LDA #$00
+.bedd	38		sec		BEDD   SEC
+.bede	e5 5e		sbc $5e		BEDE   SBC $5E
+.bee0	aa		tax		BEE0   TAX
+.bee1	a9 2d		lda #$2d	BEE1   LDA #$2D   ; minus
+.bee3	99 01 01	sta $0101,y	BEE3   STA $0101,Y
+.bee6	a9 45		lda #$45	BEE6   LDA #$45
+.bee8	99 00 01	sta $0100,y	BEE8   STA $0100,Y
+.beeb	8a		txa		BEEB   TXA
+.beec	a2 2f		ldx #$2f	BEEC   LDX #$2F
+.beee	38		sec		BEEE   SEC
+.beef	e8		inx		BEEF   INX
+.bef0	e9 0a		sbc #$0a	BEF0   SBC #$0A
+.bef2	b0 fb		bcs $beef	BEF2   BCS $BEEF
+.bef4	69 3a		adc #$3a	BEF4   ADC #$3A
+.bef6	99 03 01	sta $0103,y	BEF6   STA $0103,Y
+.bef9	8a		txa		BEF9   TXA
+.befa	99 02 01	sta $0102,y	BEFA   STA $0102,Y
+.befd	a9 00		lda #$00	BEFD   LDA #$00
+.beff	99 04 01	sta $0104,y	BEFF   STA $0104,Y
+.bf02	f0 08		beq $bf0c	BF02   BEQ $BF0C
+.bf04	99 ff 00	sta $00ff,y	BF04   STA $00FF,Y
+.bf07	a9 00		lda #$00	BF07   LDA #$00
+.bf09	99 00 01	sta $0100,y	BF09   STA $0100,Y
+.bf0c	a9 00		lda #$00	BF0C   LDA #$00   ; low  0100
+.bf0e	a0 01		ldy #$01	BF0E   LDY #$01   ; high 0100
+.bf10	60		rts		BF10   RTS
+>bf11	80 00 00 00 00			BF11   .byte $80,$00,$00,$00,$00
+>bf16	fa 0a 1f 00			BF16   .byte $FA,$0A,$1F,$00
+>bf1a	00 98 96 80			BF1A   .byte $00,$98,$96,$80
+>bf1e	ff f0 bd c0			BF1E   .byte $FF,$F0,$BD,$C0
+>bf22	00 01 86 a0			BF22   .byte $00,$01,$86,$A0
+>bf26	ff ff d8 f0			BF26   .byte $FF,$FF,$D8,$F0
+>bf2a	00 00 03 e8			BF2A   .byte $00,$00,$03,$E8
+>bf2e	ff ff ff 9c			BF2E   .byte $FF,$FF,$FF,$9C
+>bf32	00 00 00 0a			BF32   .byte $00,$00,$00,$0A
+>bf36	ff ff ff ff			BF36   .byte $FF,$FF,$FF,$FF
+>bf3a	ff df 0a 80			BF3A   .byte $FF,$DF,$0A,$80
+>bf3e	00 03 4b c0			BF3E   .byte $00,$03,$4B,$C0
+>bf42	ff ff 73 60			BF42   .byte $FF,$FF,$73,$60
+>bf46	00 00 0e 10			BF46   .byte $00,$00,$0E,$10
+>bf4a	ff ff fd a8			BF4A   .byte $FF,$FF,$FD,$A8
+>bf4e	00 00 00 3c			BF4E   .byte $00,$00,$00,$3C
+>bf52	ec				BF52   .byte $EC
+>bf53	aa aa aa aa aa aa aa aa		BF53   .byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+>bf5b	aa aa aa aa aa aa aa aa		BF5B   .byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+>bf63	aa aa aa aa aa aa aa aa		BF63   .byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+>bf6b	aa aa aa aa aa aa		BF6B   .byte $AA,$AA,$AA,$AA,$AA,$AA
+.bf71	20 0c bc	jsr $bc0c	BF71   JSR $BC0C
+.bf74	a9 11		lda #$11	BF74   LDA #$11
+.bf76	a0 bf		ldy #$bf	BF76   LDY #$BF
+.bf78	20 a2 bb	jsr $bba2	BF78   JSR $BBA2
+.bf7b	f0 70		beq $bfed	BF7B   BEQ $BFED
+.bf7d	a5 69		lda $69		BF7D   LDA $69
+.bf7f	d0 03		bne $bf84	BF7F   BNE $BF84
+.bf81	4c f9 b8	jmp $b8f9	BF81   JMP $B8F9
+.bf84	a2 4e		ldx #$4e	BF84   LDX #$4E   ; low  004E
+.bf86	a0 00		ldy #$00	BF86   LDY #$00   ; high 004E
+.bf88	20 d4 bb	jsr $bbd4	BF88   JSR $BBD4
+.bf8b	a5 6e		lda $6e		BF8B   LDA $6E
+.bf8d	10 0f		bpl $bf9e	BF8D   BPL $BF9E
+.bf8f	20 cc bc	jsr $bccc	BF8F   JSR $BCCC
+.bf92	a9 4e		lda #$4e	BF92   LDA #$4E   ; low  004E
+.bf94	a0 00		ldy #$00	BF94   LDY #$00   ; high 004E
+.bf96	20 5b bc	jsr $bc5b	BF96   JSR $BC5B
+.bf99	d0 03		bne $bf9e	BF99   BNE $BF9E
+.bf9b	98		tya		BF9B   TYA
+.bf9c	a4 07		ldy $07		BF9C   LDY $07
+.bf9e	20 fe bb	jsr $bbfe	BF9E   JSR $BBFE
+.bfa1	98		tya		BFA1   TYA
+.bfa2	48		pha		BFA2   PHA
+.bfa3	20 ea b9	jsr $b9ea	BFA3   JSR $B9EA
+.bfa6	a9 4e		lda #$4e	BFA6   LDA #$4E   ; low  004E
+.bfa8	a0 00		ldy #$00	BFA8   LDY #$00   ; high 004E
+.bfaa	20 28 ba	jsr $ba28	BFAA   JSR $BA28
+.bfad	20 ed bf	jsr $bfed	BFAD   JSR $BFED
+.bfb0	68		pla		BFB0   PLA
+.bfb1	4a		lsr a		BFB1   LSR
+.bfb2	90 0a		bcc $bfbe	BFB2   BCC $BFBE
+.bfb4	a5 61		lda $61		BFB4   LDA $61
+.bfb6	f0 06		beq $bfbe	BFB6   BEQ $BFBE
+.bfb8	a5 66		lda $66		BFB8   LDA $66
+.bfba	49 ff		eor #$ff	BFBA   EOR #$FF
+.bfbc	85 66		sta $66		BFBC   STA $66
+.bfbe	60		rts		BFBE   RTS
+>bfbf	81 38 aa 3b 29			BFBF   .byte $81,$38,$AA,$3B,$29
+>bfc4	07				BFC4   .byte $07   ; degree 8
+>bfc5	71 34 58 3e 56			BFC5   .byte $71,$34,$58,$3E,$56
+>bfca	74 16 7e b3 1b			BFCA   .byte $74,$16,$7E,$B3,$1B
+>bfcf	77 2f ee e3 85			BFCF   .byte $77,$2F,$EE,$E3,$85
+>bfd4	7a 1d 84 1c 2a			BFD4   .byte $7A,$1D,$84,$1C,$2A
+>bfd9	7c 63 59 58 0a			BFD9   .byte $7C,$63,$59,$58,$0A
+>bfde	7e 75 fd e7 c6			BFDE   .byte $7E,$75,$FD,$E7,$C6
+>bfe3	80 31 72 18 10			BFE3   .byte $80,$31,$72,$18,$10
+>bfe8	81 00 00 00 00			BFE8   .byte $81,$00,$00,$00,$00
+.bfed	a9 bf		lda #$bf	BFED    LDA #$BF
+.bfef	a0 bf		ldy #$bf	BFEF    LDY #$BF
+.bff1	20 28 ba	jsr $ba28	BFF1    JSR $BA28
+.bff4	a5 70		lda $70		BFF4    LDA $70
+.bff6	69 50		adc #$50	BFF6    ADC #$50
+.bff8	90 03		bcc $bffd	BFF8    BCC $BFFD
+.bffa	20 23 bc	jsr $bc23	BFFA    JSR $BC23
+.bffd	4c 00 e0	jmp $e000	BFFD    JMP $E000
+
+;******  End of listing

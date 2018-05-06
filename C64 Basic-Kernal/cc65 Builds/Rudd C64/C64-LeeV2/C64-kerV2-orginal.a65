@@ -1,0 +1,316 @@
+;******************************************************************************
+;******************************************************************************
+;
+;         The almost completely commented C64 BASIC ROM disassembly. 
+;                 Based on version V1.01 by Lee Davison 2012
+;
+;******************************************************************************
+;
+; start of the kernal ROM
+;
+; version 901227-02
+;
+
+
+.org $E118
+;******************************************************************************
+;
+; open channel for output with error check
+;
+OpenChan4OutpA:				;				[E118]
+	jsr	OpenChan4OutpB		; open channel for output	[E4AD]
+
+
+.org $E4AC
+E4AC:	.byte	$5C			; unused byte ??
+
+
+;******************************************************************************
+;
+; open channel for output
+;
+OpenChan4OutpB:				;				[E4AD]
+	pha				; save the flag byte
+
+	jsr	OpenChan4Outp		; open channel for output	[FFC9]
+	tax				; copy the returned flag byte
+
+	pla				; restore the alling flag byte
+	bcc	A_E4B6			; if no error, skip copying error flag
+
+	txa				; else copy the error flag
+A_E4B6:					;				[E4B6]
+	rts
+
+
+.fb $AA,35
+
+
+SaveCurColour:				;				[E4DA]
+	lda	VICBAC0			; backgroundcolor 0
+	sta	(ColorRamPtr),Y		; save it to the colour RAM
+
+	rts
+
+
+;******************************************************************************
+;
+; wait ~8.5 seconds for any key from the STOP key column
+;
+Wait8Seconds:				;				[E4E0]
+	adc	#$02			; set the number of jiffies to wait
+A_E4E2:					;				[E4E2]
+	ldy	StopKey			; read the stop key column
+	iny				; test for $FF, no keys pressed
+	bne	A_E4EB			; if any keys were pressed just exit
+
+	cmp	TimeBytes+1		; compare the wait time with the jiffy
+					; clock mid byte
+	bne	A_E4E2			; if not there yet go wait some more
+
+A_E4EB:					;				[E4EB]
+	rts
+
+
+;******************************************************************************
+;
+; baud rate word is calculated from ..
+;
+; (system clock / baud rate) / 2 - 100
+;
+;		system clock
+;		------------
+; PAL		  985248 Hz
+; NTSC		 1022727 Hz
+;
+; baud rate tables for PAL C64
+;
+TblBaudRates:				;				[E4EC]
+.word	$2619				;   50   baud	985300
+.word	$1944				;   75   baud	985200
+.word	$111A				;  110   baud	985160
+.word	$0DE8				;  134.5 baud	984540
+.word	$0C70				;  150   baud	985200
+.word	$0606				;  300   baud	985200
+.word	$02D1				;  600   baud	985200
+.word	$0137				; 1200   baud	986400
+.word	$00AE				; 1800   baud	986400
+.word	$0069				; 2400   baud	984000
+
+
+.ba $EA0B
+	jsr	SaveCurColour		; save current colour to colour RAM
+					;				[E4DA]
+	nop
+
+
+.ba $ECCA
+.byte	$9B				; enable screen, enable 25 rows
+					; vertical fine scroll and control
+					; bit	function
+					; ---	-------
+					;  7	raster compare bit 8
+					;  6	1 = enable extended color text
+					;	 mode
+					;  5	1 = enable bitmap graphics mode
+					;  4	1 = enable screen, 0 = blank
+					;	 screen
+					;  3	1 = 25 row display, 0 = 24 row
+					;	 display
+					; 2-0	vertical scroll count
+.byte	$37				; raster compare
+
+
+.ba $ECD2
+.byte	$0F				; clear all interrupts
+
+
+.ba $F428
+	beq	A_F446			; if zero skip the baud rate setup
+
+	asl				; * 2 bytes per entry
+	tax				; copy to the index
+
+	lda	PALNTSC			; get the PAL/NTSC flag
+	bne	A_F43A			; if PAL go set PAL timing
+
+	ldy	TblBaudNTSC-1,X		; get the NTSC baud rate value HB
+	lda	TblBaudNTSC-2,X		; get the NTSC baud rate value LB
+	jmp	SaveBaudRate		; go save the baud rate values	[F440]
+
+A_F43A:					;				[F43A]
+	ldy	TblBaudRates-1,X	; get the PAL baud rate value HB
+	lda	TblBaudRates-2,X	; get the PAL baud rate value LB
+SaveBaudRate:				;				[F440]
+	sty	M51AJB+1		; save the nonstandard bit timing HB
+	sta	M51AJB			; save the nonstandard bit timing LB
+A_F446:					;				[F446]
+	lda	M51AJB			; get the nonstandard bit timing LB
+	asl				; * 2
+	jsr	SetTimerBaudR		;.				[FF2E]
+
+
+.ba $F459
+	jsr	DeactivateDSR		; set no DSR			[F00D]
+
+
+.ba $F761
+	lda	TimeBytes+1		; get the jiffy clock mid byte
+	jsr	Wait8Seconds		; wait ~8.5 seconds for any key from
+					; the STOP key column		[E4E0]
+	nop				; waste cycles
+
+
+.ba $FCFB
+	jsr	InitialiseVIC2		; initialise VIC and screen editor
+
+
+.ba $FDDD
+TimingPalNtsc:				;				[FDDD]
+	lda	PALNTSC			; get the PAL/NTSC flag
+	beq	A_FDEC			; if NTSC go set NTSC timing
+
+; else set PAL timing
+	lda	#$25			;.
+	sta	CIA1TI1L		; save CIA 1 timer A LB
+
+	lda	#$40			;.
+	jmp	J_FDF3			;.				[FDF3]
+
+A_FDEC:					;				[FDEC]
+	lda	#$95			;.
+	sta	CIA1TI1L		; save CIA 1 timer A LB
+
+	lda	#$42			;.
+J_FDF3:					;				[FDF3]
+	sta	CIA1TI1H		; save CIA 1 timer A HB
+
+	jmp	SetTimerIRQ		;.				[FF6E]
+
+
+.ba $FEC2
+;******************************************************************************
+;
+; baud rate word is calculated from ..
+;
+; (system clock / baud rate) / 2 - 100
+;
+;		system clock
+;		------------
+; PAL		  985248 Hz
+; NTSC	 	 1022727 Hz
+;
+; baud rate tables for NTSC C64
+;
+TblBaudNTSC:				;				[FEC2]
+.word	$27C1				;   50   baud	1027700
+.word	$1A3E				;   75   baud	1022700
+.word	$11C5				;  110   baud	1022780
+.word	$0E74				;  134.5 baud	1022200
+.word	$0CED				;  150   baud	1022700
+.word	$0645				;  300   baud	1023000
+.word	$02F0				;  600   baud	1022400
+.word	$0146				; 1200   baud	1022400
+.word	$00B8				; 1800   baud	1022400
+.word	$0071				; 2400   baud	1022400
+
+
+.ba $FF07
+;******************************************************************************
+;
+; Write to RS-232
+;
+WriteToRS232:				;				[FF07]
+	lda	M51AJB			; nonstandard bit timing LB
+	sta	CIA2TI2L		; save CIA 2 timer B LB
+
+	lda	M51AJB+1		; nonstandard bit timing HB
+	sta	CIA2TI2H		; save CIA 2 timer B HB
+
+	lda	#$11			; set timer B single shot, start timer B
+	sta	CIA2CTR2		; save CIA 2 CRB
+
+	lda	#$12			;.
+	eor	ENABL			; EOR with RS-232 interrupt enable byte
+	sta	ENABL			; save RS-232 interrupt enable byte
+
+	lda	#$FF			;.
+	sta	CIA2TI2L		; save CIA 2 timer B LB
+	sta	CIA2TI2H		; save CIA 2 timer B HB
+
+	ldx	BITNUM			;.
+	stx	BITCI			;.
+
+	rts
+
+
+;******************************************************************************
+;
+; Set the timer for the Baud rate
+;
+SetTimerBaudR:				;				[FF2E]
+	tax				;.
+
+	lda	M51AJB+1		; nonstandard bit timing HB
+	rol				;.
+	tay				;.
+
+	txa				;.
+	adc	#$C8			;.
+	sta	BAUDOF			;.
+
+	tya				;.
+	adc	#$00			; add any carry
+	sta	BAUDOF+1		;.
+
+	rts
+
+
+;S_FF41
+	nop				; waste cycles
+	nop				; waste cycles
+
+
+.ba $FF5B
+;******************************************************************************
+;
+; initialise VIC and screen editor
+;
+InitialiseVIC2:				;				[FF5B]
+	jsr	InitScreenKeyb		; initialise the screen and keyboard
+					;				[E518]
+A_FF5E:					;				[FF5E]
+	lda	VICLINE			; read the raster compare register
+	bne	A_FF5E			; loop if not raster line $00
+A_FF63:					;				[FF63]
+	lda	VICIRQ			; read the vic interrupt flag register
+	and	#$01			; mask the raster compare flag
+	sta	PALNTSC			; save the PAL/NTSC flag
+	jmp	TimingPalNtsc		;.				[FDDD]
+
+
+;******************************************************************************
+;
+; Set the timer that generates the interrupts
+;
+SetTimerIRQ:				;				[FF6E]
+	lda	#$81			; enable timer A interrupt
+	sta	CIA1IRQ			; save CIA 1 ICR
+
+	lda	CIA1CTR1		; read CIA 1 CRA
+	and	#$80			; mask x000 0000, TOD clock
+	ora	#$11			; mask xxx1 xxx1, load timer A, start
+					; timer A
+	sta	CIA1CTR1		; save CIA 1 CRA
+
+	jmp	IecClockL		; set the serial clock out low and
+					; return			[EE8E]
+
+FF80:	.byte	$00			; checksum ??
+
+
+	jmp	InitialiseVIC2		; initialise VIC and screen editor
+
+
+
+

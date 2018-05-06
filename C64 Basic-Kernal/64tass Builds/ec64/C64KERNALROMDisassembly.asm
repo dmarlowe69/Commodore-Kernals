@@ -1,0 +1,4966 @@
+
+ * = $E000
+
+;Commodore 64 KERNAL ($03) ROM dissasembly
+;Version 1.0 (June 1994)
+
+
+; continuation of EXP function
+
+E000   STA $56
+E002   JSR $BC0F
+E005   LDA $61
+E007   CMP #$88
+E009   BCC $E00E
+E00B   JSR $BAD4
+E00E   JSR $BCCC
+E011   LDA $07
+E013   CLC
+E014   ADC #$81
+E016   BEQ $E00B
+E018   SEC
+E019   SBC #$01
+E01B   PHA
+E01C   LDX #$05
+E01E   LDA $69,X
+E020   LDY $61,X
+E022   STA $61,X
+E024   STY $69,X
+E026   DEX
+E027   BPL $E01E
+E029   LDA $56
+E02B   STA $70
+E02D   JSR $B853
+E030   JSR $BFB4
+E033   LDA #$C4
+E035   LDY #$BF
+E037   JSR $E059
+E03A   LDA #$00
+E03C   STA $6F
+E03E   PLA
+E03F   JSR $BAB9
+E042   RTS
+
+
+; compute odd degrees for SIN and ATN
+
+E043   STA $71
+E045   STY $72
+E047   JSR $BBCA
+E04A   LDA #$57
+E04C   JSR $BA28
+E04F   JSR $E05D
+E052   LDA #$57
+E054   LDY #$00
+E056   JMP $BA28
+
+
+; compute polynomials according to table indexed by AY
+
+E059   STA $71
+E05B   STY $72
+
+E05D   JSR $BBC7
+
+E060   LDA ($71),Y
+E062   STA $67
+E064   LDY $71
+E066   INY
+E067   TYA
+E068   BNE $E06C
+E06A   INC $72
+E06C   STA $71
+E06E   LDY $72
+E070   JSR $BA28
+E073   LDA $71
+E075   LDY $72
+E077   CLC
+E078   ADC #$05
+E07A   BCC $E07D
+E07C   INY
+E07D   STA $71
+E07F   STY $72
+E081   JSR $B867
+E084   LDA #$5C
+E086   LDY #$00
+E088   DEC $67
+E08A   BNE $E070
+E08C   RTS
+
+
+; float numbers for RND
+
+E08D   .byte $98,$35,$44,$7A,$00
+E092   .byte $68,$28,$B1,$46,$00
+
+
+; RND function
+
+E097   JSR $BC2B
+E09A   BMI $E0D3
+E09C   BNE $E0BE
+E09E   JSR $FFF3
+E0A1   STX $22
+E0A3   STY $23
+E0A5   LDY #$04
+E0A7   LDA ($22),Y
+E0A9   STA $62
+E0AB   INY
+E0AC   LDA ($22),Y
+E0AE   STA $64
+E0B0   LDY #$08
+E0B2   LDA ($22),Y
+E0B4   STA $63
+E0B6   INY
+E0B7   LDA ($22),Y
+E0B9   STA $65
+E0BB   JMP $E0E3
+
+E0BE   LDA #$8B
+E0C0   LDY #$00
+E0C2   JSR $BBA2
+E0C5   LDA #$8D
+E0C7   LDY #$E0
+E0C9   JSR $BA28
+E0CC   LDA #$92
+E0CE   LDY #$E0
+E0D0   JSR $B867
+E0D3   LDX $65
+E0D5   LDA $62
+E0D7   STA $65
+E0D9   STX $62
+E0DB   LDX $63
+E0DD   LDA $64
+E0DF   STA $63
+E0E1   STX $64
+
+E0E3   LDA #$00
+
+E0E5   STA $66
+E0E7   LDA $61
+E0E9   STA $70
+E0EB   LDA #$80
+E0ED   STA $61
+E0EF   JSR $B8D7
+E0F2   LDX #$8B
+E0F4   LDY #$00
+
+E0F6   JMP $BBD4
+
+
+
+; handle errors for direct I/O
+; calls from basic
+
+E0F9   CMP #$F0
+E0FB   BNE $E104
+E0FD   STY $38
+E0FF   STX $37
+E101   JMP $A663
+
+E104   TAX
+E105   BNE $E109
+E107   LDX #$1E
+E109   JMP $A437
+
+
+E10C   JSR $FFD2
+
+E10F   BCS $E0F9
+E111   RTS
+
+
+E112   JSR $FFCF
+
+E115   BCS $E0F9
+E117   RTS
+
+
+E118   JSR $E4AD
+
+E11B   BCS $E0F9
+E11D   RTS
+
+
+E11E   JSR $FFC6
+
+E121   BCS $E0F9
+E123   RTS
+
+
+E124   JSR $FFE4
+
+E127   BCS $E0F9
+E129   RTS
+
+
+; SYS command
+
+E12A   JSR $AD8A
+E12D   JSR $B7F7
+E130   LDA #$E1   ; low  E146
+E132   PHA
+E133   LDA #$46   ; high E146
+E135   PHA
+E136   LDA $030F
+E139   PHA
+E13A   LDA $030C
+E13D   LDX $030D
+E140   LDY $030E
+E143   PLP
+E144   JMP ($0014)
+
+
+E147   PHP
+
+E148   STA $030C
+E14B   STX $030D
+E14E   STY $030E
+E151   PLA
+E152   STA $030F
+E155   RTS
+
+
+; SAVE command
+
+E156   JSR $E1D4
+E159   LDX $2D
+E15B   LDY $2E
+E15D   LDA #$2B
+E15F   JSR $FFD8
+E162   BCS $E0F9
+E164   RTS
+
+
+; VERIFY command
+
+E165   LDA #$01
+E167   .byte $2C
+
+
+; LOAD command
+
+E168   LDA #$00
+E16A   STA $0A
+E16C   JSR $E1D4
+E16F   LDA $0A
+E171   LDX $2B
+E173   LDY $2C
+E175   JSR $FFD5
+E178   BCS $E1D1
+E17A   LDA $0A
+E17C   BEQ $E195
+E17E   LDX #$1C
+E180   JSR $FFB7
+E183   AND #$10
+E185   BNE $E19E
+E187   LDA $7A
+E189   CMP #$02
+E18B   BEQ $E194
+E18D   LDA #$64
+E18F   LDY #$A3
+E191   JMP $AB1E
+E194   RTS
+
+E195   JSR $FFB7
+E198   AND #$BF
+E19A   BEQ $E1A1
+E19C   LDX #$1D
+E19E   JMP $A437
+
+E1A1   LDA $7B
+E1A3   CMP #$02
+E1A5   BNE $E1B5
+E1A7   STX $2D
+E1A9   STY $2E
+E1AB   LDA #$76
+E1AD   LDY #$A3
+E1AF   JSR $AB1E
+E1B2   JMP $A52A
+
+E1B5   JSR $A68E
+E1B8   JSR $A533
+E1BB   JMP $A677
+
+
+; OPEN command
+
+E1BE   JSR $E219
+E1C1   JSR $FFC0
+E1C4   BCS $E1D1
+E1C6   RTS
+
+
+; CLOSE command
+
+E1C7   JSR $E219
+E1CA   LDA $49
+E1CC   JSR $FFC3
+E1CF   BCC $E194
+E1D1   JMP $E0F9
+
+
+; set parameters for load/verify/save
+
+E1D4   LDA #$00
+E1D6   JSR $FFBD
+E1D9   LDX #$01
+E1DB   LDY #$00
+E1DD   JSR $FFBA
+E1E0   JSR $E206
+E1E3   JSR $E257
+E1E6   JSR $E206
+E1E9   JSR $E200
+E1EC   LDY #$00
+E1EE   STX $49
+E1F0   JSR $FFBA
+E1F3   JSR $E206
+E1F6   JSR $E200
+E1F9   TXA
+E1FA   TAY
+E1FB   LDX $49
+E1FD   JMP $FFBA
+
+
+; skip comma and get integer in X
+
+E200   JSR $E20E
+E203   JMP $B79E
+
+
+; get character and check for end of line
+
+E206   JSR $0079
+E209   BNE $E20D
+E20B   PLA
+E20C   PLA
+E20D   RTS
+
+
+; check for comma and skip it
+
+E20E   JSR $AEFD
+
+E211   JSR $0079
+
+E214   BNE $E20D
+E216   JMP $AF08
+
+
+; get open/close parameters
+
+E219   LDA #$00
+E21B   JSR $FFBD
+E21E   JSR $E211
+E221   JSR $B79E
+E224   STX $49
+E226   TXA
+E227   LDX #$01
+E229   LDY #$00
+E22B   JSR $FFBA
+E22E   JSR $E206
+E231   JSR $E200
+E234   STX $4A
+E236   LDY #$00
+E238   LDA $49
+E23A   CPX #$03
+E23C   BCC $E23F
+E23E   DEY
+E23F   JSR $FFBA
+E242   JSR $E206
+E245   JSR $E200
+E248   TXA
+E249   TAY
+E24A   LDX $4A
+E24C   LDA $49
+E24E   JSR $FFBA
+E251   JSR $E206
+E254   JSR $E20E
+
+E257   JSR $AD9E
+
+E25A   JSR $B6A3
+E25D   LDX $22
+E25F   LDY $23
+E261   JMP $FFBD
+
+
+; COS function
+
+E264   LDA #$E0   ; low  E2E0
+E266   LDY #$E2   ; high E2E0
+E268   JSR $B867
+
+
+; SIN function
+
+E26B   JSR $BC0C
+E26E   LDA #$E5   ; low  E2E5
+E270   LDY #$E2   ; high E2E5
+E272   LDX $6E
+E274   JSR $BB07
+E277   JSR $BC0C
+E27A   JSR $BCCC
+E27D   LDA #$00
+E27F   STA $6F
+E281   JSR $B853
+E284   LDA #$EA   ; low  E2EA
+E286   LDY #$E2   ; high E2EA
+E288   JSR $B850
+E28B   LDA $66
+E28D   PHA
+E28E   BPL $E29D
+E290   JSR $B849
+E293   LDA $66
+E295   BMI $E2A0
+E297   LDA $12
+E299   EOR #$FF
+E29B   STA $12
+
+E29D   JSR $BFB4
+
+E2A0   LDA #$EA   ; low  E2EA
+E2A2   LDY #$E2   ; high E2EA
+E2A4   JSR $B867
+E2A7   PLA
+E2A8   BPL $E2AD
+E2AA   JSR $BFB4
+E2AD   LDA #$EF
+E2AF   LDY #$E2
+E2B1   JMP $E043
+
+
+; TAN function
+
+E2B4   JSR $BBCA
+E2B7   LDA #$00
+E2B9   STA $12
+E2BB   JSR $E26B
+E2BE   LDX #$4E   ; low  004E
+E2C0   LDY #$00   ; high 004E
+E2C2   JSR $E0F6
+E2C5   LDA #$57   ; low  005F
+E2C7   LDY #$00   ; high 005F
+E2C9   JSR $BBA2
+E2CC   LDA #$00
+E2CE   STA $66
+E2D0   LDA $12
+E2D2   JSR $E2DC
+E2D5   LDA #$4E   ; low  004E
+E2D7   LDY #$00   ; high 004E
+E2D9   JMP $BB0F
+
+
+E2DC   PHA
+
+E2DD   JMP $E29D
+
+
+; float numbers for SIN, COS and TAN
+
+; 0.5 * PI
+E2E0   .byte $81,$49,$0F,$DA,$A2
+; 2 * PI
+E2E5   .byte $83,$49,$0F,$DA,$A2
+; 0,25
+E2EA   .byte $7F,$00,$00,$00,$00
+
+
+; polynomial table
+
+E2EF   .byte $05   ; degree 6
+E2F0   .byte $84,$E6,$1A,$2D,$1B
+E2F5   .byte $86,$28,$07,$FB,$F8
+E2FA   .byte $87,$99,$68,$89,$01
+E2FF   .byte $87,$23,$35,$DF,$E1
+E304   .byte $86,$A5,$5D,$E7,$28
+E309   .byte $83,$49,$0F,$DA,$A2
+
+
+; ATN function
+
+E30E   LDA $66
+E310   PHA
+E311   BPL $E316
+E313   JSR $BFB4
+E316   LDA $61
+E318   PHA
+E319   CMP #$81
+E31B   BCC $E324
+E31D   LDA #$BC   ; low  B9BC
+E31F   LDY #$B9   ; high B9BC
+E321   JSR $BB0F
+E324   LDA #$3E   ; low  E33E
+E326   LDY #$E3   ; high E33E
+E328   JSR $E043
+E32B   PLA
+E32C   CMP #$81
+E32E   BCC $E337
+E330   LDA #$E0   ; low  E2E0
+E332   LDY #$E2   ; high E2E0
+E334   JSR $B850
+E337   PLA
+E338   BPL $E33D
+E33A   JMP $BFB4
+E33D   RTS
+
+
+; float numbers for ATN
+; polynomial table
+
+E33E   .byte $0B   ; degree 12
+E33F   .byte $76,$B3,$83,$BD,$D3
+E344   .byte $79,$1E,$F4,$A6,$F5
+E349   .byte $7B,$83,$FC,$B0,$10
+E34E   .byte $7C,$0C,$1F,$67,$CA
+E353   .byte $7C,$DE,$53,$CB,$C1
+E358   .byte $7D,$14,$64,$70,$4C
+E35D   .byte $7D,$B7,$EA,$51,$7A
+E362   .byte $7D,$63,$30,$88,$7E
+E367   .byte $7E,$92,$44,$99,$3A
+E36C   .byte $7E,$4C,$CC,$91,$C7
+E371   .byte $7F,$AA,$AA,$AA,$13
+E376   .byte $81,$00,$00,$00,$00
+
+
+; warm start entry
+
+E37B   JSR $FFCC
+E37E   LDA #$00
+E380   STA $13
+E382   JSR $A67A
+E385   CLI
+
+E386   LDX #$80
+
+E388   JMP ($0300)   ; normally E38B
+
+
+; handle error messages
+
+E38B  TXA
+E38C  BMI $E391
+E38E  JMP $A43A
+
+E391  JMP $A474
+
+
+; RESET routine
+
+E394   JSR $E453
+E397   JSR $E3BF
+E39A   JSR $E422
+E39D   LDX #$FB
+E39F   TXS
+E3A0   BNE $E386
+
+
+; character fetch code for zero page $0073-$008F
+
+E3A2   INC $7A
+E3A4   BNE $E3A8
+E3A6   INC $7B
+E3A8   LDA $EA60
+E3AB   CMP #$3A   ; colon
+E3AD   BCS $E3B9
+E3AF   CMP #$20   ; space
+E3B1   BEQ $E3A2
+E3B3   SEC
+E3B4   SBC #$30   ; 0
+E3B6   SEC
+E3B7   SBC #$D0
+E3B9   RTS
+
+
+; first RND seed value
+
+E3BA   .byte $80,$4F,$C7,$52,$58
+
+
+; initialisation of basic
+
+E3BF   LDA #$4C
+E3C1   STA $54
+E3C3   STA $0310
+E3C6   LDA #$48   ; low  B248
+E3C8   LDY #$B2   ; high B248
+E3CA   STA $0311
+E3CD   STY $0312
+E3D0   LDA #$91   ; lowh B391
+E3D2   LDY #$B3   ; high B391
+E3D4   STA $05
+E3D6   STY $06
+E3D8   LDA #$AA   ; low  B1AA
+E3DA   LDY #$B1   ; high B1AA
+E3DC   STA $03
+E3DE   STY $04
+E3E0   LDX #$1C
+E3E2   LDA $E3A2,X
+E3E5   STA $73,X
+E3E7   DEX
+E3E8   BPL $E3E2
+E3EA   LDA #$03
+E3EC   STA $53
+E3EE   LDA #$00
+E3F0   STA $68
+E3F2   STA $13
+E3F4   STA $18
+E3F6   LDX #$01
+E3F8   STX $01FD
+E3FB   STX $01FC
+E3FE   LDX #$19
+E400   STX $16
+E402   SEC
+E403   JSR $FF9C
+E406   STX $2B
+E408   STY $2C
+E40A   SEC
+E40B   JSR $FF99
+E40E   STX $37
+E410   STY $38
+E412   STX $33
+E414   STY $34
+E416   LDY #$00
+E418   TYA
+E419   STA ($2B),Y
+E41B   INC $2B
+E41D   BNE $E421
+E41F   INC $2C
+E421   RTS
+
+
+; print BASIC start up messages
+
+E422   LDA $2B
+E424   LDY $2C
+E426   JSR $A408
+E429   LDA #$73   ; low  E473
+E42B   LDY #$E4   ; high E473
+E42D   JSR $AB1E
+E430   LDA $37
+E432   SEC
+E433   SBC $2B
+E435   TAX
+E436   LDA $38
+E438   SBC $2C
+E43A   JSR $BDCD
+E43D   LDA #$60   ; low  E460
+E43F   LDY #$E4   ; high E460
+E441   JSR $AB1E
+E444   JMP $A644
+
+
+; vectors for $0300-$030B
+
+E447   .word $E38B
+E449   .word $A483
+E44B   .word $A57C
+E44D   .word $A71A
+E44F   .word $A7E4
+E451   .word $AE86
+
+
+; initialise vectors
+
+E453   LDX #$0B
+E455   LDA $E447,X
+E458   STA $0300,X
+E45B   DEX
+E45C   BPL $E455
+E45E   RTS
+
+
+; startup messages
+
+E45F   .byte $00
+
+; basic bytes free
+
+E460   .byte $20,$42,$41,$53,$49,$43
+E466   .byte $20,$42,$59,$54,$45,$53
+E46C   .byte $20,$46,$52,$45,$45
+E471   .byte $0D
+E472   .byte $00
+
+; **** commodore 64 basic v2 ****
+
+E473   .byte $93,$0D,$20,$20,$20
+E478   .byte $20,$2A,$2A,$2A,$2A
+E47D   .byte $20,$43,$4F,$4D,$4D,$4F,$44,$4F,$52,$45
+E487   .byte $20,$36,$34
+E48A   .byte $20,$42,$41,$53,$49,$43
+E490   .byte $20,$56,$32
+E493   .byte $20,$2A,$2A,$2A,$2A
+E498   .byte $0D,$0D
+
+; 64k ram system
+
+E49A   .byte $20,$36,$34,$4B
+E49E   .byte $20,$52,$41,$4D
+E4A2   .byte $20,$53,$59,$53,$54,$45,$4D
+E4A9   .byte $20,$20
+E4AB   .byte $00
+
+E4AC   .byte $81
+
+
+; set output device
+
+E4AD   PHA
+E4AE   JSR $FFC9
+E4B1   TAX
+E4B2   PLA
+E4B3   BCC $E4B6
+E4B5   TXA
+E4B6   RTS
+
+
+; unused
+
+E4B7   .byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+E4BF   .byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+E4C7   .byte $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+E4CF   .byte $AA,$AA,$AA,$AA
+
+
+E4D3   STA $A9
+
+E4D5   LDA #$01
+E4D7   STA $AB
+E4D9   RTS
+
+
+; clear byte in color ram
+
+E4DA   LDA $0286
+E4DD   STA ($F3),Y
+E4DF   RTS
+
+
+; pause after finding a file on casette
+
+E4E0   ADC #$02
+E4E2   LDY $91
+E4E4   INY
+E4E5   BNE $E4EB
+E4E7   CMP $A1
+E4E9   BNE $E4E2
+E4EB   RTS
+
+
+; baud rate factor table
+
+E4EC   .word $2619   ; 50
+E4EE   .word $1944   ; 75
+E4F0   .word $111A   ; 110
+E4F2   .word $0DE8   ; 134.5
+E4F4   .word $0C70   ; 150
+E4F6   .word $0606   ; 300
+E4F8   .word $02D1   ; 600
+E4FA   .word $0137   ; 1200
+E4FC   .word $00AE   ; 1800
+E4FE   .word $0069   ; 2400
+
+
+; read base address of I/O device into XY
+
+E500   LDX #$00   ; low  DC00
+E502   LDY #$DC   ; high DC00
+E504   RTS
+
+
+; read screen size
+
+E505   LDX #$28   ; 40 columns
+E507   LDY #$19   ; 25 rows
+E509   RTS
+
+
+; read/set XY cursor position
+
+E50A   BCS $E513
+E50C   STX $D6
+E50E   STY $D3
+E510   JSR $E56C
+E513   LDX $D6
+E515   LDY $D3
+E517   RTS
+
+
+; initialise screen and keyboard
+
+E518   JSR $E5A0
+E51B   LDA #$00
+E51D   STA $0291
+E520   STA $CF
+E522   LDA #$48   ; low  EB48
+E524   STA $028F
+E527   LDA #$EB   ; high EB48
+E529   STA $0290
+E52C   LDA #$0A
+E52E   STA $0289
+E531   STA $028C
+E534   LDA #$0E
+E536   STA $0286
+E539   LDA #$04
+E53B   STA $028B
+E53E   LDA #$0C
+E540   STA $CD
+E542   STA $CC
+
+E544   LDA $0288
+
+E547   ORA #$80
+E549   TAY
+E54A   LDA #$00
+E54C   TAX
+E54D   STY $D9,X
+E54F   CLC
+E550   ADC #$28
+E552   BCC $E555
+E554   INY
+E555   INX
+E556   CPX #$1A
+E558   BNE $E54D
+E55A   LDA #$FF
+E55C   STA $D9,X
+E55E   LDX #$18
+E560   JSR $E9FF
+E563   DEX
+E564   BPL $E560
+
+E566   LDY #$00
+
+E568   STY $D3
+E56A   STY $D6
+
+
+; set address of curent screen line
+
+E56C   LDX $D6
+E56E   LDA $D3
+E570   LDY $D9,X
+E572   BMI $E57C
+E574   CLC
+E575   ADC #$28
+E577   STA $D3
+E579   DEX
+E57A   BPL $E570
+E57C   JSR $E9F0
+E57F   LDA #$27
+E581   INX
+E582   LDY $D9,X
+E584   BMI $E58C
+E586   CLC
+E587   ADC #$28
+E589   INX
+E58A   BPL $E582
+E58C   STA $D5
+E58E   JMP $EA24
+
+E591   CPX $C9
+
+E593   BEQ $E598
+E595   JMP $E6ED
+E598   RTS
+
+E599   NOP
+
+
+; this code is unused by kernel
+; since no other part of the
+; rom jumps to this location!
+
+E59A   JSR $E5A0
+E59D   JMP $E566
+
+
+; initialise vic chip
+
+E5A0   LDA #$03
+E5A2   STA $9A
+E5A4   LDA #$00
+E5A6   STA $99
+E5A8   LDX #$2F
+E5AA   LDA $ECB8,X
+E5AD   STA $CFFF,X
+E5B0   DEX
+E5B1   BNE $E5AA
+E5B3   RTS
+
+
+; get character from keyboard buffer
+
+E5B4   LDY $0277
+E5B7   LDX #$00
+E5B9   LDA $0278,X
+E5BC   STA $0277,X
+E5BF   INX
+E5C0   CPX $C6
+E5C2   BNE $E5B9
+E5C4   DEC $C6
+E5C6   TYA
+E5C7   CLI
+E5C8   CLC
+E5C9   RTS
+
+; wait for return for keyboard
+E5CA   JSR $E716
+E5CD   LDA $C6
+E5CF   STA $CC
+E5D1   STA $0292
+E5D4   BEQ $E5CD
+E5D6   SEI
+E5D7   LDA $CF
+E5D9   BEQ $E5E7
+E5DB   LDA $CE
+E5DD   LDX $0287
+E5E0   LDY #$00
+E5E2   STY $CF
+E5E4   JSR $EA13
+E5E7   JSR $E5B4
+E5EA   CMP #$83
+E5EC   BNE $E5FE
+E5EE   LDX #$09
+E5F0   SEI
+E5F1   STX $C6
+E5F3   LDA $ECE6,X
+E5F6   STA $0276,X
+E5F9   DEX
+E5FA   BNE $E5F3
+E5FC   BEQ $E5CD
+E5FE   CMP #$0D
+E600   BNE $E5CA
+E602   LDY $D5
+E604   STY $D0
+E606   LDA ($D1),Y
+E608   CMP #$20
+E60A   BNE $E60F
+E60C   DEY
+E60D   BNE $E606
+E60F   INY
+E610   STY $C8
+E612   LDY #$00
+E614   STY $0292
+E617   STY $D3
+E619   STY $D4
+E61B   LDA $C9
+E61D   BMI $E63A
+E61F   LDX $D6
+E621   JSR $E591
+E624   CPX $C9
+E626   BNE $E63A
+E628   LDA $CA
+E62A   STA $D3
+E62C   CMP $C8
+E62E   BCC $E63A
+E630   BCS $E65D
+
+
+; get character from device 0 or 3
+
+E632   TYA
+E633   PHA
+E634   TXA
+E635   PHA
+E636   LDA $D0
+E638   BEQ $E5CD
+
+
+; get character from current screen line
+
+E63A   LDY $D3
+E63C   LDA ($D1),Y
+E63E   STA $D7
+E640   AND #$3F
+E642   ASL $D7
+E644   BIT $D7
+E646   BPL $E64A
+E648   ORA #$80
+E64A   BCC $E650
+E64C   LDX $D4
+E64E   BNE $E654
+E650   BVS $E654
+E652   ORA #$40
+E654   INC $D3
+E656   JSR $E684
+E659   CPY $C8
+E65B   BNE $E674
+E65D   LDA #$00
+E65F   STA $D0
+E661   LDA #$0D
+E663   LDX $99
+E665   CPX #$03
+E667   BEQ $E66F
+E669   LDX $9A
+E66B   CPX #$03
+E66D   BEQ $E672
+E66F   JSR $E716
+E672   LDA #$0D
+E674   STA $D7
+E676   PLA
+E677   TAX
+E678   PLA
+E679   TAY
+E67A   LDA $D7
+E67C   CMP #$DE   ; screen PI code
+E67E   BNE $E682
+E680   LDA #$FF   ; petscii PI code
+E682   CLC
+E683   RTS
+
+
+; check for quote mark and set flag
+
+E684   CMP #$22   ; quote mark
+E686   BNE $E690
+E688   LDA $D4
+E68A   EOR #$01
+E68C   STA $D4
+E68E   LDA #$22   ; quote mark
+E690   RTS
+
+
+; fill screen at current position
+
+E691   ORA #$40
+
+E693   LDX $C7
+
+E695   BEQ $E699
+
+E697   ORA #$80
+
+E699   LDX $D8
+E69B   BEQ $E69F
+E69D   DEC $D8
+E69F   LDX $0286
+E6A2   JSR $EA13
+E6A5   JSR $E6B6
+
+
+; return from output to the screen
+
+E6A8   PLA
+E6A9   TAY
+E6AA   LDA $D8
+E6AC   BEQ $E6B0
+E6AE   LSR $D4
+E6B0   PLA
+E6B1   TAX
+E6B2   PLA
+E6B3   CLC
+E6B4   CLI
+E6B5   RTS
+
+
+; get/insert new line
+
+E6B6   JSR $E8B3
+E6B9   INC $D3
+E6BB   LDA $D5
+E6BD   CMP $D3
+E6BF   BCS $E700
+E6C1   CMP #$4F
+E6C3   BEQ $E6F7
+E6C5   LDA $0292
+E6C8   BEQ $E6CD
+E6CA   JMP $E967
+
+E6CD   LDX $D6
+E6CF   CPX #$19
+E6D1   BCC $E6DA
+E6D3   JSR $E8EA
+E6D6   DEC $D6
+E6D8   LDX $D6
+
+E6DA   ASL $D9,X
+
+E6DC   LSR $D9,X
+E6DE   INX
+E6DF   LDA $D9,X
+E6E1   ORA #$80
+E6E3   STA $D9,X
+E6E5   DEX
+E6E6   LDA $D5
+E6E8   CLC
+E6E9   ADC #$28
+E6EB   STA $D5
+
+E6ED   LDA $D9,X
+
+E6EF   BMI $E6F4
+E6F1   DEX
+E6F2   BNE $E6ED
+E6F4   JMP $E9F0
+
+E6F7   DEC $D6
+E6F9   JSR $E87C
+E6FC   LDA #$00
+E6FE   STA $D3
+E700   RTS
+
+
+; move backwards over a line boundary
+
+E701   LDX $D6
+E703   BNE $E70B
+E705   STX $D3
+E707   PLA
+E708   PLA
+E709   BNE $E6A8
+E70B   DEX
+E70C   STX $D6
+E70E   JSR $E56C
+E711   LDY $D5
+E713   STY $D3
+E715   RTS
+
+
+; put a character to screen
+
+E716   PHA
+E717   STA $D7
+E719   TXA
+E71A   PHA
+E71B   TYA
+E71C   PHA
+E71D   LDA #$00
+E71F   STA $D0
+E721   LDY $D3
+E723   LDA $D7
+E725   BPL $E72A
+E727   JMP $E7D4
+
+E72A   CMP #$0D   ; return code
+E72C   BNE $E731
+E72E   JMP $E891
+
+E731   CMP #$20
+E733   BCC $E745
+E735   CMP #$60
+E737   BCC $E73D
+E739   AND #$DF
+E73B   BNE $E73F
+E73D   AND #$3F
+E73F   JSR $E684
+E742   JMP $E693
+
+E745   LDX $D8
+E747   BEQ $E74C
+E749   JMP $E697
+
+E74C   CMP #$14    ; delete code
+E74E   BNE $E77E
+E750   TYA
+E751   BNE $E759
+E753   JSR $E701
+E756   JMP $E773
+
+E759   JSR $E8A1
+E75C   DEY
+E75D   STY $D3
+E75F   JSR $EA24
+E762   INY
+E763   LDA ($D1),Y
+E765   DEY
+E766   STA ($D1),Y
+E768   INY
+E769   LDA ($F3),Y
+E76B   DEY
+E76C   STA ($F3),Y
+E76E   INY
+E76F   CPY $D5
+E771   BNE $E762
+
+E773   LDA #$20   ; space
+
+E775   STA ($D1),Y
+E777   LDA $0286
+E77A   STA ($F3),Y
+E77C   BPL $E7CB
+E77E   LDX $D4
+E780   BEQ $E785
+E782   JMP $E697
+
+E785   CMP #$12   ;  reverse code
+E787   BNE $E78B
+E789   STA $C7
+E78B   CMP #$13   ; home code
+E78D   BNE $E792
+E78F   JSR $E566
+E792   CMP #$1D   ; csr right
+E794   BNE $E7AD
+E796   INY
+E797   JSR $E8B3
+E79A   STY $D3
+E79C   DEY
+E79D   CPY $D5
+E79F   BCC $E7AA
+E7A1   DEC $D6
+E7A3   JSR $E87C
+E7A6   LDY #$00
+E7A8   STY $D3
+E7AA   JMP $E6A8
+
+E7AD   CMP #$11   ; csr down
+E7AF   BNE $E7CE
+E7B1   CLC
+E7B2   TYA
+E7B3   ADC #$28
+E7B5   TAY
+E7B6   INC $D6
+E7B8   CMP $D5
+E7BA   BCC $E7A8
+E7BC   BEQ $E7A8
+E7BE   DEC $D6
+E7C0   SBC #$28
+E7C2   BCC $E7C8
+E7C4   STA $D3
+E7C6   BNE $E7C0
+E7C8   JSR $E87C
+E7CB   JMP $E6A8
+
+E7CE   JSR $E8CB
+E7D1   JMP $EC44
+
+
+; put shifted chars to screen
+
+E7D4   AND #$7F   ; remove shift bit
+E7D6   CMP #$7F   ; code for PI
+E7D8   BNE $E7DC
+E7DA   LDA #$5E   ; screen PI
+E7DC   CMP #$20
+E7DE   BCC $E7E3
+E7E0   JMP $E691
+
+E7E3   CMP #$0D   ; shift return
+E7E5   BNE $E7EA
+E7E7   JMP $E891
+E7EA   LDX $D4
+E7EC   BNE $E82D
+E7EE   CMP #$14   ; insert
+E7F0   BNE $E829
+E7F2   LDY $D5
+E7F4   LDA ($D1),Y
+E7F6   CMP #$20
+E7F8   BNE $E7FE
+E7FA   CPY $D3
+E7FC   BNE $E805
+E7FE   CPY #$4F
+E800   BEQ $E826
+E802   JSR $E965
+E805   LDY $D5
+E807   JSR $EA24
+E80A   DEY
+E80B   LDA ($D1),Y
+E80D   INY
+E80E   STA ($D1),Y
+E810   DEY
+E811   LDA ($F3),Y
+E813   INY
+E814   STA ($F3),Y
+E816   DEY
+E817   CPY $D3
+E819   BNE $E80A
+E81B   LDA #$20
+E81D   STA ($D1),Y
+E81F   LDA $0286
+E822   STA ($F3),Y
+E824   INC $D8
+E826   JMP $E6A8
+
+E829   LDX $D8
+E82B   BEQ $E832
+E82D   ORA #$40
+E82F   JMP $E697
+
+E832   CMP #$11   ; csr up
+E834   BNE $E84C
+E836   LDX $D6
+E838   BEQ $E871
+E83A   DEC $D6
+E83C   LDA $D3
+E83E   SEC
+E83F   SBC #$28
+E841   BCC $E847
+E843   STA $D3
+E845   BPL $E871
+E847   JSR $E56C
+E84A   BNE $E871
+E84C   CMP #$12    ; reverse off
+E84E   BNE $E854
+E850   LDA #$00
+E852   STA $C7
+E854   CMP #$1D   ; csr left
+E856   BNE $E86A
+E858   TYA
+E859   BEQ $E864
+E85B   JSR $E8A1
+E85E   DEY
+E85F   STY $D3
+E861   JMP $E6A8
+
+E864   JSR $E701
+E867   JMP $E6A8
+
+E86A   CMP #$13   ; clr code
+E86C   BNE $E874
+E86E   JSR $E544
+E871   JMP $E6A8
+
+E874   ORA #$80
+E876   JSR $E8CB
+E879   JMP $EC4F
+
+
+; set next line number
+
+E87C   LSR $C9
+E87E   LDX $D6
+E880   INX
+E881   CPX #$19
+E883   BNE $E888
+E885   JSR $E8EA
+E888   LDA $D9,X
+E88A   BPL $E880
+E88C   STX $D6
+E88E   JMP $E56C
+
+
+; action for return
+
+E891   LDX #$00
+E893   STX $D8
+E895   STX $C7
+E897   STX $D4
+E899   STX $D3
+E89B   JSR $E87C
+E89E   JMP $E6A8
+
+
+; move cursor to previous line if
+; at start of line
+
+E8A1   LDX #$02
+E8A3   LDA #$00
+E8A5   CMP $D3
+E8A7   BEQ $E8B0
+E8A9   CLC
+E8AA   ADC #$28
+E8AC   DEX
+E8AD   BNE $E8A5
+E8AF   RTS
+
+E8B0   DEC $D6
+E8B2   RTS
+
+
+; move cursor to next line if
+; at end of line
+
+E8B3  LDX #$02
+E8B5  LDA #$27
+E8B7  CMP $D3
+E8B9  BEQ $E8C2
+E8BB  CLC
+E8BC  ADC #$28
+E8BE  DEX
+E8BF  BNE $E8B7
+E8C1  RTS
+
+E8C2  LDX $D6
+E8C4  CPX #$19
+E8C6  BEQ $E8CA
+E8C8  INC $D6
+E8CA  RTS
+
+
+; check for colour change codes
+
+E8CB   LDX #$0F
+E8CD   CMP $E8DA,X
+E8D0   BEQ $E8D6
+E8D2   DEX
+E8D3   BPL $E8CD
+E8D5   RTS
+
+E8D6   STX $0286
+E8D9   RTS
+
+
+; colour key codes
+
+E8DA   .byte $90,$05,$1C,$9F,$9C,$1E,$1F,$9E
+E8E2   .byte $81,$95,$96,$97,$98,$99,$9A,$9B
+
+
+; scroll screen
+
+E8EA   LDA $AC
+E8EC   PHA
+E8ED   LDA $AD
+E8EF   PHA
+E8F0   LDA $AE
+E8F2   PHA
+E8F3   LDA $AF
+E8F5   PHA
+E8F6   LDX #$FF
+E8F8   DEC $D6
+E8FA   DEC $C9
+E8FC   DEC $02A5
+E8FF   INX
+E900   JSR $E9F0
+E903   CPX #$18
+E905   BCS $E913
+E907   LDA $ECF1,X
+E90A   STA $AC
+E90C   LDA $DA,X
+E90E   JSR $E9C8
+E911   BMI $E8FF
+E913   JSR $E9FF
+E916   LDX #$00
+E918   LDA $D9,X
+E91A   AND #$7F
+E91C   LDY $DA,X
+E91E   BPL $E922
+E920   ORA #$80
+E922   STA $D9,X
+E924   INX
+E925   CPX #$18
+E927   BNE $E918
+E929   LDA $F1
+E92B   ORA #$80
+E92D   STA $F1
+E92F   LDA $D9
+E931   BPL $E8F6
+E933   INC $D6
+E935   INC $02A5
+E938   LDA #$7F
+E93A   STA $DC00
+E93D   LDA $DC01
+E940   CMP #$FB
+E942   PHP
+E943   LDA #$7F
+E945   STA $DC00
+E948   PLP
+E949   BNE $E956
+E94B   LDY #$00
+E94D   NOP
+E94E   DEX
+E94F   BNE $E94D
+E951   DEY
+E952   BNE $E94D
+E954   STY $C6
+E956   LDX $D6
+
+E958   PLA
+
+E959   STA $AF
+E95B   PLA
+E95C   STA $AE
+E95E   PLA
+E95F   STA $AD
+E961   PLA
+E962   STA $AC
+E964   RTS
+
+
+; insert blank line in screen
+
+E965   LDX $D6
+
+E967   INX
+
+E968   LDA $D9,X
+E96A   BPL $E967
+E96C   STX $02A5
+E96F   CPX #$18
+E971   BEQ $E981
+E973   BCC $E981
+E975   JSR $E8EA
+E978   LDX $02A5
+E97B   DEX
+E97C   DEC $D6
+E97E   JMP $E6DA
+
+E981   LDA $AC
+E983   PHA
+E984   LDA $AD
+E986   PHA
+E987   LDA $AE
+E989   PHA
+E98A   LDA $AF
+E98C   PHA
+E98D   LDX #$19
+E98F   DEX
+E990   JSR $E9F0
+E993   CPX $02A5
+E996   BCC $E9A6
+E998   BEQ $E9A6
+E99A   LDA $ECEF,X
+E99D   STA $AC
+E99F   LDA $D8,X
+E9A1   JSR $E9C8
+E9A4   BMI $E98F
+E9A6   JSR $E9FF
+E9A9   LDX #$17
+E9AB   CPX $02A5
+E9AE   BCC $E9BF
+E9B0   LDA $DA,X
+E9B2   AND #$7F
+E9B4   LDY $D9,X
+E9B6   BPL $E9BA
+E9B8   ORA #$80
+E9BA   STA $DA,X
+E9BC   DEX
+E9BD   BNE $E9AB
+E9BF   LDX $02A5
+E9C2   JSR $E6DA
+E9C5   JMP $E958
+
+
+; move one screen line
+
+E9C8   AND #$03
+E9CA   ORA $0288
+E9CD   STA $AD
+E9CF   JSR $E9E0
+E9D2   LDY #$27
+E9D4   LDA ($AC),Y
+E9D6   STA ($D1),Y
+E9D8   LDA ($AE),Y
+E9DA   STA ($F3),Y
+E9DC   DEY
+E9DD   BPL $E9D4
+E9DF   RTS
+
+
+; set colour and screen addresses
+
+E9E0   JSR $EA24
+E9E3   LDA $AC
+E9E5   STA $AE
+E9E7   LDA $AD
+E9E9   AND #$03
+E9EB   ORA #$D8
+E9ED   STA $AF
+E9EF   RTS
+
+
+; fetch screen addresses
+
+E9F0   LDA $ECF0,X
+E9F3   STA $D1
+E9F5   LDA $D9,X
+E9F7   AND #$03
+E9F9   ORA $0288
+E9FC   STA $D2
+E9FE   RTS
+
+
+; clear one screen line
+
+E9FF   LDY #$27
+EA01   JSR $E9F0
+EA04   JSR $EA24
+EA07   JSR $E4DA
+EA0A   LDA #$20
+EA0C   STA ($D1),Y
+EA0E   DEY
+EA0F   BPL $EA07
+EA11   RTS
+
+EA12   NOP
+
+
+; set cursor flash timing and colour memory addresses
+
+EA13   TAY
+EA14   LDA #$02
+EA16   STA $CD
+EA18   JSR $EA24
+EA1B   TYA
+
+
+; put a char on the screen
+
+EA1C   LDY $D3
+EA1E   STA ($D1),Y
+EA20   TXA
+EA21   STA ($F3),Y
+EA23   RTS
+
+
+; set colour memory adress parallel to screen
+
+EA24   LDA $D1
+EA26   STA $F3
+EA28   LDA $D2
+EA2A   AND #$03
+EA2C   ORA #$D8
+EA2E   STA $F4
+EA30   RTS
+
+
+; normal IRQ interrupt
+
+EA31   JSR $FFEA   ; do clock
+EA34   LDA $CC   ; flash cursor
+EA36   BNE $EA61
+EA38   DEC $CD
+EA3A   BNE $EA61
+EA3C   LDA #$14
+EA3E   STA $CD
+EA40   LDY $D3
+EA42   LSR $CF
+EA44   LDX $0287
+EA47   LDA ($D1),Y
+EA49   BCS $EA5C
+EA4B   INC $CF
+EA4D   STA $CE
+EA4F   JSR $EA24
+EA52   LDA ($F3),Y
+EA54   STA $0287
+EA57   LDX $0286
+EA5A   LDA $CE
+EA5C   EOR #$80
+EA5E   JSR $EA1C   ; display cursor
+EA61   LDA $01   ; checl cassette sense
+EA63   AND #$10
+EA65   BEQ $EA71
+EA67   LDY #$00
+EA69   STY $C0
+EA6B   LDA $01
+EA6D   ORA #$20
+EA6F   BNE $EA79
+EA71   LDA $C0
+EA73   BNE $EA7B
+EA75   LDA $01
+EA77   AND #$1F
+EA79   STA $01
+EA7B   JSR $EA87   ; scan keyboard
+EA7E   LDA $DC0D
+EA81   PLA
+EA82   TAY
+EA83   PLA
+EA84   TAX
+EA85   PLA
+EA86   RTI
+
+
+; scan keyboard
+
+EA87   LDA #$00
+EA89   STA $028D
+EA8C   LDY #$40
+EA8E   STY $CB
+EA90   STA $DC00
+EA93   LDX $DC01
+EA96   CPX #$FF
+EA98   BEQ $EAFB
+EA9A   TAY
+EA9B   LDA #$81
+EA9D   STA $F5
+EA9F   LDA #$EB
+EAA1   STA $F6
+EAA3   LDA #$FE
+EAA5   STA $DC00
+EAA8   LDX #$08
+EAAA   PHA
+EAAB   LDA $DC01
+EAAE   CMP $DC01
+EAB1   BNE $EAAB
+EAB3   LSR
+EAB4   BCS $EACC
+EAB6   PHA
+EAB7   LDA ($F5),Y
+EAB9   CMP #$05
+EABB   BCS $EAC9
+EABD   CMP #$03
+EABF   BEQ $EAC9
+EAC1   ORA $028D
+EAC4   STA $028D
+EAC7   BPL $EACB
+EAC9   STY $CB
+EACB   PLA
+EACC   INY
+EACD   CPY #$41
+EACF   BCS $EADC
+EAD1   DEX
+EAD2   BNE $EAB3
+EAD4   SEC
+EAD5   PLA
+EAD6   ROL
+EAD7   STA $DC00
+EADA   BNE $EAA8
+EADC   PLA
+EADD   JMP ($028F)
+
+EAE0   LDY $CB
+
+EAE2   LDA ($F5),Y
+EAE4   TAX
+EAE5   CPY $C5
+EAE7   BEQ $EAF0
+EAE9   LDY #$10
+EAEB   STY $028C
+EAEE   BNE $EB26
+EAF0   AND #$7F
+EAF2   BIT $028A
+EAF5   BMI $EB0D
+EAF7   BVS $EB42
+EAF9   CMP #$7F
+EAFB   BEQ $EB26
+EAFD   CMP #$14   ; delete
+EAFF   BEQ $EB0D
+EB01   CMP #$20   ; space
+EB03   BEQ $EB0D
+EB05   CMP #$1D   ; csr right/left
+EB07   BEQ $EB0D
+EB09   CMP #$11   ; csr up/down
+EB0B   BNE $EB42
+EB0D   LDY $028C
+EB10   BEQ $EB17
+EB12   DEC $028C
+EB15   BNE $EB42
+EB17   DEC $028B
+EB1A   BNE $EB42
+EB1C   LDY #$04
+EB1E   STY $028B
+EB21   LDY $C6
+EB23   DEY
+EB24   BPL $EB42
+EB26   LDY $CB
+EB28   STY $C5
+EB2A   LDY $028D
+EB2D   STY $028E
+EB30   CPX #$FF
+EB32   BEQ $EB42
+EB34   TXA
+EB35   LDX $C6
+EB37   CPX $0289
+EB3A   BCS $EB42
+EB3C   STA $0277,X
+EB3F   INX
+EB40   STX $C6
+EB42   LDA #$7F
+EB44   STA $DC00
+EB47   RTS
+
+EB48   LDA $028D
+EB4B   CMP #$03
+EB4D   BNE $EB64
+EB4F   CMP $028E
+EB52   BEQ $EB42
+EB54   LDA $0291
+EB57   BMI $EB76
+EB59   LDA $D018
+EB5C   EOR #$02
+EB5E   STA $D018
+EB61   JMP $EB76
+
+
+; select keyboard table
+
+EB64   ASL
+EB65   CMP #$08
+EB67   BCC $EB6B
+EB69   LDA #$06
+EB6B   TAX
+EB6C   LDA $EB79,X
+EB6F   STA $F5
+EB71   LDA $EB7A,X
+EB74   STA $F6
+
+EB76   JMP $EAE0
+
+
+
+; table addresses
+
+EB79   .word $EB81   ; standard
+EB7B   .word $EBC2   ; shift
+EB7D   .word $EC03   ; commodore key
+EB7F   .word $EC78   ; control
+
+
+; standard keyboard table
+
+EB81   .byte $14,$0D,$1D,$88,$85,$86,$87,$11
+EB89   .byte $33,$57,$41,$34,$5A,$53,$45,$01
+EB91   .byte $35,$52,$44,$36,$43,$46,$54,$58
+EB99   .byte $37,$59,$47,$38,$42,$48,$55,$56
+EBA1   .byte $39,$49,$4A,$30,$4D,$4B,$4F,$4E
+EBA9   .byte $2B,$50,$4C,$2D,$2E,$3A,$40,$2C
+EBB1   .byte $5C,$2A,$3B,$13,$01,$3D,$5E,$2F
+EBB9   .byte $31,$5F,$04,$32,$20,$02,$51,$03
+EBC1   .byte $FF
+
+
+; shift keyboard table
+
+EBC2   .byte $94,$8D,$9D,$8C,$89,$8A,$8B,$91
+EBCA   .byte $23,$D7,$C1,$24,$DA,$D3,$C5,$01
+EBD2   .byte $25,$D2,$C4,$26,$C3,$C6,$D4,$D8
+EBDA   .byte $27,$D9,$C7,$28,$C2,$C8,$D5,$D6
+EBE2   .byte $29,$C9,$CA,$30,$CD,$CB,$CF,$CE
+EBEA   .byte $DB,$D0,$CC,$DD,$3E,$5B,$BA,$3C
+EBF2   .byte $A9,$C0,$5D,$93,$01,$3D,$DE,$3F
+EBFA   .byte $21,$5F,$04,$22,$A0,$02,$D1,$83
+EC02   .byte $FF
+
+
+; commodore key keyboard table
+
+EC03   .byte $94,$8D,$9D,$8C,$89,$8A,$8B,$91
+EC0B   .byte $96,$B3,$B0,$97,$AD,$AE,$B1,$01
+EC13   .byte $98,$B2,$AC,$99,$BC,$BB,$A3,$BD
+EC1B   .byte $9A,$B7,$A5,$9B,$BF,$B4,$B8,$BE
+EC23   .byte $29,$A2,$B5,$30,$A7,$A1,$B9,$AA
+EC2B   .byte $A6,$AF,$B6,$DC,$3E,$5B,$A4,$3C
+EC33   .byte $A8,$DF,$5D,$93,$01,$3D,$DE,$3F
+EC3B   .byte $81,$5F,$04,$95,$A0,$02,$AB,$83
+EC43   .byte $FF
+
+
+; check for special petscii codes
+
+EC44   CMP #$0E
+EC46   BNE $EC4F
+EC48   LDA $D018
+EC4B   ORA #$02
+EC4D   BNE $EC58
+
+EC4F   CMP #$8E
+
+EC51   BNE $EC5E
+EC53   LDA $D018
+EC56   AND #$FD
+EC58   STA $D018
+EC5B   JMP $E6A8
+
+
+; shift + commodore key check
+
+EC5E   CMP #$08
+EC60   BNE $EC69
+EC62   LDA #$80
+EC64   ORA $0291
+EC67   BMI $EC72
+EC69   CMP #$09
+EC6B   BNE $EC5B
+EC6D   LDA #$7F
+EC6F   AND $0291
+EC72   STA $0291
+EC75   JMP $E6A8
+
+
+; control keyboard table
+
+EC78   .byte $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
+EC80   .byte $1C,$17,$01,$9F,$1A,$13,$05,$FF
+EC88   .byte $9C,$12,$04,$1E,$03,$06,$14,$18
+EC90   .byte $1F,$19,$07,$9E,$02,$08,$15,$16
+EC98   .byte $12,$09,$0A,$92,$0D,$0B,$0F,$0E
+ECA0   .byte $FF,$10,$0C,$FF,$FF,$1B,$00,$FF
+ECA8   .byte $1C,$FF,$1D,$FF,$FF,$1F,$1E,$FF
+ECB0   .byte $90,$06,$FF,$05,$FF,$FF,$11,$FF
+ECB8   .byte $FF
+
+
+; default values for VIC chip
+
+ECB9   .byte $00,$00   ; sprite 1 x,y
+ECBB   .byte $00,$00   ; sprite 2 x,y
+ECBD   .byte $00,$00   ; sprite 3 x,y
+ECBF   .byte $00,$00   ; sprite 4 x,y
+ECC1   .byte $00,$00   ; sprite 5 x,y
+ECC3   .byte $00,$00   ; sprite 6 x,y
+ECC5   .byte $00,$00   ; sprite 7 x,y
+ECC7   .byte $00,$00   ; sprite 8 x,y
+ECC9   .byte $00
+ECCA   .byte $9B
+ECCB   .byte $37
+ECCC   .byte $00
+ECCD   .byte $00
+ECCE   .byte $00
+ECCF   .byte $08
+ECD0   .byte $00   ; sprite Y expand
+ECD1   .byte $14
+ECD2   .byte $0F
+ECD3   .byte $00
+ECD4   .byte $00
+ECD5   .byte $00   ; sprite multi-colour
+ECD6   .byte $00   ; sprite X expand
+ECD7   .byte $00
+ECD8   .byte $00
+ECD9   .byte $0E   ; boarder colour
+ECDA   .byte $06   ; background colour
+ECDB   .byte $01
+ECDC   .byte $02
+ECDD   .byte $03
+ECDE   .byte $04
+ECDF   .byte $00   ; sprite colour
+ECE0   .byte $01   ; sprite colour
+ECE1   .byte $02   ; sprite colour
+ECE2   .byte $03   ; sprite colour
+ECE3   .byte $04   ; sprite colour
+ECE4   .byte $05   ; sprite colour
+ECE5   .byte $06   ; sprite colour
+ECE6   .byte $07   ; sprite colour
+
+
+; load
+
+ECE7   .byte $4C,$4F,$41,$44,$0D
+
+; run
+
+ECEC   .byte $52,$55,$4E,$0D
+
+
+; low bytes of screen line addresses
+
+ECF0   .byte $00,$28,$50,$78,$A0
+ECF5   .byte $C8,$F0,$18,$40,$68
+ECFA   .byte $90,$B8,$E0,$08,$30
+ECFF   .byte $58,$80,$A8,$D0,$F8
+ED04   .byte $20,$48,$70,$98,$C0
+
+
+; send talk on serial bus
+
+ED09   ORA #$40
+ED0B   .byte $2C
+
+
+; send listen on serial bus
+
+ED0C   ORA #$20
+ED0E   JSR $F0A4
+
+ED11   PHA
+
+ED12   BIT $94
+ED14   BPL $ED20
+ED16   SEC
+ED17   ROR $A3
+ED19   JSR $ED40
+ED1C   LSR $94
+ED1E   LSR $A3
+ED20   PLA
+ED21   STA $95
+ED23   SEI
+ED24   JSR $EE97
+ED27   CMP #$3F
+ED29   BNE $ED2E
+ED2B   JSR $EE85
+ED2E   LDA $DD00
+ED31   ORA #$08
+ED33   STA $DD00
+
+ED36   SEI
+
+ED37   JSR $EE8E
+ED3A   JSR $EE97
+ED3D   JSR $EEB3
+
+
+; send byte from $95 on serial bus
+
+ED40   SEI
+ED41   JSR $EE97
+ED44   JSR $EEA9
+ED47   BCS $EDAD
+ED49   JSR $EE85
+ED4C   BIT $A3
+ED4E   BPL $ED5A
+ED50   JSR $EEA9
+ED53   BCC $ED50
+ED55   JSR $EEA9
+ED58   BCS $ED55
+ED5A   JSR $EEA9
+ED5D   BCC $ED5A
+ED5F   JSR $EE8E
+ED62   LDA #$08
+ED64   STA $A5
+ED66   LDA $DD00
+ED69   CMP $DD00
+ED6C   BNE $ED66
+ED6E   ASL
+ED6F   BCC $EDB0
+ED71   ROR $95
+ED73   BCS $ED7A
+ED75   JSR $EEA0
+ED78   BNE $ED7D
+ED7A   JSR $EE97
+ED7D   JSR $EE85
+ED80   NOP
+ED81   NOP
+ED82   NOP
+ED83   NOP
+ED84   LDA $DD00
+ED87   AND #$DF
+ED89   ORA #$10
+ED8B   STA $DD00
+ED8E   DEC $A5
+ED90   BNE $ED66
+ED92   LDA #$04
+ED94   STA $DC07
+ED97   LDA #$19
+ED99   STA $DC0F
+ED9C   LDA $DC0D
+ED9F   LDA $DC0D
+EDA2   AND #$02
+EDA4   BNE $EDB0
+EDA6   JSR $EEA9
+EDA9   BCS $ED9F
+EDAB   CLI
+EDAC   RTS
+
+EDAD   LDA #$80
+EDAF   .byte $2C
+EDB0   LDA #$03
+
+EDB2   JSR $FE1C
+
+EDB5   CLI
+EDB6   CLC
+EDB7   BCC $EE03
+
+
+; send secondary address (listen) on serial bus
+
+EDB9   STA $95
+EDBB   JSR $ED36
+
+EDBE   LDA $DD00
+
+EDC1   AND #$F7
+EDC3   STA $DD00
+EDC6   RTS
+
+
+; send secondary address (talk) on serial bus
+
+EDC7   STA $95
+EDC9   JSR $ED36
+
+EDCC   SEI
+
+EDCD   JSR $EEA0
+EDD0   JSR $EDBE
+EDD3   JSR $EE85
+EDD6   JSR $EEA9
+EDD9   BMI $EDD6
+EDDB   CLI
+EDDC   RTS
+
+
+; output byte on serial bus
+
+EDDD   BIT $94
+EDDF   BMI $EDE6
+EDE1   SEC
+EDE2   ROR $94
+EDE4   BNE $EDEB
+EDE6   PHA
+EDE7   JSR $ED40
+EDEA   PLA
+EDEB   STA $95
+EDED   CLC
+EDEE   RTS
+
+
+; send talk on serial bus
+
+EDEF   SEI
+EDF0   JSR $EE8E
+EDF3   LDA $DD00
+EDF6   ORA #$08
+EDF8   STA $DD00
+EDFB   LDA #$5F
+EDFD   .byte $2C
+
+
+; send unlisten on serial bus
+
+EDFE   LDA #$3F
+EE00   JSR $ED11
+EE03   JSR $EDBE
+
+EE06   TXA
+
+EE07   LDX #$0A
+EE09   DEX
+EE0A   BNE $EE09
+EE0C   TAX
+EE0D   JSR $EE85
+EE10   JMP $EE97
+
+
+; input byte on serial bus
+
+EE13   SEI
+EE14   LDA #$00
+EE16   STA $A5
+EE18   JSR $EE85
+EE1B   JSR $EEA9
+EE1E   BPL $EE1B
+EE20   LDA #$01
+EE22   STA $DC07
+EE25   LDA #$19
+EE27   STA $DC0F
+EE2A   JSR $EE97
+EE2D   LDA $DC0D
+EE30   LDA $DC0D
+EE33   AND #$02
+EE35   BNE $EE3E
+EE37   JSR $EEA9
+EE3A   BMI $EE30
+EE3C   BPL $EE56
+EE3E   LDA $A5
+EE40   BEQ $EE47
+EE42   LDA #$02
+EE44   JMP $EDB2
+
+EE47   JSR $EEA0
+EE4A   JSR $EE85
+EE4D   LDA #$40
+EE4F   JSR $FE1C
+EE52   INC $A5
+EE54   BNE $EE20
+EE56   LDA #$08
+EE58   STA $A5
+EE5A   LDA $DD00
+EE5D   CMP $DD00
+EE60   BNE $EE5A
+EE62   ASL
+EE63   BPL $EE5A
+EE65   ROR $A4
+EE67   LDA $DD00
+EE6A   CMP $DD00
+EE6D   BNE $EE67
+EE6F   ASL
+EE70   BMI $EE67
+EE72   DEC $A5
+EE74   BNE $EE5A
+EE76   JSR $EEA0
+EE79   BIT $90
+EE7B   BVC $EE80
+EE7D   JSR $EE06
+EE80   LDA $A4
+EE82   CLI
+EE83   CLC
+EE84   RTS
+
+
+; set serial clock line low
+
+EE85   LDA $DD00
+EE88   AND #$EF
+EE8A   STA $DD00
+EE8D   RTS
+
+
+; set serial clock line high
+
+EE8E   LDA $DD00
+EE91   ORA #$10
+EE93   STA $DD00
+EE96   RTS
+
+
+; set serial data line low
+
+EE97   LDA $DD00
+EE9A   AND #$DF
+EE9C   STA $DD00
+EE9F   RTS
+
+
+; set serial data line high
+
+EEA0   LDA $DD00
+EEA3   ORA #$20
+EEA5   STA $DD00
+EEA8   RTS
+
+
+EEA9   LDA $DD00
+
+EEAC   CMP $DD00
+EEAF   BNE $EEA9
+EEB1   ASL
+EEB2   RTS
+
+
+; delay 1 millisecond
+
+EEB3   TXA
+EEB4   LDX #$B8
+EEB6   DEX
+EEB7   BNE $EEB6
+EEB9   TAX
+EEBA   RTS
+
+
+; set next bit to transmit on RS-232
+
+EEBB   LDA $B4
+EEBD   BEQ $EF06
+EEBF   BMI $EF00
+EEC1   LSR $B6
+EEC3   LDX #$00
+EEC5   BCC $EEC8
+EEC7   DEX
+EEC8   TXA
+EEC9   EOR $BD
+EECB   STA $BD
+EECD   DEC $B4
+EECF   BEQ $EED7
+EED1   TXA
+EED2   AND #$04
+EED4   STA $B5
+EED6   RTS
+
+EED7   LDA #$20
+EED9   BIT $0294
+EEDC   BEQ $EEF2
+EEDE   BMI $EEFC
+EEE0   BVS $EEF6
+EEE2   LDA $BD
+EEE4   BNE $EEE7
+EEE6   DEX
+EEE7   DEC $B4
+EEE9   LDA $0293
+EEEC   BPL $EED1
+EEEE   DEC $B4
+EEF0   BNE $EED1
+EEF2   INC $B4
+EEF4   BNE $EEE6
+EEF6   LDA $BD
+EEF8   BEQ $EEE7
+EEFA   BNE $EEE6
+EEFC   BVS $EEE7
+EEFE   BVC $EEE6
+EF00   INC $B4
+EF02   LDX #$FF
+EF04   BNE $EED1
+
+EF06   LDA $0294
+
+EF09   LSR
+EF0A   BCC $EF13
+EF0C   BIT $DD01
+EF0F   BPL $EF2E
+EF11   BVC $EF31
+EF13   LDA #$00
+EF15   STA $BD
+EF17   STA $B5
+EF19   LDX $0298
+EF1C   STX $B4
+EF1E   LDY $029D
+EF21   CPY $029E
+EF24   BEQ $EF39
+EF26   LDA ($F9),Y
+EF28   STA $B6
+EF2A   INC $029D
+EF2D   RTS
+
+
+; handle RS-232 errors
+
+EF2E   LDA #$40
+EF30   .byte $2C
+EF31   LDA #$10
+EF33   ORA $0297
+EF36   STA $0297
+EF39   LDA #$01
+
+EF3B   STA $DD0D
+
+EF3E   EOR $02A1
+EF41   ORA #$80
+EF43   STA $02A1
+EF46   STA $DD0D
+EF49   RTS
+
+
+; check control register
+
+EF4A   LDX #$09
+EF4C   LDA #$20
+EF4E   BIT $0293
+EF51   BEQ $EF54
+EF53   DEX
+EF54   BVC $EF58
+EF56   DEX
+EF57   DEX
+EF58   RTS
+
+
+; add bit input on RS-232 bus to word being input
+
+EF59   LDX $A9
+EF5B   BNE $EF90
+EF5D   DEC $A8
+EF5F   BEQ $EF97
+EF61   BMI $EF70
+EF63   LDA $A7
+EF65   EOR $AB
+EF67   STA $AB
+EF69   LSR $A7
+EF6B   ROR $AA
+EF6D   RTS
+
+
+; handle end of word for RS-232 input
+
+EF6E   DEC $A8
+EF70   LDA $A7
+EF72   BEQ $EFDB
+EF74   LDA $0293
+EF77   ASL
+EF78   LDA #$01
+EF7A   ADC $A8
+EF7C   BNE $EF6D
+
+
+; enable byte reception
+
+EF7E   LDA #$90
+EF80   STA $DD0D
+EF83   ORA $02A1
+EF86   STA $02A1
+EF89   STA $A9
+EF8B   LDA #$02
+EF8D   JMP $EF3B
+
+
+; receiver start bit test
+
+EF90   LDA $A7
+EF92   BNE $EF7E
+EF94   JMP $E4D3
+
+
+; put received data into RS-232 buffer
+
+EF97   LDY $029B
+EF9A   INY
+EF9B   CPY $029C
+EF9E   BEQ $EFCA
+EFA0   STY $029B
+EFA3   DEY
+EFA4   LDA $AA
+EFA6   LDX $0298
+EFA9   CPX #$09
+EFAB   BEQ $EFB1
+EFAD   LSR
+EFAE   INX
+EFAF   BNE $EFA9
+EFB1   STA ($F7),Y
+EFB3   LDA #$20
+EFB5   BIT $0294
+EFB8   BEQ $EF6E
+EFBA   BMI $EF6D
+EFBC   LDA $A7
+EFBE   EOR $AB
+EFC0   BEQ $EFC5
+EFC2   BVS $EF6D
+EFC4   .byte $2C
+EFC5   BVC $EF6D
+EFC7   LDA #$01
+EFC9   .byte $2C
+EFCA   LDA #$04
+EFCC   .byte $2C
+EFCD   LDA #$80
+EFCF   .byte $2C
+EFD0   LDA #$02
+EFD2   ORA $0297
+EFD5   STA $0297
+EFD8   JMP $EF7E
+
+EFDB   LDA $AA
+EFDD   BNE $EFD0
+EFDF   BEQ $EFCD
+
+
+; output of RS-232 device
+
+EFE1   STA $9A
+EFE3   LDA $0294
+EFE6   LSR
+EFE7   BCC $F012
+EFE9   LDA #$02
+EFEB   BIT $DD01
+EFEE   BPL $F00D
+EFF0   BNE $F012
+EFF2   LDA $02A1
+EFF5   AND #$02
+EFF7   BNE $EFF2
+EFF9   BIT $DD01
+EFFC   BVS $EFF9
+EFFE   LDA $DD01
+F001   ORA #$02
+F003   STA $DD01
+F006   BIT $DD01
+F009   BVS $F012
+F00B   BMI $F006
+
+F00D   LDA #$40
+
+F00F   STA $0297
+F012   CLC
+F013   RTS
+
+
+; buffer char to output on RS-232
+
+F014   JSR $F028
+
+F017   LDY $029E
+
+F01A   INY
+F01B   CPY $029D
+F01E   BEQ $F014
+F020   STY $029E
+F023   DEY
+F024   LDA $9E
+F026   STA ($F9),Y
+
+F028   LDA $02A1
+
+F02B   LSR
+F02C   BCS $F04C
+F02E   LDA #$10
+F030   STA $DD0E
+F033   LDA $0299
+F036   STA $DD04
+F039   LDA $029A
+F03C   STA $DD05
+F03F   LDA #$81
+F041   JSR $EF3B
+F044   JSR $EF06
+F047   LDA #$11
+F049   STA $DD0E
+F04C   RTS
+
+
+; initalise RS-232 input
+
+F04D   STA $99
+F04F   LDA $0294
+F052   LSR
+F053   BCC $F07D
+F055   AND #$08
+F057   BEQ $F07D
+F059   LDA #$02
+F05B   BIT $DD01
+F05E   BPL $F00D
+F060   BEQ $F084
+F062   LDA $02A1
+F065   LSR
+F066   BCS $F062
+F068   LDA $DD01
+F06B   AND #$FD
+F06D   STA $DD01
+F070   LDA $DD01
+F073   AND #$04
+F075   BEQ $F070
+F077   LDA #$90
+F079   CLC
+F07A   JMP $EF3B
+
+F07D   LDA $02A1
+F080   AND #$12
+F082   BEQ $F077
+F084   CLC
+F085   RTS
+
+
+; get next character from RS-232 input buffer
+
+F086   LDA $0297
+F089   LDY $029C
+F08C   CPY $029B
+F08F   BEQ $F09C
+F091   AND #$F7
+F093   STA $0297
+F096   LDA ($F7),Y
+F098   INC $029C
+F09B   RTS
+
+F09C   ORA #$08
+F09E   STA $0297
+F0A1   LDA #$00
+F0A3   RTS
+
+
+; protect serial/casette routine from RS-232 NMI's
+
+F0A4   PHA
+F0A5   LDA $02A1
+F0A8   BEQ $F0BB
+F0AA   LDA $02A1
+F0AD   AND #$03
+F0AF   BNE $F0AA
+F0B1   LDA #$10
+F0B3   STA $DD0D
+F0B6   LDA #$00
+F0B8   STA $02A1
+F0BB   PLA
+F0BC   RTS
+
+
+; kernal I/O messages
+; I/O error
+
+F0BD   .byte $0D
+F0BE   .byte $49,$2F,$4F
+F0C1   .byte $20,$45,$52,$52,$4F,$52
+F0C7   .byte $20,$A3
+
+; searching for
+
+F0C9   .byte $0D
+F0CA   .byte $53,$45,$41,$52,$43,$48,$49,$4E,$47,$A0
+F0D4   .byte $46,$4F,$52,$A0
+
+; press play on tape
+
+F0D8   .byte $0D
+F0D9   .byte $50,$52,$45,$53,$53
+F0DE   .byte $20,$50,$4C,$41,$59
+F0E3   .byte $20,$4F,$4E
+F0E6   .byte $20,$54,$41,$50,$C5
+
+; press record and play on tape
+
+F0EB   .byte $50,$52,$45,$53,$53
+F0F0   .byte $20,$52,$45,$43,$4F,$52,$44
+F0F7   .byte $20,$26
+F0F9   .byte $20,$50,$4C,$41,$59
+F0FE   .byte $20,$4F,$4E
+F101   .byte $20,$54,$41,$50,$C5
+
+; loading
+
+F106   .byte $0D
+F107   .byte $4C,$4F,$41,$44,$49,$4E,$C7
+
+; saving
+
+F10E   .byte $0D
+F10F   .byte $53,$41,$56,$49,$4E,$47,$A0
+
+; verifying
+
+F116   .byte $0D
+F117   .byte $56,$45,$52,$49,$46,$59,$49,$4E,$C7
+
+; found
+
+F120   .byte $0D
+F121   .byte $46,$4F,$55,$4E,$44,$A0
+
+; ok
+
+F127   .byte $0D
+F128   .byte $4F,$4B,$8D
+
+
+; print kernal message indexed by Y
+
+F12B   BIT $9D
+F12D   BPL $F13C
+
+F12F   LDA $F0BD,Y
+
+F132   PHP
+F133   AND #$7F
+F135   JSR $FFD2
+F138   INY
+F139   PLP
+F13A   BPL $F12F
+F13C   CLC
+F13D   RTS
+
+
+; get a character
+
+F13E   LDA $99
+F140   BNE $F14A
+F142   LDA $C6
+F144   BEQ $F155
+F146   SEI
+F147   JMP $E5B4
+
+F14A   CMP #$02
+F14C   BNE $F166
+
+F14E   STY $97
+
+F150   JSR $F086
+F153   LDY $97
+F155   CLC
+F156   RTS
+
+
+; input a character
+
+F157   LDA $99
+F159   BNE $F166
+F15B   LDA $D3
+F15D   STA $CA
+F15F   LDA $D6
+F161   STA $C9
+F163   JMP $E632
+
+F166   CMP #$03
+F168   BNE $F173
+F16A   STA $D0
+F16C   LDA $D5
+F16E   STA $C8
+F170   JMP $E632
+
+F173   BCS $F1AD
+F175   CMP #$02
+F177   BEQ $F1B8
+F179   STX $97
+F17B   JSR $F199
+F17E   BCS $F196
+F180   PHA
+F181   JSR $F199
+F184   BCS $F193
+F186   BNE $F18D
+F188   LDA #$40
+F18A   JSR $FE1C
+F18D   DEC $A6
+F18F   LDX $97
+F191   PLA
+F192   RTS
+
+F193   TAX
+F194   PLA
+F195   TXA
+F196   LDX $97
+F198   RTS
+
+
+; read a byte from cassette buffer
+
+F199   JSR $F80D
+F19C   BNE $F1A9
+F19E   JSR $F841
+F1A1   BCS $F1B4
+F1A3   LDA #$00
+F1A5   STA $A6
+F1A7   BEQ $F199
+F1A9   LDA ($B2),Y
+F1AB   CLC
+F1AC   RTS
+
+F1AD   LDA $90
+F1AF   BEQ $F1B5
+F1B1   LDA #$0D
+F1B3   CLC
+F1B4   RTS
+
+
+; read a byte from serial bus
+
+F1B5   JMP $EE13
+
+
+; read a byte from RS-232 bus
+
+F1B8   JSR $F14E
+F1BB   BCS $F1B4
+F1BD   CMP #$00
+F1BF   BNE $F1B3
+F1C1   LDA $0297
+F1C4   AND #$60
+F1C6   BNE $F1B1
+F1C8   BEQ $F1B8
+
+
+; output a character
+
+F1CA   PHA
+F1CB   LDA $9A
+F1CD   CMP #$03
+F1CF   BNE $F1D5
+F1D1   PLA
+F1D2   JMP $E716
+
+F1D5   BCC $F1DB
+F1D7   PLA
+F1D8   JMP $EDDD
+
+F1DB   LSR
+F1DC   PLA
+
+F1DD   STA $9E
+
+F1DF   TXA
+F1E0   PHA
+F1E1   TYA
+F1E2   PHA
+F1E3   BCC $F208
+F1E5   JSR $F80D
+F1E8   BNE $F1F8
+F1EA   JSR $F864
+F1ED   BCS $F1FD
+F1EF   LDA #$02
+F1F1   LDY #$00
+F1F3   STA ($B2),Y
+F1F5   INY
+F1F6   STY $A6
+F1F8   LDA $9E
+F1FA   STA ($B2),Y
+
+F1FC   CLC
+
+F1FD   PLA
+F1FE   TAY
+F1FF   PLA
+F200   TAX
+F201   LDA $9E
+F203   BCC $F207
+F205   LDA #$00
+F207   RTS
+
+F208   JSR $F017
+F20B   JMP $F1FC
+
+
+; set input device
+
+F20E   JSR $F30F
+F211   BEQ $F216
+F213   JMP $F701
+
+F216   JSR $F31F
+F219   LDA $BA
+F21B   BEQ $F233
+F21D   CMP #$03
+F21F   BEQ $F233
+F221   BCS $F237
+F223   CMP #$02
+F225   BNE $F22A
+F227   JMP $F04D
+
+F22A   LDX $B9
+F22C   CPX #$60
+F22E   BEQ $F233
+F230   JMP $F70A
+
+F233   STA $99
+F235   CLC
+F236   RTS
+
+
+; set serial bus input device
+
+F237   TAX
+F238   JSR $ED09
+F23B   LDA $B9
+F23D   BPL $F245
+F23F   JSR $EDCC
+F242   JMP $F248
+
+F245   JSR $EDC7
+
+F248   TXA
+
+F249   BIT $90
+F24B   BPL $F233
+F24D   JMP $F707
+
+
+; set output device
+
+F250   JSR $F30F
+F253   BEQ $F258
+F255   JMP $F701
+
+F258   JSR $F31F
+F25B   LDA $BA
+F25D   BNE $F262
+F25F   JMP $F70D
+
+F262   CMP #$03
+F264   BEQ $F275
+F266   BCS $F279
+F268   CMP #$02
+F26A   BNE $F26F
+F26C   JMP $EFE1
+
+F26F   LDX $B9
+F271   CPX #$60
+F273   BEQ $F25F
+F275   STA $9A
+F277   CLC
+F278   RTS
+
+
+; set serial bus output device
+
+F279   TAX
+F27A   JSR $ED0C
+F27D   LDA $B9
+F27F   BPL $F286
+F281   JSR $EDBE
+F284   BNE $F289
+F286   JSR $EDB9
+F289   TXA
+F28A   BIT $90
+F28C   BPL $F275
+F28E   JMP $F707
+
+
+; close a file
+
+F291   JSR $F314
+F294   BEQ $F298
+F296   CLC
+F297   RTS
+
+F298   JSR $F31F
+F29B   TXA
+F29C   PHA
+F29D   LDA $BA
+F29F   BEQ $F2F1
+F2A1   CMP #$03
+F2A3   BEQ $F2F1
+F2A5   BCS $F2EE
+F2A7   CMP #$02
+F2A9   BNE $F2C8
+F2AB   PLA
+F2AC   JSR $F2F2
+F2AF   JSR $F483
+F2B2   JSR $FE27
+F2B5   LDA $F8
+F2B7   BEQ $F2BA
+F2B9   INY
+F2BA   LDA $FA
+F2BC   BEQ $F2BF
+F2BE   INY
+F2BF   LDA #$00
+F2C1   STA $F8
+F2C3   STA $FA
+F2C5   JMP $F47D
+
+
+; close cassette device
+
+F2C8   LDA $B9
+F2CA   AND #$0F
+F2CC   BEQ $F2F1
+F2CE   JSR $F7D0
+F2D1   LDA #$00
+F2D3   SEC
+F2D4   JSR $F1DD
+F2D7   JSR $F864
+F2DA   BCC $F2E0
+F2DC   PLA
+F2DD   LDA #$00
+F2DF   RTS
+
+F2E0   LDA $B9
+F2E2   CMP #$62
+F2E4   BNE $F2F1
+F2E6   LDA #$05
+F2E8   JSR $F76A
+F2EB   JMP $F2F1
+
+
+; close serial bus device
+
+F2EE   JSR $F642
+
+F2F1   PLA
+
+
+
+; reorganise file tables
+
+F2F2   TAX
+F2F3   DEC $98
+F2F5   CPX $98
+F2F7   BEQ $F30D
+F2F9   LDY $98
+F2FB   LDA $0259,Y
+F2FE   STA $0259,X
+F301   LDA $0263,Y
+F304   STA $0263,X
+F307   LDA $026D,Y
+F30A   STA $026D,X
+F30D   CLC
+F30E   RTS
+
+
+; check X against logical file table
+
+F30F   LDA #$00
+F311   STA $90
+F313   TXA
+
+F314   LDX $98
+
+F316   DEX
+F317   BMI $F32E
+F319   CMP $0259,X
+F31C   BNE $F316
+F31E   RTS
+
+
+; set file parameters depending on X
+
+F31F   LDA $0259,X
+F322   STA $B8
+F324   LDA $0263,X
+F327   STA $BA
+F329   LDA $026D,X
+F32C   STA $B9
+F32E   RTS
+
+
+; close all files
+
+F32F   LDA #$00
+F331   STA $98
+
+
+; restore I/O to default devices
+
+F333   LDX #$03
+F335   CPX $9A
+F337   BCS $F33C
+F339   JSR $EDFE
+F33C   CPX $99
+F33E   BCS $F343
+F340   JSR $EDEF
+F343   STX $9A
+F345   LDA #$00
+F347   STA $99
+F349   RTS
+
+
+; open a file
+
+F34A   LDX $B8
+F34C   BNE $F351
+F34E   JMP $F70A
+
+F351   JSR $F30F
+F354   BNE $F359
+F356   JMP $F6FE
+
+F359   LDX $98
+F35B   CPX #$0A
+F35D   BCC $F362
+F35F   JMP $F6FB
+
+F362   INC $98
+F364   LDA $B8
+F366   STA $0259,X
+F369   LDA $B9
+F36B   ORA #$60
+F36D   STA $B9
+F36F   STA $026D,X
+F372   LDA $BA
+F374   STA $0263,X
+F377   BEQ $F3D3
+F379   CMP #$03
+F37B   BEQ $F3D3
+F37D   BCC $F384
+F37F   JSR $F3D5
+F382   BCC $F3D3
+F384   CMP #$02
+F386   BNE $F38B
+F388   JMP $F409
+
+
+; open for cassette device
+
+F38B   JSR $F7D0
+F38E   BCS $F393
+F390   JMP $F713
+
+F393   LDA $B9
+F395   AND #$0F
+F397   BNE $F3B8
+F399   JSR $F817
+F39C   BCS $F3D4
+F39E   JSR $F5AF
+F3A1   LDA $B7
+F3A3   BEQ $F3AF
+F3A5   JSR $F7EA
+F3A8   BCC $F3C2
+F3AA   BEQ $F3D4
+F3AC   JMP $F704
+
+F3AF   JSR $F72C
+F3B2   BEQ $F3D4
+F3B4   BCC $F3C2
+F3B6   BCS $F3AC
+
+
+; open cassette for input
+
+F3B8   JSR $F838
+F3BB   BCS $F3D4
+F3BD   LDA #$04
+F3BF   JSR $F76A
+F3C2   LDA #$BF
+F3C4   LDY $B9
+F3C6   CPY #$60
+F3C8   BEQ $F3D1
+F3CA   LDY #$00
+F3CC   LDA #$02
+F3CE   STA ($B2),Y
+F3D0   TYA
+F3D1   STA $A6
+F3D3   CLC
+F3D4   RTS
+
+
+; open for serial bus devices
+
+F3D5   LDA $B9
+F3D7   BMI $F3D3
+F3D9   LDY $B7
+F3DB   BEQ $F3D3
+F3DD   LDA #$00
+F3DF   STA $90
+F3E1   LDA $BA
+F3E3   JSR $ED0C
+F3E6   LDA $B9
+F3E8   ORA #$F0
+F3EA   JSR $EDB9
+F3ED   LDA $90
+F3EF   BPL $F3F6
+F3F1   PLA
+F3F2   PLA
+F3F3   JMP $F707
+
+F3F6   LDA $B7
+F3F8   BEQ $F406
+F3FA   LDY #$00
+F3FC   LDA ($BB),Y
+F3FE   JSR $EDDD
+F401   INY
+F402   CPY $B7
+F404   BNE $F3FC
+F406   JMP $F654
+
+
+; open RS-232 device
+
+F409   JSR $F483
+F40C   STY $0297
+F40F   CPY $B7
+F411   BEQ $F41D
+F413   LDA ($BB),Y
+F415   STA $0293,Y
+F418   INY
+F419   CPY #$04
+F41B   BNE $F40F
+F41D   JSR $EF4A
+F420   STX $0298
+F423   LDA $0293
+F426   AND #$0F
+F428   BEQ $F446
+F42A   ASL
+F42B   TAX
+F42C   LDA $02A6
+F42F   BNE $F43A
+F431   LDY $FEC1,X
+F434   LDA $FEC0,X
+F437   JMP $F440
+F43A   LDY $E4EB,X
+F43D   LDA $E4EA,X
+
+F440   STY $0296
+
+F443   STA $0295
+F446   LDA $0295
+F449   ASL
+F44A   JSR $FF2E
+F44D   LDA $0294
+F450   LSR
+F451   BCC $F45C
+F453   LDA $DD01
+F456   ASL
+F457   BCS $F45C
+F459   JSR $F00D
+F45C   LDA $029B
+F45F   STA $029C
+F462   LDA $029E
+F465   STA $029D
+F468   JSR $FE27
+F46B   LDA $F8
+F46D   BNE $F474
+F46F   DEY
+F470   STY $F8
+F472   STX $F7
+F474   LDA $FA
+F476   BNE $F47D
+F478   DEY
+F479   STY $FA
+F47B   STX $F9
+
+F47D   SEC
+
+F47E   LDA #$F0
+F480   JMP $FE2D
+
+
+; initialise CIA2
+
+F483   LDA #$7F
+F485   STA $DD0D
+F488   LDA #$06
+F48A   STA $DD03
+F48D   STA $DD01
+F490   LDA #$04
+F492   ORA $DD00
+F495   STA $DD00
+F498   LDY #$00
+F49A   STY $02A1
+F49D   RTS
+
+
+; load ram from a device
+
+F49E   STX $C3
+F4A0   STY $C4
+F4A2   JMP ($0330)   ; normally F4A5
+
+
+; standard load ram entry
+
+F4A5   STA $93
+F4A7   LDA #$00
+F4A9   STA $90
+F4AB   LDA $BA
+F4AD   BNE $F4B2
+F4AF   JMP $F713
+
+F4B2   CMP #$03
+F4B4   BEQ $F4AF
+F4B6   BCC $F533
+F4B8   LDY $B7
+F4BA   BNE $F4BF
+F4BC   JMP $F710
+
+F4BF   LDX $B9
+F4C1   JSR $F5AF
+F4C4   LDA #$60
+F4C6   STA $B9
+F4C8   JSR $F3D5
+F4CB   LDA $BA
+F4CD   JSR $ED09
+F4D0   LDA $B9
+F4D2   JSR $EDC7
+F4D5   JSR $EE13
+F4D8   STA $AE
+F4DA   LDA $90
+F4DC   LSR
+F4DD   LSR
+F4DE   BCS $F530
+F4E0   JSR $EE13
+F4E3   STA $AF
+F4E5   TXA
+F4E6   BNE $F4F0
+F4E8   LDA $C3
+F4EA   STA $AE
+F4EC   LDA $C4
+F4EE   STA $AF
+F4F0   JSR $F5D2
+F4F3   LDA #$FD
+F4F5   AND $90
+F4F7   STA $90
+F4F9   JSR $FFE1
+F4FC   BNE $F501
+F4FE   JMP $F633
+
+F501   JSR $EE13
+F504   TAX
+F505   LDA $90
+F507   LSR
+F508   LSR
+F509   BCS $F4F3
+F50B   TXA
+F50C   LDY $93
+F50E   BEQ $F51C
+F510   LDY #$00
+F512   CMP ($AE),Y
+F514   BEQ $F51E
+F516   LDA #$10
+F518   JSR $FE1C
+F51B   .byte $2C
+F51C   STA ($AE),Y
+F51E   INC $AE
+F520   BNE $F524
+F522   INC $AF
+F524   BIT $90
+F526   BVC $F4F3
+F528   JSR $EDEF
+F52B   JSR $F642
+F52E   BCC $F5A9
+F530   JMP $F704
+F533   LSR
+F534   BCS $F539
+F536   JMP $F713
+
+F539   JSR $F7D0
+F53C   BCS $F541
+F53E   JMP $F713
+F541   JSR $F817
+F544   BCS $F5AE
+F546   JSR $F5AF
+F549   LDA $B7
+F54B   BEQ $F556
+F54D   JSR $F7EA
+F550   BCC $F55D
+F552   BEQ $F5AE
+F554   BCS $F530
+F556   JSR $F72C
+F559   BEQ $F5AE
+F55B   BCS $F530
+F55D   LDA $90
+F55F   AND #$10
+F561   SEC
+F562   BNE $F5AE
+F564   CPX #$01
+F566   BEQ $F579
+F568   CPX #$03
+F56A   BNE $F549
+F56C   LDY #$01
+F56E   LDA ($B2),Y
+F570   STA $C3
+F572   INY
+F573   LDA ($B2),Y
+F575   STA $C4
+F577   BCS $F57D
+F579   LDA $B9
+F57B   BNE $F56C
+F57D   LDY #$03
+F57F   LDA ($B2),Y
+F581   LDY #$01
+F583   SBC ($B2),Y
+F585   TAX
+F586   LDY #$04
+F588   LDA ($B2),Y
+F58A   LDY #$02
+F58C   SBC ($B2),Y
+F58E   TAY
+F58F   CLC
+F590   TXA
+F591   ADC $C3
+F593   STA $AE
+F595   TYA
+F596   ADC $C4
+F598   STA $AF
+F59A   LDA $C3
+F59C   STA $C1
+F59E   LDA $C4
+F5A0   STA $C2
+F5A2   JSR $F5D2
+F5A5   JSR $F84A
+F5A8   .byte $24
+F5A9   CLC
+F5AA   LDX $AE
+F5AC   LDY $AF
+F5AE   RTS
+
+
+; handle messages for loading
+
+F5AF   LDA $9D
+F5B1   BPL $F5D1
+F5B3   LDY #$0C
+F5B5   JSR $F12F
+F5B8   LDA $B7
+F5BA   BEQ $F5D1
+F5BC   LDY #$17
+F5BE   JSR $F12F
+
+F5C1   LDY $B7
+
+F5C3   BEQ $F5D1
+F5C5   LDY #$00
+F5C7   LDA ($BB),Y
+F5C9   JSR $FFD2
+F5CC   INY
+F5CD   CPY $B7
+F5CF   BNE $F5C7
+F5D1   RTS
+
+
+; do load/verify message
+
+F5D2   LDY #$49
+F5D4   LDA $93
+F5D6   BEQ $F5DA
+F5D8   LDY #$59
+F5DA   JMP $F12B
+
+
+; save ram to a device
+
+F5DD   STX $AE
+F5DF   STY $AF
+F5E1   TAX
+F5E2   LDA $00,X
+F5E4   STA $C1
+F5E6   LDA $01,X
+F5E8   STA $C2
+F5EA   JMP ($0332)   ; normally F5ED
+
+
+; standard save ram entry
+
+F5ED   LDA $BA
+F5EF   BNE $F5F4
+F5F1   JMP $F713
+
+F5F4   CMP #$03
+F5F6   BEQ $F5F1
+F5F8   BCC $F659
+F5FA   LDA #$61
+F5FC   STA $B9
+F5FE   LDY $B7
+F600   BNE $F605
+F602   JMP $F710
+
+F605   JSR $F3D5
+F608   JSR $F68F
+F60B   LDA $BA
+F60D   JSR $ED0C
+F610   LDA $B9
+F612   JSR $EDB9
+F615   LDY #$00
+F617   JSR $FB8E
+F61A   LDA $AC
+F61C   JSR $EDDD
+F61F   LDA $AD
+F621   JSR $EDDD
+F624   JSR $FCD1
+F627   BCS $F63F
+F629   LDA ($AC),Y
+F62B   JSR $EDDD
+F62E   JSR $FFE1
+F631   BNE $F63A
+
+F633   JSR $F642
+
+F636   LDA #$00
+F638   SEC
+F639   RTS
+
+F63A   JSR $FCDB
+F63D   BNE $F624
+F63F   JSR $EDFE
+
+
+; close serial bus device
+
+F642   BIT $B9
+F644   BMI $F657
+F646   LDA $BA
+F648   JSR $ED0C
+F64B   LDA $B9
+F64D   AND #$EF
+F64F   ORA #$E0
+F651   JSR $EDB9
+
+F654   JSR $EDFE
+
+F657   CLC
+F658   RTS
+
+F659   LSR
+F65A   BCS $F65F
+F65C   JMP $F713
+
+
+; save ram to cassette
+
+F65F   JSR $F7D0
+F662   BCC $F5F1
+F664   JSR $F838
+F667   BCS $F68E
+F669   JSR $F68F
+F66C   LDX #$03
+F66E   LDA $B9
+F670   AND #$01
+F672   BNE $F676
+F674   LDX #$01
+F676   TXA
+F677   JSR $F76A
+F67A   BCS $F68E
+F67C   JSR $F867
+F67F   BCS $F68E
+F681   LDA $B9
+F683   AND #$02
+F685   BEQ $F68D
+F687   LDA #$05
+F689   JSR $F76A
+F68C   .byte $24
+F68D   CLC
+F68E   RTS
+
+
+; do saving message and filename
+
+F68F   LDA $9D
+F691   BPL $F68E
+F693   LDY #$51
+F695   JSR $F12F
+F698   JMP $F5C1
+
+
+; increment real time clock
+
+F69B   LDX #$00
+F69D   INC $A2
+F69F   BNE $F6A7
+F6A1   INC $A1
+F6A3   BNE $F6A7
+F6A5   INC $A0
+F6A7   SEC
+F6A8   LDA $A2
+F6AA   SBC #$01
+F6AC   LDA $A1
+F6AE   SBC #$1A
+F6B0   LDA $A0
+F6B2   SBC #$4F
+F6B4   BCC $F6BC
+F6B6   STX $A0
+F6B8   STX $A1
+F6BA   STX $A2
+
+F6BC   LDA $DC01
+
+F6BF   CMP $DC01
+F6C2   BNE $F6BC
+F6C4   TAX
+F6C5   BMI $F6DA
+F6C7   LDX #$BD
+F6C9   STX $DC00
+F6CC   LDX $DC01
+F6CF   CPX $DC01
+F6D2   BNE $F6CC
+F6D4   STA $DC00
+F6D7   INX
+F6D8   BNE $F6DC
+F6DA   STA $91
+F6DC   RTS
+
+
+; read real time clock
+
+F6DD   SEI
+F6DE   LDA $A2
+F6E0   LDX $A1
+F6E2   LDY $A0
+
+
+; set real time clock
+
+F6E4   SEI
+F6E5   STA $A2
+F6E7   STX $A1
+F6E9   STY $A0
+F6EB   CLI
+F6EC   RTS
+
+
+; test STOP key
+
+F6ED   LDA $91
+F6EF   CMP #$7F
+F6F1   BNE $F6FA
+F6F3   PHP
+F6F4   JSR $FFCC
+F6F7   STA $C6
+F6F9   PLP
+F6FA   RTS
+
+
+; handle I/O errors
+
+F6FB   LDA #$01   ; too many files
+F6FD   .byte $2C
+
+F6FE   LDA #$02   ; file open
+
+F700   .byte $2C
+
+F701   LDA #$03   ; file not open
+
+F703   .byte $2C
+
+F704   LDA #$04   ; file not found
+
+F706   .byte $2C
+
+F707   LDA #$05   ; device not present
+
+F709   .byte $2C
+
+F70A   LDA #$06   ; not input file
+
+F70C   .byte $2C
+
+F70D   LDA #$07   ; not output file
+
+F70F   .byte $2C
+
+F710   LDA #$08   ; file name missing
+
+F712   .byte $2C
+
+F713   LDA #$09   ; illegal device no.
+
+F715   PHA
+F716   JSR $FFCC
+F719   LDY #$00
+F71B   BIT $9D
+F71D   BVC $F729
+F71F   JSR $F12F
+F722   PLA
+F723   PHA
+F724   ORA #$30
+F726   JSR $FFD2
+F729   PLA
+F72A   SEC
+F72B   RTS
+
+
+; get next file header from cassette
+
+F72C   LDA $93
+F72E   PHA
+F72F   JSR $F841
+F732   PLA
+F733   STA $93
+F735   BCS $F769
+F737   LDY #$00
+F739   LDA ($B2),Y
+F73B   CMP #$05
+F73D   BEQ $F769
+F73F   CMP #$01
+F741   BEQ $F74B
+F743   CMP #$03
+F745   BEQ $F74B
+F747   CMP #$04
+F749   BNE $F72C
+F74B   TAX
+F74C   BIT $9D
+F74E   BPL $F767
+F750   LDY #$63
+F752   JSR $F12F
+F755   LDY #$05
+F757   LDA ($B2),Y
+F759   JSR $FFD2
+F75C   INY
+F75D   CPY #$15
+F75F   BNE $F757
+F761   LDA $A1
+F763   JSR $E4E0
+F766   NOP
+F767   CLC
+F768   DEY
+F769   RTS
+
+
+; write a special block to cassette with code in A
+
+F76A   STA $9E
+F76C   JSR $F7D0
+F76F   BCC $F7CF
+F771   LDA $C2
+F773   PHA
+F774   LDA $C1
+F776   PHA
+F777   LDA $AF
+F779   PHA
+F77A   LDA $AE
+F77C   PHA
+F77D   LDY #$BF
+F77F   LDA #$20
+F781   STA ($B2),Y
+F783   DEY
+F784   BNE $F781
+F786   LDA $9E
+F788   STA ($B2),Y
+F78A   INY
+F78B   LDA $C1
+F78D   STA ($B2),Y
+F78F   INY
+F790   LDA $C2
+F792   STA ($B2),Y
+F794   INY
+F795   LDA $AE
+F797   STA ($B2),Y
+F799   INY
+F79A   LDA $AF
+F79C   STA ($B2),Y
+F79E   INY
+F79F   STY $9F
+F7A1   LDY #$00
+F7A3   STY $9E
+F7A5   LDY $9E
+F7A7   CPY $B7
+F7A9   BEQ $F7B7
+F7AB   LDA ($BB),Y
+F7AD   LDY $9F
+F7AF   STA ($B2),Y
+F7B1   INC $9E
+F7B3   INC $9F
+F7B5   BNE $F7A5
+F7B7   JSR $F7D7
+F7BA   LDA #$69
+F7BC   STA $AB
+F7BE   JSR $F86B
+F7C1   TAY
+F7C2   PLA
+F7C3   STA $AE
+F7C5   PLA
+F7C6   STA $AF
+F7C8   PLA
+F7C9   STA $C1
+F7CB   PLA
+F7CC   STA $C2
+F7CE   TYA
+F7CF   RTS
+
+
+; set tape buffer pointer in XY
+
+F7D0   LDX $B2
+F7D2   LDY $B3
+F7D4   CPY #$02
+F7D6   RTS
+
+
+; set cassette buffer to I/O area
+
+F7D7   JSR $F7D0
+F7DA   TXA
+F7DB   STA $C1
+F7DD   CLC
+F7DE   ADC #$C0
+F7E0   STA $AE
+F7E2   TYA
+F7E3   STA $C2
+F7E5   ADC #$00
+F7E7   STA $AF
+F7E9   RTS
+
+
+; search tape for a file name
+
+F7EA   JSR $F72C
+F7ED   BCS $F80C
+F7EF   LDY #$05
+F7F1   STY $9F
+F7F3   LDY #$00
+F7F5   STY $9E
+F7F7   CPY $B7
+F7F9   BEQ $F80B
+F7FB   LDA ($BB),Y
+F7FD   LDY $9F
+F7FF   CMP ($B2),Y
+F801   BNE $F7EA
+F803   INC $9E
+F805   INC $9F
+F807   LDY $9E
+F809   BNE $F7F7
+F80B   CLC
+F80C   RTS
+
+
+; add 1 to tape index and test for overflow
+
+F80D   JSR $F7D0
+F810   INC $A6
+F812   LDY $A6
+F814   CPY #$C0
+F816   RTS
+
+
+; handle messages and
+; test cassette buttons for read
+
+F817   JSR $F82E
+F81A   BEQ $F836
+F81C   LDY #$1B
+F81E   JSR $F12F
+F821   JSR $F8D0
+F824   JSR $F82E
+F827   BNE $F821
+F829   LDY #$6A
+F82B   JMP $F12F
+
+
+; test sense line for a button
+; depressed on cassette
+
+F82E   LDA #$10
+F830   BIT $01
+F832   BNE $F836
+F834   BIT $01
+F836   CLC
+F837   RTS
+
+
+; set messages and test cassette line
+; for input
+
+F838   JSR $F82E
+F83B   BEQ $F836
+F83D   LDY #$2E
+F83F   BNE $F81E
+
+
+; read a block from cassette
+
+F841   LDA #$00
+F843   STA $90
+F845   STA $93
+F847   JSR $F7D7
+
+F84A   JSR $F817
+
+F84D   BCS $F86E
+F84F   SEI
+F850   LDA #$00
+F852   STA $AA
+F854   STA $B4
+F856   STA $B0
+F858   STA $9E
+F85A   STA $9F
+F85C   STA $9C
+F85E   LDA #$90
+F860   LDX #$0E
+F862   BNE $F875
+
+
+; write a block from cassette
+
+F864   JSR $F7D7
+
+F867   LDA #$14
+
+F869   STA $AB
+
+F86B   JSR $F838
+
+F86E   BCS $F8DC
+F870   SEI
+F871   LDA #$82
+F873   LDX #$08
+
+
+; common code for cassette read and write
+
+F875   LDY #$7F
+F877   STY $DC0D
+F87A   STA $DC0D
+F87D   LDA $DC0E
+F880   ORA #$19
+F882   STA $DC0F
+F885   AND #$91
+F887   STA $02A2
+F88A   JSR $F0A4
+F88D   LDA $D011
+F890   AND #$EF
+F892   STA $D011
+F895   LDA $0314
+F898   STA $029F
+F89B   LDA $0315
+F89E   STA $02A0
+F8A1   JSR $FCBD
+F8A4   LDA #$02
+F8A6   STA $BE
+F8A8   JSR $FB97
+F8AB   LDA $01
+F8AD   AND #$1F
+F8AF   STA $01
+F8B1   STA $C0
+F8B3   LDX #$FF
+F8B5   LDY #$FF
+F8B7   DEY
+F8B8   BNE $F8B7
+F8BA   DEX
+F8BB   BNE $F8B5
+F8BD   CLI
+
+F8BE   LDA $02A0
+
+F8C1   CMP $0315
+F8C4   CLC
+F8C5   BEQ $F8DC
+F8C7   JSR $F8D0
+F8CA   JSR $F6BC
+F8CD   JMP $F8BE
+
+
+; handle stop key during cassette operations
+
+F8D0   JSR $FFE1
+F8D3   CLC
+F8D4   BNE $F8E1
+F8D6   JSR $FC93
+F8D9   SEC
+F8DA   PLA
+F8DB   PLA
+F8DC   LDA #$00
+F8DE   STA $02A0
+F8E1   RTS
+
+
+; schedule CIA1 timer A depending on X
+
+F8E2   STX $B1
+F8E4   LDA $B0
+F8E6   ASL
+F8E7   ASL
+F8E8   CLC
+F8E9   ADC $B0
+F8EB   CLC
+F8EC   ADC $B1
+F8EE   STA $B1
+F8F0   LDA #$00
+F8F2   BIT $B0
+F8F4   BMI $F8F7
+F8F6   ROL
+F8F7   ASL $B1
+F8F9   ROL
+F8FA   ASL $B1
+F8FC   ROL
+F8FD   TAX
+F8FE   LDA $DC06
+F901   CMP #$16
+F903   BCC $F8FE
+F905   ADC $B1
+F907   STA $DC04
+F90A   TXA
+F90B   ADC $DC07
+F90E   STA $DC05
+F911   LDA $02A2
+F914   STA $DC0E
+F917   STA $02A4
+F91A   LDA $DC0D
+F91D   AND #$10
+F91F   BEQ $F92A
+F921   LDA #$F9
+F923   PHA
+F924   LDA #$2A
+F926   PHA
+F927   JMP $FF43
+F92A   CLI
+F92B   RTS
+
+
+; cassette read IRQ routine
+
+F92C   LDX $DC07
+F92F   LDY #$FF
+F931   TYA
+F932   SBC $DC06
+F935   CPX $DC07
+F938   BNE $F92C
+F93A   STX $B1
+F93C   TAX
+F93D   STY $DC06
+F940   STY $DC07
+F943   LDA #$19
+F945   STA $DC0F
+F948   LDA $DC0D
+F94B   STA $02A3
+F94E   TYA
+F94F   SBC $B1
+F951   STX $B1
+F953   LSR
+F954   ROR $B1
+F956   LSR
+F957   ROR $B1
+F959   LDA $B0
+F95B   CLC
+F95C   ADC #$3C
+F95E   CMP $B1
+F960   BCS $F9AC
+F962   LDX $9C
+F964   BEQ $F969
+F966   JMP $FA60
+
+F969   LDX $A3
+F96B   BMI $F988
+F96D   LDX #$00
+F96F   ADC #$30
+F971   ADC $B0
+F973   CMP $B1
+F975   BCS $F993
+F977   INX
+F978   ADC #$26
+F97A   ADC $B0
+F97C   CMP $B1
+F97E   BCS $F997
+F980   ADC #$2C
+F982   ADC $B0
+F984   CMP $B1
+F986   BCC $F98B
+F988   JMP $FA10
+
+F98B   LDA $B4
+F98D   BEQ $F9AC
+F98F   STA $A8
+F991   BNE $F9AC
+F993   INC $A9
+F995   BCS $F999
+
+F997   DEC $A9
+
+F999   SEC
+F99A   SBC #$13
+F99C   SBC $B1
+F99E   ADC $92
+F9A0   STA $92
+F9A2   LDA $A4
+F9A4   EOR #$01
+F9A6   STA $A4
+F9A8   BEQ $F9D5
+F9AA   STX $D7
+F9AC   LDA $B4
+F9AE   BEQ $F9D2
+F9B0   LDA $02A3
+F9B3   AND #$01
+F9B5   BNE $F9BC
+F9B7   LDA $02A4
+F9BA   BNE $F9D2
+F9BC   LDA #$00
+F9BE   STA $A4
+F9C0   STA $02A4
+F9C3   LDA $A3
+F9C5   BPL $F9F7
+F9C7   BMI $F988
+F9C9   LDX #$A6
+F9CB   JSR $F8E2
+F9CE   LDA $9B
+F9D0   BNE $F98B
+F9D2   JMP $FEBC
+
+F9D5   LDA $92
+F9D7   BEQ $F9E0
+F9D9   BMI $F9DE
+F9DB   DEC $B0
+F9DD   .byte $2C
+F9DE   INC $B0
+F9E0   LDA #$00
+F9E2   STA $92
+F9E4   CPX $D7
+F9E6   BNE $F9F7
+F9E8   TXA
+F9E9   BNE $F98B
+F9EB   LDA $A9
+F9ED   BMI $F9AC
+F9EF   CMP #$10
+F9F1   BCC $F9AC
+F9F3   STA $96
+F9F5   BCS $F9AC
+F9F7   TXA
+F9F8   EOR $9B
+F9FA   STA $9B
+F9FC   LDA $B4
+F9FE   BEQ $F9D2
+FA00   DEC $A3
+FA02   BMI $F9C9
+FA04   LSR $D7
+FA06   ROR $BF
+FA08   LDX #$DA
+FA0A   JSR $F8E2
+FA0D   JMP $FEBC
+
+
+FA10   LDA $96
+
+FA12   BEQ $FA18
+FA14   LDA $B4
+FA16   BEQ $FA1F
+FA18   LDA $A3
+FA1A   BMI $FA1F
+FA1C   JMP $F997
+
+FA1F   LSR $B1
+FA21   LDA #$93
+FA23   SEC
+FA24   SBC $B1
+FA26   ADC $B0
+FA28   ASL
+FA29   TAX
+FA2A   JSR $F8E2
+FA2D   INC $9C
+FA2F   LDA $B4
+FA31   BNE $FA44
+FA33   LDA $96
+FA35   BEQ $FA5D
+FA37   STA $A8
+FA39   LDA #$00
+FA3B   STA $96
+FA3D   LDA #$81
+FA3F   STA $DC0D
+FA42   STA $B4
+FA44   LDA $96
+FA46   STA $B5
+FA48   BEQ $FA53
+FA4A   LDA #$00
+FA4C   STA $B4
+FA4E   LDA #$01
+FA50   STA $DC0D
+FA53   LDA $BF
+FA55   STA $BD
+FA57   LDA $A8
+FA59   ORA $A9
+FA5B   STA $B6
+FA5D   JMP $FEBC
+
+
+; receive next byte from cassette
+
+FA60   JSR $FB97
+FA63   STA $9C
+FA65   LDX #$DA
+FA67   JSR $F8E2
+FA6A   LDA $BE
+FA6C   BEQ $FA70
+FA6E   STA $A7
+FA70   LDA #$0F
+FA72   BIT $AA
+FA74   BPL $FA8D
+FA76   LDA $B5
+FA78   BNE $FA86
+FA7A   LDX $BE
+FA7C   DEX
+FA7D   BNE $FA8A
+FA7F   LDA #$08
+FA81   JSR $FE1C
+FA84   BNE $FA8A
+FA86   LDA #$00
+FA88   STA $AA
+FA8A   JMP $FEBC
+
+FA8D   BVS $FAC0
+FA8F   BNE $FAA9
+FA91   LDA $B5
+FA93   BNE $FA8A
+FA95   LDA $B6
+FA97   BNE $FA8A
+FA99   LDA $A7
+FA9B   LSR
+FA9C   LDA $BD
+FA9E   BMI $FAA3
+FAA0   BCC $FABA
+FAA2   CLC
+FAA3   BCS $FABA
+FAA5   AND #$0F
+FAA7   STA $AA
+FAA9   DEC $AA
+FAAB   BNE $FA8A
+FAAD   LDA #$40
+FAAF   STA $AA
+FAB1   JSR $FB8E
+FAB4   LDA #$00
+FAB6   STA $AB
+FAB8   BEQ $FA8A
+FABA   LDA #$80
+FABC   STA $AA
+FABE   BNE $FA8A
+FAC0   LDA $B5
+FAC2   BEQ $FACE
+FAC4   LDA #$04
+FAC6   JSR $FE1C
+FAC9   LDA #$00
+FACB   JMP $FB4A
+
+FACE   JSR $FCD1
+FAD1   BCC $FAD6
+FAD3   JMP $FB48
+FAD6   LDX $A7
+FAD8   DEX
+FAD9   BEQ $FB08
+FADB   LDA $93
+FADD   BEQ $FAEB
+FADF   LDY #$00
+FAE1   LDA $BD
+FAE3   CMP ($AC),Y
+FAE5   BEQ $FAEB
+FAE7   LDA #$01
+FAE9   STA $B6
+FAEB   LDA $B6
+FAED   BEQ $FB3A
+FAEF   LDX #$3D
+FAF1   CPX $9E
+FAF3   BCC $FB33
+FAF5   LDX $9E
+FAF7   LDA $AD
+FAF9   STA $0101,X
+FAFC   LDA $AC
+FAFE   STA $0100,X
+FB01   INX
+FB02   INX
+FB03   STX $9E
+FB05   JMP $FB3A
+
+FB08   LDX $9F
+FB0A   CPX $9E
+FB0C   BEQ $FB43
+FB0E   LDA $AC
+FB10   CMP $0100,X
+FB13   BNE $FB43
+FB15   LDA $AD
+FB17   CMP $0101,X
+FB1A   BNE $FB43
+FB1C   INC $9F
+FB1E   INC $9F
+FB20   LDA $93
+FB22   BEQ $FB2F
+FB24   LDA $BD
+FB26   LDY #$00
+FB28   CMP ($AC),Y
+FB2A   BEQ $FB43
+FB2C   INY
+FB2D   STY $B6
+FB2F   LDA $B6
+FB31   BEQ $FB3A
+FB33   LDA #$10
+FB35   JSR $FE1C
+FB38   BNE $FB43
+
+FB3A   LDA $93
+
+FB3C   BNE $FB43
+FB3E   TAY
+FB3F   LDA $BD
+FB41   STA ($AC),Y
+FB43   JSR $FCDB
+FB46   BNE $FB8B
+
+FB48   LDA #$80
+
+
+FB4A   STA $AA
+
+FB4C   SEI
+FB4D   LDX #$01
+FB4F   STX $DC0D
+FB52   LDX $DC0D
+FB55   LDX $BE
+FB57   DEX
+FB58   BMI $FB5C
+FB5A   STX $BE
+FB5C   DEC $A7
+FB5E   BEQ $FB68
+FB60   LDA $9E
+FB62   BNE $FB8B
+FB64   STA $BE
+FB66   BEQ $FB8B
+FB68   JSR $FC93
+FB6B   JSR $FB8E
+FB6E   LDY #$00
+FB70   STY $AB
+FB72   LDA ($AC),Y
+FB74   EOR $AB
+FB76   STA $AB
+FB78   JSR $FCDB
+FB7B   JSR $FCD1
+FB7E   BCC $FB72
+FB80   LDA $AB
+FB82   EOR $BD
+FB84   BEQ $FB8B
+FB86   LDA #$20
+FB88   JSR $FE1C
+FB8B   JMP $FEBC
+
+
+; move save/load address into $AC/$AD
+
+FB8E   LDA $C2
+FB90   STA $AD
+FB92   LDA $C1
+FB94   STA $AC
+FB96   RTS
+
+
+; initalise cassette read/write variables
+
+FB97   LDA #$08
+FB99   STA $A3
+FB9B   LDA #$00
+FB9D   STA $A4
+FB9F   STA $A8
+FBA1   STA $9B
+FBA3   STA $A9
+FBA5   RTS
+
+
+; schedule CIA1 timer B and
+; invert casette write line
+
+FBA6   LDA $BD
+FBA8   LSR
+FBA9   LDA #$60
+FBAB   BCC $FBAF
+
+FBAD   LDA #$B0
+
+
+FBAF   LDX #$00
+
+
+FBB1   STA $DC06
+
+FBB4   STX $DC07
+FBB7   LDA $DC0D
+FBBA   LDA #$19
+FBBC   STA $DC0F
+FBBF   LDA $01
+FBC1   EOR #$08
+FBC3   STA $01
+FBC5   AND #$08
+FBC7   RTS
+
+
+; IRQ routine for cassette write B
+
+FBC8   SEC
+FBC9   ROR $B6
+FBCB   BMI $FC09
+
+FBCD   LDA $A8
+
+FBCF   BNE $FBE3
+FBD1   LDA #$10
+FBD3   LDX #$01
+FBD5   JSR $FBB1
+FBD8   BNE $FC09
+FBDA   INC $A8
+FBDC   LDA $B6
+FBDE   BPL $FC09
+FBE0   JMP $FC57
+
+FBE3   LDA $A9
+FBE5   BNE $FBF0
+FBE7   JSR $FBAD
+FBEA   BNE $FC09
+FBEC   INC $A9
+FBEE   BNE $FC09
+FBF0   JSR $FBA6
+FBF3   BNE $FC09
+FBF5   LDA $A4
+FBF7   EOR #$01
+FBF9   STA $A4
+FBFB   BEQ $FC0C
+FBFD   LDA $BD
+FBFF   EOR #$01
+FC01   STA $BD
+FC03   AND #$01
+FC05   EOR $9B
+FC07   STA $9B
+FC09   JMP $FEBC
+
+FC0C   LSR $BD
+FC0E   DEC $A3
+FC10   LDA $A3
+FC12   BEQ $FC4E
+FC14   BPL $FC09
+FC16   JSR $FB97
+FC19   CLI
+FC1A   LDA $A5
+FC1C   BEQ $FC30
+FC1E   LDX #$00
+FC20   STX $D7
+FC22   DEC $A5
+FC24   LDX $BE
+FC26   CPX #$02
+FC28   BNE $FC2C
+FC2A   ORA #$80
+FC2C   STA $BD
+FC2E   BNE $FC09
+FC30   JSR $FCD1
+FC33   BCC $FC3F
+FC35   BNE $FBC8
+FC37   INC $AD
+FC39   LDA $D7
+FC3B   STA $BD
+FC3D   BCS $FC09
+FC3F   LDY #$00
+FC41   LDA ($AC),Y
+FC43   STA $BD
+FC45   EOR $D7
+FC47   STA $D7
+FC49   JSR $FCDB
+FC4C   BNE $FC09
+FC4E   LDA $9B
+FC50   EOR #$01
+FC52   STA $BD
+FC54   JMP $FEBC
+
+
+FC57   DEC $BE
+
+FC59   BNE $FC5E
+FC5B   JSR $FCCA
+FC5E   LDA #$50
+FC60   STA $A7
+FC62   LDX #$08
+FC64   SEI
+FC65   JSR $FCBD
+FC68   BNE $FC54
+
+
+; IRQ routine for cassette write A
+
+FC6A   LDA #$78
+FC6C   JSR $FBAF
+FC6F   BNE $FC54
+FC71   DEC $A7
+FC73   BNE $FC54
+FC75   JSR $FB97
+FC78   DEC $AB
+FC7A   BPL $FC54
+FC7C   LDX #$0A
+FC7E   JSR $FCBD
+FC81   CLI
+FC82   INC $AB
+FC84   LDA $BE
+FC86   BEQ $FCB8
+FC88   JSR $FB8E
+FC8B   LDX #$09
+FC8D   STX $A5
+FC8F   STX $B6
+FC91   BNE $FC16
+
+
+; switch from cassette IRQ to default IRQ
+
+FC93   PHP
+FC94   SEI
+FC95   LDA $D011
+FC98   ORA #$10
+FC9A   STA $D011
+FC9D   JSR $FCCA
+FCA0   LDA #$7F
+FCA2   STA $DC0D
+FCA5   JSR $FDDD
+FCA8   LDA $02A0
+FCAB   BEQ $FCB6
+FCAD   STA $0315
+FCB0   LDA $029F
+FCB3   STA $0314
+FCB6   PLP
+FCB7   RTS
+
+
+; terminate cassette I/O
+
+FCB8   JSR $FC93
+FCBB   BEQ $FC54
+
+
+; set IRQ vector depending on X
+
+FCBD   LDA $FD93,X
+FCC0   STA $0314
+FCC3   LDA $FD94,X
+FCC6   STA $0315
+FCC9   RTS
+
+
+; stop cassette motor
+
+FCCA   LDA $01
+FCCC   ORA #$20
+FCCE   STA $01
+FCD0   RTS
+
+
+; compare $AC/$AD with $AE/$AF
+
+FCD1   SEC
+FCD2   LDA $AC
+FCD4   SBC $AE
+FCD6   LDA $AD
+FCD8   SBC $AF
+FCDA   RTS
+
+
+; increment $AC/$AD
+
+FCDB   INC $AC
+FCDD   BNE $FCE1
+FCDF   INC $AD
+FCE1   RTS
+
+
+; RESET routine
+
+FCE2   LDX #$FF
+FCE4   SEI
+FCE5   TXS
+FCE6   CLD
+FCE7   JSR $FD02
+FCEA   BNE $FCEF
+FCEC   JMP ($8000)   ; start cartridge
+
+FCEF   STX $D016
+FCF2   JSR $FDA3
+FCF5   JSR $FD50
+FCF8   JSR $FD15
+FCFB   JSR $FF5B
+FCFE   CLI
+FCFF   JMP ($A000)   ; start basic
+
+
+; check for a cartridge
+
+FD02   LDX #$05
+FD04   LDA $FD0F,X
+FD07   CMP $8003,X
+FD0A   BNE $FD0F
+FD0C   DEX
+FD0D   BNE $FD04
+FD0F   RTS
+
+
+; CBM80
+
+FD10   .byte $C3,$C2,$CD,$38,$30
+
+
+; restore I/O vectors
+
+FD15   LDX #$30   ; low  FD30
+FD17   LDY #$FD   ; high FD30
+FD19   CLC
+
+
+; set I/O vectors depending on XY
+
+FD1A   STX $C3
+FD1C   STY $C4
+FD1E   LDY #$1F
+FD20   LDA $0314,Y
+FD23   BCS $FD27
+FD25   LDA ($C3),Y
+FD27   STA ($C3),Y
+FD29   STA $0314,Y
+FD2C   DEY
+FD2D   BPL $FD20
+FD2F   RTS
+
+
+; vectors for OS at $0314-$0333
+
+FD30   .word $EA31   ; IRQ
+FD32   .word $FE66   ; BRK
+FD34   .word $FE47   ; NMI
+FD36   .word $F34A   ; open
+FD38   .word $F291   ; close
+FD3A   .word $F20E   ; set input dev
+FD3C   .word $F250   ; set output dev
+FD3E   .word $F333   ; restore I/O
+FD40   .word $F157   ; input
+FD42   .word $F1CA   ; output
+FD44   .word $F6ED   ; test stop key
+FD46   .word $F13E   ; get
+FD48   .word $F32F   ; abort I/O
+FD4A   .word $FE66   ; unused (BRK)
+FD4C   .word $F4A5   ; load ram
+FD4E   .word $F5ED   ; save ram
+
+
+; initalise memory pointers
+
+FD50   LDA #$00
+FD52   TAY
+FD53   STA $0002,Y
+FD56   STA $0200,Y
+FD59   STA $0300,Y
+FD5C   INY
+FD5D   BNE $FD53
+FD5F   LDX #$3C
+FD61   LDY #$03
+FD63   STX $B2
+FD65   STY $B3
+FD67   TAY
+FD68   LDA #$03
+FD6A   STA $C2
+FD6C   INC $C2
+FD6E   LDA ($C1),Y
+FD70   TAX
+FD71   LDA #$55
+FD73   STA ($C1),Y
+FD75   CMP ($C1),Y
+FD77   BNE $FD88
+FD79   ROL
+FD7A   STA ($C1),Y
+FD7C   CMP ($C1),Y
+FD7E   BNE $FD88
+FD80   TXA
+FD81   STA ($C1),Y
+FD83   INY
+FD84   BNE $FD6E
+FD86   BEQ $FD6C
+FD88   TYA
+FD89   TAX
+FD8A   LDY $C2
+FD8C   CLC
+FD8D   JSR $FE2D
+FD90   LDA #$08
+FD92   STA $0282
+FD95   LDA #$04
+FD97   STA $0288
+FD9A   RTS
+
+
+; IRQ vectors
+
+FD9B   .word $FC6A   ; cassette write A
+FD9D   .word $FBCD   ; cassette write B
+FD9F   .word $EA31   ; standard IRQ
+FDA1   .word $F92C   ; cassette read
+
+
+; initaliase I/O devices
+
+FDA3   LDA #$7F
+FDA5   STA $DC0D
+FDA8   STA $DD0D
+FDAB   STA $DC00
+FDAE   LDA #$08
+FDB0   STA $DC0E
+FDB3   STA $DD0E
+FDB6   STA $DC0F
+FDB9   STA $DD0F
+FDBC   LDX #$00
+FDBE   STX $DC03
+FDC1   STX $DD03
+FDC4   STX $D418
+FDC7   DEX
+FDC8   STX $DC02
+FDCB   LDA #$07
+FDCD   STA $DD00
+FDD0   LDA #$3F
+FDD2   STA $DD02
+FDD5   LDA #$E7
+FDD7   STA $01
+FDD9   LDA #$2F
+FDDB   STA $00
+
+
+; initalise TAL1/TAH1 fpr 1/60 of a second
+
+FDDD   LDA $02A6
+FDE0   BEQ $FDEC
+FDE2   LDA #$25
+FDE4   STA $DC04
+FDE7   LDA #$40
+FDE9   JMP $FDF3
+
+FDEC   LDA #$95
+FDEE   STA $DC04
+FDF1   LDA #$42
+
+FDF3   STA $DC05
+
+FDF6   JMP $FF6E
+
+
+; initalise file name parameters
+
+FDF9   STA $B7
+FDFB   STX $BB
+FDFD   STY $BC
+FDFF   RTS
+
+
+; inatalise file parameters
+
+FE00   STA $B8
+FE02   STX $BA
+FE04   STY $B9
+FE06   RTS
+
+
+; read I/O status word
+
+FE07   LDA $BA
+FE09   CMP #$02
+FE0B   BNE $FE1A
+FE0D   LDA $0297
+FE10   PHA
+FE11   LDA #$00
+FE13   STA $0297
+FE16   PLA
+FE17   RTS
+
+
+; control kernel messages
+
+FE18   STA $9D
+
+
+; read ST
+
+FE1A   LDA $90
+
+
+; add A to ST
+
+FE1C   ORA $90
+FE1E   STA $90
+FE20   RTS
+
+
+; set timeout on serail bus
+
+FE21   STA $0285
+FE24   RTS
+
+
+; read/set top of memory
+
+FE25   BCC $FE2D
+
+FE27   LDX $0283
+
+FE2A   LDY $0284
+
+FE2D   STX $0283
+
+FE30   STY $0284
+FE33   RTS
+
+
+; read/set bottom of memory
+
+FE34   BCC $FE3C
+FE36   LDX $0281
+FE39   LDY $0282
+FE3C   STX $0281
+FE3F   STY $0282
+FE42   RTS
+
+
+; NMI entry
+
+FE43   SEI
+FE44   JMP ($0318)   ; normally FE47
+
+
+; standard NMI routine
+
+FE47   PHA
+FE48   TXA
+FE49   PHA
+FE4A   TYA
+FE4B   PHA
+FE4C   LDA #$7F
+FE4E   STA $DD0D
+FE51   LDY $DD0D
+FE54   BMI $FE72
+FE56   JSR $FD02
+FE59   BNE $FE5E
+FE5B   JMP ($8002)   ; cartridge warm start
+
+FE5E   JSR $F6BC
+FE61   JSR $FFE1
+FE64   BNE $FE72
+
+
+; BRK routine
+
+FE66   JSR $FD15
+FE69   JSR $FDA3
+FE6C   JSR $E518
+FE6F   JMP ($A002)
+
+
+; internal NMI
+
+FE72   TYA
+FE73   AND $02A1
+FE76   TAX
+FE77   AND #$01
+FE79   BEQ $FEA3
+FE7B   LDA $DD00
+FE7E   AND #$FB
+FE80   ORA $B5
+FE82   STA $DD00
+FE85   LDA $02A1
+FE88   STA $DD0D
+FE8B   TXA
+FE8C   AND #$12
+FE8E   BEQ $FE9D
+FE90   AND #$02
+FE92   BEQ $FE9A
+FE94   JSR $FED6
+FE97   JMP $FE9D
+
+FE9A   JSR $FF07
+
+FE9D   JSR $EEBB
+
+FEA0   JMP $FEB6
+
+FEA3   TXA
+FEA4   AND #$02
+FEA6   BEQ $FEAE
+FEA8   JSR $FED6
+FEAB   JMP $FEB6
+
+FEAE   TXA
+FEAF   AND #$10
+FEB1   BEQ $FEB6
+FEB3   JSR $FF07
+
+FEB6   LDA $02A1
+
+FEB9   STA $DD0D
+
+FEBC   PLA
+
+FEBD   TAY
+FEBE   PLA
+FEBF   TAX
+FEC0   PLA
+FEC1   RTI
+
+
+; baud rate tables
+
+FEC2   .word $27C1   ; 50
+FEC4   .word $1A3E   ; 75
+FEC6   .word $11C5   ; 110
+FEC8   .word $0E74   ; 134.5
+FECA   .word $0CED   ; 150
+FECC   .word $0645   ; 300
+FECE   .word $02F0   ; 600
+FED0   .word $0146   ; 1200
+FED2   .word $00B8   ; 1800
+FED4   .word $0071   ; 2400
+
+
+; input next bit on RS-232 and schedule TB2
+
+FED6   LDA $DD01
+FED9   AND #$01
+FEDB   STA $A7
+FEDD   LDA $DD06
+FEE0   SBC #$1C
+FEE2   ADC $0299
+FEE5   STA $DD06
+FEE8   LDA $DD07
+FEEB   ADC $029A
+FEEE   STA $DD07
+FEF1   LDA #$11
+FEF3   STA $DD0F
+FEF6   LDA $02A1
+FEF9   STA $DD0D
+FEFC   LDA #$FF
+FEFE   STA $DD06
+FF01   STA $DD07
+FF04   JMP $EF59
+
+
+; schedule TB2 using baud rate factor
+
+FF07   LDA $0295
+FF0A   STA $DD06
+FF0D   LDA $0296
+FF10   STA $DD07
+FF13   LDA #$11
+FF15   STA $DD0F
+FF18   LDA #$12
+FF1A   EOR $02A1
+FF1D   STA $02A1
+FF20   LDA #$FF
+FF22   STA $DD06
+FF25   STA $DD07
+FF28   LDX $0298
+FF2B   STX $A8
+FF2D   RTS
+
+
+; continuation of baud rate calculation
+
+FF2E   TAX
+FF2F   LDA $0296
+FF32   ROL
+FF33   TAY
+FF34   TXA
+FF35   ADC #$C8
+FF37   STA $0299
+FF3A   TYA
+FF3B   ADC #$00
+FF3D   STA $029A
+FF40   RTS
+
+FF41   NOP
+FF42   NOP
+
+
+FF43   PHP
+
+FF44   PLA
+FF45   AND #$EF
+FF47   PHA
+
+
+; IRQ entry point
+
+FF48   PHA
+FF49   TXA
+FF4A   PHA
+FF4B   TYA
+FF4C   PHA
+FF4D   TSX
+FF4E   LDA $0104,X
+FF51   AND #$10
+FF53   BEQ $FF58
+FF55   JMP ($0316)   ; normally FE66
+
+FF58   JMP ($0314)   ; normally EA31
+
+
+; addition to I/O device initalisation
+
+FF5B   JSR $E518
+FF5E   LDA $D012
+FF61   BNE $FF5E
+FF63   LDA $D019
+FF66   AND #$01
+FF68   STA $02A6
+FF6B   JMP $FDDD
+
+
+; end of scheduling TA for 1/60 second IRQ's
+
+FF6E   LDA #$81
+FF70   STA $DC0D
+FF73   LDA $DC0E
+FF76   AND #$80
+FF78   ORA #$11
+FF7A   STA $DC0E
+FF7D   JMP $EE8E
+
+FF80   .byte $03   ; kernal version number
+
+
+; kernal vectors
+
+FF81   JMP $FF5B   ; initalise screen and keyboard
+FF84   JMP $FDA3   ; initalise I/O devices
+FF87   JMP $FD50   ; initalise memory pointers
+FF8A   JMP $FD15   ; restore I/O vectors
+FF8D   JMP $FD1A   ; set I/O vectors from XY
+
+FF90   JMP $FE18   ; control kernal messages
+
+FF93   JMP $EDB9   ; read secondary address after listen
+FF96   JMP $EDC7   ; read secondary address after talk
+
+FF99   JMP $FE25   ; read/set top of memory
+
+
+FF9C   JMP $FE34   ; read/set bottom of memory
+
+FF9F   JMP $EA87   ; scan keyboard
+FFA2   JMP $FE21   ; set timout for serial bus
+FFA5   JMP $EE13   ; input on serial bus
+FFA8   JMP $EDDD   ; output byte on serial bus
+FFAB   JMP $EDEF   ; send untalk on serial bus
+FFAE   JMP $EDFE   ; send unlisten on serial bus
+FFB1   JMP $ED0C   ; send listen on serial bus
+FFB4   JMP $ED09   ; send talk on serial bus
+
+FFB7   JMP $FE07   ; read I/O status word
+
+
+FFBA   JMP $FE00   ; set file parameters
+
+
+FFBD   JMP $FDF9   ; set filename parameters
+
+
+FFC0   JMP ($031A)   ; (F34A) open a file
+
+
+FFC3   JMP ($031C)   ; (F291) close a file
+
+
+FFC6   JMP ($031E)   ; (F20E) set input device
+
+
+FFC9   JMP ($0320)   ; (F250) set output device
+
+
+FFCC   JMP ($0322)   ; (F333) restore I/O devices to default
+
+
+FFCF   JMP ($0324)   ; (F157) input char on current device
+
+
+FFD2   JMP ($0326)   ; (F1CA) output char on current device
+
+
+FFD5   JMP $F49E   ; load ram from device
+
+
+FFD8   JMP $F5DD   ; save ram to device
+
+
+FFDB   JMP $F6E4   ; set real time clock
+
+
+FFDE   JMP $F6DD   ; read real time clock
+
+
+FFE1   JMP ($0328)   ; (F6ED) check stop key
+
+
+FFE4   JMP ($032A)   ; (F13E) get a character
+
+
+FFE7   JMP ($032C)   ; (F32F) close all channels and files
+
+
+FFEA   JMP $F69B   ; increment real time clock
+
+FFED   JMP $E505   ; read organisation of screen into XY
+
+FFF0   JMP $E50A   ; read/set XY cursor position
+
+
+FFF3   JMP $E500   ; read base address of I/O devices
+
+
+
+; unused
+
+FFF6   .byte $52,$52,$42,$59
+
+FFFA   .word $FE43   ; NMI vector
+FFFC   .word $FCE2   ; RESET vector
+FFFE   .word $FF48   ; IRQ/BRK vector
+

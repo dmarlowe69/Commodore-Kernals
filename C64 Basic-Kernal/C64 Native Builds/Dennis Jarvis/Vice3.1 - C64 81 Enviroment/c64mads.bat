@@ -1,0 +1,1 @@
+%VICEPATH%\x64.exe -chdir "%CD%" -config C64mads.set -8 mads-64ex.d64

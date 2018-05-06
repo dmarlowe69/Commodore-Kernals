@@ -1,0 +1,39 @@
+
+;******************************************************************************
+;******************************************************************************
+;
+;          The almost completely commented C64 ROM disassembly for
+;
+;              the BASIC ROM 901226-01 and Kernal ROM 901227-03
+;
+;               based on Lee Davison's version V1.01 from 2012
+;
+;
+; Changes by Ruud Baltissen:
+; - I splitted the original file in four parts so one can use only those parts 
+;   (s)he can use for her/his projects
+; - addapted to his own assembler, MP-ASM
+; - changed names of routines and variables, LAzB_xx and LAzB_xxxx, 
+;   into more logical ones
+; - length of lines < 81 (if possible)
+; - combined low and high bytes to one variable
+
+; Many references were used to complete this disassembly including, but not
+; limited to, "Mapping the Vic 20", "Mapping the C64", "C64 Programmers
+; reference", "C64 user guide", "The complete Commodore inner space anthology",
+; "VIC Revealed" and various text files, pictures and other documents.
+
+;Version = 1
+
+.include "C64-var.a65"
+
+.include "C64-basV1mod.a65"
+
+.include "C64-kerV1mod.a65"
+;.ov
+;.include "C64-kerV2.a65"
+;.include "C64-kerV3.a65"
+;.oo
+
+.end
+

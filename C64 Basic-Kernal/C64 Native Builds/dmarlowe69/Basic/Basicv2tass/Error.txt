@@ -1,0 +1,151 @@
+
+C:\Users\denton\Desktop\MADS 64 C64 Basic Kernal\Basic>call 64t basic  1>basic.o
+ut
+basic.asm:10:14: error: too large for a 8 bit unsigned integer '"CBMBASIC"'
+ ZZA004 .BYTE 'CBMBASIC'
+              ^
+basic.asm:10:14: note: for long strings mixed with bytes please use the '.text'
+directive [-Wpitfalls]
+ ZZA004 .BYTE 'CBMBASIC'
+              ^
+basic.asm:219:14: error: too large for a 8 bit unsigned integer '"TOO MANY FILE"
+'
+ XXA19E .BYTE 'TOO MANY FILE'
+              ^
+basic.asm:222:14: error: too large for a 8 bit unsigned integer '"FILE OPE"'
+ XXA1AC .BYTE 'FILE OPE'
+              ^
+basic.asm:225:14: error: too large for a 8 bit unsigned integer '"FILE NOT OPE"'
+
+ XXA1B5 .BYTE 'FILE NOT OPE'
+              ^
+basic.asm:228:14: error: too large for a 8 bit unsigned integer '"FILE NOT FOUN"
+'
+ XXA1C2 .BYTE 'FILE NOT FOUN'
+              ^
+basic.asm:231:14: error: too large for a 8 bit unsigned integer '"DEVICE NOT PRE
+SEN"'
+ XXA1D0 .BYTE 'DEVICE NOT PRESEN'
+              ^
+basic.asm:234:14: error: too large for a 8 bit unsigned integer '"NOT INPUT FIL"
+'
+ XXA1E2 .BYTE 'NOT INPUT FIL'
+              ^
+basic.asm:237:14: error: too large for a 8 bit unsigned integer '"NOT OUTPUT FIL
+"'
+ XXA1F0 .BYTE 'NOT OUTPUT FIL'
+              ^
+basic.asm:240:14: error: too large for a 8 bit unsigned integer '"MISSING FILE N
+AM"'
+ XXA1FF .BYTE 'MISSING FILE NAM'
+              ^
+basic.asm:243:14: error: too large for a 8 bit unsigned integer '"ILLEGAL DEVICE
+ NUMBE"'
+ XXA210 .BYTE 'ILLEGAL DEVICE NUMBE'
+              ^
+basic.asm:246:14: error: too large for a 8 bit unsigned integer '"NEXT WITHOUT F
+O"'
+ XXA225 .BYTE 'NEXT WITHOUT FO'
+              ^
+basic.asm:249:14: error: too large for a 8 bit unsigned integer '"SYNTA"'
+ XXA235 .BYTE 'SYNTA'
+              ^
+basic.asm:252:14: error: too large for a 8 bit unsigned integer '"RETURN WITHOUT
+ GOSU"'
+ XXA23B .BYTE 'RETURN WITHOUT GOSU'
+              ^
+basic.asm:255:14: error: too large for a 8 bit unsigned integer '"OUT OF DAT"'
+ XXA24F .BYTE 'OUT OF DAT'
+              ^
+basic.asm:258:14: error: too large for a 8 bit unsigned integer '"ILLEGAL QUANTI
+T"'
+ XXA25A .BYTE 'ILLEGAL QUANTIT'
+              ^
+basic.asm:261:14: error: too large for a 8 bit unsigned integer '"OVERFLO"'
+ XXA26A .BYTE 'OVERFLO'
+              ^
+basic.asm:264:14: error: too large for a 8 bit unsigned integer '"OUT OF MEMOR"'
+
+ XXA272 .BYTE 'OUT OF MEMOR'
+              ^
+basic.asm:267:14: error: too large for a 8 bit unsigned integer '"UNDEF'D STATEM
+EN"'
+ XXA27F .BYTE 'UNDEF''D STATEMEN'
+              ^
+basic.asm:270:14: error: too large for a 8 bit unsigned integer '"BAD SUBSCRIP"'
+
+ XXA290 .BYTE 'BAD SUBSCRIP'
+              ^
+basic.asm:273:14: error: too large for a 8 bit unsigned integer '"REDIM'D ARRA"'
+
+ XXA29D .BYTE 'REDIM''D ARRA'
+              ^
+basic.asm:276:14: error: too large for a 8 bit unsigned integer '"DIVISION BY ZE
+R"'
+ XXA2AA .BYTE 'DIVISION BY ZER'
+              ^
+basic.asm:279:14: error: too large for a 8 bit unsigned integer '"ILLEGAL DIREC"
+'
+ XXA2BA .BYTE 'ILLEGAL DIREC'
+              ^
+basic.asm:282:14: error: too large for a 8 bit unsigned integer '"TYPE MISMATC"'
+
+ XXA2C8 .BYTE 'TYPE MISMATC'
+              ^
+basic.asm:285:14: error: too large for a 8 bit unsigned integer '"STRING TOO LON
+"'
+ XXA2D5 .BYTE 'STRING TOO LON'
+              ^
+basic.asm:288:14: error: too large for a 8 bit unsigned integer '"FILE DAT"'
+ XXA2E4 .BYTE 'FILE DAT'
+              ^
+basic.asm:291:14: error: too large for a 8 bit unsigned integer '"FORMULA TOO CO
+MPLE"'
+ XXA2ED .BYTE 'FORMULA TOO COMPLE'
+              ^
+basic.asm:294:14: error: too large for a 8 bit unsigned integer '"CAN'T CONTINU"
+'
+ XXA300 .BYTE 'CAN''T CONTINU'
+              ^
+basic.asm:297:21: error: too large for a 8 bit unsigned integer '"UNDEF'D FUNCTI
+O"'
+        XXA30E .BYTE 'UNDEF''D FUNCTIO'
+                     ^
+basic.asm:300:21: error: too large for a 8 bit unsigned integer '"VERIF"'
+        XXA31E .BYTE 'VERIF'
+                     ^
+basic.asm:303:14: error: too large for a 8 bit unsigned integer '"LOA"'
+ XXA324 .BYTE 'LOA'
+              ^
+basic.asm:342:14: error: too large for a 8 bit unsigned integer '"OK"'
+        .BYTE 'OK'
+              ^
+basic.asm:345:14: error: too large for a 8 bit unsigned integer '"  ERROR"'
+        .BYTE '  ERROR'
+              ^
+basic.asm:347:14: error: too large for a 8 bit unsigned integer '" IN "'
+        .BYTE ' IN '
+              ^
+basic.asm:351:14: error: too large for a 8 bit unsigned integer '"READY."'
+        .BYTE 'READY.'
+              ^
+basic.asm:357:14: error: too large for a 8 bit unsigned integer '"BREAK"'
+ XXA383 .BYTE 'BREAK'
+              ^
+basic.asm:370:15: error: an operator expected
+        INX +4 PASS CALLING ROUTINE RETURN ADDRESS
+               ^
+basic.asm:371:20: error: an operator expected
+ XXA38F LDA $0101,X GET THE TOKEN BYTE FROM THE STACK
+                    ^
+basic.asm:1837:14: error: too large for a 8 bit unsigned integer '"?EXTRA IGNORE
+D"'
+        .BYTE '?EXTRA IGNORED'
+              ^
+basic.asm:1840:14: error: too large for a 8 bit unsigned integer '"?REDO FROM ST
+ART"'
+        .BYTE '?REDO FROM START'
+              ^
+
+C:\Users\denton\Desktop\MADS 64 C64 Basic Kernal\Basic>pause
+Press any key to continue . . .

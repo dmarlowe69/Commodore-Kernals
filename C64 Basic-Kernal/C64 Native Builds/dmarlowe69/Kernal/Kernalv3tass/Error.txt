@@ -1,0 +1,58 @@
+
+C:\Users\denton\Desktop\MADS 64 C64 Basic Kernal\Kernal>call 64t kernal  1>kerna
+l.out
+kernal.asm:663:14: error: too large for a 8 bit unsigned integer '" BASIC BYTES
+FREE"'
+ ZZE460 .BYTE ' BASIC BYTES FREE'
+              ^
+kernal.asm:663:14: note: for long strings mixed with bytes please use the '.text
+' directive [-Wpitfalls]
+ ZZE460 .BYTE ' BASIC BYTES FREE'
+              ^
+kernal.asm:668:14: error: too large for a 8 bit unsigned integer '"    **** COMM
+ODORE 64 BASIC V2 ****"'
+        .BYTE '    **** COMMODORE 64 BASIC V2 ****'
+              ^
+kernal.asm:671:14: error: too large for a 8 bit unsigned integer '" 64K RAM SYST
+EM  "'
+        .BYTE ' 64K RAM SYSTEM  '
+              ^
+kernal.asm:2462:14: error: too large for a 8 bit unsigned integer '"I/O ERROR "'
+
+        .BYTE 'I/O ERROR '
+              ^
+kernal.asm:2465:14: error: too large for a 8 bit unsigned integer '"SEARCHING"'
+        .BYTE 'SEARCHING'
+              ^
+kernal.asm:2467:20: error: too large for a 8 bit unsigned integer '"FOR"'
+ ZZF0D4       .BYTE 'FOR'
+                    ^
+kernal.asm:2470:14: error: too large for a 8 bit unsigned integer '"PRESS PLAY O
+N TAP"'
+        .BYTE 'PRESS PLAY ON TAP'
+              ^
+kernal.asm:2472:20: error: too large for a 8 bit unsigned integer '"PRESS RECORD
+ & PLAY ON TAP"'
+ ZZF0EB       .BYTE 'PRESS RECORD & PLAY ON TAP'
+                    ^
+kernal.asm:2475:14: error: too large for a 8 bit unsigned integer '"LOADIN"'
+        .BYTE 'LOADIN'
+              ^
+kernal.asm:2478:14: error: too large for a 8 bit unsigned integer '"SAVING"'
+        .BYTE 'SAVING'
+              ^
+kernal.asm:2481:14: error: too large for a 8 bit unsigned integer '"VERIFYIN"'
+        .BYTE 'VERIFYIN'
+              ^
+kernal.asm:2484:14: error: too large for a 8 bit unsigned integer '"FOUND"'
+        .BYTE 'FOUND'
+              ^
+kernal.asm:2487:14: error: too large for a 8 bit unsigned integer '"OK"'
+        .BYTE 'OK'
+              ^
+kernal.asm:4322:14: error: too large for a 8 bit unsigned integer '"80"'
+        .BYTE '80'
+              ^
+
+C:\Users\denton\Desktop\MADS 64 C64 Basic Kernal\Kernal>pause
+Press any key to continue . . .

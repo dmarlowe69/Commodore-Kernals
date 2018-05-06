@@ -1,0 +1,4 @@
+use "loloader64" with an hex offset of 8000
+and then use monitor to save prg
+
+s "kernal65" 08 6500 8000

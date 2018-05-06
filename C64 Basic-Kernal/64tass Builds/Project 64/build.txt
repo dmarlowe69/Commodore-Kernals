@@ -1,0 +1,59 @@
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\C64\C64 Basic K
+ernal Sources\Project 64 GitHub C64  firmware - tass>call 64t C64LD11  1>C64LD11
+.out
+C64LD11.asm:1300:3: error: not defined 'ORG'
+        .ORG    $A000
+         ^
+C64LD11.asm: note: searched in the global scope
+C64LD11.asm:1634:12: error: too large for a 8 bit unsigned integer '"OK"'
+        .byte   $0D,"OK",$0D,$00
+                    ^
+C64LD11.asm:1634:12: note: for long strings mixed with bytes please use the '.te
+xt' directive [-Wpitfalls]
+        .byte   $0D,"OK",$0D,$00
+                    ^
+C64LD11.asm:1640:16: error: too large for a 8 bit unsigned integer '"READY."'
+        .byte   $0D,$0A,"READY.",$0D,$0A,$00
+                        ^
+C64LD11.asm:4576:6: error: value needs to be non-negative '-22'
+        LDA     LAB_A052-$68,Y  ; get function jump vector low byte
+                ^
+C64LD11.asm:4578:6: error: value needs to be non-negative '-21'
+        LDA     LAB_A052-$67,Y  ; get function jump vector high byte
+                ^
+C64LD11.asm:11722:2: error: branch too far by -16339 bytes
+        BVC     $EF6D                   ; if ?? just exit
+        ^
+C64LD11.asm:11935:12: error: too large for a 8 bit unsigned integer '"I/O ERROR
+"'
+        .byte   $0D,"I/O ERROR ",'#'+$80
+                    ^
+C64LD11.asm:11937:12: error: too large for a 8 bit unsigned integer '"SEARCHING"
+'
+        .byte   $0D,"SEARCHING",' '+$80
+                    ^
+C64LD11.asm:11941:12: error: too large for a 8 bit unsigned integer '"PRESS PLAY
+ ON TAP"'
+        .byte   $0D,"PRESS PLAY ON TAP",'E'+$80
+                    ^
+C64LD11.asm:11945:12: error: too large for a 8 bit unsigned integer '"LOADIN"'
+        .byte   $0D,"LOADIN",'G'+$80
+                    ^
+C64LD11.asm:11947:12: error: too large for a 8 bit unsigned integer '"SAVING"'
+        .byte   $0D,"SAVING",' '+$80
+                    ^
+C64LD11.asm:11949:12: error: too large for a 8 bit unsigned integer '"VERIFYIN"'
+
+        .byte   $0D,"VERIFYIN",'G'+$80
+                    ^
+C64LD11.asm:11951:12: error: too large for a 8 bit unsigned integer '"FOUND"'
+        .byte   $0D,"FOUND",' '+$80
+                    ^
+C64LD11.asm:11953:12: error: too large for a 8 bit unsigned integer '"OK"'
+        .byte   $0D,"OK",$0D+$80
+                    ^
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\C64\C64 Basic K
+ernal Sources\Project 64 GitHub C64  firmware - tass>pause
+Press any key to continue . . .

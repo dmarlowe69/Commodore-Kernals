@@ -1,0 +1,13 @@
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\C64\C64 Basic Kernal Sources\ec64>64tass C64KERNALROMDisassembly.asm -L C64KERNALROMDisassembly.lst -o C64KERNALROMDisassembly.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   C64KERNALROMDisassembly.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $e000-$ffff   $2000
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\C64\C64 Basic Kernal Sources\ec64>rem pause 

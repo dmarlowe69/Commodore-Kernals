@@ -1,0 +1,1228 @@
+BASICV2EX.ASM......PAGE 0001
+
+LINE# LOC   CODE        LINE
+
+
+00001  0000              *=$E000
+00002  E000              ;********************************
+00003  E000              ; COMMODORE 64 KERNAL ($03) ROM 
+00004  E000              ;
+00005  E000              ; (C) 1982 COMMODORE BUSINESS MACHINES
+00006  E000              ;
+00007  E000              ; CONTINUATION OF EXP FUNCTION
+00008  E000              ;********************************
+00009  E000              
+00010  E000              ;********************************
+00011  E000              ; PAGE ZERO EQUATES
+00012  E000              ;********************************
+00013  E000              ADRAY1 = $03
+00014  E000              ADRAY2 = $05
+00015  E000              CHARAC = $07
+00016  E000              ENDCHR = $08
+00017  E000              VERCK  = $0A
+00018  E000              TANSGN = $12
+00019  E000              CHANNL = $13
+00020  E000              LINNUM = $14
+00021  E000              TEMPPT = $16
+00022  E000              LASTPR = $17
+00023  E000              L
+00024  E000              INDEX  = $22
+00025  E000              TXTTAB = $2B
+00026  E000              VARTAB = $2D
+00027  E000              V
+00028  E000              FRETOP = $33
+00029  E000              MEMSIZ = $37
+00030  E000              M
+00031  E000              FORPNT = $49
+00032  E000              DEFPNT = $4E
+00033  E000              D
+00034  E000              FOUR6  = $53
+00035  E000              JMPER  = $54
+00036  E000              BASWRK = $57
+00037  E000              B
+00038  E000              FAC1   = $61
+00039  E000              FACEXP = $61
+00040  E000              FACHO  = $62
+00041  E000              FACSGN = $66
+00042  E000              SGNFLG = $67
+00043  E000              BITS   = $68
+00044  E000              FAC2   = $69
+00045  E000              ARGEXP = $69
+00046  E000              ARGHO  = $6A
+00047  E000              ARGSGN = $6E
+00048  E000              ARISGN = $6F
+00049  E000              FACOV  = $70
+00050  E000              FBUFPT = $71
+00051  E000              CHRGET = $73
+00052  E000              CHRGOT = $79
+00053  E000              TXTPRT = $7A
+00054  E000              ;********************************
+00055  E000              ; PAGE THREE EQUATES
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0002
+
+LINE# LOC   CODE        LINE
+
+
+00056  E000              ;********************************
+00057  E000              IERROR = $0300
+00058  E000              IMAIN  = $0302
+00059  E000              ICRNCH = $0304
+00060  E000              IQPLOP = $0306
+00061  E000              IGONE  = $0308
+00062  E000              IEVAL  = $030A
+00063  E000              ;
+00064  E000              SAREG  = $030C
+00065  E000              SXREG  = $030D
+00066  E000              SYREG  = $030E
+00067  E000              SPREG  = $030F
+00068  E000              USRPOK = $0310
+00069  E000              USRADD = $0311
+00070  E000              ;********************************
+00071  E000              ; BASIC ROM EQUATES
+00072  E000              ;********************************
+00073  E000              WWA376 = $A376         ;READY MESSAGE
+00074  E000              XXA408 = $A408
+00075  E000              XXA437 = $A437
+00076  E000              KKA43A = $A43A
+00077  E000              XXA474 = $A474
+00078  E000              KKA483 = $A483
+00079  E000              KKA52A = $A52A
+00080  E000              XXA533 = $A533
+00081  E000              KKA57C = $A57C
+00082  E000              KKA644 = $A644
+00083  E000              KKA663 = $A663
+00084  E000              KKA677 = $A677
+00085  E000              XXA67A = $A67A
+00086  E000              XXA68E = $A68E
+00087  E000              ZZA71A = $A71A
+00088  E000              KKA7E4 = $A7E4
+00089  E000              XXAB1E = $AB1E
+00090  E000              XXAD8A = $AD8A
+00091  E000              XXAD9E = $AD9E
+00092  E000              KKAE86 = $AE86
+00093  E000              XXAEFD = $AEFD
+00094  E000              XXAF08 = $AF08
+00095  E000              ;
+00096  E000              ZZB1AA = $B1AA
+00097  E000              XXB248 = $B248
+00098  E000              XXB391 = $B391
+00099  E000              ;
+00100  E000              XXB6A3 = $B6A3
+00101  E000              XXB79E = $B79E
+00102  E000              XXB7F7 = $B7F7
+00103  E000              XXB849 = $B849
+00104  E000              XXB850 = $B850
+00105  E000              KKB853 = $B853
+00106  E000              XXB867 = $B867
+00107  E000              XXB8D7 = $B8D7
+00108  E000              WWB9BC = $B9BC
+00109  E000              XXBA28 = $BA28
+00110  E000              KKBAD4 = $BAD4
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0003
+
+LINE# LOC   CODE        LINE
+
+
+00111  E000              KKBAB9 = $BAB9
+00112  E000              KKBB07 = $BB07
+00113  E000              XXBB0F = $BB0F
+00114  E000              XXBBA2 = $BBA2
+00115  E000              ZZBBC7 = $BBC7
+00116  E000              KKBBCA = $BBCA
+00117  E000              XXBBD4 = $BBD4
+00118  E000              XXBC0C = $BC0C
+00119  E000              KKBC0F = $BC0F
+00120  E000              XXBC2B = $BC2B
+00121  E000              XXBCCC = $BCCC
+00122  E000              XXBDCD = $BDCD
+00123  E000              XXBFB4 = $BFB4
+00124  E000              ZZBFC4 = $BFC4         ;EXP POLYNOMIAL TABLE
+00125  E000              ;********************************
+00126  E000              ; KERNAL ROM EQUATES
+00127  E000              ;********************************
+00128  E000              XXEA61 = $EA61
+00129  E000              ;********************************
+00130  E000              ; KERNAL ROM EQUATES
+00131  E000              ;********************************
+00132  E000              MEMTOP = $FF99
+00133  E000              MEMBOT = $FF9C
+00134  E000              SETLFS = $FFBA
+00135  E000              SETNAM = $FFBD
+00136  E000              OPEN   = $FFC0
+00137  E000              CLOSE  = $FFC3
+00138  E000              CHKIN  = $FFC6
+00139  E000              CHKOUT = $FFC9
+00140  E000              CLRCHN = $FFCC
+00141  E000              CHRIN  = $FFCF
+00142  E000              CHROUT = $FFD2
+00143  E000              LOAD   = $FFD5
+00144  E000              SAVE   = $FFD8
+00145  E000              GETIN  = $FFE4
+00146  E000              READST = $FFB7         ;READ I/O STATUS
+00147  E000              IOBASE = $FFF3
+00148  E000              ;********************************
+00149  E000              ; CONTINUATION OF EXP FUNCTION
+00150  E000              ;********************************
+00151  E000  85 56       KKE000 STA JMPER+2
+00152  E002  20 0F BC           JSR KKBC0F
+00153  E005  A5 61              LDA FACEXP
+00154  E007  C9 88              CMP #$88
+00155  E009  90 03              BCC XXE00E
+00156  E00B  20 D4 BA    XXE00B JSR KKBAD4
+00157  E00E  20 CC BC    XXE00E JSR XXBCCC
+00158  E011  A5 07              LDA CHARAC
+00159  E013  18                 CLC 
+00160  E014  69 81              ADC #$81
+00161  E016  F0 F3              BEQ XXE00B
+00162  E018  38                 SEC 
+00163  E019  E9 01              SBC #$01
+00164  E01B  48                 PHA 
+00165  E01C  A2 05              LDX #$05
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0004
+
+LINE# LOC   CODE        LINE
+
+
+00166  E01E  B5 69       XXE01E LDA ARGEXP,X
+00167  E020  B4 61              LDY FACEXP,X
+00168  E022  95 61              STA FACEXP,X
+00169  E024  94 69              STY ARGEXP,X
+00170  E026  CA                 DEX 
+00171  E027  10 F5              BPL XXE01E
+00172  E029  A5 56              LDA JMPER+2
+00173  E02B  85 70              STA FACOV
+00174  E02D  20 53 B8           JSR KKB853
+00175  E030  20 B4 BF           JSR XXBFB4
+00176  E033              ;********************************
+00177  E033              ; EXP POLYNOMIAL TABLE
+00178  E033              ;********************************
+00179  E033  A9 C4              LDA #<ZZBFC4    ;#$C4
+00180  E035  A0 BF              LDY #>ZZBFC4    ;#$BF
+00181  E037  20 59 E0           JSR XXE059
+00182  E03A  A9 00              LDA #$00
+00183  E03C  85 6F              STA ARISGN
+00184  E03E  68                 PLA 
+00185  E03F  20 B9 BA           JSR KKBAB9
+00186  E042  60                 RTS 
+00187  E043              ;********************************
+00188  E043              ; COMPUTE ODD DEGREES FOR SIN AND ATN
+00189  E043              ;********************************
+00190  E043  85 71       XXE043 STA FBUFPT
+00191  E045  84 72              STY FBUFPT+1
+00192  E047  20 CA BB           JSR KKBBCA
+00193  E04A  A9 57              LDA #$57        ;'W'
+00194  E04C  20 28 BA           JSR XXBA28
+00195  E04F  20 5D E0           JSR XXE05D
+00196  E052  A9 57              LDA #$57        ;'W'
+00197  E054  A0 00              LDY #$00
+00198  E056  4C 28 BA           JMP XXBA28
+00199  E059              ;********************************
+00200  E059              ; COMPUTE POLYNOMIALS ACCORDING TO TABLE INDEXED 
+BY AY
+00201  E059              ;********************************
+00202  E059  85 71       XXE059 STA FBUFPT
+00203  E05B  84 72              STY FBUFPT+1
+00204  E05D  20 C7 BB    XXE05D JSR ZZBBC7
+00205  E060  B1 71              LDA (FBUFPT),Y
+00206  E062  85 67              STA SGNFLG
+00207  E064  A4 71              LDY FBUFPT
+00208  E066  C8                 INY 
+00209  E067  98                 TYA 
+00210  E068  D0 02              BNE XXE06C
+00211  E06A  E6 72              INC FBUFPT+1
+00212  E06C  85 71       XXE06C STA FBUFPT
+00213  E06E  A4 72              LDY FBUFPT+1
+00214  E070  20 28 BA    XXE070 JSR XXBA28
+00215  E073  A5 71              LDA FBUFPT
+00216  E075  A4 72              LDY FBUFPT+1
+00217  E077  18                 CLC 
+00218  E078  69 05              ADC #$05
+00219  E07A  90 01              BCC XXE07D
+00220  E07C  C8                 INY 
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0005
+
+LINE# LOC   CODE        LINE
+
+
+00221  E07D  85 71       XXE07D STA FBUFPT
+00222  E07F  84 72              STY FBUFPT+1
+00223  E081  20 67 B8           JSR XXB867
+00224  E084  A9 5C              LDA #$5C        ;'\'
+00225  E086  A0 00              LDY #$00
+00226  E088  C6 67              DEC SGNFLG
+00227  E08A  D0 E4              BNE XXE070
+00228  E08C  60                 RTS 
+00229  E08D              ;********************************
+00230  E08D              ; FLOAT NUMBERS FOR RND
+00231  E08D              ;********************************
+00232  E08D  98          ZZE08D .BYTE $98,$35,$44,$7A,$00
+00232  E08E  35 
+00232  E08F  44 
+00232  E090  7A 
+00232  E091  00 
+00233  E092  68          ZZE092 .BYTE $68,$28,$B1,$46,$00
+00233  E093  28 
+00233  E094  B1 
+00233  E095  46 
+00233  E096  00 
+00234  E097              ;********************************
+00235  E097              ; RND FUNCTION
+00236  E097              ;********************************
+00237  E097  20 2B BC    ZZE097 JSR XXBC2B
+00238  E09A  30 37              BMI XXE0D3
+00239  E09C  D0 20              BNE XXE0BE
+00240  E09E  20 F3 FF           JSR IOBASE
+00241  E0A1  86 22              STX INDEX
+00242  E0A3  84 23              STY INDEX+1
+00243  E0A5  A0 04              LDY #$04
+00244  E0A7  B1 22              LDA (INDEX),Y
+00245  E0A9  85 62              STA FACHO
+00246  E0AB  C8                 INY 
+00247  E0AC  B1 22              LDA (INDEX),Y
+00248  E0AE  85 64              STA FACHO+2
+00249  E0B0  A0 08              LDY #$08
+00250  E0B2  B1 22              LDA (INDEX),Y
+00251  E0B4  85 63              STA FACHO+1
+00252  E0B6  C8                 INY 
+00253  E0B7  B1 22              LDA (INDEX),Y
+00254  E0B9  85 65              STA FACHO+3
+00255  E0BB  4C E3 E0           JMP XXE0E3
+00256  E0BE              ;********************************
+00257  E0BE              ;
+00258  E0BE              ;********************************
+00259  E0BE  A9 8B       XXE0BE LDA #$8B
+00260  E0C0  A0 00              LDY #$00
+00261  E0C2  20 A2 BB           JSR XXBBA2
+00262  E0C5              ;********************************
+00263  E0C5              ; FLOAT NUMBERS FOR RND
+00264  E0C5              ;********************************
+00265  E0C5  A9 8D              LDA #<ZZE08D    ;#$8D
+00266  E0C7  A0 E0              LDY #>ZZE08D    ;#$E0
+00267  E0C9  20 28 BA           JSR XXBA28
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0006
+
+LINE# LOC   CODE        LINE
+
+
+00268  E0CC              ;********************************
+00269  E0CC              ; FLOAT NUMBERS FOR RND
+00270  E0CC              ;********************************
+00271  E0CC  A9 92              LDA #<ZZE092    ;#$92
+00272  E0CE  A0 E0              LDY #>ZZE092    ;#$E0
+00273  E0D0  20 67 B8           JSR XXB867
+00274  E0D3              ;********************************
+00275  E0D3              ; 
+00276  E0D3              ;********************************
+00277  E0D3  A6 65       XXE0D3 LDX FACHO+3
+00278  E0D5  A5 62              LDA FACHO
+00279  E0D7  85 65              STA FACHO+3
+00280  E0D9  86 62              STX FACHO
+00281  E0DB  A6 63              LDX FACHO+1
+00282  E0DD  A5 64              LDA FACHO+2
+00283  E0DF  85 63              STA FACHO+1
+00284  E0E1  86 64              STX FACHO+2
+00285  E0E3  A9 00       XXE0E3 LDA #$00
+00286  E0E5  85 66              STA FACSGN
+00287  E0E7  A5 61              LDA FACEXP
+00288  E0E9  85 70              STA FACOV
+00289  E0EB  A9 80              LDA #$80
+00290  E0ED  85 61              STA FACEXP
+00291  E0EF  20 D7 B8           JSR XXB8D7
+00292  E0F2  A2 8B              LDX #$8B
+00293  E0F4  A0 00              LDY #$00
+00294  E0F6  4C D4 BB    XXE0F6 JMP XXBBD4
+00295  E0F9              ;********************************
+00296  E0F9              ; HANDLE ERRORS FOR DIRECT I/O
+00297  E0F9              ; CALLS FROM BASIC
+00298  E0F9              ;********************************
+00299  E0F9  C9 F0       XXE0F9 CMP #$F0
+00300  E0FB  D0 07              BNE XXE104
+00301  E0FD  84 38              STY MEMSIZ+1
+00302  E0FF  86 37              STX MEMSIZ
+00303  E101  4C 63 A6           JMP KKA663
+00304  E104              ;********************************
+00305  E104              ;
+00306  E104              ;********************************
+00307  E104  AA          XXE104 TAX 
+00308  E105  D0 02              BNE XXE109
+00309  E107  A2 1E              LDX #$1E
+00310  E109  4C 37 A4    XXE109 JMP XXA437
+00311  E10C              ;********************************
+00312  E10C              ;
+00313  E10C              ;********************************
+00314  E10C  20 D2 FF    KKE10C JSR CHROUT
+00315  E10F  B0 E8              BCS XXE0F9
+00316  E111  60                 RTS 
+00317  E112              ;********************************
+00318  E112              ;
+00319  E112              ;********************************
+00320  E112  20 CF FF    KKE112 JSR CHRIN
+00321  E115  B0 E2              BCS XXE0F9
+00322  E117  60                 RTS 
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0007
+
+LINE# LOC   CODE        LINE
+
+
+00323  E118              ;********************************
+00324  E118              ;
+00325  E118              ;********************************
+00326  E118  20 AD E4    KKE118 JSR XXE4AD
+00327  E11B  B0 DC              BCS XXE0F9
+00328  E11D  60                 RTS 
+00329  E11E              ;********************************
+00330  E11E              ;
+00331  E11E              ;********************************
+00332  E11E  20 C6 FF    KKE11E JSR CHKIN
+00333  E121  B0 D6              BCS XXE0F9
+00334  E123  60                 RTS 
+00335  E124              ;********************************
+00336  E124              ;
+00337  E124              ;********************************
+00338  E124  20 E4 FF    KKE124 JSR GETIN
+00339  E127  B0 D0              BCS XXE0F9
+00340  E129  60                 RTS 
+00341  E12A              ;********************************
+00342  E12A              ; SYS COMMAND
+00343  E12A              ;********************************
+00344  E12A  20 8A AD    ZZE12A JSR XXAD8A
+00345  E12D  20 F7 B7           JSR XXB7F7
+00346  E130  A9 E1              LDA #>KKE147    ;#$E1
+00347  E132  48                 PHA 
+00348  E133  A9 46              LDA #<KKE147-1  ;#$46      ;'F'
+00349  E135  48                 PHA 
+00350  E136  AD 0F 03           LDA SPREG
+00351  E139  48                 PHA 
+00352  E13A  AD 0C 03           LDA SAREG
+00353  E13D  AE 0D 03           LDX SXREG
+00354  E140  AC 0E 03           LDY SYREG
+00355  E143  28                 PLP 
+00356  E144  6C 14 00           JMP (LINNUM)
+00357  E147              ;********************************
+00358  E147              ;
+00359  E147              ;********************************
+00360  E147  08          KKE147 PHP 
+00361  E148  8D 0C 03           STA SAREG
+00362  E14B  8E 0D 03           STX SXREG
+00363  E14E  8C 0E 03           STY SYREG
+00364  E151  68                 PLA 
+00365  E152  8D 0F 03           STA SPREG
+00366  E155  60                 RTS 
+00367  E156              ;********************************
+00368  E156              ; SAVE COMMAND
+00369  E156              ;********************************
+00370  E156  20 D4 E1    ZZE156 JSR XXE1D4
+00371  E159  A6 2D              LDX VARTAB
+00372  E15B  A4 2E              LDY VARTAB+1
+00373  E15D  A9 2B              LDA #TXTTAB      ;'+'
+00374  E15F  20 D8 FF           JSR SAVE
+00375  E162  B0 95              BCS XXE0F9
+00376  E164  60                 RTS 
+00377  E165              ;********************************
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0008
+
+LINE# LOC   CODE        LINE
+
+
+00378  E165              ; VERIFY COMMAND
+00379  E165              ;********************************
+00380  E165  A9 01       ZZE165 LDA #$01
+00381  E167              ;********************************
+00382  E167  2C                 .BYTE $2C
+00383  E168              ;********************************
+00384  E168              ; LOAD COMMAND
+00385  E168              ;********************************
+00386  E168  A9 00       ZZE168 LDA #$00
+00387  E16A  85 0A              STA VERCK
+00388  E16C  20 D4 E1           JSR XXE1D4
+00389  E16F  A5 0A              LDA VERCK
+00390  E171  A6 2B              LDX TXTTAB
+00391  E173  A4 2C              LDY TXTTAB+1
+00392  E175  20 D5 FF           JSR LOAD
+00393  E178  B0 57              BCS XXE1D1
+00394  E17A  A5 0A              LDA VERCK
+00395  E17C  F0 17              BEQ XXE195
+00396  E17E  A2 1C              LDX #$1C
+00397  E180  20 B7 FF           JSR READST
+00398  E183  29 10              AND #$10
+00399  E185  D0 17              BNE XXE19E
+00400  E187  A5 7A              LDA TXTPRT
+00401  E189  C9 02              CMP #$02
+00402  E18B  F0 07              BEQ XXE194
+00403  E18D  A9 64              LDA #FACHO+2
+00404  E18F  A0 A3              LDY #$A3
+00405  E191  4C 1E AB           JMP XXAB1E
+00406  E194              ;********************************
+00407  E194              ;
+00408  E194              ;********************************
+00409  E194  60          XXE194 RTS 
+00410  E195              ;********************************
+00411  E195              ;
+00412  E195              ;********************************
+00413  E195  20 B7 FF    XXE195 JSR READST
+00414  E198  29 BF              AND #$BF
+00415  E19A  F0 05              BEQ XXE1A1
+00416  E19C  A2 1D              LDX #$1D
+00417  E19E  4C 37 A4    XXE19E JMP XXA437
+00418  E1A1              ;********************************
+00419  E1A1              ;
+00420  E1A1              ;********************************
+00421  E1A1  A5 7B       XXE1A1 LDA TXTPRT+1
+00422  E1A3  C9 02              CMP #$02
+00423  E1A5  D0 0E              BNE XXE1B5
+00424  E1A7  86 2D              STX VARTAB
+00425  E1A9  84 2E              STY VARTAB+1
+00426  E1AB  A9 76              LDA #<WWA376    ;#$76
+00427  E1AD  A0 A3              LDY #>WWA376    ;#$A3
+00428  E1AF  20 1E AB           JSR XXAB1E
+00429  E1B2  4C 2A A5           JMP KKA52A
+00430  E1B5              ;********************************
+00431  E1B5              ;
+00432  E1B5              ;********************************
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0009
+
+LINE# LOC   CODE        LINE
+
+
+00433  E1B5  20 8E A6    XXE1B5 JSR XXA68E
+00434  E1B8  20 33 A5           JSR XXA533
+00435  E1BB  4C 77 A6           JMP KKA677
+00436  E1BE              ;********************************
+00437  E1BE              ; OPEN COMMAND
+00438  E1BE              ;********************************
+00439  E1BE  20 19 E2    ZZE1BE JSR XXE219
+00440  E1C1  20 C0 FF           JSR OPEN
+00441  E1C4  B0 0B              BCS XXE1D1
+00442  E1C6  60                 RTS 
+00443  E1C7              ;********************************
+00444  E1C7              ; CLOSE COMMAND
+00445  E1C7              ;********************************
+00446  E1C7  20 19 E2    ZZE1C7 JSR XXE219
+00447  E1CA  A5 49              LDA FORPNT
+00448  E1CC  20 C3 FF           JSR CLOSE
+00449  E1CF  90 C3              BCC XXE194
+00450  E1D1  4C F9 E0    XXE1D1 JMP XXE0F9
+00451  E1D4              ;********************************
+00452  E1D4              ; SET PARAMETERS FOR LOAD/VERIFY/SAVE
+00453  E1D4              ;********************************
+00454  E1D4  A9 00       XXE1D4 LDA #$00
+00455  E1D6  20 BD FF           JSR SETNAM
+00456  E1D9  A2 01              LDX #$01
+00457  E1DB  A0 00              LDY #$00
+00458  E1DD  20 BA FF           JSR SETLFS
+00459  E1E0  20 06 E2           JSR XXE206
+00460  E1E3  20 57 E2           JSR XXE257
+00461  E1E6  20 06 E2           JSR XXE206
+00462  E1E9  20 00 E2           JSR XXE200
+00463  E1EC  A0 00              LDY #$00
+00464  E1EE  86 49              STX FORPNT
+00465  E1F0  20 BA FF           JSR SETLFS
+00466  E1F3  20 06 E2           JSR XXE206
+00467  E1F6  20 00 E2           JSR XXE200
+00468  E1F9  8A                 TXA 
+00469  E1FA  A8                 TAY 
+00470  E1FB  A6 49              LDX FORPNT
+00471  E1FD  4C BA FF           JMP SETLFS
+00472  E200              ;********************************
+00473  E200              ; SKIP COMMA AND GET INTEGER IN X
+00474  E200              ;********************************
+00475  E200  20 0E E2    XXE200 JSR XXE20E
+00476  E203  4C 9E B7           JMP XXB79E
+00477  E206              ;********************************
+00478  E206              ; GET CHARACTER AND CHECK FOR END OF LINE
+00479  E206              ;********************************
+00480  E206  20 79 00    XXE206 JSR CHRGOT
+00481  E209  D0 02              BNE XXE20D
+00482  E20B  68                 PLA 
+00483  E20C  68                 PLA 
+00484  E20D  60          XXE20D RTS 
+00485  E20E              ;********************************
+00486  E20E              ; CHECK FOR COMMA AND SKIP IT
+00487  E20E              ;********************************
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0010
+
+LINE# LOC   CODE        LINE
+
+
+00488  E20E  20 FD AE    XXE20E JSR XXAEFD
+00489  E211  20 79 00    XXE211 JSR CHRGOT
+00490  E214  D0 F7              BNE XXE20D
+00491  E216  4C 08 AF           JMP XXAF08
+00492  E219              ;********************************
+00493  E219              ; GET OPEN/CLOSE PARAMETERS
+00494  E219              ;********************************
+00495  E219  A9 00       XXE219 LDA #$00
+00496  E21B  20 BD FF           JSR SETNAM
+00497  E21E  20 11 E2           JSR XXE211
+00498  E221  20 9E B7           JSR XXB79E
+00499  E224  86 49              STX FORPNT
+00500  E226  8A                 TXA 
+00501  E227  A2 01              LDX #$01
+00502  E229  A0 00              LDY #$00
+00503  E22B  20 BA FF           JSR SETLFS
+00504  E22E  20 06 E2           JSR XXE206
+00505  E231  20 00 E2           JSR XXE200
+00506  E234  86 4A              STX FORPNT+1
+00507  E236  A0 00              LDY #$00
+00508  E238  A5 49              LDA FORPNT
+00509  E23A  E0 03              CPX #$03
+00510  E23C  90 01              BCC XXE23F
+00511  E23E  88                 DEY 
+00512  E23F  20 BA FF    XXE23F JSR SETLFS
+00513  E242  20 06 E2           JSR XXE206
+00514  E245  20 00 E2           JSR XXE200
+00515  E248  8A                 TXA 
+00516  E249  A8                 TAY 
+00517  E24A  A6 4A              LDX FORPNT+1
+00518  E24C  A5 49              LDA FORPNT
+00519  E24E  20 BA FF           JSR SETLFS
+00520  E251  20 06 E2           JSR XXE206
+00521  E254  20 0E E2           JSR XXE20E
+00522  E257  20 9E AD    XXE257 JSR XXAD9E
+00523  E25A  20 A3 B6           JSR XXB6A3
+00524  E25D  A6 22              LDX INDEX
+00525  E25F  A4 23              LDY INDEX+1
+00526  E261  4C BD FF           JMP SETNAM
+00527  E264              ;********************************
+00528  E264              ; COS FUNCTION
+00529  E264              ;********************************
+00530  E264  A9 E0       KKE264 LDA #<ZZE2E0      ; LOW  E2E0
+00531  E266  A0 E2              LDY #>ZZE2E0      ; HIGH E2E0
+00532  E268  20 67 B8           JSR XXB867
+00533  E26B              ;********************************
+00534  E26B              ; SIN FUNCTION
+00535  E26B              ;********************************
+00536  E26B  20 0C BC    XXE26B JSR $BC0C
+00537  E26E  A9 E5              LDA #<ZZE2E5      ; LOW  E2E5
+00538  E270  A0 E2              LDY #>ZZE2E5      ; HIGH E2E5
+00539  E272  A6 6E              LDX ARGSGN
+00540  E274  20 07 BB           JSR KKBB07
+00541  E277  20 0C BC           JSR XXBC0C
+00542  E27A  20 CC BC           JSR XXBCCC
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0011
+
+LINE# LOC   CODE        LINE
+
+
+00543  E27D  A9 00              LDA #$00
+00544  E27F  85 6F              STA ARISGN
+00545  E281  20 53 B8           JSR KKB853
+00546  E284  A9 EA              LDA #<ZZE2EA      ; LOW  E2EA
+00547  E286  A0 E2              LDY #>ZZE2EA      ; HIGH E2EA
+00548  E288  20 50 B8           JSR XXB850
+00549  E28B  A5 66              LDA FACSGN
+00550  E28D  48                 PHA 
+00551  E28E  10 0D              BPL XXE29D
+00552  E290  20 49 B8           JSR XXB849
+00553  E293  A5 66              LDA FACSGN
+00554  E295  30 09              BMI XXE2A0
+00555  E297  A5 12              LDA TANSGN
+00556  E299  49 FF              EOR #$FF
+00557  E29B  85 12              STA TANSGN
+00558  E29D  20 B4 BF    XXE29D JSR XXBFB4
+00559  E2A0  A9 EA       XXE2A0 LDA #<ZZE2EA      ; LOW  E2EA
+00560  E2A2  A0 E2              LDY #>ZZE2EA      ; HIGH E2EA
+00561  E2A4  20 67 B8           JSR XXB867
+00562  E2A7  68                 PLA 
+00563  E2A8  10 03              BPL XXE2AD
+00564  E2AA  20 B4 BF           JSR XXBFB4
+00565  E2AD  A9 EF       XXE2AD LDA #$EF
+00566  E2AF  A0 E2              LDY #$E2
+00567  E2B1  4C 43 E0           JMP XXE043
+00568  E2B4              ;********************************
+00569  E2B4              ; TAN FUNCTION
+00570  E2B4              ;********************************
+00571  E2B4  20 CA BB    ZZE2B4 JSR KKBBCA
+00572  E2B7  A9 00              LDA #$00
+00573  E2B9  85 12              STA TANSGN
+00574  E2BB  20 6B E2           JSR XXE26B
+00575  E2BE  A2 4E              LDX #<DEFPNT    ;#$4E      ; LOW  004E
+00576  E2C0  A0 00              LDY #>DEFPNT    ;#$00      ; HIGH 004E
+00577  E2C2  20 F6 E0           JSR XXE0F6
+00578  E2C5  A9 57              LDA #<BASWRK    ;#$57      ; LOW  0057
+00579  E2C7  A0 00              LDY #>BASWRK    ;#$00      ; HIGH 0057
+00580  E2C9  20 A2 BB           JSR XXBBA2
+00581  E2CC  A9 00              LDA #$00
+00582  E2CE  85 66              STA FACSGN
+00583  E2D0  A5 12              LDA TANSGN
+00584  E2D2  20 DC E2           JSR XXE2DC
+00585  E2D5  A9 4E              LDA #<DEFPNT    ;#$4E      ; LOW  004E
+00586  E2D7  A0 00              LDY #>DEFPNT    ;#$00      ; HIGH 004E
+00587  E2D9  4C 0F BB           JMP XXBB0F
+00588  E2DC              ;********************************
+00589  E2DC              ;
+00590  E2DC              ;********************************
+00591  E2DC  48          XXE2DC PHA 
+00592  E2DD  4C 9D E2           JMP XXE29D
+00593  E2E0              ;********************************
+00594  E2E0              ; FLOAT NUMBERS FOR SIN, COS AND TAN
+00595  E2E0              ;********************************
+00596  E2E0              ; 0.5 * PI
+00597  E2E0  81          ZZE2E0 .BYTE $81,$49,$0F,$DA,$A2
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0012
+
+LINE# LOC   CODE        LINE
+
+
+00597  E2E1  49 
+00597  E2E2  0F 
+00597  E2E3  DA 
+00597  E2E4  A2 
+00598  E2E5              ; 2 * PI
+00599  E2E5  83          ZZE2E5 .BYTE $83,$49,$0F,$DA,$A2
+00599  E2E6  49 
+00599  E2E7  0F 
+00599  E2E8  DA 
+00599  E2E9  A2 
+00600  E2EA              ; 0.25 * PI
+00601  E2EA  7F          ZZE2EA .BYTE $7F,$00,$00,$00,$00
+00601  E2EB  00 
+00601  E2EC  00 
+00601  E2ED  00 
+00601  E2EE  00 
+00602  E2EF              ;********************************
+00603  E2EF              ; POLYNOMIAL TABLE
+00604  E2EF              ;********************************
+00605  E2EF  05          ZZE2EF .BYTE $05       ; DEGREE 6
+00606  E2F0  84                 .BYTE $84,$E6,$1A,$2D,$1B
+00606  E2F1  E6 
+00606  E2F2  1A 
+00606  E2F3  2D 
+00606  E2F4  1B 
+00607  E2F5  86                 .BYTE $86,$28,$07,$FB,$F8
+00607  E2F6  28 
+00607  E2F7  07 
+00607  E2F8  FB 
+00607  E2F9  F8 
+00608  E2FA  87                 .BYTE $87,$99,$68,$89,$01
+00608  E2FB  99 
+00608  E2FC  68 
+00608  E2FD  89 
+00608  E2FE  01 
+00609  E2FF  87                 .BYTE $87,$23,$35,$DF,$E1
+00609  E300  23 
+00609  E301  35 
+00609  E302  DF 
+00609  E303  E1 
+00610  E304  86                 .BYTE $86,$A5,$5D,$E7,$28
+00610  E305  A5 
+00610  E306  5D 
+00610  E307  E7 
+00610  E308  28 
+00611  E309  83                 .BYTE $83,$49,$0F,$DA,$A2
+00611  E30A  49 
+00611  E30B  0F 
+00611  E30C  DA 
+00611  E30D  A2 
+00612  E30E              ;********************************
+00613  E30E              ; ATN FUNCTION
+00614  E30E              ;********************************
+00615  E30E  A5 66       KKE30E LDA FACSGN
+00616  E310  48                 PHA 
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0013
+
+LINE# LOC   CODE        LINE
+
+
+00617  E311  10 03              BPL XXE316
+00618  E313  20 B4 BF           JSR XXBFB4
+00619  E316  A5 61       XXE316 LDA FACEXP
+00620  E318  48                 PHA 
+00621  E319  C9 81              CMP #$81
+00622  E31B  90 07              BCC XXE324
+00623  E31D  A9 BC              LDA #<WWB9BC    ;#$BC      ; LOW  B9BC
+00624  E31F  A0 B9              LDY #>WWB9BC    ;#$B9      ; HIGH B9BC
+00625  E321  20 0F BB           JSR XXBB0F
+00626  E324  A9 3E       XXE324 LDA #<ZZE33E      ; LOW  E33E
+00627  E326  A0 E3              LDY #>ZZE33E      ; HIGH E33E
+00628  E328  20 43 E0           JSR XXE043
+00629  E32B  68                 PLA 
+00630  E32C  C9 81              CMP #$81
+00631  E32E  90 07              BCC XXE337
+00632  E330  A9 E0              LDA #<ZZE2E0      ; LOW  E2E0
+00633  E332  A0 E2              LDY #>ZZE2E0      ; HIGH E2E0
+00634  E334  20 50 B8           JSR XXB850
+00635  E337  68          XXE337 PLA 
+00636  E338  10 03              BPL XXE33D
+00637  E33A  4C B4 BF           JMP XXBFB4
+00638  E33D              ;********************************
+00639  E33D              ;
+00640  E33D              ;********************************
+00641  E33D  60          XXE33D RTS 
+00642  E33E              ;********************************
+00643  E33E              ; FLOAT NUMBERS FOR ATN
+00644  E33E              ; POLYNOMIAL TABLE
+00645  E33E              ;********************************
+00646  E33E  0B          ZZE33E .BYTE $0B       ; DEGREE 12
+00647  E33F  76                 .BYTE $76,$B3,$83,$BD,$D3
+00647  E340  B3 
+00647  E341  83 
+00647  E342  BD 
+00647  E343  D3 
+00648  E344  79                 .BYTE $79,$1E,$F4,$A6,$F5
+00648  E345  1E 
+00648  E346  F4 
+00648  E347  A6 
+00648  E348  F5 
+00649  E349  7B                 .BYTE $7B,$83,$FC,$B0,$10
+00649  E34A  83 
+00649  E34B  FC 
+00649  E34C  B0 
+00649  E34D  10 
+00650  E34E  7C                 .BYTE $7C,$0C,$1F,$67,$CA
+00650  E34F  0C 
+00650  E350  1F 
+00650  E351  67 
+00650  E352  CA 
+00651  E353  7C                 .BYTE $7C,$DE,$53,$CB,$C1
+00651  E354  DE 
+00651  E355  53 
+00651  E356  CB 
+00651  E357  C1 
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0014
+
+LINE# LOC   CODE        LINE
+
+
+00652  E358  7D                 .BYTE $7D,$14,$64,$70,$4C
+00652  E359  14 
+00652  E35A  64 
+00652  E35B  70 
+00652  E35C  4C 
+00653  E35D  7D                 .BYTE $7D,$B7,$EA,$51,$7A
+00653  E35E  B7 
+00653  E35F  EA 
+00653  E360  51 
+00653  E361  7A 
+00654  E362  7D                 .BYTE $7D,$63,$30,$88,$7E
+00654  E363  63 
+00654  E364  30 
+00654  E365  88 
+00654  E366  7E 
+00655  E367  7E                 .BYTE $7E,$92,$44,$99,$3A
+00655  E368  92 
+00655  E369  44 
+00655  E36A  99 
+00655  E36B  3A 
+00656  E36C  7E                 .BYTE $7E,$4C,$CC,$91,$C7
+00656  E36D  4C 
+00656  E36E  CC 
+00656  E36F  91 
+00656  E370  C7 
+00657  E371  7F                 .BYTE $7F,$AA,$AA,$AA,$13
+00657  E372  AA 
+00657  E373  AA 
+00657  E374  AA 
+00657  E375  13 
+00658  E376  81                 .BYTE $81,$00,$00,$00,$00
+00658  E377  00 
+00658  E378  00 
+00658  E379  00 
+00658  E37A  00 
+00659  E37B              ;********************************
+00660  E37B              ; WARM START ENTRY
+00661  E37B              ;********************************
+00662  E37B  20 CC FF    KKE37B JSR CLRCHN
+00663  E37E  A9 00              LDA #$00
+00664  E380  85 13              STA CHANNL
+00665  E382  20 7A A6           JSR XXA67A
+00666  E385  58                 CLI 
+00667  E386  A2 80       XXE386 LDX #$80
+00668  E388  6C 00 03           JMP (IERROR)    ; NORMALLY E38B
+00669  E38B              ;********************************
+00670  E38B              ; HANDLE ERROR MESSAGES
+00671  E38B              ;********************************
+00672  E38B  8A          XXE38B TXA 
+00673  E38C  30 03              BMI XXE391
+00674  E38E  4C 3A A4           JMP KKA43A
+00675  E391              ;********************************
+00676  E391  4C 74 A4    XXE391 JMP XXA474
+00677  E394              ;********************************
+00678  E394              ; RESET ROUTINE
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0015
+
+LINE# LOC   CODE        LINE
+
+
+00679  E394              ;********************************
+00680  E394  20 53 E4    ZZE394 JSR XXE453
+00681  E397  20 BF E3           JSR XXE3BF
+00682  E39A  20 22 E4           JSR XXE422
+00683  E39D  A2 FB              LDX #$FB
+00684  E39F  9A                 TXS 
+00685  E3A0  D0 E4              BNE XXE386
+00686  E3A2              ;********************************
+00687  E3A2              ; CHARACTER FETCH CODE FOR ZERO PAGE $0073-$008F
+00688  E3A2              ;********************************
+00689  E3A2  E6 7A       XXE3A2 INC TXTPRT
+00690  E3A4  D0 02              BNE XXE3A8
+00691  E3A6  E6 7B              INC TXTPRT+1
+00692  E3A8  AD 60 EA    XXE3A8 LDA XXEA61-1
+00693  E3AB  C9 3A              CMP #$3A        ; COLON ;':'
+00694  E3AD  B0 0A              BCS XXE3B9
+00695  E3AF  C9 20              CMP #$20        ; SPACE ' '
+00696  E3B1  F0 EF              BEQ XXE3A2
+00697  E3B3  38                 SEC 
+00698  E3B4  E9 30              SBC #$30        ; '0'
+00699  E3B6  38                 SEC 
+00700  E3B7  E9 D0              SBC #$D0
+00701  E3B9  60          XXE3B9 RTS 
+00702  E3BA              ;********************************
+00703  E3BA              ; FIRST RND SEED VALUE
+00704  E3BA              ;********************************
+00705  E3BA  80          WWE3BA .BYTE $80,$4F,$C7,$52,$58
+00705  E3BB  4F 
+00705  E3BC  C7 
+00705  E3BD  52 
+00705  E3BE  58 
+00706  E3BF              ;********************************
+00707  E3BF              ; INITIALISATION OF BASIC
+00708  E3BF              ;********************************
+00709  E3BF  A9 4C       XXE3BF LDA #$4C        ;'L'
+00710  E3C1  85 54              STA JMPER
+00711  E3C3  8D 10 03           STA USRPOK
+00712  E3C6  A9 48              LDA #<XXB248    ;#$48      ; LOW  B248
+00713  E3C8  A0 B2              LDY #>XXB248    ;#$B2      ; HIGH B248
+00714  E3CA  8D 11 03           STA USRADD
+00715  E3CD  8C 12 03           STY USRADD+1
+00716  E3D0  A9 91              LDA #<XXB391    ;#$91      ; LOW B391
+00717  E3D2  A0 B3              LDY #>XXB391    ;#$B3      ; HIGH B391
+00718  E3D4  85 05              STA ADRAY2
+00719  E3D6  84 06              STY ADRAY2+1
+00720  E3D8  A9 AA              LDA #<ZZB1AA    ;#$AA      ; LOW  B1AA
+00721  E3DA  A0 B1              LDY #>ZZB1AA    ;#$B1      ; HIGH B1AA
+00722  E3DC  85 03              STA ADRAY1
+00723  E3DE  84 04              STY ADRAY1+1
+00724  E3E0  A2 1C              LDX #$1C
+00725  E3E2  BD A2 E3    XXE3E2 LDA XXE3A2,X
+00726  E3E5  95 73              STA CHRGET,X
+00727  E3E7  CA                 DEX 
+00728  E3E8  10 F8              BPL XXE3E2
+00729  E3EA  A9 03              LDA #$03
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0016
+
+LINE# LOC   CODE        LINE
+
+
+00730  E3EC  85 53              STA FOUR6
+00731  E3EE  A9 00              LDA #$00
+00732  E3F0  85 68              STA BITS
+00733  E3F2  85 13              STA CHANNL
+00734  E3F4  85 18              STA LASTPR+1
+00735  E3F6  A2 01              LDX #$01
+00736  E3F8  8E FD 01           STX $01FD
+00737  E3FB  8E FC 01           STX $01FC
+00738  E3FE  A2 19              LDX #$19
+00739  E400  86 16              STX TEMPPT
+00740  E402  38                 SEC 
+00741  E403  20 9C FF           JSR MEMBOT
+00742  E406  86 2B              STX TXTTAB
+00743  E408  84 2C              STY TXTTAB+1
+00744  E40A  38                 SEC 
+00745  E40B  20 99 FF           JSR MEMTOP
+00746  E40E  86 37              STX MEMSIZ
+00747  E410  84 38              STY MEMSIZ+1
+00748  E412  86 33              STX FRETOP
+00749  E414  84 34              STY FRETOP+1
+00750  E416  A0 00              LDY #$00
+00751  E418  98                 TYA 
+00752  E419  91 2B              STA (TXTTAB),Y
+00753  E41B  E6 2B              INC TXTTAB
+00754  E41D  D0 02              BNE XXE421
+00755  E41F  E6 2C              INC TXTTAB+1
+00756  E421  60          XXE421 RTS 
+00757  E422              ;********************************
+00758  E422              ; PRINT BASIC START UP MESSAGES
+00759  E422              ;********************************
+00760  E422  A5 2B       XXE422 LDA TXTTAB
+00761  E424  A4 2C              LDY TXTTAB+1
+00762  E426  20 08 A4           JSR XXA408
+00763  E429  A9 73              LDA #<ZZE473    ; LOW  E473
+00764  E42B  A0 E4              LDY #>ZZE473    ; HIGH E473
+00765  E42D  20 1E AB           JSR XXAB1E
+00766  E430  A5 37              LDA MEMSIZ
+00767  E432  38                 SEC 
+00768  E433  E5 2B              SBC TXTTAB
+00769  E435  AA                 TAX 
+00770  E436  A5 38              LDA MEMSIZ+1
+00771  E438  E5 2C              SBC TXTTAB+1
+00772  E43A  20 CD BD           JSR XXBDCD
+00773  E43D  A9 60              LDA #<ZZE460    ; LOW  E460
+00774  E43F  A0 E4              LDY #>ZZE460    ; HIGH E460
+00775  E441  20 1E AB           JSR XXAB1E
+00776  E444  4C 44 A6           JMP KKA644
+00777  E447              ;********************************
+00778  E447              ; VECTORS FOR $0300-$030B
+00779  E447              ;********************************
+00780  E447  8B E3       XXE447 .WORD XXE38B    ;$E38B
+00781  E449  83 A4              .WORD KKA483    ;$A483
+00782  E44B  7C A5              .WORD KKA57C    ;$A57C
+00783  E44D  1A A7              .WORD ZZA71A    ;$A71A
+00784  E44F  E4 A7              .WORD KKA7E4    ;$A7E4
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0017
+
+LINE# LOC   CODE        LINE
+
+
+00785  E451  86 AE              .WORD KKAE86    ;$AE86
+00786  E453              ;********************************
+00787  E453              ; INITIALIZE VECTORS
+00788  E453              ;********************************
+00789  E453  A2 0B       XXE453 LDX #$0B
+00790  E455  BD 47 E4    XXE455 LDA XXE447,X
+00791  E458  9D 00 03           STA IERROR,X
+00792  E45B  CA                 DEX 
+00793  E45C  10 F7              BPL XXE455
+00794  E45E  60                 RTS 
+00795  E45F              ;********************************
+00796  E45F              ; STARTUP MESSAGES
+00797  E45F              ;********************************
+00798  E45F  00          ZZE45F .BYTE $00
+00799  E460  20 42       ZZE460 .BYTE ' BASIC BYTES FREE'
+00800  E471  0D                 .BYTE $0D
+00801  E472  00                 .BYTE $00
+00802  E473  93          ZZE473 .BYTE $93
+00803  E474  0D                 .BYTE $0D
+00804  E475  20 20              .BYTE '    **** COMMODORE 64 BASIC V2 ****
+'
+00805  E498  0D                 .BYTE $0D
+00806  E499  0D                 .BYTE $0D
+00807  E49A  20 36              .BYTE ' 64K RAM SYSTEM  '
+00808  E4AB  00                 .BYTE $00
+00809  E4AC  81          ZZE4AC .BYTE $81
+00810  E4AD              ;********************************
+00811  E4AD              ; SET OUTPUT DEVICE
+00812  E4AD              ;********************************
+00813  E4AD  48          XXE4AD PHA 
+00814  E4AE  20 C9 FF           JSR CHKOUT
+00815  E4B1  AA                 TAX 
+00816  E4B2  68                 PLA 
+00817  E4B3  90 01              BCC XXE4B6
+00818  E4B5  8A                 TXA 
+00819  E4B6  60          XXE4B6 RTS 
+00820  E4B7              ;********************************
+00821  E4B7              ; UNUSED
+00822  E4B7              ;********************************
+00823  E4B7  AA                 .BYTE $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+00823  E4B8  AA 
+00823  E4B9  AA 
+00823  E4BA  AA 
+00823  E4BB  AA 
+00823  E4BC  AA 
+00823  E4BD  AA 
+00823  E4BE  AA 
+00824  E4BF  AA                 .BYTE $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+00824  E4C0  AA 
+00824  E4C1  AA 
+00824  E4C2  AA 
+00824  E4C3  AA 
+00824  E4C4  AA 
+00824  E4C5  AA 
+00824  E4C6  AA 
+00825  E4C7  AA                 .BYTE $AA,$AA,$AA,$AA,$AA,$AA,$AA,$AA
+
+
+
+
+
+
+BASICV2EX.ASM......PAGE 0018
+
+LINE# LOC   CODE        LINE
+
+
+00825  E4C8  AA 
+00825  E4C9  AA 
+00825  E4CA  AA 
+00825  E4CB  AA 
+00825  E4CC  AA 
+00825  E4CD  AA 
+00825  E4CE  AA 
+00826  E4CF  AA                 .BYTE $AA,$AA,$AA,$AA
+00826  E4D0  AA 
+00826  E4D1  AA 
+00826  E4D2  AA 
+00827  E4D3              ;********************************
+00828  E4D3              ; RS-232 EQUATES
+00829  E4D3              ;********************************
+00830  E4D3              RINONE = $A9
+00831  E4D3              RIPRTY = $AB
+00832  E4D3              ;********************************
+00833  E4D3              ; RS-232
+00834  E4D3              ;********************************
+00835  E4D3  85 A9       XXE4D3 STA RINONE
+00836  E4D5  A9 01              LDA #$01
+00837  E4D7  85 AB              STA RIPRTY
+00838  E4D9  60                 RTS 
+00839  E4DA              ;********************************
+00840  E4DA              .END
+
+
+ERRORS = 00000
+
+
+SYMBOL TABLE
+
+SYMBOL VALUE
+ ADRAY1   0003    ADRAY2   0005    ARGEXP   0069    ARGHO    006A
+ ARGSGN   006E    ARISGN   006F    BASWRK   0057    BITS     0068
+ CHANNL   0013    CHARAC   0007    CHKIN    FFC6    CHKOUT   FFC9
+ CHRGET   0073    CHRGOT   0079    CHRIN    FFCF    CHROUT   FFD2
+ CLOSE    FFC3    CLRCHN   FFCC    DEFPNT   004E    ENDCHR   0008
+ FAC1     0061    FAC2     0069    FACEXP   0061    FACHO    0062
+ FACOV    0070    FACSGN   0066    FBUFPT   0071    FORPNT   0049
+ FOUR6    0053    FRETOP   0033    GETIN    FFE4    ICRNCH   0304
+ IERROR   0300    IEVAL    030A    IGONE    0308    IMAIN    0302
+ INDEX    0022    IOBASE   FFF3    IQPLOP   0306    JMPER    0054
+ KKA43A   A43A    KKA483   A483    KKA52A   A52A    KKA57C   A57C
+ KKA644   A644    KKA663   A663    KKA677   A677    KKA7E4   A7E4
+ KKAE86   AE86    KKB853   B853    KKBAB9   BAB9    KKBAD4   BAD4
+ KKBB07   BB07    KKBBCA   BBCA    KKBC0F   BC0F    KKE000   E000
+ KKE10C   E10C    KKE112   E112    KKE118   E118    KKE11E   E11E
+ KKE124   E124    KKE147   E147    KKE264   E264    KKE30E   E30E
+ KKE37B   E37B    LASTPR   0017    LINNUM   0014    LOAD     FFD5
+ MEMBOT   FF9C    MEMSIZ   0037    MEMTOP   FF99    OPEN     FFC0
+ READST   FFB7    RINONE   00A9    RIPRTY   00AB    SAREG    030C
+ SAVE     FFD8    SETLFS   FFBA    SETNAM   FFBD    SGNFLG   0067
+ SPREG    030F    SXREG    030D    SYREG    030E    TANSGN   0012
+
+
+
+
+
+
+
+
+SYMBOL TABLE
+
+SYMBOL VALUE
+ TEMPPT   0016    TXTPRT   007A    TXTTAB   002B    USRADD   0311
+ USRPOK   0310    VARTAB   002D    VERCK    000A    WWA376   A376
+ WWB9BC   B9BC    WWE3BA   E3BA    XXA408   A408    XXA437   A437
+ XXA474   A474    XXA533   A533    XXA67A   A67A    XXA68E   A68E
+ XXAB1E   AB1E    XXAD8A   AD8A    XXAD9E   AD9E    XXAEFD   AEFD
+ XXAF08   AF08    XXB248   B248    XXB391   B391    XXB6A3   B6A3
+ XXB79E   B79E    XXB7F7   B7F7    XXB849   B849    XXB850   B850
+ XXB867   B867    XXB8D7   B8D7    XXBA28   BA28    XXBB0F   BB0F
+ XXBBA2   BBA2    XXBBD4   BBD4    XXBC0C   BC0C    XXBC2B   BC2B
+ XXBCCC   BCCC    XXBDCD   BDCD    XXBFB4   BFB4    XXE00B   E00B
+ XXE00E   E00E    XXE01E   E01E    XXE043   E043    XXE059   E059
+ XXE05D   E05D    XXE06C   E06C    XXE070   E070    XXE07D   E07D
+ XXE0BE   E0BE    XXE0D3   E0D3    XXE0E3   E0E3    XXE0F6   E0F6
+ XXE0F9   E0F9    XXE104   E104    XXE109   E109    XXE194   E194
+ XXE195   E195    XXE19E   E19E    XXE1A1   E1A1    XXE1B5   E1B5
+ XXE1D1   E1D1    XXE1D4   E1D4    XXE200   E200    XXE206   E206
+ XXE20D   E20D    XXE20E   E20E    XXE211   E211    XXE219   E219
+ XXE23F   E23F    XXE257   E257    XXE26B   E26B    XXE29D   E29D
+ XXE2A0   E2A0    XXE2AD   E2AD    XXE2DC   E2DC    XXE316   E316
+ XXE324   E324    XXE337   E337    XXE33D   E33D    XXE386   E386
+ XXE38B   E38B    XXE391   E391    XXE3A2   E3A2    XXE3A8   E3A8
+ XXE3B9   E3B9    XXE3BF   E3BF    XXE3E2   E3E2    XXE421   E421
+ XXE422   E422    XXE447   E447    XXE453   E453    XXE455   E455
+ XXE4AD   E4AD    XXE4B6   E4B6    XXE4D3   E4D3    XXEA61   EA61
+ ZZA71A   A71A    ZZB1AA   B1AA    ZZBBC7   BBC7    ZZBFC4   BFC4
+ ZZE08D   E08D    ZZE092   E092    ZZE097   E097    ZZE12A   E12A
+ ZZE156   E156    ZZE165   E165    ZZE168   E168    ZZE1BE   E1BE
+ ZZE1C7   E1C7    ZZE2B4   E2B4    ZZE2E0   E2E0    ZZE2E5   E2E5
+ ZZE2EA   E2EA    ZZE2EF   E2EF    ZZE33E   E33E    ZZE394   E394
+ ZZE45F   E45F    ZZE460   E460    ZZE473   E473    ZZE4AC   E4AC
+
+
+END OF ASSEMBLY
+

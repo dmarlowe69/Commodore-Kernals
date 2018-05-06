@@ -1,0 +1,14 @@
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\C64\C64 Basic Kernal Sources\Project 64 GitHub C64  firmware - tass>64tass C64LD11.asm -L C64LD11.lst -o C64LD11.prg  
+64tass Turbo Assembler Macro V1.53.1515
+64TASS comes with ABSOLUTELY NO WARRANTY; This is free software, and you
+are welcome to redistribute it under certain conditions; See LICENSE!
+
+Assembling file:   C64LD11.asm
+Error messages:    None
+Warning messages:  None
+Passes:            3
+Memory range:      $a000-$bfff   $2000
+Memory range:      $e000-$ffff   $2000
+
+C:\My Commodore\Commodore 2018\Commodore Firmware Reconstruction\C64\C64 Basic Kernal Sources\Project 64 GitHub C64  firmware - tass>rem pause 
